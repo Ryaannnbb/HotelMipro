@@ -26,24 +26,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('produk') ? 'active' : '' }}"
-                        href="{{ route('produk') }}" data-bs-toggle="" aria-expanded="false">
+                    <a class="nav-link {{ request()->routeIs('kamar') ? 'active' : '' }}"
+                        href="{{ route('kamar') }}" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
-                                <span data-feather="package"></span>
+                                <span class="fas fa-door-open"></span>
                             </span>
-                            <span class="nav-link-text">Product</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('order.side') ? 'active' : '' }}"
-                        href="{{ route('order.side') }}" data-bs-toggle="" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span data-feather="shopping-bag"></span>
-                            </span>
-                            <span class="nav-link-text">Order</span>
+                            <span class="nav-link-text">Rooms</span>
                         </div>
                     </a>
                 </li>
@@ -55,28 +44,6 @@
                                 <span data-feather="list"></span>
                             </span>
                             <span class="nav-link-text">Category</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('pembayaran') ? 'active' : '' }}"
-                        href="{{ route('pembayaran') }}" data-bs-toggle="" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span data-feather="credit-card"></span>
-                            </span>
-                            <span class="nav-link-text">Payment</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('pengiriman') ? 'active' : '' }}"
-                        href="{{ route('pengiriman') }}" data-bs-toggle="" aria-expanded="false">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span data-feather="send"></span>
-                            </span>
-                            <span class="nav-link-text">Shipping</span>
                         </div>
                     </a>
                 </li>
@@ -98,7 +65,7 @@
             class="toggle-line"></span></span></button>
       <a class="navbar-brand me-1 me-sm-3" href="#">
         <div class="d-flex align-items-center">
-          <div class="d-flex align-items-center"><img src="{{ asset('assets/storage/logo.png') }}" alt="phoenix"
+          <div class="d-flex align-items-center"><img src="{{ asset('assets/img/brand2/asus-rog.png') }}" alt="phoenix"
               width="27" />
             <p class="logo-text ms-2 d-none d-sm-block">iVibe</p>
           </div>
@@ -431,7 +398,7 @@
             <div class="card-body p-0">
               <div class="text-center pt-4 pb-3">
                 <div class="avatar avatar-xl">
-                  <img class="rounded-circle" src="{{ asset('assets/storage/apple.jpg') }}" alt="" />
+                  <img class="rounded-circle" src="{{ asset('assets/img/icons/logo_kontol.png') }}" alt="" />
                 </div>
                 <h6 class="mt-2 text-black">Admin</h6>
               </div>
