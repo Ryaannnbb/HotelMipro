@@ -14,7 +14,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>iVibe</title>
+    <title>Tulip Hotel</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -61,31 +61,33 @@
 </head>
 <style>
     .auth-img-holder {
-    width: 100%; /* Lebar sesuai dengan kontennya */
-    height: 100%; /* Tinggi sesuai dengan kontennya */
-    overflow: hidden;
+        width: 100%;
+        /* Lebar sesuai dengan kontennya */
+        height: 100%;
+        /* Tinggi sesuai dengan kontennya */
+        overflow: hidden;
     }
 
     .auth-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-        input[type="number"] {
-            -moz-appearance: textfield;
-            appearance: textfield;
-        }
+    input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
 
-        ::-webkit-scrollbar {
+    ::-webkit-scrollbar {
         display: none;
-        }
+    }
 </style>
 
 
@@ -104,13 +106,14 @@
                     <div class="card border border-200 auth-card">
                         <div class="card-body pe-md-0">
                             <div class="row align-items-center gx-0 gy-7">
-                                <div
-                                    class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative auth-title-box">
+                                <div class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative auth-title-box">
                                     <div class="bg-holder auth-img-holder">
-                                        <img src="{{ asset('assets/img/e-commerce/4.png') }}" class="auth-img rounded-3" alt="Authentication Image">
+                                        <img src="{{ asset('assets/img/regis.png') }}" class="auth-img rounded-3"
+                                            alt="Authentication Image">
                                     </div>
                                     <!--/.bg-holder-->
-                                    <div class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 card-sign-up">
+                                    <div
+                                        class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 card-sign-up">
                                     </div>
                                     <div
                                         class="position-relative z-index--1 mb-6 d-none d-md-block text-center mt-md-15">
@@ -126,8 +129,8 @@
                                                 class="d-flex flex-center text-decoration-none mb-4"
                                                 href="../../../index.html">
                                                 <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block">
-                                                    <img src="{{ asset('assets/img/brand2/asus-rog.png') }}" alt="phoenix"
-                                                        width="58" /></div>
+                                                    <img src="{{ asset('assets/img/brands/small.png') }}"
+                                                        alt="logo" width="58" /></div>
                                             </a>
                                             <h3 class="text-1000">Sign Up</h3>
                                             <p class="text-700">Create your account today</p>
@@ -177,14 +180,18 @@
                                                         placeholder="Confirm Password" /></div>
                                             </div>
                                             <div class="form-check mb-3">
-                                                <input class="form-check-input mt-2" id="termsService" type="checkbox" value="" required />
+                                                <input class="form-check-input mt-2" id="termsService"
+                                                    type="checkbox" value="" required />
                                                 <label class="form-label fs--1 text-none" for="termsService">
                                                     I accept the
-                                                    <button id="termsButton" type="button" class="btn btn-link mx-n3" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                                    <button id="termsButton" type="button"
+                                                        class="btn btn-link mx-n3" data-bs-toggle="modal"
+                                                        data-bs-target="#termsModal">
                                                         terms
                                                     </button>
                                                     and
-                                                    <button type="button" class="btn btn-link mx-n4" data-bs-toggle="modal" data-bs-target="#privacyModal">
+                                                    <button type="button" class="btn btn-link mx-n4"
+                                                        data-bs-toggle="modal" data-bs-target="#privacyModal">
                                                         privacy policy
                                                     </button>
                                                 </label>
@@ -195,43 +202,70 @@
                                             </div>
                                         </form>
                                         <!-- Terms Modal -->
-                                        <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="termsModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="termsModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="termsModalLabel">Terms and
+                                                            Conditions</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <h4>Last Updated: [Last Updated Date]</h4>
                                                         <br>
-                                                        <p>Welcome to iVibe! These Terms of Service govern your use of our website (www.ivibe.com) and the services provided by iVibe.</p>
+                                                        <p>Welcome to iVibe! These Terms of Service govern your use of
+                                                            our website (www.ivibe.com) and the services provided by
+                                                            iVibe.</p>
                                                         <br>
-                                                        <p>By accessing or using our services, you agree to comply with and be bound by these Terms. If you do not agree with any part of these Terms, please do not use our services.</p>
+                                                        <p>By accessing or using our services, you agree to comply with
+                                                            and be bound by these Terms. If you do not agree with any
+                                                            part of these Terms, please do not use our services.</p>
                                                         <br>
                                                         <h4 class="mb-3">1. Use of Services</h4>
-                                                        <p>You agree to use iVibe's services for lawful purposes only and in a manner consistent with all applicable local, state, national, and international laws and regulations.</p>
+                                                        <p>You agree to use iVibe's services for lawful purposes only
+                                                            and in a manner consistent with all applicable local, state,
+                                                            national, and international laws and regulations.</p>
                                                         <br>
                                                         <h4 class="mb-3">2. User Accounts</h4>
-                                                        <p>To access certain features of our services, you may be required to create a user account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
+                                                        <p>To access certain features of our services, you may be
+                                                            required to create a user account. You are responsible for
+                                                            maintaining the confidentiality of your account information
+                                                            and for all activities that occur under your account.</p>
                                                         <br>
                                                         <h4 class="mb-3">3. Intellectual Property</h4>
-                                                        <p>The content, design, and logos on the iVibe website are the intellectual property of iVibe and are protected by copyright and trademark laws. You may not use, reproduce, or distribute any content from our website without our prior written consent.</p>
+                                                        <p>The content, design, and logos on the iVibe website are the
+                                                            intellectual property of iVibe and are protected by
+                                                            copyright and trademark laws. You may not use, reproduce, or
+                                                            distribute any content from our website without our prior
+                                                            written consent.</p>
                                                         <br>
                                                         <h4 class="mb-3">4. Limitation of Liability</h4>
-                                                        <p>iVibe shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of our services.</p>
+                                                        <p>iVibe shall not be liable for any indirect, incidental,
+                                                            special, consequential, or punitive damages arising out of
+                                                            or related to your use of our services.</p>
                                                         <br>
                                                         <h4 class="mb-3">5. Termination</h4>
-                                                        <p>iVibe reserves the right to terminate or suspend your account and access to our services at any time, without prior notice, for any reason.</p>
+                                                        <p>iVibe reserves the right to terminate or suspend your account
+                                                            and access to our services at any time, without prior
+                                                            notice, for any reason.</p>
                                                         <br>
                                                         <h4 class="mb-3">6. Changes to Terms</h4>
-                                                        <p>iVibe may update these Terms of Service from time to time. The most current version will be posted on our website. Continued use of our services after any changes indicate your acceptance of the revised terms.</p>
+                                                        <p>iVibe may update these Terms of Service from time to time.
+                                                            The most current version will be posted on our website.
+                                                            Continued use of our services after any changes indicate
+                                                            your acceptance of the revised terms.</p>
                                                         <br>
                                                         <h4 class="mb-3">Contact Information</h4>
-                                                        <p class="mb-3">If you have any questions or concerns about these Terms of Service, please contact us at info@ivibe.com.</p>
+                                                        <p class="mb-3">If you have any questions or concerns about
+                                                            these Terms of Service, please contact us at info@ivibe.com.
+                                                        </p>
                                                         <p class="mb-3">Thank you for choosing iVibe!</p>
                                                         <p class="mb-n1">Ijen Malang East Java</p>
-                                                        <p class="mb-n1">Phone: <a href="http://wa.me/6282331079449">+62 823-3107-9449</a> (Rokhim)</p>
+                                                        <p class="mb-n1">Phone: <a
+                                                                href="http://wa.me/6282331079449">+62 823-3107-9449</a>
+                                                            (Rokhim)</p>
                                                         <p>Email: iVibe@gmail.com</p>
                                                     </div>
                                                 </div>
@@ -239,20 +273,27 @@
                                         </div>
 
                                         <!-- Privacy Modal -->
-                                        <div class="modal fade" id="privacyModal" tabindex="-1" role="dialog" aria-labelledby="privacyModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="privacyModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="privacyModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy
+                                                        </h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <h4>Last Updated: [Last Updated Date]</h4>
                                                         <br>
-                                                        <p>Welcome to iVibe! This privacy policy explains how iVibe collects, uses, and safeguards your personal information when you use our website (www.ivibe.com).</p>
+                                                        <p>Welcome to iVibe! This privacy policy explains how iVibe
+                                                            collects, uses, and safeguards your personal information
+                                                            when you use our website (www.ivibe.com).</p>
                                                         <br>
                                                         <h4 class="mb-3">Information We Collect</h4>
-                                                        <p class="mb-3">When you use the iVibe website, we may collect personal information voluntarily provided by you, including but not limited to:</p>
+                                                        <p class="mb-3">When you use the iVibe website, we may
+                                                            collect personal information voluntarily provided by you,
+                                                            including but not limited to:</p>
                                                         <ul>
                                                             <li>Name and contact information</li>
                                                             <li>Email address</li>
@@ -270,23 +311,41 @@
                                                         </ul>
                                                         <br>
                                                         <h4 class="mb-3">How We Protect Your Information</h4>
-                                                        <p>iVibe takes adequate physical, electronic, and procedural security measures to protect your personal information from unauthorized access or use. We use encryption technology to secure sensitive data during transmission.</p>
+                                                        <p>iVibe takes adequate physical, electronic, and procedural
+                                                            security measures to protect your personal information from
+                                                            unauthorized access or use. We use encryption technology to
+                                                            secure sensitive data during transmission.</p>
                                                         <br>
                                                         <h4 class="mb-3">Sharing Information with Third Parties</h4>
-                                                        <p>iVibe does not sell, rent, or trade customer's personal information to third parties without your consent, except when required by law or to provide services requested by you.</p>
+                                                        <p>iVibe does not sell, rent, or trade customer's personal
+                                                            information to third parties without your consent, except
+                                                            when required by law or to provide services requested by
+                                                            you.</p>
                                                         <br>
                                                         <h4 class="mb-3">Cookies</h4>
-                                                        <p>iVibe uses cookies and similar tracking technologies to understand how you use our website. This information helps us enhance the user experience and present relevant content.</p>
+                                                        <p>iVibe uses cookies and similar tracking technologies to
+                                                            understand how you use our website. This information helps
+                                                            us enhance the user experience and present relevant content.
+                                                        </p>
                                                         <br>
                                                         <h4 class="mb-3">Your Rights</h4>
-                                                        <p>You have the right to access, correct, or delete your personal information that we hold. If you have any questions or privacy-related requests, please contact us at info@ivibe.com.</p>
+                                                        <p>You have the right to access, correct, or delete your
+                                                            personal information that we hold. If you have any questions
+                                                            or privacy-related requests, please contact us at
+                                                            info@ivibe.com.</p>
                                                         <br>
                                                         <h4 class="mb-3">Changes to Privacy Policy</h4>
-                                                        <p class="mb-3">iVibe may update this privacy policy from time to time. Significant changes will be communicated through our website or via direct contact.</p>
-                                                        <p class="mb-3">By using the iVibe website, you agree to this privacy policy.</p>
-                                                        <p class="mb-5">Thank you for choosing iVibe as your destination for cutting-edge technology solutions.</p>
+                                                        <p class="mb-3">iVibe may update this privacy policy from
+                                                            time to time. Significant changes will be communicated
+                                                            through our website or via direct contact.</p>
+                                                        <p class="mb-3">By using the iVibe website, you agree to this
+                                                            privacy policy.</p>
+                                                        <p class="mb-5">Thank you for choosing iVibe as your
+                                                            destination for cutting-edge technology solutions.</p>
                                                         <p class="mb-n1">Ijen Malang East Java</p>
-                                                        <p class="mb-n1">Phone: <a href="http://wa.me/6282331079449">+62 823-3107-9449</a> (Rokhim)</p>
+                                                        <p class="mb-n1">Phone: <a
+                                                                href="http://wa.me/6282331079449">+62 823-3107-9449</a>
+                                                            (Rokhim)</p>
                                                         <p>Email: iVibe@gmail.com</p>
                                                         <br>
                                                         <p><i>Happy Shopping!</i></p>

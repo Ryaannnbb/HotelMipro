@@ -64,9 +64,10 @@
     <main class="alternate-landing" style="--phoenix-scroll-margin-top: 1.2rem;">
       <div class="bg-white sticky-top landing-navbar" data-navbar-shadow-on-scroll="data-navbar-shadow-on-scroll">
         <nav class="navbar navbar-expand-lg container-small px-3 px-lg-7 px-xxl-3"><a class="navbar-brand flex-1 flex-lg-grow-0" href="../../index.html">
-            <div class="d-flex align-items-center"><img src="../../assets/img/icons/logo.png" alt="phoenix" width="27" />
-              <p class="logo-text ms-2">phoenix</p>
-            </div>
+          <div class="d-flex align-items-center" style="margin-right: 20px;">
+            <img src="../../assets/img/brands/tulip1.png" alt="logo" width="100" />
+            <p class="logo-text ms-2" style="margin-left: 10px;">Tulip Hotel</p>
+        </div>        
           </a>
           <div class="d-lg-none">
             <div class="theme-control-toggle fa-icon-wait px-2"><input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggleSm" /><label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggleSm" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme"><span class="icon" data-feather="moon"></span></label><label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggleSm" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme"><span class="icon" data-feather="sun"></span></label></div>
@@ -88,7 +89,7 @@
             <div class="d-grid d-lg-flex align-items-center">
               <div class="nav-item d-flex align-items-center d-none d-lg-block pe-2">
                 <div class="theme-control-toggle fa-icon-wait px-2"><input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggle" /><label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme"><span class="icon" data-feather="moon"></span></label><label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme"><span class="icon" data-feather="sun"></span></label></div>
-              </div><a class="text-700 hover-text-1100 px-2 d-none d-lg-inline lh-sm" href="#" data-bs-toggle="modal" data-bs-target="#searchBoxModal"><span data-feather="search" style="height: 20px; width: 20px;"></span></a><a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="../authentication/simple/sign-in.html">Sign in</a><a class="btn btn-phoenix-primary order-0" href="../authentication/simple/sign-up.html"><span class="fw-bold">Sign Up</span></a>
+              </div><a class="text-700 hover-text-1100 px-2 d-none d-lg-inline lh-sm" href="#" data-bs-toggle="modal" data-bs-target="#searchBoxModal"><span data-feather="search" style="height: 20px; width: 20px;"></span></a><a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="{{ route('login') }}">Sign in</a><a class="btn btn-phoenix-primary order-0" href="{{route('register')}}"><span class="fw-bold">Sign Up</span></a>
             </div>
           </div>
         </nav>
@@ -218,7 +219,7 @@
             <div class="row align-items-center">
               <div class="col-12 col-lg-6 pt-8 pb-6 position-relative z-index-5 text-center text-lg-start">
                 <h1 class="fs-5 fs-md-6 fs-xl-7 fw-black mb-4"><span class="text-gradient-info me-3">Welcome To</span><br />Tulip Hotel</h1>
-                <p class="mb-5 pe-xl-10"></p><a class="btn btn-lg btn-primary rounded-pill me-3" href="#!" role="button">Sign up</a><a class="btn btn-link me-2 fs-0 p-0" href="#!" ></span></a>
+                {{-- <p class="mb-5 pe-xl-10"></p><a class="btn btn-lg btn-primary rounded-pill me-3" href="#!" role="button">Sign up</a><a class="btn btn-link me-2 fs-0 p-0" href="#!" ></span></a> --}}
               </div>
               <div class="col-12 col-lg-auto d-none d-lg-block">
                 <div class="hero-image-container position-absolute h-100 end-0 d-flex align-items-center">
@@ -382,7 +383,7 @@
         <!--/.bg-holder-->
         <div class="container-small position-relative px-lg-7 px-xxl-3">
           <div class="text-center mb-7">
-            <h5 class="text-info mb-3" style="font-size: 1.5em;">Gallery</h5>
+            <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">Gallery</h5>
 
           </div>
 
@@ -545,7 +546,7 @@
       <section class="pt-10" id="blog" style="background-color: #F5F7FA;">
         <div class="container-small px-lg-7 px-xxl-3">
           <div class="text-center mb-5 mb-8">
-            <h5 class="text-info mb-3"><span style="font-size: 30px;">Facility</span></h5>
+            <h5 class="text-info mb-3"><span style="font-size: 30px; margin-right: 2000px;">Facility</span></h5>
 
           </div>
           <div class="row gx-3 gy-7">
