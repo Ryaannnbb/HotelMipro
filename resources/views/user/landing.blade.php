@@ -83,13 +83,35 @@
               <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3 active" aria-current="page" href="#">Home</a></li>
               <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#feature">Rooms</a></li>
 
-              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#team">Abaout Me</a></li>
+              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#team">About Us</a></li>
             </ul>
             <div class="d-grid d-lg-flex align-items-center">
-              <div class="nav-item d-flex align-items-center d-none d-lg-block pe-2">
-                <div class="theme-control-toggle fa-icon-wait px-2"><input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggle" /><label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme"><span class="icon" data-feather="moon"></span></label><label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme"><span class="icon" data-feather="sun"></span></label></div>
-              </div><a class="text-700 hover-text-1100 px-2 d-none d-lg-inline lh-sm" href="#" data-bs-toggle="modal" data-bs-target="#searchBoxModal"><span data-feather="search" style="height: 20px; width: 20px;"></span></a><a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="../authentication/simple/sign-in.html">Sign in</a><a class="btn btn-phoenix-primary order-0" href="../authentication/simple/sign-up.html"><span class="fw-bold">Sign Up</span></a>
-            </div>
+                <!-- Toggle tema -->
+                <div class="nav-item d-flex align-items-center d-none d-lg-block pe-2">
+                  <div class="theme-control-toggle fa-icon-wait px-2">
+                    <input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggle" />
+                    <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme">
+                      <span class="icon" data-feather="moon"></span>
+                    </label>
+                    <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme">
+                      <span class="icon" data-feather="sun"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Tombol pencarian -->
+                {{-- <a class="text-700 hover-text-1100 px-2 d-none d-lg-inline lh-sm" href="#" data-bs-toggle="modal" data-bs-target="#searchBoxModal">
+                  <span data-feather="search" style="height: 20px; width: 20px;"></span>
+                </a> --}}
+
+                <!-- Tombol Sign in -->
+                <a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="{{ route('login') }}">Sign in</a>
+
+                <!-- Tombol Sign Up -->
+                <a class="btn btn-phoenix-primary order-0" href="{{ route('register') }}">
+                  <span class="fw-bold">Sign Up</span>
+                </a>
+              </div>
           </div>
         </nav>
       </div>
@@ -222,7 +244,7 @@
               </div>
               <div class="col-12 col-lg-auto d-none d-lg-block">
                 <div class="hero-image-container position-absolute h-100 end-0 d-flex align-items-center">
-                    <img class="w-100" src="../../assets/img/kamar4.png" alt="hero-header" style="margin-left: -30px;">
+                    <img class="w-100" src="{{ asset('assets/img/kamar4.png') }}" alt="hero-header" style="margin-left: -30px;">
                 </div>
             </div>
             </div>
@@ -275,10 +297,10 @@
 
       <!-- ============================================-->
       <!-- <section> begin ============================-->
-        <section class="pt-13 pb-10" id="feature" style="background-color: #F5F7FA;">
+        <section class="pt-13 pb-10" id="feature">
         <div class="container-small px-lg-7 px-xxl-3">
           <div class="text-center mb-10 mb-md-5">
-            <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">About Me</h5>
+            <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">About Us</h5>
 
             <p class="mb-0" style="text-align: left;  font-size: 20px; max-width: 600px;">
                 Hotel Tulip tempat penginapan yang menyediakan berbagai

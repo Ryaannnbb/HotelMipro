@@ -355,6 +355,7 @@
   <!-- ===============================================-->
   <!--    JavaScripts-->
   <!-- ===============================================-->
+  <script src="{{ asset('vendors/echarts/echarts.min.js') }}"></script>
   <script src="../../../vendors/popper/popper.min.js"></script>
   <script src="../../../vendors/bootstrap/bootstrap.min.js"></script>
   <script src="../../../vendors/anchorjs/anchor.min.js"></script>

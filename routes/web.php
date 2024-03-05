@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\DashboardAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KamarController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Middleware\UserMiddleware;
 
@@ -25,7 +27,6 @@ Route::get('/', function () {
 });
 
 
-
 // LOGIN REGISTER
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -44,6 +45,25 @@ Route::controller(ResetPasswordController::class)->group(function () {
 // USER
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/homeadmin', [KamarController::class, 'index'])->name('homeadmin');
+    Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
+
+    Route::controller(KamarController::class)->prefix('kamar')->group(function () {
+        Route::get('/', 'index')->name('kamar');
+        Route::get('/create', 'create')->name('kamar.create');
+        Route::post('/store', 'store')->name('kamar.store');
+        Route::get('/edit/{id}', 'edit')->name('kamar.edit');
+        Route::put('/edit/{id}', 'update')->name('kamar.update');
+        Route::delete('destroy/{id}', 'destroy')->name('kamar.destroy');
+    });
+
+    Route::controller(KategoriController::class)->prefix('kategori')->group(function () {
+        Route::get('/', 'index')->name('kategori');
+        Route::get('/create', 'create')->name('kategori.create');
+        Route::post('/store', 'store')->name('kategori.store');
+        Route::get('/edit/{id}', 'edit')->name('kategori.edit');
+        Route::put('/edit/{id}', 'update')->name('kategori.update');
+        Route::delete('destroy/{id}', 'destroy')->name('kategori.destroy');
+    });
 });
 
 // ADMIN
