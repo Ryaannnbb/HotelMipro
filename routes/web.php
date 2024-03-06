@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\DashboardAdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KamarController;
+use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Http\Middleware\UserMiddleware;
+use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\FasilitasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +65,23 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::get('/edit/{id}', 'edit')->name('kategori.edit');
         Route::put('/edit/{id}', 'update')->name('kategori.update');
         Route::delete('destroy/{id}', 'destroy')->name('kategori.destroy');
+    });
+
+    Route::controller(PembayaranController::class)->prefix('pembayaran')->group(function () {
+        Route::get('', 'index')->name('pembayaran');
+        Route::get('create', 'create')->name('pembayaran.create');
+        Route::post('store', 'store')->name('pembayaran.store');
+        Route::get('edit/{id}', 'edit')->name('pembayaran.edit');
+        Route::put('edit/{id}', 'update')->name('pembayaran.update');
+        Route::delete('destroy/{id}', 'destroy')->name('pembayaran.destroy');
+    });
+    Route::controller(FasilitasController::class)->prefix('fasilitas')->group(function () {
+        Route::get('', 'index')->name('fasilitas');
+        Route::get('create', 'create')->name('fasilitas.create');
+        Route::post('store', 'store')->name('fasilitas.store');
+        Route::get('edit/{id}', 'edit')->name('fasilitas.edit');
+        Route::put('edit/{id}', 'update')->name('fasilitas.update');
+        Route::delete('destroy/{id}', 'destroy')->name('fasilitas.destroy');
     });
 });
 

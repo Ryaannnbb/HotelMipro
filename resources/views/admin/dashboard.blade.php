@@ -208,7 +208,7 @@
                                         class="fa-stack-1x fa-solid fa-shopping-bag text-primary"
                                         data-fa-transform="shrink-2 up-8 right-6"></span></span>
                                 <div class="ms-3">
-                                    <h4 class="mb-0"> Product</h4>
+                                    <h4 class="mb-0"> Rooms</h4>
                                     <p class="text-800 fs--1 mb-0">Total amount</p>
                                 </div>
                             </div>
@@ -238,8 +238,8 @@
                                         class="fa-stack-1x fa-brands fa-sellsy text-warning"
                                         data-fa-transform="shrink-2 up-8 right-6"></span></span>
                                 <div class="ms-3">
-                                    <h4 class="mb-0"> Product Pending</h4>
-                                    <p class="text-800 fs--1 mb-0">Pending</p>
+                                    <h4 class="mb-0"> Rooms Active</h4>
+                                    <p class="text-800 fs--1 mb-0">Rooms available</p>
                                 </div>
                             </div>
                         </div>
@@ -253,10 +253,23 @@
                                         class="fa-stack-1x fa-solid fa-xmark text-danger "
                                         data-fa-transform="shrink-2 up-8 right-6"></span></span>
                                 <div class="ms-3">
-                                    <h4 class="mb-0">
-                                        Products
-                                    </h4>
-                                    <p class="text-800 fs--1 mb-0">Out of stock</p>
+                                    <h4 class="mb-0">Rooms Empty</h4>
+                                    <p class="text-800 fs--1 mb-0">Rooms booked</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-auto">
+                            <div class="d-flex align-items-center"><span class="fa-stack"
+                                    style="min-height: 46px;min-width: 46px;"><span
+                                        class="fa-solid fa-square fa-stack-2x text-danger-300"
+                                        data-fa-transform="down-4 rotate--10 left-4"></span><span
+                                        class="fa-solid fa-circle fa-stack-2x stack-circle text-danger-100"
+                                        data-fa-transform="up-4 right-3 grow-2"></span><span
+                                        class="fa-stack-1x fa-solid fa-xmark text-danger "
+                                        data-fa-transform="shrink-2 up-8 right-6"></span></span>
+                                <div class="ms-3">
+                                    <h4 class="mb-0">Rooms Pending</h4>
+                                    <p class="text-800 fs--1 mb-0">Users order pending</p>
                                 </div>
                             </div>
                         </div>
