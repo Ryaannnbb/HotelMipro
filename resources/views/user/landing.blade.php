@@ -218,7 +218,7 @@
           <div class="container-small px-lg-7 px-xxl-3">
             <div class="row align-items-center">
               <div class="col-12 col-lg-6 pt-8 pb-6 position-relative z-index-5 text-center text-lg-start">
-                <h1 class="fs-5 fs-md-6 fs-xl-7 fw-black mb-4"><span class="text-gradient-info me-3">Welcome To</span><br />Tulip Hotel</h1>
+                <h1 class="fs-5 fs-md-6 fs-xl-7 fw-black mb-4"><span class="text-gradient-info me-3">Welcome To</span><br />small Hotel</h1>
                 {{-- <p class="mb-5 pe-xl-10"></p><a class="btn btn-lg btn-primary rounded-pill me-3" href="#!" role="button">Sign up</a><a class="btn btn-link me-2 fs-0 p-0" href="#!" ></span></a> --}}
               </div>
               <div class="col-12 col-lg-auto d-none d-lg-block">
@@ -282,11 +282,11 @@
             <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">About Us</h5>
 
             <p class="mb-0" style="text-align: left;  font-size: 20px; max-width: 600px;">
-                Hotel Tulip tempat penginapan yang menyediakan berbagai
+                Hotel small tempat penginapan yang menyediakan berbagai
                 fasilitas dan layanan untuk para tamu yang menginap. Hotel
-                Tulip memiliki kamar-kamar tidur yang dilengkapi dengan
+                small memiliki kamar-kamar tidur yang dilengkapi dengan
                 berbagai fasilitas seperti tempat tidur, kamar mandi pribadi, televisi,
-                meja kerja, dan area penyimpanan. Selain itu, hotel Tulip
+                meja kerja, dan area penyimpanan. Selain itu, hotel small
                 menyediakan fasilitas umum seperti restoran, kolam renang, pusat
                 kebugaran.
             </p>

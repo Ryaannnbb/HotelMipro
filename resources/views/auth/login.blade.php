@@ -87,7 +87,7 @@
                 <div class="row align-items-center gx-0 gy-7">
                   <div class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative auth-title-box">
                     <div class="bg-holder auth-img-holder">
-                        <img src="{{ asset('assets/img/login.png') }}" class="auth-img rounded-3" alt="Authentication Image">
+                        <img src="{{ asset('assets/img/loginn.png') }}" class="auth-img rounded-3" alt="Authentication Image">
                     </div>
                     <!--/.bg-holder-->
                     <div class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 pb-md-7">
