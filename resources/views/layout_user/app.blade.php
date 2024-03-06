@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 
 <!-- Mirrored from prium.github.io/phoenix/v1.13.0/apps/e-commerce/landing/homepage.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 Nov 2023 12:13:49 GMT -->
@@ -71,7 +71,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light px-0">
                     <div class="row gx-0 gy-2 w-100 flex-between-center">
                         <div class="col-auto"><a class="text-decoration-none" href="#">
-                                <div class="d-flex align-items-center"><img src="{{ asset('assets/storage/logo.png') }}"
+                                <div class="d-flex align-items-center"><img src="{{ asset('assets/img/loghotel.jpeg') }}"
                                         alt="phoenix" width="27" />
                                     <p class="logo-text ms-2">iVibe</p>
                                 </div>
@@ -92,7 +92,7 @@
                                             title="Switch theme"><span class="icon" data-feather="sun"></span></label>
                                     </div>
                                 </li>
-                                <li class="nav-item"><a
+                                {{-- <li class="nav-item"><a
                                         class="nav-link px-2 @if ($totalpesanan > 0) icon-indicator icon-indicator-primary @endif"
                                         href="{{ route('keranjang') }}" role="button"><span class="text-700"
                                             data-feather="shopping-cart" style="height:20px;width:20px;"></span><span
@@ -100,7 +100,7 @@
                                             @if ($totalpesanan > 0)
                                                 <span>{{ $totalpesanan }}</span>
                                             @endif
-                                        </span></a></li>
+                                        </span></a></li> --}}
                                 {{-- <li class="nav-item dropdown"><a
                     class="nav-link px-2 icon-indicator icon-indicator-sm icon-indicator-danger"
                     id="navbarTopDropdownNotification" href="#" role="button" data-bs-toggle="dropdown"
@@ -309,11 +309,11 @@
 
                                             </div>
                                             {{-- <div class="overflow-auto scrollbar" style="height: 2rem;"> --}}
-                                            <ul class="nav d-flex flex-column mb-2 pb-1">
+                                            {{-- <ul class="nav d-flex flex-column mb-2 pb-1">
                                                 <li class="nav-item"><a class="nav-link px-3"
                                                         href="{{ route('profil') }}"> <span class="me-2 text-900"
                                                             data-feather="user"></span><span>Profile</span></a></li>
-                                            </ul>
+                                            </ul> --}}
                                             {{-- </div> --}}
 
                                             <hr>
@@ -352,7 +352,7 @@
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('homeuser') ? 'active' : '' }}"
                         href="{{ route('homeuser') }}">Home</a></li>
-                <li class="nav-item" data-nav-item="data-nav-item"><a
+                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('produk.filter') ? 'active' : '' }}""
                         href="{{ route('produk.filter') }}">Products</a></li>
                 <li class="nav-item" data-nav-item="data-nav-item"><a
@@ -361,7 +361,7 @@
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
                         href="{{ route('checkout') }}">Checkout</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </nav>
@@ -375,7 +375,7 @@
             <div class="container-small">
                 <div class="row justify-content-between gy-4">
                     <div class="col-12 col-lg-4">
-                        <div class="d-flex align-items-center mb-3"><img src="{{ asset('assets/storage/logo.png') }}"
+                        <div class="d-flex align-items-center mb-3"><img src="{{ asset('assets/img/loghotel.png') }}"
                                 alt="phoenix" width="27" />
                             <p class="logo-text ms-2">iVibe</p>
                         </div>

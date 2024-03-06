@@ -148,13 +148,16 @@
                         </div>
 
                         {{-- {{ TABLE }} --}}
+                        <div
+                        class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
                         <div class="table-responsive scrollbar mx-n1 px-1">
-                            <table class="table fs-1 mb-0">
+                            <table class="table fs--1 mb-0">
                                 <thead>
+
                                     <tr class="text-center">
 
                                         <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
-                                            style="width:350px;" data-sort="no">NO</th>
+                                            style="width:350px;" data-sort="text start">NO</th>
                                         <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
                                             style="width:350px;" data-sort="path_produk">IMAGE</th>
                                         <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
@@ -221,7 +224,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
                             <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a

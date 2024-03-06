@@ -264,6 +264,16 @@
         </nav>
         <form action="{{ route('kamar.update', $kamar->id) }}"method="POST" enctype="multipart/form-data">
             @csrf
+            <div class="row g-3 flex-between-end mb-5">
+                <div class="col-auto">
+                    <h2 class="mb-2">Edit a rooms</h2>
+                    <h5 class="text-700 fw-semi-bold">Orders placed across your store</h5>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kamar') }}">Discard</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish Rooms</button>
+                </div>
+            </div>
             @method('PUT')
             <div class="row g-5">
                 <div class="col-12 col-xl-8">
@@ -341,17 +351,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row gx-3">
-                                <div class="col-12">
-                                    <a href="{{ route('kamar') }}" class="btn btn-warning me-2 mb-2 mb-sm-0"
-                                        type="button">
-                                        Discard
-                                    </a>
-                                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                                        <i class="fas fa-check"></i> save change
-                                    </button>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
