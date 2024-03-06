@@ -69,4 +69,5 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 // ADMIN
 Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
+    Route::get('/detailkamar{id}', [HomeUserController::class, 'Detailkamar'])->name('detail.kamar');
 });

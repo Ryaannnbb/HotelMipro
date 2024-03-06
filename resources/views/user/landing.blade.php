@@ -64,8 +64,8 @@
     <main class="alternate-landing" style="--phoenix-scroll-margin-top: 1.2rem;">
       <div class="bg-white sticky-top landing-navbar" data-navbar-shadow-on-scroll="data-navbar-shadow-on-scroll">
         <nav class="navbar navbar-expand-lg container-small px-3 px-lg-7 px-xxl-3"><a class="navbar-brand flex-1 flex-lg-grow-0" href="../../index.html">
-            <div class="d-flex align-items-center"><img src="../../assets/img/icons/logo.png" alt="phoenix" width="27" />
-              <p class="logo-text ms-2">phoenix</p>
+            <div class="d-flex align-items-center"><img src="../../assets/img/hotel10.png" alt="phoenix" width="27" />
+              <p class="logo-text ms-2">Small</p>
             </div>
           </a>
           <div class="d-lg-none">
@@ -81,9 +81,10 @@
             </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3 active" aria-current="page" href="#">Home</a></li>
-              <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#feature">Rooms</a></li>
+              <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#rooms">Rooms</a></li>
 
-              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#team">About Us</a></li>
+              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#about">About Us</a></li>
+              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#facility">Facility</a></li>
             </ul>
             <div class="d-grid d-lg-flex align-items-center">
                 <!-- Toggle tema -->
@@ -240,7 +241,7 @@
             <div class="row align-items-center">
               <div class="col-12 col-lg-6 pt-8 pb-6 position-relative z-index-5 text-center text-lg-start">
                 <h1 class="fs-5 fs-md-6 fs-xl-7 fw-black mb-4"><span class="text-gradient-info me-3">Welcome To</span><br />Tulip Hotel</h1>
-                <p class="mb-5 pe-xl-10"></p><a class="btn btn-lg btn-primary rounded-pill me-3" href="#!" role="button">Sign up</a><a class="btn btn-link me-2 fs-0 p-0" href="#!" ></span></a>
+                {{-- <p class="mb-5 pe-xl-10"></p><a class="btn btn-lg btn-primary rounded-pill me-3" href="#!" role="button">Sign up</a><a class="btn btn-link me-2 fs-0 p-0" href="#!" ></span></a> --}}
               </div>
               <div class="col-12 col-lg-auto d-none d-lg-block">
                 <div class="hero-image-container position-absolute h-100 end-0 d-flex align-items-center">
@@ -297,20 +298,7 @@
 
       <!-- ============================================-->
       <!-- <section> begin ============================-->
-        <section class="pt-13 pb-10" id="feature">
-        <div class="container-small px-lg-7 px-xxl-3">
-          <div class="text-center mb-10 mb-md-5">
-            <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">About Us</h5>
 
-            <p class="mb-0" style="text-align: left;  font-size: 20px; max-width: 600px;">
-                Hotel Tulip tempat penginapan yang menyediakan berbagai
-                fasilitas dan layanan untuk para tamu yang menginap. Hotel
-                Tulip memiliki kamar-kamar tidur yang dilengkapi dengan
-                berbagai fasilitas seperti tempat tidur, kamar mandi pribadi, televisi,
-                meja kerja, dan area penyimpanan. Selain itu, hotel Tulip
-                menyediakan fasilitas umum seperti restoran, kolam renang, pusat
-                kebugaran.
-            </p>
             {{-- <div class="text-center mt-5"><a class="btn btn-outline-primary" href="#!">See more<span class="fa-solid fa-angle-right ms-2"></span></a></div>
           </div>
           <div class="row flex-between-center px-xl-11 mb-10 mb-md-9">
@@ -396,7 +384,7 @@
       </section><!-- <section> close ============================--> --}}
       <!-- ============================================-->
 
-      <section class="gallery"  style="background-color: #F5F7FA;">
+      <section class="gallery"  style="background-color: #F5F7FA;" id="rooms">
         <div class="position-absolute left-0 w-100 gallery-overlay"></div>
         <div class="bg-holder d-none d-xl-block" style="background-image:url(../../assets/img/bg/bg-left-26.png);background-size:auto;background-position:left 65%;"></div>
         <!--/.bg-holder-->
@@ -564,9 +552,10 @@
 
       <!-- ============================================-->
       <!-- <section> begin ============================-->
-      <section class="pt-10" id="blog" style="background-color: #F5F7FA;">
+      <section class="pt-10" id="facility" style="background-color: #F5F7FA;">
         <div class="container-small px-lg-7 px-xxl-3">
           <div class="text-center mb-5 mb-8">
+            {{-- <div class="row g-3" id="image_gallery" data-sl-isotope='{"layoutMode":"packery"}'> --}}
             <h5 class="text-info mb-3"><span style="font-size: 30px;">Facility</span></h5>
 
           </div>
@@ -591,8 +580,26 @@
             </div>
           </div>
         </div><!-- end of .container-->
-      </section><!-- <section> close ============================-->
+      </section>
+
+      <!-- <section> close ============================-->
       <!-- ============================================-->
+
+      <section class="pt-13 pb-10" id="about">
+        <div class="container-small px-lg-7 px-xxl-3">
+          <div class="text-center mb-10 mb-md-5">
+            <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">About Us</h5>
+
+            <p class="mb-0" style="text-align: left;  font-size: 20px; max-width: 600px;">
+                Small Hotel is a place of accommodation that provides various facilities
+                and services for guests who stay. Hotel Tulip has bedrooms equipped with
+                various facilities such as a bed, private bathroom, television, work desk
+                and storage area. In addition, the Tulip hotel provides public facilities
+                such as a restaurant, swimming pool, fitness center.
+            </p>
+          </div>
+        </div>
+      </section>
 
 
 
@@ -759,14 +766,14 @@
       <section class="bg-1100 dark__bg-1000">
         <div class="container-small px-lg-7 px-xxl-3">
           <div class="row gx-xxl-8 gy-5 align-items-center mb-5">
-            <div class="col-xl-auto text-center"><a href="#"><img src="../../assets/img/icons/logo-white.png" height="48" alt="" /></a></div>
+            <div class="col-xl-auto text-center"><a href="#"><img src="../../assets/img/hotel10.png" height="48" alt="" /></a></div>
             <div class="col-xl-auto flex-1">
               <ul class="list-unstyled d-flex justify-content-center flex-wrap mb-0 border-end-xl border-dashed border-800 gap-3 gap-xl-8 pe-xl-5 pe-xxl-8 w-75 w-md-100 mx-auto">
                 <li><a class="text-300 dark__text-300" href="#">Contact us</a></li>
-                <li><a class="text-300 dark__text-300" href="#">Newsroom</a></li>
-                <li><a class="text-300 dark__text-300" href="#">Opportunities</a></li>
-                <li><a class="text-300 dark__text-300" href="#">Login</a></li>
-                <li><a class="text-300 dark__text-300" href="#">Sign Up</a></li>
+                <li><a class="text-300 dark__text-300" href="#">Rooms</a></li>
+                {{-- <li><a class="text-300 dark__text-300" href="#">Opportunities</a></li> --}}
+                <li><a class="text-300 dark__text-300" href="{{ route('login') }}">Login</a></li>
+                <li><a class="text-300 dark__text-300"  href="{{ route('register') }}">Sign Up</a></li>
                 <li><a class="text-300 dark__text-300" href="#">Support</a></li>
                 <li><a class="text-300 dark__text-300" href="#">FAQ</a></li>
               </ul>
