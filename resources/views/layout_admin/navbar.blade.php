@@ -48,6 +48,28 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('pembayaran') ? 'active' : '' }}"
+                        href="{{ route('pembayaran') }}" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-credit-card"></span>
+                            </span>
+                            <span class="nav-link-text">Payment</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('fasilitas') ? 'active' : '' }}"
+                        href="{{ route('fasilitas') }}" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-receipt"></span>
+                            </span>
+                            <span class="nav-link-text">Facility</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <!-- label-->
                     <hr class="navbar-vertical-line" /><!-- parent pages-->
 

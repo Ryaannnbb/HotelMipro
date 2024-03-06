@@ -216,35 +216,39 @@
       }
     </script>
     <div class="content">
-      {{-- <nav class="mb-2" aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="#!">Page 1</a></li>
-          <li class="breadcrumb-item"><a href="#!">Page 2</a></li>
-          <li class="breadcrumb-item active">Default</li>
-        </ol>
-      </nav> --}}
-      <form action="{{ route('kategori.update', $kategori->id) }}" method="POST" class="mb-9">
-        @method('PUT')
-        @csrf
+        <form method="POST" action="{{ route('fasilitas.store') }}" class="mb-9">
+            @csrf
 
-        <div class="row g-3 flex-between-end mb-5">
-          <div class="col-auto">
-            <h2 class="mb-2">Add a category</h2>
-            <h5 class="text-700 fw-semi-bold">Orders placed across your store</h5>
-          </div>
-          <div class="col-auto"><button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button">Discard</button><button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish category</button></div>
-        </div>
-        <div class="row g-5">
-          <div class="col-12 col-xl-12">
-            <h4 class="mb-3">Category Title</h4><input class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori" value="{{ $kategori->nama_kategori }}" type="text" placeholder="Write title here..." />
-            @error('nama_kategori')
-                <div class="invalid-feedback">
-                    {{ $message }}
+            <div class="row g-3 flex-between-end mb-5">
+                <div class="col-auto">
+                    <h2 class="mb-2">Add a facility</h2>
                 </div>
-            @enderror
-          </div>
-        </div>
-      </form>
+                <div class="col-auto">
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('fasilitas') }}">Discard</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish facility</button>
+                </div>
+            </div>
+            <div class="row g-5">
+                <div class="col-12 col-xl-12">
+                    <label class="fw-bold">Facility Title</label>
+                    <input class="form-control @error('nama_fasilitas') is-invalid @enderror" name="nama_fasilitas" value="{{ old('nama_fasilitas') }}" type="text" placeholder="Write title here..." />
+                    @error('nama_fasilitas')
+                        <strong class="invalid-feedback">
+                            {{ $message }}
+                        </strong>
+                    @enderror
+                </div>
+                <div class="col-12 col-xl-12">
+                    <label class="fw-bold">Best Price</label>
+                    <input class="form-control @error('harga_satuan') is-invalid @enderror" name="harga_satuan" value="{{ old('harga_satuan') }}" type="number" placeholder="Write title here..." />
+                    @error('harga_satuan')
+                        <strong class="invalid-feedback">
+                            {{ $message }}
+                        </strong>
+                    @enderror
+                </div>
+            </div>
+        </form>
       <footer class="footer position-absolute">
         <div class="row g-0 justify-content-between align-items-center h-100">
           <div class="col-12 col-sm-auto text-center">
