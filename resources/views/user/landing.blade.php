@@ -65,8 +65,8 @@
       <div class="bg-white sticky-top landing-navbar" data-navbar-shadow-on-scroll="data-navbar-shadow-on-scroll">
         <nav class="navbar navbar-expand-lg container-small px-3 px-lg-7 px-xxl-3"><a class="navbar-brand flex-1 flex-lg-grow-0" href="../../index.html">
           <div class="d-flex align-items-center" style="margin-right: 20px;">
-            <img src="../../assets/img/brands/tulip1.png" alt="logo" width="100" />
-            <p class="logo-text ms-2" style="margin-left: 10px;">Tulip Hotel</p>
+            <img src="../../assets/img/brands/small.png" alt="logo" width="70" />
+            <p class="logo-text ms-2" style="margin-left: 10px;">Small Hotel</p>
         </div>        
           </a>
           <div class="d-lg-none">
