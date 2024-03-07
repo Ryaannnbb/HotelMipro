@@ -1,6 +1,8 @@
 @extends('layout_admin.app')
 
 @section('content')
+    @include('sweetalert.sweetalert')
+    {{-- @dd($diskon) --}}
     <div class="modal fade" id="searchBoxModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true"
         data-phoenix-modal="data-phoenix-modal" style="--phoenix-backdrop-opacity: 1;">
         <div class="modal-dialog">
@@ -14,8 +16,7 @@
                         </form>
                         <div class="btn-close position-absolute end-0 top-50 translate-middle cursor-pointer shadow-none"
                             data-bs-dismiss="search"><button class="btn btn-link btn-close-falcon p-0"
-                                aria-label="Close"></button>
-                        </div>
+                                aria-label="Close"></button></div>
                         <div class="dropdown-menu border border-300 font-base start-0 py-0 overflow-hidden w-100">
                             <div class="scrollbar-overlay" style="max-height: 30rem;">
                                 <div class="list pb-3">
@@ -24,7 +25,7 @@
                                     <hr class="text-200 my-0" />
                                     <h6 class="dropdown-header text-1000 fs--1 border-bottom border-200 py-2 lh-sm">Recently
                                         Searched </h6>
-                                    <div class="py-2"><a class="dropdown-item" href="../landing/produk-details.html">
+                                    <div class="py-2"><a class="dropdown-item" href="../landing/product-details.html">
                                             <div class="d-flex align-items-center">
                                                 <div class="fw-normal text-1000 title"><span
                                                         class="fa-solid fa-clock-rotate-left"
@@ -59,8 +60,7 @@
                                             <div class="flex-1">
                                                 <h6 class="mb-0 text-1000 title">MacBook Pro - 13″</h6>
                                                 <p class="fs--2 mb-0 d-flex text-700"><span
-                                                        class="fw-medium text-600 ms-2">30 Sep at 12:30
-                                                        PM</span></p>
+                                                        class="fw-medium text-600 ms-2">30 Sep at 12:30 PM</span></p>
                                             </div>
                                         </a>
                                     </div>
@@ -262,7 +262,28 @@
     <div class="content">
         <nav class="mb-2" aria-label="breadcrumb">
         </nav>
-        <form action="{{ route('kamar.update', $kamar->id) }}"method="POST" enctype="multipart/form-data">
+        <style>
+            #imagePreview {
+                text-align: center;
+            }
+
+            #imagePreview img {
+                max-width: 100%;
+                max-height: 200px;
+                /* Atur tinggi maksimum sesuai kebutuhan */
+                object-fit: contain;
+                margin-top: 10px;
+            }
+
+            .card {
+                height: 100%;
+            }
+        </style>
+
+        {{-- @dd($diskon->all()) --}}
+
+        <form class="mb-9" action="{{ route('diskon.update', $diskon->id) }}" method="POST" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
@@ -270,41 +291,62 @@
                     <h5 class="text-700 fw-semi-bold">Orders placed across your store</h5>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kamar') }}">Discard</a>
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('diskon') }}">Discard</a>
                     <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish Rooms</button>
                 </div>
             </div>
-            @method('PUT')
             <div class="row g-5">
                 <div class="col-12 col-xl-8">
-                    <h4 class="mb-3">Product Title</h4><input class="form-control mb-5" type="text"
-                        name="nama_kamar" value="{{ old('name', $kamar->nama_kamar) }}"
-                        placeholder="Write title here..." />
+                    <!-- Konten form di sini -->
+                    <h4 class="mb-3">Discount Title</h4>
+                    <input class="form-control mb-2 @error('nama_diskon') is-invalid @enderror" type="text"
+                        name="nama_diskon" value="{{ old('name', $diskon->nama_diskon) }}" placeholder="Write title here..." />
+
+                    @error('nama_diskon')
+                        <strong class="invalid-feedback">
+                            {{ $message }}
+                        </strong>
+                    @enderror
+
                     <div class="mb-6">
-                        <h4 class="mb-3"> Product Description</h4>
-                        <textarea class="tinymce" name="deskripsi"
-                            data-tinymce='{"height":"15rem","placeholder":"Write a description here...","plugins": "nonbreaking"}'>{{ old('description', $kamar->deskripsi) }}</textarea>
+                        <h4 class="mb-3">Discount Description</h4>
+                        <textarea class="tinymce @error('deskripsi') is-invalid @enderror" name="deskripsi"
+                            data-tinymce='{"height":"15rem","placeholder":"Write a description here...","plugins": "nonbreaking"}'>
+                            {{ old('description', $diskon->deskripsi) }}
+                        </textarea>
+
+                        @error('deskripsi')
+                            <strong class="invalid-feedback">
+                                {{ $message }}
+                            </strong>
+                        @enderror
                     </div>
+
                     <h4 class="mb-3">Display images</h4>
                     <div class="mb-3">
+                        <div id="imagePreview" class="mt-2"></div>
                         <div class="d-flex align-items-center flex-column">
-                            <input class="form-control @error('path_kamar') is-invalid @enderror"
-                            type="file" name="path_kamar" id="formFile">
-                            @if ($kamar->path_kamar)
+                            <input class="form-control @error('gambar') is-invalid @enderror"
+                            type="file" name="gambar" id="formFile">
+                            @if ($diskon->gambar)
                             <img class="mt-2" id="image-preview"
-                            src="{{ asset('storage/kamar/' . $kamar->path_kamar) }}"
+                            src="{{ asset('storage/kamar/' . $diskon->gambar) }}"
                             alt="Preview"
                             style="width: 50%; height: auto; border-radius: 5px">
                             @endif
-                        <img class="mt-2" id="image-preview" src="#" alt="Preview"
-                        style="display: none; width: 50%; height: auto; border-radius: 5px">
-                        @error('path_kamar')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                            <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
+                            @error('gambar')
+                                <strong class="invalid-feedback">
+                                    {{ $message }}
+                                </strong>
+                            @enderror
                         </div>
                     </div>
+                    @error('gambar')
+                        <strong class="invalid-feedback">
+                            {{ $message }}
+                        </strong>
+                    @enderror
                     <script>
                         document.getElementById('formFile').addEventListener('change', function(e) {
                             const file = e.target.files[0];
@@ -317,35 +359,123 @@
                         });
                     </script>
                 </div>
-                <div class="col-12 col-xl-4"style="margin-top: 70px;>
-                    <div class="row g-2">
-                        <div class="col-12 col-xl-12">
-                            <div class="card mb-3">
+
+                <div class="col-12 col-xl-4" style="margin-top: 70px;">
+                    <div class="row g-2 order-xl-last">
+                        <div class="col-12 col-xl-12 order-xl-first">
+                            <div class="card mb-4">
                                 <div class="card-body">
                                     <h4 class="card-title mb-4">Organize</h4>
                                     <div class="row gx-3">
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
                                                 <div class="d-flex flex-wrap mb-2">
-                                                    <h5 class="mb-0 text-1000 me-2">category</h5><a class="fw-bold fs--1"
-                                                        href="#!"></a>
                                                 </div>
-                                                <select class="form-select mb-3 @error('kategori_id') is-invalid @enderror"
-                                                    name="kategori_id" aria-label="category">
-                                                    @foreach ($kategori as $kategoris)
-                                                        <option value="{{ $kategoris->id }}"
-                                                            @if ($kamar->kategori_id == $kategoris->id) selected @endif>
-                                                            {{ $kategoris->nama_kategori }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-xl-12">
+                                            <div class="mb-3">
+                                                <h5 class="mb-2 text-1000">Type</h5>
+                                                <select class="form-select @error('jenis') is-invalid @enderror" id="organizerSingle" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}' name="jenis">
+                                                    <option value="">Select organizer...</option>
+                                                        <option value="nominal" @selected(old('jenis', $diskon->jenis) == 'nominal')>
+                                                            Nominal
                                                         </option>
-                                                    @endforeach
+                                                        <option value="percentage" @selected(old('jenis', $diskon->jenis) == 'percentage')>
+                                                            Percentage
+                                                        </option>
                                                 </select>
+                                                @error('jenis')
+                                                    <strong class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </strong>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">price</h5><input class="form-control mb-xl-3"
-                                                    type="number" name="harga"
-                                                    value="{{ old('name', $kamar->harga) }}" placeholder="price" />
+                                                <h5 class="mb-2 text-1000">Discount</h5>
+                                                <input
+                                                    class="form-control mb-xl-3 @error('potongan_harga') is-invalid @enderror"
+                                                    type="number" name="potongan_harga"
+                                                    value="{{ old('name', $diskon->potongan_harga) }}" placeholder="Best price" />
+                                                @error('potongan_harga')
+                                                    <strong class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </strong>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-xl-12">
+                                            <div class="mb-4">
+                                                <h5 class="mb-2 text-1000">Start Effects</h5>
+                                                <input class="form-control datetimepicker start-date @error('awal_berlaku') is-invalid @enderror" type="text" placeholder="dd/mm/yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="awal_berlaku" />
+                                                @error('awal_berlaku')
+                                                    <strong class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </strong>
+                                                @enderror
+                                                <script>
+                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                        var datepickers = document.querySelectorAll('.start-date');
+                                                        var oldValue = '{{ old('awal_berlaku') ?? $diskon->awal_berlaku }}';
+
+                                                        if (oldValue) {
+                                                            datepickers.forEach(function(datepicker) {
+                                                                datepicker.value = oldValue;
+                                                            });
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-xl-12">
+                                            <div class="mb-4">
+                                                <h5 class="mb-2 text-1000">End Effects</h5>
+                                                <input class="form-control datetimepicker end-date @error('akhir_berlaku') is-invalid @enderror" type="text" placeholder="dd/mm/yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="akhir_berlaku"  />
+                                                @error('akhir_berlaku')
+                                                    <strong class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </strong>
+                                                @enderror
+                                                <script>
+                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                        var datepickers = document.querySelectorAll('.end-date');
+                                                        var oldValue = '{{ old('akhir_berlaku') ?? $diskon->akhir_berlaku }}';
+
+                                                        if (oldValue) {
+                                                            datepickers.forEach(function(datepicker) {
+                                                                datepicker.value = oldValue;
+                                                            });
+                                                        }
+                                                    });
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-xl-12">
+                                            @php
+                                                $listkamarterdiskon = [];
+                                                foreach ($kamarterdiskon as $value) {
+                                                    array_push($listkamarterdiskon, $value->rooms_id);
+                                                }
+                                                // print_r($listkamarterdiskon);
+                                            @endphp
+                                            <div class="mb-4">
+                                                <h5 class="mb-2 text-1000">Add room discount</h5>
+                                                <select class="form-select @error('nama_kamar') is-invalid @enderror" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}' name="nama_kamar[]">
+                                                <option value="">Select rooms...</option>
+                                                @foreach ($room as $rooms)
+                                                    <option value="{{ $rooms->id }}"
+                                                        @selected(!is_null(@old('nama_kamar')) ? in_array($rooms->id, @old('nama_kamar')) : in_array($rooms->id, $listkamarterdiskon))>
+                                                        {{ $rooms->nama_kamar }}
+                                                    </option>
+                                                @endforeach
+                                                </select>
+                                                @error('nama_kamar')
+                                                    <strong class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </strong>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -354,20 +484,100 @@
                         </div>
                     </div>
                 </div>
+                <div id="products"
+                data-list='{"valueNames":["product","price","category","tags","vendor","time"],"page":5 ,"pagination":true}'>
+                <div class="mb-4">
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="search-box">
+                            {{-- <form class="position-relative" data-bs-toggle="search" data-bs-display="static"><input
+                                    class="form-control search-input search" type="search" placeholder="Search rooms"
+                                    aria-label="Search" />
+                                <span class="fas fa-search search-box-icon"></span>
+                            </form> --}}
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
+                    <div class="table-responsive scrollbar mx-n1 px-1">
+                        <table class="table fs--1 mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="white-space-nowrap text-start align-middle ps-4 fs--1 text-dark"
+                                        data-sort="text start">NO</th>
+                                    <th class="white-space-nowrap text-center align-middle ps-4 fs--1 text-dark"
+                                        data-sort="path_produk">IMAGE</th>
+                                    <th class="white-space-nowrap text-center align-middle ps-4 fs--1 text-dark"
+                                        data-sort="path_nama">DISCOUNT NAME</th>
+                                    <th class="white-space-nowrap align-middle text-center fs--1 ps-4 text-dark"
+                                        data-sort="harga">DISCOUNT</th>
+                                    <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
+                                        data-sort="categori">TYPE</th>
+                                    <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
+                                        data-sort="categori">DESCRIPTION</th>
+                                    <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
+                                        data-sort="stok">START EFFECTS</th>
+                                    <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
+                                        data-sort="deskripsi">END EFFECTS</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list" id="products-table-body text-center">
+                                @foreach ($diskons as $diskon)
+                                {{-- @dd($diskon) --}}
+                                    <tr class="position-static">
+                                        <td class="align-middle review fs-0 text-start ps-4">
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td class="align-middle white-space-nowrap mx-auto text-center py-0">
+                                            <img src="{{ asset('storage/kamar/' . $diskon->gambar) }}"
+                                                alt="" width="50%" height="50" style="object-fit: cover;"
+                                                class="mx-auto rounded-3" />
+                                        </td>
+                                        <td class="category text-center ellipsis-text col-1">
+                                            <p class="fw-semi-bold fs--1 line-clamp-3 mb-0">
+                                                {{ Str::limit($diskon->nama_diskon, 10, $end = '...') }}</p>
+                                        </td>
+                                        <td
+                                            class="price text-center white-space-nowrap fw-bold fs--1  text-700 ps-4">
+                                            {{ 'Rp ' . number_format($diskon->potongan_harga, 0, ',', '.') }}</td>
+                                        <td class="tags text-center review pb-2 ps-3 fs--1 ">
+                                            {{ $diskon->jenis }}
+                                        </td>
+                                        <td class="ellipsis-text text-center col-1">
+                                            {{ strip_tags(Str::limit($diskon->deskripsi, 10, $end = '...')) }}</td>
+                                            <td class="produks text-center ps-4">
+                                                <span
+                                                    class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskon->awal_berlaku) ? '-' : date('d F Y', strtotime($diskon->awal_berlaku)) }}</span>
+                                            </td>
+                                            <td class="produks text-center ps-4">
+                                                <span
+                                                    class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskon->akhir_berlaku) ? '-' : date('d F Y', strtotime($diskon->akhir_berlaku)) }}</span>
+                                            </td>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+                    <div class="col-auto d-flex">
+                        <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a
+                        class="fw-semi-bold" href="#!" data-list-view="*">View all<span
+                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
+                        class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span
+                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                    </div>
+                    <div class="col-auto d-flex"><button class="page-link" data-list-pagination="prev"><span
+                                class="fas fa-chevron-left"></span></button>
+                                <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span
+                                    class="fas fa-chevron-right"></span></button>
+                                </div>
+                            </div>
+                            <hr class="hr">
+            </div>
+            </div>
             </div>
         </form>
-    </div>
-    </div>
-    </div>
-    </div>
-    <footer class="footer position-absolute">
-        <div class="row g-0 justify-content-between align-items-center h-100">
-          <div class="col-12 col-sm-auto text-center">
-            <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
-          </div>
-          <div class="col-12 col-sm-auto text-center">
-          </div>
-        </div>
-      </footer>
-    </div>
-@endsection
+    @endsection

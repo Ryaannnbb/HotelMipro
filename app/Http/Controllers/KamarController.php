@@ -132,7 +132,7 @@ class KamarController extends Controller
             $kamar->update(['path_kamar' => $fileName]);
 
             if ($existingimage) {
-                Storage::delete('path_kamar/' . $existingimage);
+                Storage::delete('kamar/' . $existingimage);
             }
         }
 // dd($request);

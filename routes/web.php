@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MenuKamarUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\AuthController;
@@ -15,7 +14,6 @@ use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
-use App\Http\Controllers\DetailKamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,23 +88,20 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::put('edit/{id}', 'update')->name('fasilitas.update');
         Route::delete('destroy/{id}', 'destroy')->name('fasilitas.destroy');
     });
-    // Route::controller(DiskonController::class)->prefix('diskon')->group(function () {
-    //     Route::get('/', 'index')->name('diskon');
-    //     Route::get('/create', 'create')->name('diskon.create');
-    //     Route::post('/store', 'store')->name('diskon.store');
-    //     Route::get('/edit/{id}', 'edit')->name('diskon.edit');
-    //     Route::put('/edit/{id}', 'update')->name('diskon.update');
-    //     Route::delete('destroy/{id}', 'destroy')->name('diskon.destroy');
-    // });
+    Route::controller(DiskonController::class)->prefix('diskon')->group(function () {
+        Route::get('/', 'index')->name('diskon');
+        Route::get('/create', 'create')->name('diskon.create');
+        Route::post('/store', 'store')->name('diskon.store');
+        Route::get('/edit/{id}', 'edit')->name('diskon.edit');
+        Route::put('/edit/{id}', 'update')->name('diskon.update');
+        Route::delete('destroy/{id}', 'destroy')->name('diskon.destroy');
+    });
 
 });
 
 // ADMIN
 Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
-    Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
-    Route::get('/detailkamar{id}', [DetailKamarController::class, 'index'])->name('detailkamar');
-
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {
         Route::get('', 'index')->name('profil');
