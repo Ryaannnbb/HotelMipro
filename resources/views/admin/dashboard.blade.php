@@ -205,7 +205,7 @@
                                         data-fa-transform="down-4 rotate--10 left-4"></span><span
                                         class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
                                         data-fa-transform="up-4 right-3 grow-2"></span><span
-                                        class="fa-stack-1x fa-solid fa-shopping-bag text-primary"
+                                        class="fa-stack-1x fas fa-bed text-primary"
                                         data-fa-transform="shrink-2 up-8 right-6"></span></span>
                                 <div class="ms-3">
                                     <h4 class="mb-0"> Rooms</h4>
@@ -214,44 +214,38 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
-                            <div class="d-flex align-items-center"><span class="fa-stack"
-                                    style="min-height: 46px; min-width: 46px;"><span
-                                        class="fa-solid fa-square fa-stack-2x text-success-300"
-                                        data-fa-transform="down-4 rotate--10 left-4"></span><span
-                                        class="fa-solid fa-circle fa-stack-2x stack-circle text-success-100"
-                                        data-fa-transform="up-4 right-3 grow-2"></span><span
-                                        class="fa-stack-1x fa-solid fa-bell text-success"
-                                        data-fa-transform="shrink-2 up-8 right-6"></span></span>
+                            <div class="d-flex align-items-center">
+                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(119, 226, 253);" data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(194, 243, 255);" data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span class="fa-stack-1x fas fa-user" style="color: rgb(37, 197, 236);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                </span>
                                 <div class="ms-3">
-                                    <h4 class="mb-0"> Users</h4>
+                                    <h4 class="mb-0">Users</h4>
                                     <p class="text-800 fs--1 mb-0">Registered users total</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
-                            <div class="d-flex align-items-center"><span class="fa-stack"
-                                    style="min-height: 46px; min-width: 46px;"><span
-                                        class="fa-solid fa-square fa-stack-2x text-warning-300"
-                                        data-fa-transform="down-4 rotate--10 left-4"></span><span
-                                        class="fa-solid fa-circle fa-stack-2x stack-circle text-warning-100"
-                                        data-fa-transform="up-4 right-3 grow-2"></span><span
-                                        class="fa-stack-1x fa-brands fa-sellsy text-warning"
-                                        data-fa-transform="shrink-2 up-8 right-6"></span></span>
+                            <div class="d-flex align-items-center">
+                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(144, 255, 199);" data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(211, 252, 231);" data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span class="fa-stack-1x far fa-check-circle" style="color: rgb(111, 175, 142);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                </span>
                                 <div class="ms-3">
-                                    <h4 class="mb-0"> Rooms Active</h4>
+                                    <h4 class="mb-0">Rooms Active</h4>
                                     <p class="text-800 fs--1 mb-0">Rooms available</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
-                            <div class="d-flex align-items-center"><span class="fa-stack"
-                                    style="min-height: 46px;min-width: 46px;"><span
-                                        class="fa-solid fa-square fa-stack-2x text-danger-300"
-                                        data-fa-transform="down-4 rotate--10 left-4"></span><span
-                                        class="fa-solid fa-circle fa-stack-2x stack-circle text-danger-100"
-                                        data-fa-transform="up-4 right-3 grow-2"></span><span
-                                        class="fa-stack-1x fa-solid fa-xmark text-danger "
-                                        data-fa-transform="shrink-2 up-8 right-6"></span></span>
+                            <div class="d-flex align-items-center">
+                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(250, 115, 115);" data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(252, 204, 192);" data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span class="fa-stack-1x fa-regular fa-circle-xmark" style="color: rgb(250, 107, 71);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                </span>
                                 <div class="ms-3">
                                     <h4 class="mb-0">Rooms Empty</h4>
                                     <p class="text-800 fs--1 mb-0">Rooms booked</p>
@@ -259,21 +253,18 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
-                            <div class="d-flex align-items-center"><span class="fa-stack"
-                                    style="min-height: 46px;min-width: 46px;"><span
-                                        class="fa-solid fa-square fa-stack-2x text-danger-300"
-                                        data-fa-transform="down-4 rotate--10 left-4"></span><span
-                                        class="fa-solid fa-circle fa-stack-2x stack-circle text-danger-100"
-                                        data-fa-transform="up-4 right-3 grow-2"></span><span
-                                        class="fa-stack-1x fa-solid fa-xmark text-danger "
-                                        data-fa-transform="shrink-2 up-8 right-6"></span></span>
+                            <div class="d-flex align-items-center">
+                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(252, 190, 109);" data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(245, 198, 137);" data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span class="fa-stack-1x fas fa-clock" style="color: rgb(255, 140, 0);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                </span>
                                 <div class="ms-3">
                                     <h4 class="mb-0">Rooms Pending</h4>
                                     <p class="text-800 fs--1 mb-0">Users order pending</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <hr class="bg-200 mb-6 mt-4" />
                     <div class="row bg-tax">
                         <div class="col-md-12 col-lg-12">
@@ -413,9 +404,9 @@
             <footer class="footer position-absolute">
                 <div class="row g-0 justify-content-between align-items-center h-100">
                     <div class="col-12 col-sm-auto text-center">
-                        <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © iVibe<span
+                        <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span
                                 class="d-none d-sm-inline-block"></span><span
-                                class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2023</p>
+                                class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
 
                     </div>
                     <div class="col-12 col-sm-auto text-center">

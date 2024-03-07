@@ -63,7 +63,7 @@
                                                 </div>
                                             </div>
                                             <div class="card-body  mt-3">
-                                                <a href="{{ route('detail.kamar', $kamar->id) }}" class="stretched-link">
+                                                {{-- <a href="{{ route('detail.kamar', $kamar->id) }}" class="stretched-link"> --}}
                                                 <h6 class="card-title mb-0 lh-sm line-clamp-3 product-name"
                                                     style="font-weight: bold; font-family: 'Nunito Sans', sans-serif;">
                                                     {{ $kamar->nama_kamar }}

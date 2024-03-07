@@ -281,6 +281,16 @@
         {{-- {{ TAMBAH }} --}}
         <form class="mb-9" action="{{ route('kamar.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <div class="row g-3 flex-between-end mb-5">
+                <div class="col-auto">
+                    <h2 class="mb-2">Add a rooms</h2>
+                    <h5 class="text-700 fw-semi-bold">Rooms booked across your hotel</h5>
+                </div>
+                <div class="col-auto">
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kamar') }}">Discard</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish Rooms</button>
+                </div>
+            </div>
             <div class="row g-5">
                 <div class="col-12 col-xl-8">
                     <!-- Konten form di sini -->
@@ -335,8 +345,8 @@
                         </script>
                 </div>
 
-                <div class="col-12 col-xl-4">
-                    <div class="row g-2">
+                <div class="col-12 col-xl-4" style="margin-top: 70px;">
+                    <div class="row g-2 order-xl-last" >
                         <div class="col-12 col-xl-12 order-xl-first">
                             <div class="card mb-4">
                                 <div class="card-body">
@@ -379,21 +389,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row gx-3">
-                                <div class="col-12">
-                                    <a href="{{ route('kamar') }}" class="btn btn-warning me-2 mb-2 mb-sm-0"
-                                        type="button">
-                                        Back
-                                    </a>
-                                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">
-                                        <i class="fas fa-check"></i> Save Change
-                                    </button>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </form>
+        <footer class="footer position-absolute">
+            <div class="row g-0 justify-content-between align-items-center h-100">
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
+              </div>
+              <div class="col-12 col-sm-auto text-center">
+              </div>
+            </div>
+          </footer>
+        </div>
         {{-- {{ TAMBAH }} --}}
     @endsection

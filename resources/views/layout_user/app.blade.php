@@ -19,10 +19,10 @@
     <!--    Favicons-->
     <!-- ===============================================-->
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/storage/logo.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/storage/logo.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/storage/logo.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/storage/logo.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/hotel10.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/hotel10.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/hotel10.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/hotel10.png') }}">
     <link rel="manifest" href="../../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -308,13 +308,13 @@
                                                 </div>
 
                                             </div>
-                                            {{-- <div class="overflow-auto scrollbar" style="height: 2rem;"> --}}
-                                            {{-- <ul class="nav d-flex flex-column mb-2 pb-1">
+                                            <div class="overflow-auto scrollbar" style="height: 2rem;">
+                                            <ul class="nav d-flex flex-column mb-2 pb-1">
                                                 <li class="nav-item"><a class="nav-link px-3"
                                                         href="{{ route('profil') }}"> <span class="me-2 text-900"
                                                             data-feather="user"></span><span>Profile</span></a></li>
-                                            </ul> --}}
-                                            {{-- </div> --}}
+                                            </ul>
+                                             </div>
 
                                             <hr>
                                             <div class="px-3"> <a
@@ -377,7 +377,7 @@
                     <div class="col-12 col-lg-4">
                         <div class="d-flex align-items-center mb-3"><img src="{{ asset('assets/img/loghotel.png') }}"
                                 alt="phoenix" width="27" />
-                            <p class="logo-text ms-2">iVibe</p>
+                            <p class="logo-text ms-2">Small</p>
                         </div>
                         <p class="text-700 mb-1 fw-semi-bold lh-sm fs--1">
                             iVibe is a leading retailer in Indonesia that provides the latest technology products and

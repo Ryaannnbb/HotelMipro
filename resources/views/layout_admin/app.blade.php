@@ -14,15 +14,15 @@
   <!-- ===============================================-->
   <!--    Document Title-->
   <!-- ===============================================-->
-  <title>iVibe</title>
+  <title>Small</title>
 
   <!-- ===============================================-->
   <!--    Favicons-->
   <!-- ===============================================-->
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/storage/logo.png') }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/storage/logo.png') }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/storage/logo.png') }}">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/storage/logo.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/hotel10.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/hotel10.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/hotel10.png') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/hotel10.png') }}">
   <link rel="manifest" href="../../../assets/img/favicons/manifest.json">
   <meta name="msapplication-TileImage" content="../../../assets/img/favicons/mstile-150x150.png">
   <meta name="theme-color" content="#ffffff">

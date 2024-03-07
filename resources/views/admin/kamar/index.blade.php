@@ -113,12 +113,12 @@
         <div class="mb-9">
             <div class="row g-3 mb-4">
                 <div class="col-auto">
-                    <h2 class="mb-0">Products</h2>
+                    <h2 class="mb-0">Rooms</h2>
                 </div>
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item">
-                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span class="text-700 fw-semi-bold">
+                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span class="text-700 fw-semi-bold" >
                             @if ($kamar->count() > 0)
                                 <span>({{ $kamar->count() }})</span>
                             @endif
@@ -148,13 +148,16 @@
                         </div>
 
                         {{-- {{ TABLE }} --}}
+                        <div
+                        class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
                         <div class="table-responsive scrollbar mx-n1 px-1">
-                            <table class="table fs-1 mb-0">
+                            <table class="table fs--1 mb-0">
                                 <thead>
-                                    <tr class="text-center">
 
-                                        <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
-                                            style="width:350px;" data-sort="no">NO</th>
+                                    <tr align="center">
+                                        <th class=" ps-0" style="width: 10% "[.[.[.[p/]]]]>
+                                            <span>NO</span>
+                                        </th>
                                         <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
                                             style="width:350px;" data-sort="path_produk">IMAGE</th>
                                         <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
@@ -174,33 +177,41 @@
                                 <tbody class="list" id="products-table-body text-center">
                                     @foreach ($kamar as $kamars)
                                         <tr class="position-static text-center">
-                                            <td class="align-middle review fs-0 text-center ps-4">
-                                                {{ $loop->iteration }}
+                                            <td class="review ellipsis-text col-1 pt-4">
+                                                    {{ $loop->iteration }}
                                             </td>
-                                            <td class="align-middle white-space-nowrap mx-auto text-center py-0">
+                                            <td class="align-middle white-space-nowrap mx-auto text-center pt-4">
                                                 <img src="{{ asset('storage/kamar/' . $kamars->path_kamar) }}"
                                                     alt="" width="50%" height="50" style="object-fit: cover; min-width: 50px;"
                                                     class="mx-auto rounded-3" />
                                             </td>
-                                            <td class="category ellipsis-text col-1">
-                                                <p class="fw-semi-bold fs--1 line-clamp-3 mb-0">
+                                            <td class="category ellipsis-text col-1 pt-4"style="vertical-align: bottom; margin-top: -10px;">
+                                                <p>
                                                     {{ Str::limit($kamars->nama_kamar, 10, $end = '...') }}</p>
                                             </td>
                                             <td
-                                                class="price align-middle white-space-nowrap text-end fw-bold fs--1  text-700 ps-4">
-                                                {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</td>
+                                                class="price align-middle white-space-nowrap text-end fw-bold fs--1  text-700 ps-4 pt-5">
+                                                <p>
+                                                    {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</td>
+                                                </p>
 
                                             <td
-                                                class="align-middle white-space-nowrap text-600 fs--1 ps-4 fw-semi-bold">
-                                                {{ $kamars->kategori ? $kamars->kategori->nama_kategori : 'Tidak Ada Kategori' }}
+                                                class="align-middle white-space-nowrap text-600 fs--1 ps-4 fw-semi-bold pt-5">
+                                                <p>
+                                                    {{ $kamars->kategori ? $kamars->kategori->nama_kategori : 'Tidak Ada Kategori' }}
+                                                </p>
                                             </td>
-                                            <td class="tags align-middle review pb-2 ps-3 fs--1 " style="width:200px;">
-                                                {{ $kamars->status }}
+                                            <td class="tags align-middle review pt-5 ps-3 fs--1 " style="width:200px;">
+                                                <p>
+                                                    <span class="badge badge-phoenix fs-10 badge-phoenix-success">{{ $kamars->status }}</span>
+                                                </p>
                                             </td>
 
-                                            <td class="ellipsis-text col-1">
-                                                {{ strip_tags(Str::limit($kamars->deskripsi, 10, $end = '...')) }}</td>
-                                            <td class="align-middle white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger">
+                                            <td class="ellipsis-text col-1 pt-5">
+                                                <p>
+                                                    {{ strip_tags(Str::limit($kamars->deskripsi, 10, $end = '...')) }}</td>
+                                                </p>
+                                            <td class="align-middle white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger mb-2">
                                                 <div class="font-sans-serif btn-reveal-trigger position-static">
                                                     <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
                                                         <span class="fas fa-ellipsis-h fs--2"></span>
@@ -221,7 +232,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
                             <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a
@@ -272,5 +283,20 @@
                             });
                         });
                     </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                    <footer class="footer position-absolute">
+        <div class="row g-0 justify-content-between align-items-center h-100">
+          <div class="col-12 col-sm-auto text-center">
+            <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
+          </div>
+          <div class="col-12 col-sm-auto text-center">
+          </div>
+        </div>
+      </footer>
+    </div>
 
 @endsection

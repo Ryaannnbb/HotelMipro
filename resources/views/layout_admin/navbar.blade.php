@@ -87,9 +87,9 @@
             class="toggle-line"></span></span></button>
       <a class="navbar-brand me-1 me-sm-3" href="#">
         <div class="d-flex align-items-center">
-          <div class="d-flex align-items-center"><img src="{{ asset('assets/img/brand2/asus-rog.png') }}" alt="phoenix"
+          <div class="d-flex align-items-center"><img src="{{ asset('assets/img/hotel10.png') }}" alt="phoenix"
               width="27" />
-            <p class="logo-text ms-2 d-none d-sm-block">iVibe</p>
+            <p class="logo-text ms-2 d-none d-sm-block">Small</p>
           </div>
         </div>
       </a>
@@ -420,7 +420,7 @@
             <div class="card-body p-0">
               <div class="text-center pt-4 pb-3">
                 <div class="avatar avatar-xl">
-                  <img class="rounded-circle" src="{{ asset('assets/img/icons/logo_kontol.png') }}" alt="" />
+                  <img class="rounded-circle" src="{{ asset('assets/img/hotel10.png') }}" alt="" />
                 </div>
                 <h6 class="mt-2 text-black">Admin</h6>
               </div>

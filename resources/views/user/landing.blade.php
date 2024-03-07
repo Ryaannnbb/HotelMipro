@@ -784,8 +784,8 @@
           </div>
           <hr class="text-800" />
           <div class="d-sm-flex flex-between-center text-center">
-            <p class="text-600 mb-0">Copyright © Company Name</p>
-            <p class="text-600 mb-0">Made with love by <a href="https://themewagon.com/">ThemeWagon</a></p>
+            <p class="text-600 mb-0">Copyright © Small</p>
+            <p class="text-600 mb-0">Made with love by <a href="https://themewagon.com/">Small</a></p>
           </div>
         </div><!-- end of .container-->
       </section><!-- <section> close ============================-->

@@ -222,6 +222,7 @@
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
                     <h2 class="mb-2">Add a facility</h2>
+                    <h5 class="text-700 fw-semi-bold">>Facilities booked across your hotel</h5>
                 </div>
                 <div class="col-auto">
                     <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('fasilitas') }}">Discard</a>
@@ -252,7 +253,7 @@
       <footer class="footer position-absolute">
         <div class="row g-0 justify-content-between align-items-center h-100">
           <div class="col-12 col-sm-auto text-center">
-            <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © iVibe<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2023</p>
+            <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
           </div>
           <div class="col-12 col-sm-auto text-center">
           </div>
