@@ -55,6 +55,7 @@ class ProfilController extends Controller
     public function update(Request $request, string $id)
     {
         try {
+            // dd($request->all());
             $request->validate([
                 'name' => 'nullable',
                 'address' => 'nullable',

@@ -151,6 +151,8 @@
                                         data-bs-toggle="tab" href="#tab-personal-info" role="tab"
                                         aria-controls="tab-personal-info" aria-selected="true"><span
                                             class="fas fa-user me-2"></span>Personal info</a></li>
+
+
                             </ul>
                         </div>
                         <div class="tab-content" id="profileTabContent">

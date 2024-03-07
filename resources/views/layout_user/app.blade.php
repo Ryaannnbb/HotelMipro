@@ -71,10 +71,10 @@
                 <nav class="navbar navbar-expand-lg navbar-light px-0">
                     <div class="row gx-0 gy-2 w-100 flex-between-center">
                         <div class="col-auto"><a class="text-decoration-none" href="#">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/small.png') }}" alt="phoenix" width="40" />
-                                <p class="logo-text ms-2">Small Hotel</p>
-                            </div>
+                                <div class="d-flex align-items-center"><img src="{{ asset('assets/img/loghotel.jpeg') }}"
+                                        alt="phoenix" width="27" />
+                                    <p class="logo-text ms-2">iVibe</p>
+                                </div>
                             </a></div>
                         <div class="col-auto order-md-1">
                             <ul class="navbar-nav navbar-nav-icons flex-row me-n2">
@@ -375,9 +375,9 @@
             <div class="container-small">
                 <div class="row justify-content-between gy-4">
                     <div class="col-12 col-lg-4">
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/small.png') }}" alt="phoenix" width="40" />
-                            <p class="logo-text ms-2">Small Hotel</p>
+                        <div class="d-flex align-items-center mb-3"><img src="{{ asset('assets/img/loghotel.png') }}"
+                                alt="phoenix" width="27" />
+                            <p class="logo-text ms-2">Small</p>
                         </div>
                         <p class="text-700 mb-1 fw-semi-bold lh-sm fs--1">
                             Small Hotel is a luxury hotel located in the center of Tuban city. With an elegant and modern architectural design, this hotel offers a special staying experience for its guests.</p>
