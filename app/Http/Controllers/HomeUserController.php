@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kamar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,16 +13,9 @@ class HomeUserController extends Controller
      */
     public function index()
     {
-        $Kamars = DB::table('kamars')
-        // ->leftJoin('ulasan', 'id', '=', 'ulasan.produk_id')
-        ->select('id', 'nama_kamar','path_kamar','harga','deskripsi','status',) // sertakan semua kolom non-agregasi di sini
-        // DB::raw('avg(rating) AS rating'), DB::raw('count(ulasan.produk_id) AS totalulasan'))
-        ->groupBy('id', 'nama_kamar','path_kamar','harga','deskripsi','status',) // sertakan semua kolom non-agregasi di sini
-        ->get();
         $user = auth()->user();
-        // $wishlist = Wishlist::where('user_id', $user->id)->get();
-        // $productsInWishlist = $user->wishlists;
-        return view('user.homeuser', compact('Kamars', 'user'));
+        $kamar = Kamar::all();
+        return view('user.homeuser', compact('kamar', 'user'));
     }
 
     public function Detailkamar(Request $request, $id)
