@@ -107,7 +107,7 @@
                                 <div
                                     class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative auth-title-box">
                                     <div class="bg-holder auth-img-holder">
-                                        <img src="{{ asset('assets/img/e-commerce/4.png') }}" class="auth-img rounded-3" alt="Authentication Image">
+                                        <img src="{{ asset('assets/img/e-commerce/register.png') }}" class="auth-img rounded-3" alt="Authentication Image">
                                     </div>
                                     <!--/.bg-holder-->
                                     <div class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 card-sign-up">
@@ -125,9 +125,8 @@
                                         <div class="text-center mb-7"><a
                                                 class="d-flex flex-center text-decoration-none mb-4"
                                                 href="../../../index.html">
-                                                <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block">
-                                                    <img src="{{ asset('assets/img/brands/small.png') }}"
-                                                        alt="logo" width="58" />
+                                                <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block" style="margin-top: 5px;">
+                                                    <img src="{{ asset('assets/img/brands/small.png') }}" alt="logo" width="58" />
                                                 </div>
                                             </a>
                                             <h3 class="text-1000">Sign Up</h3>
