@@ -14,7 +14,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>iVibe</title>
+    <title>Small Hotel</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -107,7 +107,7 @@
                                 <div
                                     class="col-auto bg-100 dark__bg-1100 rounded-3 position-relative auth-title-box">
                                     <div class="bg-holder auth-img-holder">
-                                        <img src="{{ asset('assets/img/e-commerce/register.png') }}" class="auth-img rounded-3" alt="Authentication Image">
+                                        <img src="{{ asset('assets/img/e-commerce/register.jpg') }}" class="auth-img rounded-3" alt="Authentication Image">
                                     </div>
                                     <!--/.bg-holder-->
                                     <div class="position-relative px-4 px-lg-7 pt-7 pb-7 pb-sm-5 text-center text-md-start pb-lg-7 card-sign-up">

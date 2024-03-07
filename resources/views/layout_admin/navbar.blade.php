@@ -89,7 +89,7 @@
         <div class="d-flex align-items-center">
           <div class="d-flex align-items-center"><img src="{{ asset('assets/img/hotel10.png') }}" alt="phoenix"
               width="27" />
-            <p class="logo-text ms-2 d-none d-sm-block">Small</p>
+            <p class="logo-text ms-2 d-none d-sm-block">Small Hotel</p>
           </div>
         </div>
       </a>

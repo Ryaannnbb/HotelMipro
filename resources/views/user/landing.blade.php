@@ -12,15 +12,15 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>Phoenix</title>
+    <title>Small Hotel</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/hotel10.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/hotel10.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/hotel10.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/hotel10.ico">
     <link rel="manifest" href="../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -64,8 +64,8 @@
     <main class="alternate-landing" style="--phoenix-scroll-margin-top: 1.2rem;">
       <div class="bg-white sticky-top landing-navbar" data-navbar-shadow-on-scroll="data-navbar-shadow-on-scroll">
         <nav class="navbar navbar-expand-lg container-small px-3 px-lg-7 px-xxl-3"><a class="navbar-brand flex-1 flex-lg-grow-0" href="../../index.html">
-            <div class="d-flex align-items-center"><img src="../../assets/img/hotel10.png" alt="phoenix" width="27" />
-              <p class="logo-text ms-2">Small</p>
+            <div class="d-flex align-items-center"><img src="../../assets/img/hotel10.png" alt="phoenix" width="40" />
+              <p class="logo-text ms-2">Small Hotel</p>
             </div>
           </a>
           <div class="d-lg-none">

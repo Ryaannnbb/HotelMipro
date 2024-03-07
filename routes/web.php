@@ -32,7 +32,7 @@ Route::get('/', function () {
 });
 
 
-Route::middleware([RedirectMiddleware::class])->group(function () {
+// Route::middleware([RedirectMiddleware::class])->group(function () {
     // LOGIN REGISTER
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -47,7 +47,7 @@ Route::middleware([RedirectMiddleware::class])->group(function () {
         Route::get('reset-password/{token}', 'resetPassword')->name('password.reset');
         Route::post('reset-password', 'updatePassword')->name('password.update');
     });
-});
+// });
 
 // USER
 Route::middleware([AdminMiddleware::class])->group(function () {
@@ -88,14 +88,14 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::put('edit/{id}', 'update')->name('fasilitas.update');
         Route::delete('destroy/{id}', 'destroy')->name('fasilitas.destroy');
     });
-    Route::controller(DiskonController::class)->prefix('diskon')->group(function () {
-        Route::get('/', 'index')->name('diskon');
-        Route::get('/create', 'create')->name('diskon.create');
-        Route::post('/store', 'store')->name('diskon.store');
-        Route::get('/edit/{id}', 'edit')->name('diskon.edit');
-        Route::put('/edit/{id}', 'update')->name('diskon.update');
-        Route::delete('destroy/{id}', 'destroy')->name('diskon.destroy');
-    });
+    // Route::controller(DiskonController::class)->prefix('diskon')->group(function () {
+    //     Route::get('/', 'index')->name('diskon');
+    //     Route::get('/create', 'create')->name('diskon.create');
+    //     Route::post('/store', 'store')->name('diskon.store');
+    //     Route::get('/edit/{id}', 'edit')->name('diskon.edit');
+    //     Route::put('/edit/{id}', 'update')->name('diskon.update');
+    //     Route::delete('destroy/{id}', 'destroy')->name('diskon.destroy');
+    // });
 
 });
 

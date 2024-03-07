@@ -5,22 +5,19 @@
         <div class="container px-xl-0 px-xxl-3">
             <div class="row g-3 mb-9">
                 <div class="col-12 mt-4">
-                    <div class="whooping-banner w-100 rounded-3 overflow-hidden">
-                        <div class="bg-holder z-index--1 product-bg"
-                            style="background-image:url(assets/img/benner4.png);background-position: bottom right;"></div>
+                    <div>
+                        <img src="assets/img/banner.png" alt="Banner Image" class="rounded-3"  width="1205" height="320" margin-left: 100px;>
+                        {{-- <div class="bg-holder product-bg" style="background-image:url(assets/img/banner.png);"></div>
                         <!--/.bg-holder-->
-                        <div class="bg-holder z-index--1 shape-bg"
-                            style="background-image:url(assets/img/benner4.png);background-position: bottom left;"></div>
-                        <!--/.bg-holder-->
+                        <div class="bg-holder shape-bg" style="background-image:url(assets/img/banner.png);"></div>
+                        <!--/.bg-holder--> --}}
                         <div class="banner-text light">
-                            <h2 class="text-warning-300 fw-bolder fs-lg-5 fs-xxl-6">MacBook Pro M2 <span
-                                    class="gradient-text"></span></h2>
+                            {{-- <h2 class="text-warning-300 fw-bolder fs-lg-5 fs-xxl-6">MacBook Pro M2 <span class="gradient-text"></span></h2>
                             <h3 class="fw-bolder fs-lg-3 fs-xxl-5 text-white light">
                                 <strike>Rp 13.000.000</strike>
                                 <span class="small-text" style="color: red;"> (10.000.000)</span>
-                            </h3>
-                        </div><a class="btn btn-lg btn-primary rounded-pill banner-button" href="#!">Shop Now</a>
-                    </div>
+                            </h3> --}}
+                        </div>
                 </div>
                 <!-- Kategori di bawah gambar MacBook Pro M2 -->
                 <div class="row g-4 mb-6">
@@ -32,11 +29,11 @@
                 </div>
 
                 <div class="row">
-                    {{-- @php
+                    @php
                         $inwsihlist = [];
                     @endphp
-                    @if(count($produk) > 0)
-                    @php
+                    @if(count($kamar) > 0)
+                    {{-- @php
                         foreach ($wishlist as $value) {
                             array_push($inwsihlist, $value->product_id);
                         }

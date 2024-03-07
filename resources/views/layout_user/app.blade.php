@@ -13,7 +13,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>iVibe</title>
+    <title>Small Hotel</title>
 
     <!-- ===============================================-->
     <!--    Favicons-->
@@ -71,10 +71,10 @@
                 <nav class="navbar navbar-expand-lg navbar-light px-0">
                     <div class="row gx-0 gy-2 w-100 flex-between-center">
                         <div class="col-auto"><a class="text-decoration-none" href="#">
-                                <div class="d-flex align-items-center"><img src="{{ asset('assets/img/loghotel.jpeg') }}"
-                                        alt="phoenix" width="27" />
-                                    <p class="logo-text ms-2">iVibe</p>
-                                </div>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset('assets/img/small.png') }}" alt="phoenix" width="40" />
+                                <p class="logo-text ms-2">Small Hotel</p>
+                            </div>
                             </a></div>
                         <div class="col-auto order-md-1">
                             <ul class="navbar-nav navbar-nav-icons flex-row me-n2">
@@ -375,40 +375,30 @@
             <div class="container-small">
                 <div class="row justify-content-between gy-4">
                     <div class="col-12 col-lg-4">
-                        <div class="d-flex align-items-center mb-3"><img src="{{ asset('assets/img/loghotel.png') }}"
-                                alt="phoenix" width="27" />
-                            <p class="logo-text ms-2">Small</p>
+                        <div class="d-flex align-items-center">
+                            <img src="{{ asset('assets/img/small.png') }}" alt="phoenix" width="40" />
+                            <p class="logo-text ms-2">Small Hotel</p>
                         </div>
                         <p class="text-700 mb-1 fw-semi-bold lh-sm fs--1">
-                            iVibe is a leading retailer in Indonesia that provides the latest technology products and
-                            premium
-                            accessories. They offer a complete range of innovative products and invite customers to
-                            experience and
-                            test products in their stores. Apart from that, iVibe also provides training services and
-                            after-sales
-                            support through an experienced team.</p>
+                            Small Hotel is a luxury hotel located in the center of Tuban city. With an elegant and modern architectural design, this hotel offers a special staying experience for its guests.</p>
                     </div>
                     <div class="col-6 col-md-auto">
-                        <h5 class="fw-bolder mb-3">About iVibe</h5>
+                        <h5 class="fw-bolder mb-3">About Small Hotel</h5>
                         <div class="d-flex flex-column"><a class="text-700 fw-semi-bold fs--1 mb-1"
-                                href="#!">Careers</a><a class="text-700 fw-semi-bold fs--1 mb-1"
-                                href="#!">Affiliate
-                                Program</a><a class="text-700 fw-semi-bold fs--1 mb-1" href="#!">Privacy
-                                Policy</a><a class="text-700 fw-semi-bold fs--1 mb-1" href="#!">Terms &
-                                Conditions</a></div>
+                                href="#!">Career </a><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Personal policy</a><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Terms & conditions</a><a class="text-700 fw-semi-bold fs--1 mb-1"></a></div>
                     </div>
                     <div class="col-6 col-md-auto">
                         <h5 class="fw-bolder mb-3">Stay Connected</h5>
                         <div class="d-flex flex-column"><a class="text-700 fw-semi-bold fs--1 mb-1"
-                                href="#!">Jalan Ijen
-                                No.
-                                123 Kota Malang, Indonesia</a><a class="mb-1 fw-semi-bold fs--1 d-flex"
+                                href="#!">Jalan Soekarno Hatta no. 123 Tuban City, Indonesia</a><a class="mb-1 fw-semi-bold fs--1 d-flex"
                                 href="#!"><span class="fas fa-phone text-primary me-2 fs-0"></span><span
                                     class="text-800">+62
-                                    823-3107-9449</span></a><a class="mb-1 fw-semi-bold fs--1 d-flex"
+                                    889-8908-7546</span></a><a class="mb-1 fw-semi-bold fs--1 d-flex"
                                 href="#!"><span class="fas fa-envelope text-info me-2 fs-0"></span><span
                                     class="text-800">Email :
-                                    info@ivibe.com</span></a></div>
+                                    smallhotel@gmail.com</span></a></div>
                     </div>
                 </div>
             </div>
