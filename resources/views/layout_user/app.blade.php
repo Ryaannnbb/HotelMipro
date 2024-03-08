@@ -71,7 +71,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light px-0">
                     <div class="row gx-0 gy-2 w-100 flex-between-center">
                         <div class="col-auto"><a class="text-decoration-none" href="#">
-                                <div class="d-flex align-items-center"><img src="{{ asset('assets/img/loghotel.jpeg') }}"
+                                <div class="d-flex align-items-center"><img src="{{ asset('assets/img/hotel10.png') }}"
                                         alt="phoenix" width="27" />
                                     <p class="logo-text ms-2">iVibe</p>
                                 </div>
@@ -375,7 +375,7 @@
             <div class="container-small">
                 <div class="row justify-content-between gy-4">
                     <div class="col-12 col-lg-4">
-                        <div class="d-flex align-items-center mb-3"><img src="{{ asset('assets/img/loghotel.png') }}"
+                        <div class="d-flex align-items-center mb-3"><img src="{{ asset('assets/img/hotel10.png') }}"
                                 alt="phoenix" width="27" />
                             <p class="logo-text ms-2">Small</p>
                         </div>
