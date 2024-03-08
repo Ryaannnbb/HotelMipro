@@ -89,7 +89,7 @@ class AuthController extends Controller
                 return redirect()->route('login')->with('error', 'Email atau password salah');
 
             }else if(auth()->user()->role == 'admin'){
-                return redirect()->route('homeadmin')->with('success', 'you have successfully logged in');
+                return redirect()->route('dashboard')->with('success', 'you have successfully logged in');
                 return redirect()->route('login')->with('error', 'Email atau password salah');
             }
         }

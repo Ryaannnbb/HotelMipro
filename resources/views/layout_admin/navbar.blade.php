@@ -51,7 +51,7 @@
                     <a class="nav-link {{ request()->routeIs('pembayaran') ? 'active' : '' }}"
                         href="{{ route('pembayaran') }}" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
+                            <span class="nav-link-icon mt-1">
                                 <span class="fas fa-credit-card"></span>
                             </span>
                             <span class="nav-link-text">Payment</span>
@@ -62,7 +62,7 @@
                     <a class="nav-link {{ request()->routeIs('fasilitas') ? 'active' : '' }}"
                         href="{{ route('fasilitas') }}" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
+                            <span class="nav-link-icon mt-1">
                                 <span class="fas fa-receipt"></span>
                             </span>
                             <span class="nav-link-text">Facility</span>
@@ -70,11 +70,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('diskon') ? 'active' : '' }}"
+                        href="{{ route('diskon') }}" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-tag mt-1"></span>
+                            </span>
+                            <span class="nav-link-text">Discount</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <!-- label-->
                     <hr class="navbar-vertical-line" /><!-- parent pages-->
 
-          {{-- <div class="navbar-vertical-footer"><button
-              class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span
+            {{-- <div class="navbar-vertical-footer"><button
+                class="btn navbar-vertical-toggle border-0 fw-semi-bold w-100 white-space-nowrap d-flex align-items-center"><span
                 class="uil uil-left-arrow-to-left fs-0"></span><span class="uil uil-arrow-from-right fs-0"></span><span
                 class="navbar-vertical-footer-text ms-2">Collapsed View</span></button></div> --}}
 </nav>

@@ -1,7 +1,42 @@
 @extends('layout_admin.app')
 
 @section('content')
-    @include('sweetalert.sweetalert')
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: "{{ session('success') }}"
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "{{ session('error') }}",
+            });
+        </script>
+    @endif
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        ::-webkit-scrollbar {
+        display: none;
+        }
+    </style>
     <div class="modal fade" id="searchBoxModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true"
         data-phoenix-modal="data-phoenix-modal" style="--phoenix-backdrop-opacity: 1;">
         <div class="modal-dialog">
@@ -259,40 +294,232 @@
         }
     </script>
     <div class="content">
-        <form method="POST" action="{{ route('kategori.store') }}" class="mb-9">
-            @csrf
-
-            <div class="row g-3 flex-between-end mb-5">
+        <div class="mb-9">
+            <div class="row g-3 mb-4">
                 <div class="col-auto">
-                    <h2 class="mb-2">Add a category</h2>
-                    <h5 class="text-700 fw-semi-bold">Categories added across your store</h5>
-                </div>
-                <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kategori') }}">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish category</button>
+                    <h2 class="mb-0">Discount</h2>
                 </div>
             </div>
-            <div class="row g-5">
-                <div class="col-12 col-xl-12">
-                    <h4 class="mb-3">Category Title</h4>
-                    <input class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori"
-                        value="{{ old('nama_kategori') }}" type="text" placeholder="Write title here..." />
-                    @error('nama_kategori')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+            <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
+                <li class="nav-item">
+                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span class="text-700 fw-semi-bold">
+                            @if ($diskon->count() > 0)
+                                <span>({{ $diskon->count() }})</span>
+                            @endif
+                        </span></p>
+                </li>
+            </ul>
+            <div id="products"
+                data-list='{"valueNames":["product","price","category","tags","vendor","time"],"page":5 ,"pagination":true}'>
+                <div class="mb-4">
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="search-box">
+                            <form class="position-relative" data-bs-toggle="search" data-bs-display="static"><input
+                                    class="form-control search-input search" type="search" placeholder="Search category"
+                                    aria-label="Search" />
+                                <span class="fas fa-search search-box-icon"></span>
+                            </form>
                         </div>
-                    @enderror
+                        <div class="ms-xxl-auto"><a href="{{ route('diskon.create') }}"><button class="btn btn-primary"
+                                    id="addBtn"><span class="fas fa-plus me-2"></span>Add category</button></a></div>
+                    </div>
+                </div>
+                <div
+                    class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
+                    <div class="table-responsive scrollbar mx-n1 px-1">
+                        <table class="table fs--1 mb-0">
+                            <thead>
+                                <tr class="text-center">
+                                    <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
+                                        style="width:350px;" data-sort="text start">NO</th>
+                                    <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
+                                        style="width:350px;" data-sort="path_produk">IMAGE</th>
+                                    <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
+                                        style="width:350px;" data-sort="path_nama">DISCOUNT NAME</th>
+                                    <th class="white-space-nowrap align-middle text-center fs--1 ps-4 text-dark"
+                                        style="width:150px;" data-sort="harga">DISCOUNT</th>
+                                    <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark"
+                                        style="width:150px;" data-sort="categori">TYPE</th>
+                                    <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark"
+                                        style="width:150px;" data-sort="categori">DESCRIPTION</th>
+                                    <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark"
+                                        style="width:200px;" data-sort="stok">START EFFECTS</th>
+                                    <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark" style="width:10px;"
+                                        data-sort="deskripsi">END EFFECTS</th>
+                                    <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark" style="width:50px;"
+                                        data-sort="ACTION">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list" id="products-table-body text-center">
+                                @foreach ($diskon as $diskons)
+                                    <tr class="position-static text-center">
+                                        <td class="align-middle review fs-0 text-center ps-4">
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td class="align-middle white-space-nowrap mx-auto text-center py-0">
+                                            <img src="{{ asset('storage/kamar/' . $diskons->gambar) }}"
+                                                alt="" width="50%" height="50" style="object-fit: cover; min-width: 50px;"
+                                                class="mx-auto rounded-3" />
+                                        </td>
+                                        <td class="category ellipsis-text col-1">
+                                            <p class="fw-semi-bold fs--1 line-clamp-3 mb-0">
+                                                {{ Str::limit($diskons->nama_diskon, 10, $end = '...') }}</p>
+                                        </td>
+                                        <td class="price text-center white-space-nowrap text-end fw-bold fs--1  text-700 ps-4">
+                                            @if ($diskons->potongan_harga > 100)
+                                                {{ 'Rp ' . number_format($diskons->potongan_harga, 0, ',', '.') }}
+                                            @else
+                                                {{ $diskons->potongan_harga }}%
+                                            @endif
+                                        </td>
+                                        <td class="tags text-center review pb-2 ps-3 fs--1 " style="width:200px;">
+                                            {{ $diskons->jenis }}
+                                        </td>
+                                        <td class="ellipsis-text col-1">
+                                            {{ strip_tags(Str::limit($diskons->deskripsi, 10, $end = '...')) }}</td>
+                                            <td class="produks text-center ps-4">
+                                                <span
+                                                    class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskons->awal_berlaku) ? '-' : date('d F Y', strtotime($diskons->awal_berlaku)) }}</span>
+                                            </td>
+                                            <td class="produks text-center ps-4">
+                                                <span
+                                                    class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskons->akhir_berlaku) ? '-' : date('d F Y', strtotime($diskons->akhir_berlaku)) }}</span>
+                                            </td>
+                                        <td class="text-center white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger">
+                                            <div class="font-sans-serif btn-reveal-trigger position-static">
+                                                <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
+                                                    <span class="fas fa-ellipsis-h fs--2"></span>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-end py-2">
+                                                    <a class="dropdown-item" href="{{ route('diskon.edit', $diskons->id) }}">Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <form action="{{ route('kamar.destroy', $diskons->id) }}" method="POST" class="hapus-form">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="button" class="dropdown-item text-danger hapus">Remove</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+                    <div class="col-auto d-flex">
+                        <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a
+                        class="fw-semi-bold" href="#!" data-list-view="*">View all<span
+                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
+                        class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span
+                        class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                    </div>
+                    <div class="col-auto d-flex"><button class="page-link" data-list-pagination="prev"><span
+                                class="fas fa-chevron-left"></span></button>
+                                <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span
+                                    class="fas fa-chevron-right"></span></button>
+                                </div>
+                            </div>
+                            <hr class="hr">
+            </div>
+            </div>
+        </div>
+        <footer class="footer position-absolute">
+            <div class="row g-0 justify-content-between align-items-center h-100">
+                <div class="col-12 col-sm-auto text-center">
+                    <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © iVibe<span
+                            class="d-none d-sm-inline-block"></span><span
+                            class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2023</p>
+                </div>
+                <div class="col-12 col-sm-auto text-center">
                 </div>
             </div>
-        </form>
-      <footer class="footer position-absolute">
-        <div class="row g-0 justify-content-between align-items-center h-100">
-          <div class="col-12 col-sm-auto text-center">
-            <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
-          </div>
-          <div class="col-12 col-sm-auto text-center">
-          </div>
-        </div>
-      </footer>
+        </footer>
     </div>
+    <div class="support-chat-container">
+        <div class="container-fluid support-chat">
+            <div class="card bg-white">
+                <div class="card-header d-flex flex-between-center px-4 py-3 border-bottom">
+                    <h5 class="mb-0 d-flex align-items-center gap-2">Demo widget<span
+                            class="fa-solid fa-circle text-success fs--3"></span></h5>
+                    <div class="btn-reveal-trigger"><button
+                            class="btn btn-link p-0 dropdown-toggle dropdown-caret-none transition-none d-flex"
+                            type="button" id="support-chat-dropdown" data-bs-toggle="dropdown" data-boundary="window"
+                            aria-haspopup="true" aria-expanded="false" data-bs-reference="parent"><span
+                                class="fas fa-ellipsis-h text-900"></span></button>
+                        <div class="dropdown-menu dropdown-menu-end py-2" aria-labelledby="support-chat-dropdown"><a
+                                class="dropdown-item" href="#!">Request a callback</a><a class="dropdown-item"
+                                href="#!">Search in chat</a><a class="dropdown-item" href="#!">Show
+                                history</a><a class="dropdown-item" href="#!">Report to Admin</a><a
+                                class="dropdown-item btn-support-chat" href="#!">Close Support</a></div>
+                    </div>
+                </div>
+                <div class="card-body chat p-0">
+                    <div class="d-flex flex-column-reverse scrollbar h-100 p-3">
+                        <div class="text-end mt-6"><a
+                                class="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                href="#!">
+                                <p class="mb-0 fw-semi-bold fs--1">I need help with something</p><span
+                                    class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                            </a><a
+                                class="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                href="#!">
+                                <p class="mb-0 fw-semi-bold fs--1">I can’t reorder a product I previously ordered</p><span
+                                    class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                            </a><a
+                                class="mb-2 d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                href="#!">
+                                <p class="mb-0 fw-semi-bold fs--1">How do I place an order?</p><span
+                                    class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                            </a><a
+                                class="false d-inline-flex align-items-center text-decoration-none text-1100 hover-bg-soft rounded-pill border border-primary py-2 ps-4 pe-3"
+                                href="#!">
+                                <p class="mb-0 fw-semi-bold fs--1">My payment method not working</p><span
+                                    class="fa-solid fa-paper-plane text-primary fs--1 ms-3"></span>
+                            </a></div>
+                        <div class="text-center mt-auto">
+                            <div class="avatar avatar-3xl status-online"><img
+                                    class="rounded-circle border border-3 border-white"
+                                    src="../../../assets/img/team/30.webp" alt="" /></div>
+                            <h5 class="mt-2 mb-3">Eric</h5>
+                            <p class="text-center text-black mb-0">Ask us anything – we’ll get back to you here or by email
+                                within 24 hours.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center gap-2 border-top ps-3 pe-4 py-3">
+                    <div class="d-flex align-items-center flex-1 gap-3 border rounded-pill px-4"><input
+                            class="form-control outline-none border-0 flex-1 fs--1 px-0" type="text"
+                            placeholder="Write message" /><label class="btn btn-link d-flex p-0 text-500 fs--1 border-0"
+                            for="supportChatPhotos"><span class="fa-solid fa-image"></span></label><input class="d-none"
+                            type="file" accept="image/*" id="supportChatPhotos" /><label
+                            class="btn btn-link d-flex p-0 text-500 fs--1 border-0" for="supportChatAttachment"> <span
+                                class="fa-solid fa-paperclip"></span></label><input class="d-none" type="file"
+                            id="supportChatAttachment" /></div><button class="btn p-0 border-0 send-btn"><span
+                            class="fa-solid fa-paper-plane fs--1"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $('.hapus').click(function() {
+            var form = $(this).closest('form');
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will delete this product. This action cannot be undone!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, accept!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection
