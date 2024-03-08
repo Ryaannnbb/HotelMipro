@@ -42,6 +42,9 @@ class DiskonController extends Controller
         )
         ->groupBy(
             'detail_diskons.rooms_id',
+            "kamars.id",
+            "kamars.nama_kamar",
+            "kamars.path_kamar",
             )
         ->where('diskons.awal_berlaku', '>=', Carbon::now('Asia/Jakarta'));
         $detaildiskon = $query->get();
@@ -175,6 +178,9 @@ class DiskonController extends Controller
         )
         ->groupBy(
             'detail_diskons.rooms_id',
+            "kamars.id",
+            "kamars.nama_kamar",
+            "kamars.path_kamar",
             )
         ->where('diskons.awal_berlaku', '>=', Carbon::now('Asia/Jakarta'));
         $detaildiskon = $query->get();

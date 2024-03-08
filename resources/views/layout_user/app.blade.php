@@ -19,10 +19,10 @@
     <!--    Favicons-->
     <!-- ===============================================-->
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/hotel10.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/hotel10.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/hotel10.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/hotel10.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/storage/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/storage/logo.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/storage/logo.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/storage/logo.png') }}">
     <link rel="manifest" href="../../../assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="../../../assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
@@ -71,9 +71,9 @@
                 <nav class="navbar navbar-expand-lg navbar-light px-0">
                     <div class="row gx-0 gy-2 w-100 flex-between-center">
                         <div class="col-auto"><a class="text-decoration-none" href="#">
-                                <div class="d-flex align-items-center"><img src="{{ asset('assets/img/hotel10.png') }}"
-                                        alt="phoenix" width="27" />
-                                    <p class="logo-text ms-2">iVibe</p>
+                                <div class="d-flex align-items-center"><img
+                                        src="{{ asset('assets/img/brands/small.png') }}" alt="phoenix" width="40" />
+                                    <p class="logo-text ms-2">Small Hotel</p>
                                 </div>
                             </a></div>
                         <div class="col-auto order-md-1">
@@ -312,9 +312,9 @@
                                             <ul class="nav d-flex flex-column mb-2 pb-1">
                                                 <li class="nav-item"><a class="nav-link px-3"
                                                         href="{{ route('profil') }}"> <span class="me-2 text-900"
-                                                            data-feather="user"></span><span>Profile</span></a></li>
+                                                            data-feather="user" style="margin-right: 100px;"></span><span>Profile</span></a></li>
                                             </ul>
-                                             </div>
+                                            </div>
 
                                             <hr>
                                             <div class="px-3"> <a
@@ -352,10 +352,10 @@
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('homeuser') ? 'active' : '' }}"
                         href="{{ route('homeuser') }}">Home</a></li>
-                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
-                        class="nav-link {{ request()->routeIs('produk.filter') ? 'active' : '' }}""
-                        href="{{ route('produk.filter') }}">Products</a></li>
                 <li class="nav-item" data-nav-item="data-nav-item"><a
+                        class="nav-link {{ request()->routeIs('#') ? 'active' : '' }}"
+                        href="{{ route('usermenu') }}">Rooms</a></li>
+                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('wishlist') ? 'active' : '' }}""
                         href="{{ route('wishlist') }}">Wishlist</a></li>
                 <li class="nav-item" data-nav-item="data-nav-item"><a
@@ -380,7 +380,11 @@
                             <p class="logo-text ms-2">Small</p>
                         </div>
                         <p class="text-700 mb-1 fw-semi-bold lh-sm fs--1">
-                            Small Hotel is a luxury hotel located in the center of Tuban city. With an elegant and modern architectural design, this hotel offers a special staying experience for its guests.</p>
+                            Small Hotel is a leading hospitality provider in Indonesia, offering a variety of modern
+                            facilities and high-quality services. Guests can explore a range of innovative
+                            accommodations and luxurious amenities. Small Hotel is dedicated to ensuring guest
+                            satisfaction by providing personalized experiences and the best customer support from
+                            experienced professionals.</p>
                     </div>
                     <div class="col-6 col-md-auto">
                         <h5 class="fw-bolder mb-3">About Small Hotel</h5>
@@ -392,13 +396,15 @@
                     <div class="col-6 col-md-auto">
                         <h5 class="fw-bolder mb-3">Stay Connected</h5>
                         <div class="d-flex flex-column"><a class="text-700 fw-semi-bold fs--1 mb-1"
-                                href="#!">Jalan Soekarno Hatta no. 123 Tuban City, Indonesia</a><a class="mb-1 fw-semi-bold fs--1 d-flex"
+                                href="#!">Jalan Ijen
+                                No.
+                                123 Kota Tuban, Indonesia</a><a class="mb-1 fw-semi-bold fs--1 d-flex"
                                 href="#!"><span class="fas fa-phone text-primary me-2 fs-0"></span><span
                                     class="text-800">+62
                                     889-8908-7546</span></a><a class="mb-1 fw-semi-bold fs--1 d-flex"
                                 href="#!"><span class="fas fa-envelope text-info me-2 fs-0"></span><span
                                     class="text-800">Email :
-                                    smallhotel@gmail.com</span></a></div>
+                                    info@smallhotel.com</span></a></div>
                     </div>
                 </div>
             </div>
@@ -476,15 +482,15 @@
                                         // Tambahkan logika atau respons setelah berhasil ditambahkan ke wishlist
                                         if (response.remove) remove(
                                             'Product removed from wishlist successfully'
-                                            );
+                                        );
                                         console.log(
                                             'Product removed from wishlist successfully'
-                                            );
+                                        );
                                     },
                                     error: function(error) {
                                         console.error(
                                             'Failed to add product to wishlist'
-                                            );
+                                        );
                                     }
                                 });
                                 wishlistItems = wishlistItems.filter(item => item !==
@@ -501,15 +507,15 @@
                                         // Tambahkan logika atau respons setelah berhasil ditambahkan ke wishlist
                                         if (response.success) remove(
                                             'Product added to wishlist successfully'
-                                            );
+                                        );
                                         console.log(
                                             'Product added to wishlist successfully'
-                                            );
+                                        );
                                     },
                                     error: function(error) {
                                         console.error(
                                             'Failed to add product to wishlist'
-                                            );
+                                        );
                                     }
                                 });
                                 wishlistItems.push(productId);
@@ -529,6 +535,7 @@
             // Tandai tombol wishlist yang sudah ada di wishlistItems
         });
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-cS5Z0YPGE0GolGoVr6lM5pwpWz5jkp/k1yMWql4crVZaj/bdJPkDff53IJYwjdQr5I6BTgGLW5o5lG7icoy2QQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </body>
 
 </html>

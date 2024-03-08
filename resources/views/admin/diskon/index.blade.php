@@ -321,7 +321,7 @@
                             </form>
                         </div>
                         <div class="ms-xxl-auto"><a href="{{ route('diskon.create') }}"><button class="btn btn-primary"
-                                    id="addBtn"><span class="fas fa-plus me-2"></span>Add category</button></a></div>
+                                    id="addBtn"><span class="fas fa-plus me-2"></span>Add Discount</button></a></div>
                     </div>
                 </div>
                 <div
@@ -428,7 +428,7 @@
         <footer class="footer position-absolute">
             <div class="row g-0 justify-content-between align-items-center h-100">
                 <div class="col-12 col-sm-auto text-center">
-                    <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © iVibe<span
+                    <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © SmallHotel<span
                             class="d-none d-sm-inline-block"></span><span
                             class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2023</p>
                 </div>

@@ -46,7 +46,7 @@
                                             <input class="form-check-input mt-0" id="kategori{{ $kategoris->id }}"
                                                 type="checkbox" name="kategori[]" value="{{ $kategoris->id }}"
                                                 onchange="showSelectedCategories()"
-                                                {{ (is_array($selectedCategories) && in_array($kategoris->id, $selectedCategories)) ? 'checked' : '' }}>
+                                                {{ is_array($selectedCategories) && in_array($kategoris->id, $selectedCategories) ? 'checked' : '' }}>
                                             <label class="form-check-label d-block lh-sm fs-0 text-900 fw-normal mb-0"
                                                 for="kategori{{ $kategoris->id }}">
                                                 {{ $kategoris->nama_kategori }}
@@ -173,13 +173,14 @@
                                                                 <p>There are no reviews</p>
                                                             @endif
                                                         </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="d-flex align-items-center mb-1">
-                                                        <h3 class="text-1100 mb-0">
-                                                            Rp.{{ number_format($kamars->harga, 0, ',', '.') }}</h3>
-                                                        <div class="flex-grow-1"></div>
+                                                        <div class="card-footer">
+                                                            <div class="d-flex align-items-center mb-1">
+                                                                <h3 class="text-1100 mb-0">
+                                                                    Rp.{{ number_format($kamars->harga, 0, ',', '.') }}
+                                                                </h3>
+                                                                <div class="flex-grow-1"></div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -198,8 +199,8 @@
                             </div>
                         @endif
                     </div>
-                </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

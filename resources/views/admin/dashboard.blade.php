@@ -217,7 +217,9 @@
                             <div class="d-flex align-items-center">
                                 <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(119, 226, 253);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(194, 243, 255);" data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span
+                                    class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                    data-fa-transform="up-4 right-3 grow-2"></span>
                                     <span class="fa-stack-1x fas fa-user" style="color: rgb(37, 197, 236);" data-fa-transform="shrink-2 up-8 right-6"></span>
                                 </span>
                                 <div class="ms-3">
@@ -230,7 +232,9 @@
                             <div class="d-flex align-items-center">
                                 <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(144, 255, 199);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(211, 252, 231);" data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span
+                                        class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                        data-fa-transform="up-4 right-3 grow-2"></span>
                                     <span class="fa-stack-1x far fa-check-circle" style="color: rgb(111, 175, 142);" data-fa-transform="shrink-2 up-8 right-6"></span>
                                 </span>
                                 <div class="ms-3">
@@ -243,7 +247,9 @@
                             <div class="d-flex align-items-center">
                                 <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(250, 115, 115);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(252, 204, 192);" data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span
+                                    class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                    data-fa-transform="up-4 right-3 grow-2"></span>
                                     <span class="fa-stack-1x fa-regular fa-circle-xmark" style="color: rgb(250, 107, 71);" data-fa-transform="shrink-2 up-8 right-6"></span>
                                 </span>
                                 <div class="ms-3">
@@ -256,8 +262,9 @@
                             <div class="d-flex align-items-center">
                                 <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(252, 190, 109);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle" style="color: rgb(245, 198, 137);" data-fa-transform="up-4 right-3 grow-2"></span>
-                                    <span class="fa-stack-1x fas fa-clock" style="color: rgb(255, 140, 0);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                    <span
+                                    class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                    data-fa-transform="up-4 right-3 grow-2"></span>                                    <span class="fa-stack-1x fas fa-clock" style="color: rgb(255, 140, 0);" data-fa-transform="shrink-2 up-8 right-6"></span>
                                 </span>
                                 <div class="ms-3">
                                     <h4 class="mb-0">Rooms Pending</h4>
