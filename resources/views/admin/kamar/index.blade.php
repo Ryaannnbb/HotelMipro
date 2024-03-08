@@ -148,87 +148,37 @@
                         </div>
 
                         {{-- {{ TABLE }} --}}
-                        <div
-                        class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
-                        <div class="table-responsive scrollbar mx-n1 px-1">
-                            <table class="table fs--1 mb-0">
-                                <thead>
-
-                                    <tr align="center">
-                                        <th class=" ps-0" style="width: 10% "[.[.[.[p/]]]]>
-                                            <span>NO</span>
-                                        </th>
-                                        <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
-                                            style="width:350px;" data-sort="path_produk">IMAGE</th>
-                                        <th class="white-space-nowrap align-middle ps-4 fs--1 text-dark"
-                                            style="width:350px;" data-sort="path_nama">ROOMS NAME</th>
-                                        <th class="white-space-nowrap align-middle text-center fs--1 ps-4 text-dark"
-                                            style="width:150px;" data-sort="harga">PRICE</th>
-                                        <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark"
-                                            style="width:150px;" data-sort="categori">CATEGORY</th>
-                                        <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark"
-                                            style="width:200px;" data-sort="stok">STATUS</th>
-                                        <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark" style="width:10px;"
-                                            data-sort="deskripsi">ROOMS DESCRIPTION</th>
-                                        <th class="white-space-nowrap align-middle fs--1 ps-4 text-dark" style="width:50px;"
-                                            data-sort="ACTION">ACTION</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="list" id="products-table-body text-center">
-                                    @foreach ($kamar as $kamars)
-                                        <tr class="position-static text-center">
-                                            <td class="review ellipsis-text col-1 pt-4">
-                                                    {{ $loop->iteration }}
-                                            </td>
-                                            <td class="align-middle white-space-nowrap mx-auto text-center pt-4">
-                                                <img src="{{ asset('storage/kamar/' . $kamars->path_kamar) }}"
-                                                    alt="" width="50%" height="50" style="object-fit: cover; min-width: 50px;"
-                                                    class="mx-auto rounded-3" />
-                                            </td>
-                                            <td class="category ellipsis-text col-1 pt-4"style="vertical-align: bottom; margin-top: -10px;">
-                                                <p>
-                                                    {{ Str::limit($kamars->nama_kamar, 10, $end = '...') }}</p>
-                                            </td>
-                                            <td
-                                                class="price align-middle white-space-nowrap text-end fw-bold fs--1  text-700 ps-4 pt-5">
-                                                <p>
-                                                    {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</td>
-                                                </p>
-
-                                            <td
-                                                class="align-middle white-space-nowrap text-600 fs--1 ps-4 fw-semi-bold pt-5">
-                                                <p>
-                                                    {{ $kamars->kategori ? $kamars->kategori->nama_kategori : 'Tidak Ada Kategori' }}
-                                                </p>
-                                            </td>
-                                            <td class="tags align-middle review pt-5 ps-3 fs--1 " style="width:200px;">
-                                                <p>
-                                                    <span class="badge badge-phoenix fs-10 badge-phoenix-success">{{ $kamars->status }}</span>
-                                                </p>
-                                            </td>
-
-                                            <td class="ellipsis-text col-1 pt-5">
-                                                <p>
-                                                    {{ strip_tags(Str::limit($kamars->deskripsi, 10, $end = '...')) }}</td>
-                                                </p>
-                                            <td class="align-middle white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger mb-2">
-                                                <div class="font-sans-serif btn-reveal-trigger position-static">
-                                                    <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent">
-                                                        <span class="fas fa-ellipsis-h fs--2"></span>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end py-2">
-                                                        <a class="dropdown-item" href="{{ route('kamar.edit', $kamars->id) }}">Edit</a>
-                                                        <div class="dropdown-divider"></div>
+                        <div class="row">
+                            @foreach ($kamar as $kamars)
+                                <div class="col-12 col-sm-6 col-md-4 col-xxl-3 mb-4">
+                                    <div class="card">
+                                        <img src="{{ asset('storage/kamar/' . $kamars->path_kamar) }}" class="card-img-top" alt="Room Image">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">{{ Str::limit($kamars->nama_kamar, 20, '...') }}</h5>
+                                            <p class="card-text fs-6">Price: <span class="fw-bold">{{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</span></p>
+                                            <p class="card-text">Category: {{ $kamars->kategori ? $kamars->kategori->nama_kategori : 'Tidak Ada Kategori' }}</p>
+                                            <p class="card-text"><span class="badge badge-success">{{ $kamars->status }}</span></p>
+                                            <p class="card-text">{{ strip_tags(Str::limit($kamars->deskripsi, 50)) }}</p>
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="{{ route('kamar.edit', $kamars->id) }}">Edit</a></li>
+                                                    <li>
                                                         <form action="{{ route('kamar.destroy', $kamars->id) }}" method="POST" class="hapus-form">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="button" class="dropdown-item text-danger hapus">Remove</button>
+                                                            <button type="submit" class="dropdown-item text-danger">Remove</button>
                                                         </form>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                                 </tbody>
                             </table>
                         </div>

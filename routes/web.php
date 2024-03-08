@@ -8,14 +8,15 @@ use App\Http\Controllers\KamarController;
 use App\Http\Controllers\DiskonController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Middleware\RedirectMiddleware;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\DetailKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
-use App\Http\Controllers\DetailKamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,7 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
     Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
     Route::get('/detailkamar{id}', [DetailKamarController::class, 'index'])->name('detailkamar');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {
         Route::get('', 'index')->name('profil');
