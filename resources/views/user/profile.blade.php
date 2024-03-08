@@ -14,7 +14,7 @@
         }
 
         ::-webkit-scrollbar {
-        display: none;
+            display: none;
         }
     </style>
     <form action="{{ route('profil.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
@@ -83,9 +83,9 @@
                                         <h4 class="fs-1 text-1000 mb-0 text-center">
                                             {{-- @if ($lastorder->count() > 0)
                                                 {{ Carbon::now()->diffInDays($lastorder[0]->created_at) }} Days Ago --}}
-                                                6 Days Ago
+                                            6 Days Ago
                                         </h4>
-                                    {{-- @else
+                                        {{-- @else
                                         <h4 class="fs-1 text-1000 mb-0">User has never placed an order.</h4>
                                         @endif --}}
                                     </div>
@@ -150,10 +150,8 @@
                                 <li class="nav-item"><a class="nav-link text-nowrap" id="personal-info-tab"
                                         data-bs-toggle="tab" href="#tab-personal-info" role="tab"
                                         aria-controls="tab-personal-info" aria-selected="true"><span
-                                            class="fas fa-user me-2"></span>Personal info</a></li>
-
-
-                            </ul>
+                                            class="fas fa-user me-2"></span>Personal info</a></li>  
+                                         </ul>
                         </div>
                         <div class="tab-content" id="profileTabContent">
                             <div class="tab-pane fade show active" id="tab-orders" role="tabpanel"
@@ -196,22 +194,22 @@
                                                                 $no += 1;
                                                                 $totalproduktiappesanan[$orders->id] = 1;
                                                             @endphp --}}
-                                                            <tr class="position-static text-center">
-                                                                <td class="align-middle review fs-0 mx-auto text-center">
-                                                                    {{-- {{ $no }} --}}
-                                                                </td>
-                                                                <td class="align-middle review fs-0 text-center mx-auto">
-                                                                    <button type="button" class="btn btn-link primary"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#productDetailModal
+                                                <tr class="position-static text-center">
+                                                    <td class="align-middle review fs-0 mx-auto text-center">
+                                                        {{-- {{ $no }} --}}
+                                                    </td>
+                                                    <td class="align-middle review fs-0 text-center mx-auto">
+                                                        <button type="button" class="btn btn-link primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#productDetailModal
                                                                         {{-- {{ $orders->id }} --}}
                                                                         ">
-                                                                        Detail
-                                                                    </button>
-                                                                </td>
-                                                                <td class="align-middle white-space-nowrap py-0">
-                                                                    <span class="badge-phoenix-success">Available</span>
-                                                                    {{-- <span
+                                                            Detail
+                                                        </button>
+                                                    </td>
+                                                    <td class="align-middle white-space-nowrap py-0">
+                                                        <span class="badge-phoenix-success">Available</span>
+                                                        {{-- <span
                                                                         class="badge badge-phoenix fs--2
                                                                 @if ($orders->status == 'pending') badge-phoenix-warning
                                                                 @elseif($orders->status == 'shipped')
@@ -225,36 +223,33 @@
                                                                 ">
                                                                         {{ $orders->status }}
                                                                     </span> --}}
-                                                                </td>
-                                                                <td class="align-middle white-space-nowrap py-0">
-                                                                    <span
-                                                                        class="fw-semi-bold fs--1 line-clamp-3 mb-0">
-                                                                        {{-- {{ $orders->metode_pengiriman }} --}}
-                                                                        Shopee Express
-                                                                    </span>
-                                                                </td>
-                                                                <td class="produks align-middle ps-4">
-                                                                    <span
-                                                                        class="fw-semi-bold fs--1 line-clamp-3 mb-0">
-                                                                        {{-- {{ is_null($orders->tanggal_pengiriman) ? '-' : date('d F Y', strtotime($orders->tanggal_pengiriman)) }} --}}
-                                                                    </span>
-                                                                </td>
-                                                                <td class="produks align-middle ps-4">
-                                                                    <span
-                                                                        class="fw-semi-bold fs--1 line-clamp-3 mb-0">
-                                                                        {{-- {{ is_null($orders->tanggal_menerima) ? '-' : date('d F Y', strtotime($orders->tanggal_menerima)) }} --}}
-                                                                        25 - January - 2020
-                                                                    </span>
-                                                                </td>
-                                                                <td class="produks align-middle">
-                                                                    <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">Rp.
-                                                                        {{-- {{ number_format($orders->total, 0, ',', '.') }} --}}
-                                                                        Rp. 30.500.000
-                                                                    </span>
-                                                                </td>
-                                                                <td class="produks align-middle ">
-                                                                    {{-- @if ($orders->status == 'shipped') --}}
-                                                                        {{-- <form action="{{ route('diterima', $orders->id) }}">
+                                                    </td>
+                                                    <td class="align-middle white-space-nowrap py-0">
+                                                        <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
+                                                            {{-- {{ $orders->metode_pengiriman }} --}}
+                                                            Shopee Express
+                                                        </span>
+                                                    </td>
+                                                    <td class="produks align-middle ps-4">
+                                                        <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
+                                                            {{-- {{ is_null($orders->tanggal_pengiriman) ? '-' : date('d F Y', strtotime($orders->tanggal_pengiriman)) }} --}}
+                                                        </span>
+                                                    </td>
+                                                    <td class="produks align-middle ps-4">
+                                                        <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
+                                                            {{-- {{ is_null($orders->tanggal_menerima) ? '-' : date('d F Y', strtotime($orders->tanggal_menerima)) }} --}}
+                                                            25 - January - 2020
+                                                        </span>
+                                                    </td>
+                                                    <td class="produks align-middle">
+                                                        <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">Rp.
+                                                            {{-- {{ number_format($orders->total, 0, ',', '.') }} --}}
+                                                            Rp. 30.500.000
+                                                        </span>
+                                                    </td>
+                                                    <td class="produks align-middle ">
+                                                        {{-- @if ($orders->status == 'shipped') --}}
+                                                        {{-- <form action="{{ route('diterima', $orders->id) }}">
                                                                             @csrf
                                                                             @method('put')
                                                                             <input type="hidden" name="status" value="{{ $orders->status }}">
@@ -263,39 +258,52 @@
                                                                                 Diterima
                                                                             </button>
                                                                         </form> --}}
-                                                                        <a class="btn btn-link dropdown-item text-primary"
-                                                                            href="#">Accepted</a>
-                                                                            {{-- @elseif ($orders->status == 'reject') --}}
-                                                                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#show-reject-message
+                                                        <a class="btn btn-link dropdown-item text-primary"
+                                                            href="#">Accepted</a>
+                                                        {{-- @elseif ($orders->status == 'reject') --}}
+                                                        <button type="button" class="btn btn-link"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#show-reject-message
                                                                             {{-- {{ $orders->id }} --}}
-                                                                            ">Reject Message</button>
-                                                                            <div class="modal fade" id="show-reject-message
+                                                                            ">Reject
+                                                            Message</button>
+                                                        <div class="modal fade"
+                                                            id="show-reject-message
                                                                             {{-- {{ $orders->id }} --}}
-                                                                            " tabindex="-1" aria-labelledby="rejectMessageModalLabel" aria-hidden="true">
-                                                                                <div class="modal-dialog modal-dialog-centered">
-                                                                                    <div class="modal-content">
-                                                                                        <div class="modal-header">
-                                                                                            <h5 class="modal-title" id="rejectMessageModalLabel">Reject Message</h5>
-                                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                        </div>
-                                                                                        <div class="modal-body">
-                                                                                            <div class="w-100 fs-2"><p style="overflow-wrap: break-word;">
-                                                                                                {{-- {{ $orders->reject_message }} --}}
-                                                                                                soasik
-                                                                                            </p></div>
-                                                                                        </div>
-                                                                                        <div class="modal-footer">
-                                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                                            <!-- Tambahkan tombol untuk menolak pesan di sini jika diperlukan -->
-                                                                                            <!-- <button type="button" class="btn btn-danger">Reject</button> -->
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                    {{-- @endif --}}
-                                                                </td>
-                                                            </tr>
-                                                        {{-- @else
+                                                                            "
+                                                            tabindex="-1" aria-labelledby="rejectMessageModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="rejectMessageModalLabel">Reject Message
+                                                                        </h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="w-100 fs-2">
+                                                                            <p style="overflow-wrap: break-word;">
+                                                                                {{-- {{ $orders->reject_message }} --}}
+                                                                                soasik
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                        <!-- Tambahkan tombol untuk menolak pesan di sini jika diperlukan -->
+                                                                        <!-- <button type="button" class="btn btn-danger">Reject</button> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- @endif --}}
+                                                    </td>
+                                                </tr>
+                                                {{-- @else
                                                         @php
                                                             $totalproduktiappesanan[$orders->id] += 1;
                                                         @endphp
@@ -373,59 +381,60 @@
                                     $counter = 1;
                                 @endphp --}}
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="productDetailModal
+                            <!-- Modal -->
+                            <div class="modal fade"
+                                id="productDetailModal
                                 {{-- {{ $orders->id }} --}}
-                                " tabindex="-1"
-                                    aria-labelledby="productDetailModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="productDetailModalLabel">
-                                                    Product Detail</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div>
-                                                    <table class="table fs--1 mb-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="sort text-center white-space-nowrap align-middle ps-4"
-                                                                    style="width: 250px">
-                                                                    <span>NO</span>
-                                                                </th>
-                                                                <th class="sort text-center white-space-nowrap align-middle ps-4"
-                                                                    scope="col" style="width:350px;">
-                                                                </th>
-                                                                <th class="sort text-center white-space-nowrap align-middle ps-4"
-                                                                    scope="col" style="width:350px;">
-                                                                    PRODUCT NAME</th>
-                                                                <th class="sort text-center white-space-nowrap align-middle ps-4"
-                                                                    scope="col" style="width:250px;">
-                                                                    JUMLAH</th>
-                                                                <th class="sort text-center white-space-nowrap align-middle ps-4"
-                                                                    scope="col" style="width:350px;">
-                                                                    TOTAL HARGA</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="list" id="products-table-body">
-                                                            {{-- @php
+                                "
+                                tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="productDetailModalLabel">
+                                                Product Detail</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <table class="table fs--1 mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="sort text-center white-space-nowrap align-middle ps-4"
+                                                                style="width: 250px">
+                                                                <span>NO</span>
+                                                            </th>
+                                                            <th class="sort text-center white-space-nowrap align-middle ps-4"
+                                                                scope="col" style="width:350px;">
+                                                            </th>
+                                                            <th class="sort text-center white-space-nowrap align-middle ps-4"
+                                                                scope="col" style="width:350px;">
+                                                                PRODUCT NAME</th>
+                                                            <th class="sort text-center white-space-nowrap align-middle ps-4"
+                                                                scope="col" style="width:250px;">
+                                                                JUMLAH</th>
+                                                            <th class="sort text-center white-space-nowrap align-middle ps-4"
+                                                                scope="col" style="width:350px;">
+                                                                TOTAL HARGA</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="list" id="products-table-body">
+                                                        {{-- @php
                                                                 echo $detail;
                                                             @endphp --}}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <!-- Jika diperlukan, tambahkan tombol lain di sini -->
-                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <!-- Jika diperlukan, tambahkan tombol lain di sini -->
                                         </div>
                                     </div>
                                 </div>
-                                {{-- @php
+                            </div>
+                            {{-- @php
                                     $detail = '';
                                 @endphp
                             @endif

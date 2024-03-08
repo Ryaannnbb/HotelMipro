@@ -15,68 +15,30 @@ class MenuKamarUserController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $kamar = Kamar::all();
-        return view('user.menukamaruser', compact('kamar', 'user'));
-
         $kategori = Kategori::all();
-        $user = auth()->user();
-        $devices = $request->input('device');
+        $kamar = Kamar::query();
+    
+        // Filter berdasarkan kategori
+        $selectedCategories = $request->input('kategori');
+    
+        if (!empty($selectedCategories)) {
+            $kamar->whereIn('kategori_id', $selectedCategories);
+        }
+    
+        // Filter berdasarkan harga
         $minPrice = $request->input('min');
         $maxPrice = $request->input('max');
-
-        // Lakukan filter data dengan menggunakan nilai-nilai yang diperoleh dari form
-        $query = DB::table('produk')
-            ->leftJoin('ulasan', 'produk.id', '=', 'ulasan.produk_id')
-            ->select(
-                'produk.id',
-                'produk.nama_produk',
-                'produk.path_produk',
-                'produk.harga',
-                'produk.stok',
-                'produk.deskripsi',
-                DB::raw('avg(rating) AS rating'),
-                DB::raw('count(ulasan.produk_id) AS totalulasan')
-            )
-            ->groupBy(
-                'produk.id',
-                'produk.nama_produk',
-                'produk.path_produk',
-                'produk.harga',
-                'produk.stok',
-                'produk.deskripsi'
-            );
-
-        if (!empty($devices)) {
-            $query->whereIn('kategori_id', $devices);
-        } else {
-            $devices = [0];
-        }
-
+    
         if (!empty($minPrice) && !empty($maxPrice)) {
-            $query->whereBetween('harga', [intval($minPrice), intval($maxPrice)]);
+            $kamar->whereBetween('harga', [intval($minPrice), intval($maxPrice)]);
         }
-
-        if (empty($minPrice)) {
-            $minPrice = null;
-        }
-
-        if (empty($maxPrice)) {
-            $maxPrice = null;
-        }
-
-        // // Tambahkan filter untuk rating
-        // if (!empty($rating)) {
-        //     $query->havingRaw('avg(rating) >= ?', [$rating]);
-        // }
-
-        // Eksekusi query untuk mendapatkan hasil filter
-        $produk = $query->get();
-
-        // dd($wishlist);
-        // Lakukan tindakan lainnya, seperti menampilkan data pada view atau mengembalikan respons JSON
-        return view('user.produkfilter', compact('produk', 'user', 'kategori', 'devices', 'minPrice', 'maxPrice', 'totalpesanan', 'wishlist'));
+    
+        // Menetapkan kembali variabel $kamar setelah menerapkan filter
+        $kamar = $kamar->get();
+    
+        return view('user.menukamaruser', compact('kamar', 'user', 'kategori', 'minPrice', 'maxPrice', 'selectedCategories'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

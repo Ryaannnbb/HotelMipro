@@ -13,9 +13,10 @@ class DetailKamarController extends Controller
     public function index(Request $request, $id)
     {
         $user = auth()->user();
-        $kamar = Kamar::all();
-        return view('user.detailkamar', compact('user', 'kamar'));
+        $kamar = Kamar::where('id', $id)->get();
+         return view('user.detailkamar', compact('user', 'kamar'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

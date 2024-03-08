@@ -246,7 +246,7 @@
               </div>
               <div class="col-12 col-lg-auto d-none d-lg-block">
                 <div class="hero-image-container position-absolute h-100 end-0 d-flex align-items-center">
-                    <img class="w-100" src="{{ asset('assets/img/kamar4.png') }}" alt="hero-header" style="margin-left: -30px;">
+                    <img class="w-100 rounded-3" src="{{ asset('assets/img/kamar.png') }}" alt="hero-header" style="margin-left: -30px;">
                 </div>
             </div>
             </div>
@@ -764,7 +764,7 @@
 
       <!-- ============================================-->
       <!-- <section> begin ============================-->
-      <section class="bg-1100 dark__bg-1000">
+      {{-- <section class="bg-1100 dark__bg-1000">
         <div class="container-small px-lg-7 px-xxl-3">
           <div class="row gx-xxl-8 gy-5 align-items-center mb-5">
             <div class="col-xl-auto text-center"><a href="#"><img src="../../assets/img/hotel10.png" height="48" alt="" /></a></div>
@@ -773,7 +773,7 @@
                 <li><a class="text-300 dark__text-300" href="#">Contact us</a></li>
                 <li><a class="text-300 dark__text-300" href="#">Rooms</a></li>
                 {{-- <li><a class="text-300 dark__text-300" href="#">Opportunities</a></li> --}}
-                <li><a class="text-300 dark__text-300" href="{{ route('login') }}">Login</a></li>
+                {{-- <li><a class="text-300 dark__text-300" href="{{ route('login') }}">Login</a></li>
                 <li><a class="text-300 dark__text-300"  href="{{ route('register') }}">Sign Up</a></li>
                 <li><a class="text-300 dark__text-300" href="#">Support</a></li>
                 <li><a class="text-300 dark__text-300" href="#">FAQ</a></li>
@@ -782,14 +782,53 @@
             <div class="col-xl-auto">
               <div class="d-flex align-items-center justify-content-center gap-8"><a class="text-white dark__text-white" href="#!"> <span class="fa-brands fa-facebook"></span></a><a class="text-white dark__text-white" href="#!"> <span class="fa-brands fa-twitter"></span></a><a class="text-white dark__text-white" href="#!"> <span class="fa-brands fa-linkedin-in"></span></a></div>
             </div>
-          </div>
-          <hr class="text-800" />
+          </div> --}}
+        <section class="bg-100 dark__bg-1100 py-9">
+            <div class="container-small">
+                <div class="row justify-content-between gy-4">
+                    <div class="col-12 col-lg-4">
+                        <div class="d-flex align-items-center mb-3"><img
+                                src="{{ asset('assets/img/brands/small.png') }}" alt="phoenix" width="40" />
+                            <p class="logo-text ms-2">Small Hotel</p>
+                        </div>
+                        <p class="text-700 mb-1 fw-semi-bold lh-sm fs--1">
+                            Small Hotel is a leading hospitality provider in Indonesia, offering a variety of modern
+                            facilities and high-quality services. Guests can explore a range of innovative
+                            accommodations and luxurious amenities. Small Hotel is dedicated to ensuring guest
+                            satisfaction by providing personalized experiences and the best customer support from
+                            experienced professionals.</p>
+                    </div>
+                    <div class="col-6 col-md-auto">
+                        <h5 class="fw-bolder mb-3">About Small Hotel</h5>
+                        <div class="d-flex flex-column"><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Career </a><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Personal policy</a><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Terms & conditions</a><a class="text-700 fw-semi-bold fs--1 mb-1"></a></div>
+                    </div>
+                    <div class="col-6 col-md-auto">
+                        <h5 class="fw-bolder mb-3">Stay Connected</h5>
+                        <div class="d-flex flex-column"><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Jalan Ijen
+                                No.
+                                123 Kota Tuban, Indonesia</a><a class="mb-1 fw-semi-bold fs--1 d-flex"
+                                href="#!"><span class="fas fa-phone text-primary me-2 fs-0"></span><span
+                                    class="text-800">+62
+                                    889-8908-7546</span></a><a class="mb-1 fw-semi-bold fs--1 d-flex"
+                                href="#!"><span class="fas fa-envelope text-info me-2 fs-0"></span><span
+                                    class="text-800">Email :
+                                    info@smallhotel.com</span></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+          {{-- <hr class="text-800" />
           <div class="d-sm-flex flex-between-center text-center">
             <p class="text-600 mb-0">Copyright © Small</p>
             <p class="text-600 mb-0">Made with love by <a href="https://themewagon.com/">Small</a></p>
           </div>
         </div><!-- end of .container-->
-      </section><!-- <section> close ============================-->
+      </section><!-- <section> close ============================-->  --}}
       <!-- ============================================-->
 
       <div class="support-chat-container">
