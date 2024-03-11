@@ -29,10 +29,14 @@
     <script src="../../../vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="../../../vendors/simplebar/simplebar.min.js"></script>
     <script src="../../../assets/js/config.js"></script>
+    <script src="{{ asset('assets/js/flatpickr.js') }}"></script>
+    <script src="{{ asset('vendors/choices/choices.min.js') }}"></script>
 
     <!-- ===============================================-->
     <!--    Stylesheets-->
     <!-- ===============================================-->
+    <link href="{{ asset('vendors/choices/choices.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('vendors/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap"
@@ -355,13 +359,12 @@
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('#') ? 'active' : '' }}"
                         href="{{ route('usermenu') }}">Rooms</a></li>
-                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
-                        class="nav-link {{ request()->routeIs('wishlist') ? 'active' : '' }}""
-                        href="{{ route('wishlist') }}">Wishlist</a></li>
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
-                        href="{{ route('checkout') }}">Checkout</a>
-                </li> --}}
+                        href="{{ route('checkout') }}">Checkout</a></li>
+                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
+                        class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
+                        href="{{ route('checkout') }}">Checkout</a></li> --}}
             </ul>
         </div>
     </nav>
