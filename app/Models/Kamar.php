@@ -24,4 +24,9 @@ class Kamar extends Model
         return $this->belongsTo(Kategori::class);
     }
 
+    public function UlasanKamar()
+    {
+        return $this->hasMany(UlasanKamar::class);
+    }
+
 }

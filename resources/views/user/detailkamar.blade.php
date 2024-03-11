@@ -91,7 +91,7 @@
                                     </strong>
                                 </p>
                                 </p>
-                                <a class="fw-bold" href="#">Ulasan-></a>
+                                <a class="fw-bold" href="{{ route('ulasankamar', $detail->id) }}">Ulasan-></a>
                             </div>
                             <div>
                             </div>

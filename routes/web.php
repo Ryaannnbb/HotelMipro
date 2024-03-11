@@ -14,6 +14,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DetailKamarController;
+use App\Http\Controllers\UlasanKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
@@ -108,6 +109,11 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
     Route::get('/detailkamar{id}', [DetailKamarController::class, 'index'])->name('detailkamar');
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+    Route::controller(UlasanKamarController::class)->prefix('ulasankamar')->group(function () {
+        Route::get('show/{id}', 'show')->name('ulasankamar');
+        Route::post('store', 'store')->name('ulasankamar.store');
+    });
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {
         Route::get('', 'index')->name('profil');
