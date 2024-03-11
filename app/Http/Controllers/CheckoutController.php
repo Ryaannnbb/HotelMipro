@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fasilitas;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -12,7 +14,10 @@ class CheckoutController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('user.checkout', compact('user'));
+        $fasilitas = Fasilitas::all();
+        $bank = Pembayaran::where('metode_pembayaran', 'bank')->get();
+        $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
+        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet'));
     }
 
     /**

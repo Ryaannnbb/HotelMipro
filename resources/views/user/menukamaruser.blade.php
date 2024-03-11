@@ -41,21 +41,19 @@
                             </a>
                             <div class="collapse show" id="collapseDevice">
                                 <div class="mb-2">
-                                    @foreach ($kategori as $kategoris)
+                                    {{-- @foreach ($kategori as $kategoris)
                                         <div class="form-check mb-0">
-                                            <input class="form-check-input mt-0" id="kategori{{ $kategoris->id }}"
-                                                type="checkbox" name="kategori[]" value="{{ $kategoris->id }}"
-                                                onchange="showSelectedCategories()"
-                                                {{ is_array($selectedCategories) && in_array($kategoris->id, $selectedCategories) ? 'checked' : '' }}>
+                                            <input class="form-check-input mt-0" id="flexCheck{{ $kategoris->id }}"
+                                                type="checkbox" name="device[]" value="{{ $kategoris->id }}"
+                                                {{ in_array($kategoris->id, $devices) ? 'checked' : '' }}>
                                             <label class="form-check-label d-block lh-sm fs-0 text-900 fw-normal mb-0"
-                                                for="kategori{{ $kategoris->id }}">
+                                                for="flexCheck{{ $kategoris->id }}">
                                                 {{ $kategoris->nama_kategori }}
                                             </label>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                             </div>
-
                             <a class="btn px-0 d-block collapse-indicator" data-bs-toggle="collapse"
                                 href="#collapsePriceRange" role="button" aria-expanded="true"
                                 aria-controls="collapsePriceRange">
@@ -66,12 +64,12 @@
                             </a>
                             <div class="collapse show" id="collapsePriceRange">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <div class="input-group me-2">
+                                    {{-- <div class="input-group me-2">
                                         <input class="form-control" type="number" aria-label="First name" placeholder="Min"
                                             name="min" value="{{ old('min', $minPrice) }}">
                                         <input class="form-control" type="number" aria-label="Last name" placeholder="Max"
                                             name="max" value="{{ old('max', $maxPrice) }}">
-                                    </div>
+                                    </div> --}}
                                     <button class="btn btn-phoenix-primary border-300 px-3" type="submit">Go</button>
                                 </div>
                             </div>
@@ -133,8 +131,8 @@
                 </div>
                 <div class="col-lg-9 col-xxl-10">
                     <div class="row">
-                        @if($kamar->isNotEmpty())
-                            @foreach($kamar as $kamars)
+                        @if (count($kamar) > 0)
+                            @foreach ($kamar as $kamars)
                                 <div class="col-12 col-xl-4 mt-2">
                                     <div class="card mr-3" style="height: 450px">
                                         <div class="position-relative text-decoration-none product-card h-100">
@@ -154,7 +152,6 @@
                                                         </a>
                                                         <p class="fs--1 text-1000 fw-bold mb-2">Stock {{ $kamars->stok }}
                                                         </p>
-                                                        <p class="fs--1 text-1000 fw-bold mb-2">category {{ $kamars->kategori->nama_kategori }}</p>
                                                         <p class="fs--1">
                                                             @if (!is_null($kamars->rating))
                                                                 @if ($kamars->rating - floor($kamars->rating) < 0.5)
@@ -173,14 +170,13 @@
                                                                 <p>There are no reviews</p>
                                                             @endif
                                                         </p>
-                                                        <div class="card-footer">
-                                                            <div class="d-flex align-items-center mb-1">
-                                                                <h3 class="text-1100 mb-0">
-                                                                    Rp.{{ number_format($kamars->harga, 0, ',', '.') }}
-                                                                </h3>
-                                                                <div class="flex-grow-1"></div>
-                                                            </div>
-                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="d-flex align-items mb-1">
+                                                        <h3 class="text-1100 mb-0">
+                                                            Rp.{{ number_format($kamars->harga, 0, ',', '.') }}</h3>
+                                                        <div class="flex-grow-1"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,18 +185,21 @@
                                 </div>
                             @endforeach
                         @else
-                            <div class="col-12">
-                                <div
-                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
-                                    <img src="{{ asset('assets/img/No data-amico.svg') }}" alt=""
-                                        style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
-                                    <h3 class="mb-3">There are no products available.</h3>
-                                </div>
-                            </div>
+                            <tr>
+                                <td colspan="8" class="text-center py-4">
+                                    <div
+                                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
+                                        <img src="{{ asset('assets/img/No data-amico.svg') }}" alt=""
+                                            style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
+                                        <h3 class="mb-3">There are no products added by admin yet. Please check back
+                                            later.</h3>
+                                    </div>
+                                </td>
+                            </tr>
                         @endif
                     </div>
+                </div>
             </div>
-        </div>
         </div>
     </section>
 @endsection

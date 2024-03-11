@@ -3,20 +3,21 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\DiskonController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\UlasanController;
 use App\Http\Middleware\RedirectMiddleware;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\DetailKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DetailKamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ Route::get('/', function () {
 });
 
 
-// Route::middleware([RedirectMiddleware::class])->group(function () {
+Route::middleware([RedirectMiddleware::class])->group(function () {
     // LOGIN REGISTER
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -50,7 +51,7 @@ Route::get('/', function () {
         Route::get('reset-password/{token}', 'resetPassword')->name('password.reset');
         Route::post('reset-password', 'updatePassword')->name('password.update');
     });
-// });
+});
 
 // USER
 Route::middleware([AdminMiddleware::class])->group(function () {

@@ -41,7 +41,7 @@ class DiskonController extends Controller
             DB::raw('max(diskons.akhir_berlaku) AS akhir_berlaku'),
         )
         ->groupBy(
-            'detail_diskons.rooms_id',
+            'detail_diskons.rooms_id', // Jika ingin groupBy harus menyertakan semua kolom termasuk kolom yang tidak mmiliki DB:raw
             "kamars.id",
             "kamars.nama_kamar",
             "kamars.path_kamar",
