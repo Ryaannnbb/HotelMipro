@@ -15,9 +15,10 @@
         <h2 class="mb-5">Check out</h2>
         <div class="row justify-content-between">
             <div class="col-lg-7 col-xl-7">
-                <form>
+                <form action="{{ route('pesanan.store') }}" method="POST">
+                    @csrf
                     <div class="d-flex align-items-end">
-                        <h3 class="mb-0 me-3">Shipping Details</h3>
+                        <h3 class="mb-0 me-3">User Details</h3>
                         {{-- <button class="btn btn-link p-0"
                             type="button">Edit</button> --}}
                     </div>
@@ -32,7 +33,7 @@
                                 </td>
                                 <td class="py-2 fw-bold lh-sm">:</td>
                                 <td class="py-2 px-3">
-                                    <h5 class="lh-sm fw-normal text-800">{{ auth()->user()->name }}</h5>
+                                    <h5 class="lh-sm fw-normal text-800">{{ Auth::user()->name }}</h5>
                                 </td>
                             </tr>
                             <tr>
@@ -44,7 +45,11 @@
                                 </td>
                                 <td class="py-2 fw-bold lh-sm">:</td>
                                 <td class="py-2 px-3">
-                                    <h5 class="lh-sm fw-normal text-800">{{ auth()->user()->address }}</h5>
+                                    @if(Auth::user()->address)
+                                        <h5 class="lh-lg fw-normal text-800">{{ Auth::user()->address }}</h5>
+                                    @else
+                                        <p>Please fill in your address.</p>
+                                    @endif
                                 </td>
                             </tr>
                             <tr>
@@ -56,7 +61,11 @@
                                 </td>
                                 <td class="py-2 fw-bold lh-sm">: </td>
                                 <td class="py-2 px-3">
-                                    <h5 class="lh-sm fw-normal text-800">{{ auth()->user()->telp }}</h5>
+                                    @if(Auth::user()->telp)
+                                        <h5 class="lh-lg fw-normal text-800">{{ Auth::user()->telp }}</h5>
+                                    @else
+                                        <p>Please fill in your number phone.</p>
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>
@@ -69,9 +78,9 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <form action="">
+                            <form action="{{ route('pesanan.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                @method('POST')
+                                <label class="form-label fs-0 text-1000 ps-0 text-none" for="awal_berlaku">Choose payment method</label>
                                 <select class="form-select mb-3 @error('metode_pembayaran') is-invalid @enderror"
                                     name="metode_pembayaran" aria-label=".form-select-lg example" id="selectMetode">
                                     <option value="" disabled {{ old('metode_pembayaran') ? '' : 'selected' }}>Select Payment</option>
@@ -83,7 +92,7 @@
                                 @enderror
                                 <div class="mb-3" id="ewalletInput" style="display: @error('tujuan_ewallet') block @else none @enderror;">
                                     <div>
-                                        <p class="text-bold">Type QR</p>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Type QR</label>
                                     </div>
                                     <select name="tujuan_ewallet" id="tujuan_ewallet" class="form-control @error('tujuan_ewallet') is-invalid @enderror">
                                         <option value="" disabled selected>Choose</option>
@@ -99,7 +108,7 @@
                                     @enderror
 
                                     <div class="mt-3">
-                                        <p class="text-bold">Kode QR</p>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none">QR Code</label>
                                     </div>
 
                                     <p class="" id="keterangan_ewallet">
@@ -111,7 +120,7 @@
 
                                 <div class="mb-3" id="bankInput" style="display: @error('tujuan_bank') block @else none @enderror;">
                                     <div>
-                                        <p class="text-bold">Choose Bank</p>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Choose Bank</label>
                                     </div>
                                     <select name="tujuan_bank" id="tujuan_bank" class="form-control @error('tujuan_bank') is-invalid @enderror">
                                         <option value="" disabled selected>Choose</option>
@@ -119,14 +128,14 @@
                                             <option value="{{ $data->tujuan }}" data="{{ $data->keterangan }}">
                                                 {{ $data->tujuan }}</option>
                                         @empty
-                                            <option value=""disabled selected>No account number available</option>
+                                            <option value="" disabled selected>No account number available</option>
                                         @endforelse
                                     </select>
                                     @error('tujuan_bank')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <div class="mt-3">
-                                        <p class="text-bold">No Rekening</p>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Account Number</label>
                                     </div>
                                     @foreach ($bank as $data)
                                         <input type="text" name="keterangan_bank" value="{{ $data->keterangan }}"
@@ -143,16 +152,16 @@
                                 <div class="d-flex justify-content-between">
                                     <div style="width: 48%;">
                                         <label class="form-label fs-0 text-1000 ps-0 text-none" for="awal_berlaku">Start date</label>
-                                        <input class="form-control datetimepicker mb-3 start-date  @error('awal_berlaku') is-invalid @enderror" type="text" placeholder="dd/mm/yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="awal_berlaku" />
+                                        <input class="form-control datetimepicker mb-3 start-date  @error('awal_berlaku') is-invalid @enderror" type="text" placeholder="dd-mm-yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="awal_berlaku" />
                                     </div>
                                     <div style="width: 48%;">
                                         <label class="form-label fs-0 text-1000 ps-0 text-none" for="akhir_berlaku">End date</label>
-                                        <input class="form-control datetimepicker mb-3 start-date @error('akhir_berlaku') is-invalid @enderror" type="text" placeholder="dd/mm/yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="akhir_berlaku" />
+                                        <input class="form-control datetimepicker mb-3 start-date @error('akhir_berlaku') is-invalid @enderror" type="text" placeholder="dd-mm-yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="akhir_berlaku" />
                                     </div>
                                 </div>
                                 <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Select facility</label>
                                 <select class="form-select @error('nama_fasilitas') is-invalid @enderror" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
-                                    <option value="">Select fasilitasd...</option>
+                                    <option value="">Select facility...</option>
                                     @foreach ($fasilitas as $fasilitasd)
                                         <option value="{{ $fasilitasd->id }}"
                                             @selected(!is_null(@old('nama_fasilitas')) ? in_array($fasilitasd->id, @old('nama_fasilitas')) : '')>
@@ -217,16 +226,8 @@
                                 <h5 class="text-danger fw-semi-bold">-$59</h5>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
-                                <h5 class="text-900 fw-semi-bold">Tax: </h5>
+                                <h5 class="text-900 fw-semi-bold">Facility: </h5>
                                 <h5 class="text-900 fw-semi-bold">$126.20</h5>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <h5 class="text-900 fw-semi-bold">Subtotal </h5>
-                                <h5 class="text-900 fw-semi-bold">$665</h5>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <h5 class="text-900 fw-semi-bold">Shipping Cost </h5>
-                                <h5 class="text-900 fw-semi-bold">$30 </h5>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between border-dashed-y pt-3">

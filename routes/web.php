@@ -8,6 +8,7 @@ use App\Http\Controllers\KamarController;
 use App\Http\Controllers\DiskonController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UlasanController;
+use App\Http\Controllers\PesananController;
 use App\Http\Middleware\RedirectMiddleware;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeUserController;
@@ -58,6 +59,9 @@ Route::middleware([RedirectMiddleware::class])->group(function () {
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/homeadmin', [KamarController::class, 'index'])->name('homeadmin');
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
+    Route::get('/pesanan/{id}', [PesananController::class, 'index'])->name('pesanan');
+    Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
+
 
     Route::controller(KamarController::class)->prefix('kamar')->group(function () {
         Route::get('/', 'index')->name('kamar');
