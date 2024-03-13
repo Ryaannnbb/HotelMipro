@@ -32,7 +32,7 @@
                                 </td>
                                 <td class="py-2 fw-bold lh-sm">:</td>
                                 <td class="py-2 px-3">
-                                    <h5 class="lh-sm fw-normal text-800">Yuni Nirmala</h5>
+                                    <h5 class="lh-sm fw-normal text-800">{{ auth()->user()->name }}</h5>
                                 </td>
                             </tr>
                             <tr>
@@ -44,8 +44,7 @@
                                 </td>
                                 <td class="py-2 fw-bold lh-sm">:</td>
                                 <td class="py-2 px-3">
-                                    <h5 class="lh-lg fw-normal text-800">Apt: 6/B, 192 Edsel Road, Van Nuys <br>
-                                        California, USA 96580</h5>
+                                    <h5 class="lh-sm fw-normal text-800">{{ auth()->user()->address }}</h5>
                                 </td>
                             </tr>
                             <tr>
@@ -57,7 +56,7 @@
                                 </td>
                                 <td class="py-2 fw-bold lh-sm">: </td>
                                 <td class="py-2 px-3">
-                                    <h5 class="lh-sm fw-normal text-800">085778428774</h5>
+                                    <h5 class="lh-sm fw-normal text-800">{{ auth()->user()->telp }}</h5>
                                 </td>
                             </tr>
                         </tbody>
@@ -165,12 +164,19 @@
                         </div>
                     </div>
                     <div class="row g-2 mb-5 mb-lg-0">
-                        <div class="col-md-8 col-lg-9 d-grid">
-                            <button class="btn btn-primary" type="submit">Pay</button>
-                        </div>
-                        <div class="col-md-4 col-lg-3 d-grid">
-                            <a href="{{ route('kamar') }}" class="btn btn-phoenix-secondary text-nowrap">Save Order and Exit</a>
-                        </div>
+                        <form method="POST" action="{{ route('checkout.store') }}" enctype="multipart/form-data">
+                            @csrf
+                            <!-- Isi form lainnya di sini -->
+                            <div class="col-md-8 col-lg-9 d-grid">
+                                <button class="btn btn-primary" type="submit" name="submit">Pay</button>
+                            </div>
+                        </form>
+                        {{-- <div class="col-md-4 col-lg-3 d-grid">
+                            <form action="{{ route('detailkamar', ['id']) }}" method="get">
+                                @csrf
+                                <button type="submit" class="btn btn-phoenix-secondary text-nowrap">Save Order and Exit</button>
+                            </form>
+                        </div> --}}
                     </div>
                 </form>
             </div>
@@ -185,10 +191,10 @@
                         <div class="border-dashed border-bottom mt-4">
                             <div class="ms-n2">
                                 <div class="row align-items-center mb-2 g-3">
+                                    @foreach ($kamar as $kamarItem)
                                     <div class="col-8 col-md-7 col-lg-8">
-                                        <div class="d-flex align-items-center"><img class="me-2 ms-1"
-                                                src="{{ asset('assets/img/kamar4.png') }}" width="40"
-                                                alt="" />
+                                        <div class="d-flex align-items-center">
+                                            <img class="me-2 ms-1" src="{{ asset('storage/kamar/' . $kamarItem->path_kamar) }}" width="40" alt="" />
                                             <h6 class="fw-semi-bold text-1000 lh-base">Luxury room</h6>
                                         </div>
                                     </div>
@@ -230,9 +236,10 @@
                     </div>
                 </div>
             </div>
+            @endforeach<!-- <section> close ============================-->
         </div>
     </div><!-- end of .container-->
-</section><!-- <section> close ============================-->
+</section>
 <!-- ============================================-->
 
 <div class="support-chat-container">

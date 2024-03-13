@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kamar;
 use App\Models\Kategori;
+use App\Models\Detailkamar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,28 +18,29 @@ class MenuKamarUserController extends Controller
         $user = auth()->user();
         $kategori = Kategori::all();
         $kamar = Kamar::query();
-    
+        $detailkamars = Detailkamar::where('kamar_id')->get();
+
         // Filter berdasarkan kategori
         $selectedCategories = $request->input('kategori');
-    
+
         if (!empty($selectedCategories)) {
             $kamar->whereIn('kategori_id', $selectedCategories);
         }
-    
+
         // Filter berdasarkan harga
         $minPrice = $request->input('min');
         $maxPrice = $request->input('max');
-    
+
         if (!empty($minPrice) && !empty($maxPrice)) {
             $kamar->whereBetween('harga', [intval($minPrice), intval($maxPrice)]);
         }
-    
+
         // Menetapkan kembali variabel $kamar setelah menerapkan filter
         $kamar = $kamar->get();
-    
-        return view('user.menukamaruser', compact('kamar', 'user', 'kategori', 'minPrice', 'maxPrice', 'selectedCategories'));
+
+        return view('user.menukamaruser', compact('kamar', 'user', 'kategori', 'minPrice', 'maxPrice', 'selectedCategories','detailkamars'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */

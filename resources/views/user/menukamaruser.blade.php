@@ -164,7 +164,7 @@
                                                                     @endfor
                                                                 @endif
                                                                 <span
-                                                                    class="text-500 fw-semi-bold ms-1">({{ $kamars->totalulasan }}
+                                                                    class="text-500 fw-semi-bold ms-1">({{ $kamars->detailkamars }}
                                                                     people rated)</span>
                                                             @else
                                                                 <p>There are no reviews</p>

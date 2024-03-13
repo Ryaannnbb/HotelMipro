@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('detailkamars', function (Blueprint $table) {
             $table->id();
+            $table->enum('rating', [1, 2, 3, 4, 5]);
+            $table->string('ulasan');
+            $table->string('foto');
+            $table->foreignId('kamar_id')->constrained('kamars')->restrictOnDelete();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
+
     }
 
     /**

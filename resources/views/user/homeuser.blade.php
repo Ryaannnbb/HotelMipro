@@ -52,15 +52,15 @@
                                         <p class="fs--1">
                                             @if (!is_null($product->rating))
                                             @if ($product->rating - floor($product->rating) < 0.5)
-                                            @for ($i = 0; $i < floor($product->rating); $i++)
-                                            <span class="fa fa-star text-warning"></span>
-                                            @endfor
+                                            @for ($i = 1; $i <= $product->rating; $i++)
+                                            <span style="color: #ffd700;">★</span>
+                                        @endfor
                                             @else
                                             @for ($i = 0; $i < ceil($product->rating); $i++)
                                             <span class="fa fa-star text-warning"></span>
                                             @endfor
                                             @endif
-                                            <span class="text-500 fw-semi-bold ms-1">({{ $product->totalulasan }} people rated)</span>
+                                            <span class="text-500 fw-semi-bold ms-1">({{ $product->detailkamar }} people rated)</span>
                                             @else
                                             <p>There are no reviews</p>
                                             @endif

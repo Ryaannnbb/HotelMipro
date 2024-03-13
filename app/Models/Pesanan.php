@@ -17,13 +17,13 @@ class Pesanan extends Model
         'tanggal_akhir',
         'fasilitas',
         'metode_pembayaran',
-        'adaulasan',
+        // 'adaulasan',
     ];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function room()
+    public function kamars()
     {
         return $this->belongsTo(Kamar::class);
     }

@@ -3,21 +3,22 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\DiskonController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Middleware\RedirectMiddleware;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\DetailKamarController;
+use App\Http\Controllers\UlasanKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
-use App\Http\Controllers\DetailKamarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,7 +109,10 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
     Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
     Route::get('/detailkamar{id}', [DetailKamarController::class, 'index'])->name('detailkamar');
+    Route::post('/detailkamar', [DetailKamarController::class, 'store'])->name('detailkamar.store');
+    Route::post('/detailkamar{id}', [DetailKamarController::class, 'show'])->name('detailkamar.show');
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
     // Route::controller(UlasanKamarController::class)->prefix('ulasankamar')->group(function () {
     //     Route::get('show/{id}', 'show')->name('ulasankamar');
