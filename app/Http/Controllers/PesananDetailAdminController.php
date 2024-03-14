@@ -2,21 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kamar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class DetailKamarController extends Controller
+class PesananDetailAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, $id)
+    public function index()
     {
         $user = auth()->user();
-        $kamar = Kamar::where('id', $id)->get();
-        return view('user.detailkamar', compact('user', 'kamar', 'id'));
+        $pesanan = DB::table('pesanans')
+        ->leftJoin('users', 'pesanans.user_id', '=', 'users.id')
+        ->leftJoin('kamars', 'pesanans.rooms_id', '=', 'kamars.id')
+        // ->leftJoin('diskons', 'pesanans.diskon_id', '=', 'diskons.id')
+        ->select(
+            'pesanans.*',
+            'users.name',
+            'kamars.nama_kamar'
+            // 'diskons.discount as diskon_discount'
+            )
+        // ->where('pesanans.user_id', $user->id)
+        ->get();
+        return view('admin.pesanan.index', compact('user', 'pesanan'));
     }
-
 
     /**
      * Show the form for creating a new resource.

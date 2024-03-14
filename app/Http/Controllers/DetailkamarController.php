@@ -14,9 +14,9 @@ class DetailKamarController extends Controller
     {
         $user = auth()->user();
         $kamar = Kamar::where('id', $id)->get();
-         return view('user.detailkamar', compact('user', 'kamar'));
+        return view('user.detailkamar', compact('user', 'kamar', 'id'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.

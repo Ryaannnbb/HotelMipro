@@ -19,6 +19,7 @@ use App\Http\Controllers\DetailKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\PesananDetailAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,12 +55,10 @@ Route::middleware([RedirectMiddleware::class])->group(function () {
     });
 });
 
-// USER
+// ADMIN
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/homeadmin', [KamarController::class, 'index'])->name('homeadmin');
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
-    Route::get('/pesanan/{id}', [PesananController::class, 'index'])->name('pesanan');
-    Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
 
 
     Route::controller(KamarController::class)->prefix('kamar')->group(function () {
@@ -104,15 +103,20 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::put('/edit/{id}', 'update')->name('diskon.update');
         Route::delete('destroy/{id}', 'destroy')->name('diskon.destroy');
     });
+    Route::controller(PesananDetailAdminController::class)->prefix('pesanandetail')->group(function () {
+        Route::get('/', 'index')->name('pesanandetail');
+    });
 
 });
 
-// ADMIN
+// USER
 Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
     Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
     Route::get('/detailkamar{id}', [DetailKamarController::class, 'index'])->name('detailkamar');
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::get('/pesanan/{id}', [PesananController::class, 'index'])->name('pesanan');
+    Route::post('/pesanan/store', [PesananController::class, 'store'])->name('pesanan.store');
+    Route::delete('/pesanan/destroy/{id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {
         Route::get('', 'index')->name('profil');

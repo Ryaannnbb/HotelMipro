@@ -359,9 +359,9 @@
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('#') ? 'active' : '' }}"
                         href="{{ route('usermenu') }}">Rooms</a></li>
-                <li class="nav-item" data-nav-item="data-nav-item"><a
+                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
-                        href="{{ route('checkout') }}">Checkout</a></li>
+                        href="{{ route('checkout') }}">Checkout</a></li> --}}
                 {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
                         href="{{ route('checkout') }}">Checkout</a></li> --}}

@@ -18,6 +18,9 @@ class Pesanan extends Model
         'fasilitas',
         'metode_pembayaran',
         'adaulasan',
+        'foto',
+        'rooms_id',
+        'user_id'
     ];
     public function user()
     {

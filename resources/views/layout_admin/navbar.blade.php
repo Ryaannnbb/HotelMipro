@@ -81,6 +81,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('pesanandetail') ? 'active' : '' }}"
+                        href="{{ route('pesanandetail') }}" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span data-feather="shopping-bag"></span>
+                            </span>
+                            <span class="nav-link-text">Orders</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <!-- label-->
                     <hr class="navbar-vertical-line" /><!-- parent pages-->
 

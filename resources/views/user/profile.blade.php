@@ -71,8 +71,7 @@
                                     <div>
                                         <h6 class="mb-2 text-800">Total Spent</h6>
                                         <h4 class="fs-1 text-1000 mb-0">Rp.
-                                            {{-- {{ number_format($totalpembayaran[0]->total, 0, ',', '.') }} --}}
-                                            20.000.000.000
+                                            {{ number_format($totalpembayaran[0]->total, 0, ',', '.') }}
                                         </h4>
                                     </div>
                                     @php
@@ -81,19 +80,17 @@
                                     <div class="text-end">
                                         <h6 class="mb-2 text-800 text-center">Last Order</h6>
                                         <h4 class="fs-1 text-1000 mb-0 text-center">
-                                            {{-- @if ($lastorder->count() > 0)
-                                                {{ Carbon::now()->diffInDays($lastorder[0]->created_at) }} Days Ago --}}
-                                            6 Days Ago
+                                            @if ($lastorder->count() > 0)
+                                                {{ Carbon::now()->diffInDays($lastorder[0]->created_at) }} Days Ago
                                         </h4>
-                                        {{-- @else
+                                        @else
                                         <h4 class="fs-1 text-1000 mb-0">User has never placed an order.</h4>
-                                        @endif --}}
+                                        @endif
                                     </div>
                                     <div class="text-end">
                                         <h6 class="mb-2 text-800">Total Orders</h6>
                                         <h4 class="fs-1 text-1000 mb-2">
-                                            {{-- {{ $totalorder }} --}}
-                                            98
+                                            {{ $totalorder }}
                                         </h4>
                                     </div>
                                 </div>
@@ -144,14 +141,13 @@
                                         data-bs-toggle="tab" href="#tab-orders" role="tab" aria-controls="tab-orders"
                                         aria-selected="true"><span class="fas fa-shopping-cart me-2"></span>Orders <span
                                             class="text-700 fw-normal">
-                                            {{-- ({{ $totalorder }}) --}}
-                                            67
+                                            ({{ $totalorder }})
                                         </span></a></li>
                                 <li class="nav-item"><a class="nav-link text-nowrap" id="personal-info-tab"
                                         data-bs-toggle="tab" href="#tab-personal-info" role="tab"
                                         aria-controls="tab-personal-info" aria-selected="true"><span
-                                            class="fas fa-user me-2"></span>Personal info</a></li>  
-                                         </ul>
+                                            class="fas fa-user me-2"></span>Personal info</a></li>
+                                        </ul>
                         </div>
                         <div class="tab-content" id="profileTabContent">
                             <div class="tab-pane fade show active" id="tab-orders" role="tabpanel"
@@ -165,15 +161,15 @@
                                                     <th class="sort white-space-nowrap align-middle text-center  "
                                                         scope="col" style="width:15%; min-width:120px">NO</th>
                                                     <th class="sort white-space-nowrap align-middle text-center  "
-                                                        scope="col" style="width:15%; min-width:140px">MY ORDER</th>
+                                                        scope="col" style="width:15%; min-width:140px">ROOM NAME</th>
                                                     <th class="sort align-middle  text-center" scope="col"
-                                                        style="width:15%; min-width:180px">STATUS</th>
-                                                    <th class="sort align-middle text-center" scope="col"
-                                                        style="width:20%; min-width:160px">DELIVERY METHOD</th>
+                                                        style="width:15%; min-width:180px">PAYMENT METHOD</th>
+                                                    {{-- <th class="sort align-middle text-center" scope="col"
+                                                        style="width:20%; min-width:160px">DELIVERY METHOD</th> --}}
                                                     <th class="sort align-middle  text-center" scope="col"
-                                                        style="width:15%; min-width:160px">SHIPPED DATE</th>
+                                                        style="width:15%; min-width:160px">START DATE</th>
                                                     <th class="sort align-middle  text-center" scope="col"
-                                                        style="width:15%; min-width:160px">RECEIVED DATE</th>
+                                                        style="width:15%; min-width:160px">END DATE</th>
                                                     <th class="sort align-middle text-center" scope="col"
                                                         style="width:15%; min-width:160px">TOTAL</th>
                                                     <th class="align-middle text-center" scope="col"
@@ -181,14 +177,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="list" id="profile-order-table-body text-center">
-                                                {{-- @if ($order->count() > 0)
-                                                    @php
+                                                @if ($pesanan->count() > 0)
+                                                    {{-- @php
                                                         $checkout_id = 0;
                                                         $no = 0;
                                                         $totalproduktiappesanan = [];
-                                                    @endphp
-                                                    @foreach ($order as $orders)
-                                                        @if ($orders->id != $checkout_id)
+                                                    @endphp --}}
+                                                    @foreach ($pesanan as $orders)
+                                                        {{-- @if ($orders->id != $checkout_id)
                                                             @php
                                                                 $checkout_id = $orders->id;
                                                                 $no += 1;
@@ -196,19 +192,22 @@
                                                             @endphp --}}
                                                 <tr class="position-static text-center">
                                                     <td class="align-middle review fs-0 mx-auto text-center">
-                                                        {{-- {{ $no }} --}}
+                                                        {{ $loop->iteration }}
                                                     </td>
                                                     <td class="align-middle review fs-0 text-center mx-auto">
-                                                        <button type="button" class="btn btn-link primary"
+                                                        {{-- <button type="button" class="btn btn-link primary"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#productDetailModal
-                                                                        {{-- {{ $orders->id }} --}}
+                                                                        {{ $orders->id }}
                                                                         ">
                                                             Detail
-                                                        </button>
+                                                        </button> --}}
+                                                        <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
+                                                            {{ $orders->nama_kamar }}
+                                                        </span>
                                                     </td>
                                                     <td class="align-middle white-space-nowrap py-0">
-                                                        <span class="badge-phoenix-success">Available</span>
+                                                        <span class="badge-phoenix-success">{{ $orders->metode_pembayaran }}</span>
                                                         {{-- <span
                                                                         class="badge badge-phoenix fs--2
                                                                 @if ($orders->status == 'pending') badge-phoenix-warning
@@ -224,32 +223,37 @@
                                                                         {{ $orders->status }}
                                                                     </span> --}}
                                                     </td>
-                                                    <td class="align-middle white-space-nowrap py-0">
+                                                    {{-- <td class="align-middle white-space-nowrap py-0">
                                                         <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
-                                                            {{-- {{ $orders->metode_pengiriman }} --}}
+                                                            {{ $orders->metode_pengiriman }}
                                                             Shopee Express
                                                         </span>
-                                                    </td>
+                                                    </td> --}}
                                                     <td class="produks align-middle ps-4">
                                                         <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
-                                                            {{-- {{ is_null($orders->tanggal_pengiriman) ? '-' : date('d F Y', strtotime($orders->tanggal_pengiriman)) }} --}}
+                                                            {{ is_null($orders->tanggal_awal) ? '-' : date('d F Y', strtotime($orders->tanggal_awal)) }}
                                                         </span>
                                                     </td>
                                                     <td class="produks align-middle ps-4">
                                                         <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
-                                                            {{-- {{ is_null($orders->tanggal_menerima) ? '-' : date('d F Y', strtotime($orders->tanggal_menerima)) }} --}}
-                                                            25 - January - 2020
+                                                            {{ is_null($orders->tanggal_akhir) ? '-' : date('d F Y', strtotime($orders->tanggal_akhir)) }}
                                                         </span>
                                                     </td>
                                                     <td class="produks align-middle">
                                                         <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">Rp.
-                                                            {{-- {{ number_format($orders->total, 0, ',', '.') }} --}}
-                                                            Rp. 30.500.000
+                                                            {{ number_format($orders->harga_pesanan, 0, ',', '.') }}
                                                         </span>
                                                     </td>
                                                     <td class="produks align-middle ">
-                                                        {{-- @if ($orders->status == 'shipped') --}}
-                                                        {{-- <form action="{{ route('diterima', $orders->id) }}">
+                                                        <form action="{{ route('pesanan.destroy', $orders->id) }}" method="POST" class="hapus-form">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button type="submit" class="btn btn-link primary">
+                                                                Cancel
+                                                            </button>
+                                                        </form>
+                                                        {{-- @if ($orders->status == 'shipped')
+                                                        <form action="{{ route('diterima', $orders->id) }}">
                                                                             @csrf
                                                                             @method('put')
                                                                             <input type="hidden" name="status" value="{{ $orders->status }}">
@@ -257,19 +261,19 @@
                                                                                 class="btn btn-link dropdown-item text-primary">
                                                                                 Diterima
                                                                             </button>
-                                                                        </form> --}}
+                                                                        </form>
                                                         <a class="btn btn-link dropdown-item text-primary"
                                                             href="#">Accepted</a>
-                                                        {{-- @elseif ($orders->status == 'reject') --}}
+                                                        @elseif ($orders->status == 'reject')
                                                         <button type="button" class="btn btn-link"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#show-reject-message
-                                                                            {{-- {{ $orders->id }} --}}
+                                                                            {{ $orders->id }}
                                                                             ">Reject
                                                             Message</button>
                                                         <div class="modal fade"
                                                             id="show-reject-message
-                                                                            {{-- {{ $orders->id }} --}}
+                                                                            {{ $orders->id }}
                                                                             "
                                                             tabindex="-1" aria-labelledby="rejectMessageModalLabel"
                                                             aria-hidden="true">
@@ -286,7 +290,7 @@
                                                                     <div class="modal-body">
                                                                         <div class="w-100 fs-2">
                                                                             <p style="overflow-wrap: break-word;">
-                                                                                {{-- {{ $orders->reject_message }} --}}
+                                                                                {{ $orders->reject_message }}
                                                                                 soasik
                                                                             </p>
                                                                         </div>
@@ -300,16 +304,16 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{-- @endif --}}
+                                                        @endif --}}
                                                     </td>
                                                 </tr>
-                                                {{-- @else
-                                                        @php
+                                                {{-- @else --}}
+                                                        {{-- @php
                                                             $totalproduktiappesanan[$orders->id] += 1;
-                                                        @endphp
-                                                        @endif
+                                                        @endphp --}}
+                                                        {{-- @endif --}}
                                                     @endforeach
-                                                @endif --}}
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -473,9 +477,8 @@
     </main><!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
-@endsection
 
-<script>
+    <script>
     function previewImage() {
         var input = document.getElementById('avatarFile');
         var preview = document.getElementById('avatarPreview');
@@ -498,3 +501,23 @@
         }
     }
 </script>
+<script>
+    $('.hapus').click(function() {
+        var form = $(this).closest('form');
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will delete this product. This action cannot be undone!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, accept!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+</script>
+@endsection
