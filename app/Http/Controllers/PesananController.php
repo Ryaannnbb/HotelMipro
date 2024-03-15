@@ -31,15 +31,16 @@ class PesananController extends Controller
         $user = auth()->user();
         $kamars = Kamar::findOrFail($request->id);
         $kategori_id = $kamars->kategori_id;
-        $kategori = Kategori::find($request->id);
+        // $kategori = Kategori::find($request->id);
+        // dd($kategori_id);
         $fasilitas = Fasilitas::all();
         $bank = Pembayaran::where('metode_pembayaran', 'bank')->get();
         $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
         $diskons = DB::table('diskons')
-                ->select('potongan_harga', 'kategori_id', 'akhir_berlaku')
+                ->select('potongan_harga', 'kategori_id', 'akhir_berlaku','jenis')
                 ->where('kategori_id', $kategori_id)
                 ->first();
-        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars', 'diskons','kategori'));
+        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars', 'diskons','kategori_id'));
 
         // dd($kamars);
 
@@ -68,66 +69,66 @@ class PesananController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $rules = [
-            'tanggal_awal' => [
-                'required',
-                'date',
-                'before_or_equal:tanggal_akhir',
-                Rule::unique('pesanans')->where(function ($query) use ($request) {
-                    return $query->where('rooms_id', $request->id_kamar)
-                        ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
-                        ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
-                }),
-            ],
-            'tanggal_akhir' => [
-                'required',
-                'date',
-                'after_or_equal:tanggal_awal',
-                Rule::unique('pesanans')->where(function ($query) use ($request) {
-                    return $query->where('rooms_id', $request->id_kamar)
-                                ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
-                                ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
-                }),
-            ],
-            'metode_pembayaran' => 'required|string',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
-            'nama_fasilitas' => 'required|array',
-            'nama_fasilitas.*' => 'exists:fasilitas,id',
-            'kategori_id' => 'nullable|exists:diskons,id',
-        ];
-        $message = [
-            'tanggal_awal.required' => 'Tanggal awal harus diisi.',
-            'tanggal_awal.date' => 'Tanggal awal harus dalam format tanggal yang valid.',
-            'tanggal_awal.before_or_equal' => 'Tanggal awal tidak boleh lebih dari tanggal akhir.',
-            'tanggal_awal.after_or_equal' => 'Tanggal awal tidak boleh kurang dari tanggal sekarang.',
-            'tanggal_awal.unique' => 'The selected date range is already booked. Please choose another date range.',
-            'tanggal_akhir.required' => 'Tanggal akhir harus diisi.',
-            'tanggal_akhir.date' => 'Tanggal akhir harus dalam format tanggal yang valid.',
-            'tanggal_akhir.after_or_equal' => 'Tanggal akhir harus setelah atau sama dengan tanggal awal.',
-            'tanggal_akhir.unique' => 'The selected date range is already booked. Please choose another date range.',
-            'metode_pembayaran.required' => 'Metode pembayaran harus diisi.',
-            'metode_pembayaran.string' => 'Metode pembayaran harus berupa teks.',
-            'foto.required' => 'The photo field is required.',
-            'foto.image' => 'The photo must be an image.',
-            'foto.mimes' => 'The photo must be a file of type: jpeg, png, jpg, gif.',
-            'foto.max' => 'The photo may not be greater than 10 mb.',
-            'nama_fasilitas.required' => 'The facility field is required.',
-            'nama_fasilitas.array' => 'The facility field must be an array.',
-            'nama_fasilitas.*.exists' => 'Selected facility is invalid.',
-        ];
+        // $rules = [
+        //     'tanggal_awal' => [
+        //         'required',
+        //         'date',
+        //         'before_or_equal:tanggal_akhir',
+        //         Rule::unique('pesanans')->where(function ($query) use ($request) {
+        //             return $query->where('rooms_id', $request->id_kamar)
+        //                 ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
+        //                 ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
+        //         }),
+        //     ],
+        //     'tanggal_akhir' => [
+        //         'required',
+        //         'date',
+        //         'after_or_equal:tanggal_awal',
+        //         Rule::unique('pesanans')->where(function ($query) use ($request) {
+        //             return $query->where('rooms_id', $request->id_kamar)
+        //                         ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
+        //                         ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
+        //         }),
+        //     ],
+        //     'metode_pembayaran' => 'required|string',
+        //     'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
+        //     'nama_fasilitas' => 'required|array',
+        //     'nama_fasilitas.*' => 'exists:fasilitas,id',
+        //     'kategori_id' => 'nullable|exists:diskons,id',
+        // ];
+        // $message = [
+        //     'tanggal_awal.required' => 'Tanggal awal harus diisi.',
+        //     'tanggal_awal.date' => 'Tanggal awal harus dalam format tanggal yang valid.',
+        //     'tanggal_awal.before_or_equal' => 'Tanggal awal tidak boleh lebih dari tanggal akhir.',
+        //     'tanggal_awal.after_or_equal' => 'Tanggal awal tidak boleh kurang dari tanggal sekarang.',
+        //     'tanggal_awal.unique' => 'The selected date range is already booked. Please choose another date range.',
+        //     'tanggal_akhir.required' => 'Tanggal akhir harus diisi.',
+        //     'tanggal_akhir.date' => 'Tanggal akhir harus dalam format tanggal yang valid.',
+        //     'tanggal_akhir.after_or_equal' => 'Tanggal akhir harus setelah atau sama dengan tanggal awal.',
+        //     'tanggal_akhir.unique' => 'The selected date range is already booked. Please choose another date range.',
+        //     'metode_pembayaran.required' => 'Metode pembayaran harus diisi.',
+        //     'metode_pembayaran.string' => 'Metode pembayaran harus berupa teks.',
+        //     'foto.required' => 'The photo field is required.',
+        //     'foto.image' => 'The photo must be an image.',
+        //     'foto.mimes' => 'The photo must be a file of type: jpeg, png, jpg, gif.',
+        //     'foto.max' => 'The photo may not be greater than 10 mb.',
+        //     'nama_fasilitas.required' => 'The facility field is required.',
+        //     'nama_fasilitas.array' => 'The facility field must be an array.',
+        //     'nama_fasilitas.*.exists' => 'Selected facility is invalid.',
+        // ];
 
-        if($request->metode_pembayaran == 'bank') {
-            $rules['tujuan_bank'] = 'required';
-        } else if($request->metode_pembayaran == 'e-wallet') {
-            $rules['tujuan_ewallet'] = 'required';
-        }
-
-        // $kamar = Kamar::findOrFail($request->id_kamar);
-        // if ($kamar->status == 'booked') {
-        //     return redirect()->route('usermenu')->with("error", "The selected room is already booked.");
+        // if($request->metode_pembayaran == 'bank') {
+        //     $rules['tujuan_bank'] = 'required';
+        // } else if($request->metode_pembayaran == 'e-wallet') {
+        //     $rules['tujuan_ewallet'] = 'required';
         // }
 
-        $request->validate($rules, $message);
+        // // $kamar = Kamar::findOrFail($request->id_kamar);
+        // // if ($kamar->status == 'booked') {
+        // //     return redirect()->route('usermenu')->with("error", "The selected room is already booked.");
+        // // }
+
+        // $request->validate($rules, $message);
 
         $usedeadline = true;
 
@@ -159,15 +160,23 @@ class PesananController extends Controller
         $kategori_id = $kategori_id ?? null; 
         // Set nilai default sebagai null jika 'kategori_id' tidak ada
         $diskon_amount = 0;
+
         if ($kategori_id) {
             $diskon = Diskon::find($kategori_id);
         
             if ($diskon) {
-                $diskon_amount = $diskon->potongan_harga;
-                $totalharga = $totalinap * $tarif - $diskon_amount;
-            }
+                if ($diskon->jenis == 'percentage') {
+                    // Jika jenis diskon adalah persentase, hitung diskon berdasarkan persentase
+                    $diskon_amount = ($totalinap * $tarif * $diskon->potongan_harga) / 100;
+                } else {
+                    
+                    $totalharga = $totalinap * $tarif - $diskon->potongan_harga;
+
+                }
         
+            }
         }
+        
         
         $pesanan = new Pesanan;
         $pesanan->email = $request->email;

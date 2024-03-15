@@ -19,7 +19,8 @@ class DetailKamarController extends Controller
         $pesanan = Pesanan::find($id);
         $diskons = DB::table('diskons')
             ->leftJoin('diskons as diskon', 'diskon.id', '=',  'diskons.id')
-            ->select('diskon.potongan_harga', 'diskon.kategori_id', 'diskon.akhir_berlaku')
+            ->select('diskon.jenis', 'diskon.potongan_harga', 'diskon.kategori_id', 'diskon.akhir_berlaku')
+            ->groupBy('diskon.jenis', 'diskon.potongan_harga', 'diskon.kategori_id', 'diskon.akhir_berlaku')
             ->get();
         // $diskonsArray = $diskons->toArray();
         // $kategoriIds = [];
