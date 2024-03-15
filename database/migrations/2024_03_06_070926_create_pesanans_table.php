@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('email');
             $table->string('username');
             $table->string('telp');
+            $table->foreignId('user_id')->constrained('users')->restrictOnDelete();
             $table->dateTime('tanggal_awal');
             $table->dateTime('tanggal_akhir');
             $table->string('metode_pembayaran');
+            $table->string('invoice');
             $table->foreignId('rooms_id')->constrained('kamars')->restrictOnDelete();
             $table->bigInteger('harga_pesanan');
             $table->enum('adaulasan', ['true', 'false'])->default('false');

@@ -17,7 +17,10 @@ class Pesanan extends Model
         'tanggal_akhir',
         'fasilitas',
         'metode_pembayaran',
-        // 'adaulasan',
+        'adaulasan',
+        'foto',
+        'rooms_id',
+        'user_id'
     ];
     public function user()
     {

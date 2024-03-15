@@ -197,10 +197,10 @@
                                 </div>
                                 <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Select
                                     facility</label>
-                                    <select class="form-select @error('nama_fasilitas') is-invalid @enderror" id="selectedFacilities" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]"
+                                <select class="form-select @error('nama_fasilitas') is-invalid @enderror"
                                     id="organizerMultiple" data-choices="data-choices" multiple="multiple"
                                     data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
-                                    <option value="fasilitas_id" data-price="harga_numerik">Nama Fasilitas</option>
+                                    <option value="">Select Facility...</option>
                                     @foreach ($fasilitas as $fasilitasd)
                                         <option value="{{ $fasilitasd->id }}" @selected(!is_null(@old('nama_fasilitas')) ? in_array($fasilitasd->id, @old('nama_fasilitas')) : '')>
                                             {{ $fasilitasd->nama_fasilitas }}

@@ -1,6 +1,24 @@
 @extends('layout_user.app')
 @section('content')
-    @include('sweetalert.sweetalert')
+    {{-- @include('sweetalert.sweetalert') --}}
+    @if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: "{{ session('error') }}"
+        });
+    </script>
+    @endif
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: "{{ session('success') }}"
+        });
+    </script>
+    @endif
     <style>
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {

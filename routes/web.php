@@ -20,6 +20,7 @@ use App\Http\Controllers\UlasanKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\PesananDetailAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,11 +56,10 @@ Route::middleware([RedirectMiddleware::class])->group(function () {
     });
 });
 
-// USER
+// ADMIN
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/homeadmin', [KamarController::class, 'index'])->name('homeadmin');
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
-
 
 
     Route::controller(KamarController::class)->prefix('kamar')->group(function () {
@@ -104,10 +104,13 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::put('/edit/{id}', 'update')->name('diskon.update');
         Route::delete('destroy/{id}', 'destroy')->name('diskon.destroy');
     });
+    Route::controller(PesananDetailAdminController::class)->prefix('pesanandetail')->group(function () {
+        Route::get('/', 'index')->name('pesanandetail');
+    });
 
 });
 
-// ADMIN
+// USER
 Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
     Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
