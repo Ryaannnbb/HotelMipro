@@ -68,15 +68,19 @@
                                                     }
 
                                                 @endphp
-                                                <div class="d-flex flex-wrap align-items-center">
-                                                    <h1 style="font-size: 21px;">
-                                                        @if ($diskon_tersedia && \Carbon\Carbon::now() <= \Carbon\Carbon::parse($diskon->akhir_berlaku))
-                                                            Rp.{{ number_format($harga_setelah_diskon, 0, ',', '.') }}
-                                                            <span
-                                                                class="text-body-quaternary text-decoration-line-through fs-0 mb-0 me-3 style="opacity:
-                                                                10;">
-                                                                Rp.{{ number_format($harga_awal, 0, ',', '.') }}
-                                                            </span>
+                                               <div class="d-flex flex-wrap align-items-center">
+                                                <h1 style="font-size: 30px;">
+                                                    @if ($diskon_tersedia && \Carbon\Carbon::now() <= \Carbon\Carbon::parse($diskon->akhir_berlaku))
+                                                        Rp.{{ number_format($harga_setelah_diskon, 0, ',', '.') }}
+                                                        <span class="text-body-quaternary text-decoration-line-through fs-1 mb-0 me-3">
+                                                            Rp.{{ number_format($harga_awal, 0, ',', '.') }}
+                                                        </span>
+                                                    @else
+                                                        Rp.{{ number_format($harga_awal, 0, ',', '.') }}
+                                                    @endif
+                                                    @if ($diskons && property_exists($diskons, 'potongan_harga') && $diskons->kategori_id == $kamars->first()->kategori_id)
+                                                        @if ($diskon->potongan_harga > 100)
+                                                            {{-- Rp.{{ number_format($diskon->potongan_harga, 0, ',', '.') }} --}}
                                                         @else
                                                             Rp.{{ number_format($harga_awal, 0, ',', '.') }}
                                                         @endif
@@ -101,7 +105,17 @@
                                                     @else
                                                         Discount has expired
                                                     @endif
-                                                </p>
+                                                </h1>
+                                            </div>
+                                            <p class="text-success font-size: 24px;">{{ $detail->status }}</p>
+                                            <p class="mb-2 text-body-secondary"><strong class="text-body-highlight" style="font-size: 14px;">{{ $detail->deskripsi }}</strong></p>
+                                            <p class="text-danger-dark fw-bold mb-5 mb-lg-0">
+                                                @if ($diskon_tersedia && \Carbon\Carbon::now() <= \Carbon\Carbon::parse($diskon->akhir_berlaku))
+                                                    Discount expires {{ \Carbon\Carbon::parse($diskon->akhir_berlaku)->diffForHumans(\Carbon\Carbon::now(), true) }}
+                                                @else
+                                                    Discount has expired
+                                                @endif
+                                            </p>
                                             @endforeach
                                             {{-- <p class="text-success font-size: 24px;">{{ $detail->status }}</p>
                                             <p class="mb-2 text-body-secondary"><strong class="text-body-highlight"

@@ -302,9 +302,8 @@
                                                                 src="{{ asset('storage/' . $user->profile) }}"
                                                                 alt="" />
                                                         @else
-                                                            <!-- Tampilkan foto default jika tidak ada foto profil -->
                                                             <img class="rounded-circle" id="avatarPreview"
-                                                                src="{{ asset('assets/storage/apple.jpg') }}"
+                                                                src="{{ asset('assets/img/hotel10.png') }}"
                                                                 alt="Default Avatar" />
                                                         @endif
                                                     </div>
@@ -360,8 +359,8 @@
                         class="nav-link {{ request()->routeIs('#') ? 'active' : '' }}"
                         href="{{ route('usermenu') }}">Rooms</a></li>
                 {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
-                        class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
-                        href="{{ route('checkout') }}">Checkout</a></li> --}}
+                        class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}"
+                        href="{{ route('pesanan') }}">Checkout</a></li> --}}
                 {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
                         href="{{ route('checkout') }}">Checkout</a></li> --}}
