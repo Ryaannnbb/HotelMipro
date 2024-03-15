@@ -335,6 +335,8 @@
                                     </th>
                                     <th class="sort text-center white-space-nowrap align-middle ps-4" scope="col"
                                         style="width:70%;">CATEGORY NAME</th>
+                                        {{-- <th class="sort text-center white-space-nowrap ps-4" scope="col"
+                                        >BEST PRICE</th> --}}
 
                                     <th class="sort text-end align-middle pe-0 ps-4" scope="col" style="width: 20%">
                                         ACTION</th>
@@ -348,6 +350,10 @@
                                             <td class="text-center category align-middle ps-4">
                                                 <span></span>{{ $kategoris->nama_kategori }}
                                             </td>
+
+                                            {{-- <td class="text-center category align-middle ps-4">
+                                                <span></span>{{ $kategoris->harga }}
+                                            </td> --}}
                                             <td
                                                 class="align-middle white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger">
                                                 <div class="font-sans-serif btn-reveal-trigger position-static"><button

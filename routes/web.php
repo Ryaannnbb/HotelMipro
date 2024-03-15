@@ -59,8 +59,7 @@ Route::middleware([RedirectMiddleware::class])->group(function () {
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/homeadmin', [KamarController::class, 'index'])->name('homeadmin');
     Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
-    Route::get('/pesanan/{id}', [PesananController::class, 'index'])->name('pesanan');
-    Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
+
 
 
     Route::controller(KamarController::class)->prefix('kamar')->group(function () {
@@ -113,14 +112,13 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
     Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
     Route::get('/detailkamar{id}', [DetailKamarController::class, 'index'])->name('detailkamar');
+    Route::get('/pesanan/{id}', [PesananController::class, 'index'])->name('pesanan');
+    Route::post('/pesanan/store', [PesananController::class, 'store'])->name('pesanan.store');
+    Route::post('/pesanan/update', [PesananController::class, 'update'])->name('pesanan.update');
     Route::post('/detailkamar', [DetailKamarController::class, 'store'])->name('detailkamar.store');
     Route::post('/detailkamar{id}', [DetailKamarController::class, 'show'])->name('detailkamar.show');
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-
-    // Route::controller(UlasanKamarController::class)->prefix('ulasankamar')->group(function () {
-    //     Route::get('show/{id}', 'show')->name('ulasankamar');
-    //     Route::post('store', 'store')->name('ulasankamar.store');
+        Route::delete('/detailkamar/{id}', [DetailKamarController::class, 'destroy'])->name('detailkamar.delete');
+        Route::post('/update-facilities-price', [PesananController::class, 'updateFacilitiesPrice'])->name('updateFacilitiesPrice');
     // });
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {

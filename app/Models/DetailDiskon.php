@@ -11,13 +11,13 @@ class DetailDiskon extends Model
     use HasFactory;
     protected $table = 'detail_diskons';
     protected $fillable =[
-        'rooms_id',
+        'kategori_id',
         'diskon_id',
         'nominal_potongan',
     ];
-    public function room(): BelongsTo
+    public function kategori(): BelongsTo
     {
-        return $this->belongsTo(Kamar::class);
+        return $this->belongsTo(Kategori::class);
     }
     public function diskon(): BelongsTo
     {

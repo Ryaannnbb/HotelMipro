@@ -11,7 +11,6 @@ class Detailkamar extends Model
     protected $table = 'detailkamars';
 
     protected $fillable = [
-        'id',
         'rating',
         'ulasan',
         'foto',

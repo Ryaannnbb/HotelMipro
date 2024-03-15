@@ -178,7 +178,7 @@
                             </table>
                         </div>
                         </div>
-                
+
                         </thead>
                         {{-- <tbody class="list" id="products-table-body text-center"> --}}
 
@@ -295,7 +295,7 @@
                         </table>
                     </div>
 
-                    <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
+                    {{-- <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
                             <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info">
                             </p><a class="fw-semi-bold" href="#!" data-list-view="*">View all<span
@@ -308,8 +308,8 @@
                             <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
                                 data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
                         </div>
-                    </div>
-                    <hr class="hr">
+                    </div> --}}
+                    {{-- <hr class="hr"> --}}
 
                     <style>
                         .hr {

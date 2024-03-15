@@ -23,7 +23,7 @@ class Pesanan extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function kamars()
+    public function room()
     {
         return $this->belongsTo(Kamar::class);
     }

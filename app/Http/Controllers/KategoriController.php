@@ -33,9 +33,12 @@ class KategoriController extends Controller
     {
         $request->validate([
             'nama_kategori' => 'required|string|max:255', // Tambahkan aturan lain sesuai kebutuhan
+            // 'harga' => 'required|numeric|min:0', // Menyatakan bahwa 'harga' wajib diisi, merupakan angka, dan minimal bernilai 0.
         ], [
             'nama_kategori.required' => 'Category name is required.',
-            // 'nama_kategori.string' => 'Category Name must be text.',
+            'harga.required' => 'Price is required.', // Pesan kesalahan jika 'harga' tidak diisi.
+    // 'harga.numeric' => 'Price must be a number.', // Pesan kesalahan jika 'harga' bukan merupakan angka.
+    // 'harga.min' => 'Price must be at least :min.', // Pesan kesalahan jika 'harga' kurang dari nilai minimal yang diizinkan.
         ]);
 
         Kategori::create($request->all());

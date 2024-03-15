@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('pesanan_id')->constrained('pesanans')->restrictOnDelete();
             $table->foreignId('fasilitas_id')->constrained('fasilitas')->restrictOnDelete();
             $table->integer('jumlah_pemakaian');
-            $table->bigInteger('harga_pemakaian');
-            $table->date('tanggal_pemakaian');
+            $table->decimal('harga_pemakaian', 10, 2); // 10 digit total, 2 digit di belakang koma
+            // $table->date('tanggal_pemakaian');
             $table->timestamps();
         });
     }

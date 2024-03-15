@@ -15,7 +15,7 @@ class PemakaianFasilitas extends Model
         'fasilitas_id',
         'jumlah_pemakaian',
         'harga_pemakaian',
-        'tanggal_pemakaian',
+        // 'tanggal_pemakaian',
     ];
     public function pesanan(): BelongsTo
     {

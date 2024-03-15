@@ -41,19 +41,21 @@
                             </a>
                             <div class="collapse show" id="collapseDevice">
                                 <div class="mb-2">
-                                    {{-- @foreach ($kategori as $kategoris)
+                                    @foreach ($kategori as $kategoris)
                                         <div class="form-check mb-0">
-                                            <input class="form-check-input mt-0" id="flexCheck{{ $kategoris->id }}"
-                                                type="checkbox" name="device[]" value="{{ $kategoris->id }}"
-                                                {{ in_array($kategoris->id, $devices) ? 'checked' : '' }}>
+                                            <input class="form-check-input mt-0" id="kategori{{ $kategoris->id }}"
+                                                type="checkbox" name="kategori[]" value="{{ $kategoris->id }}"
+                                                onchange="showSelectedCategories()"
+                                                {{ is_array($selectedCategories) && in_array($kategoris->id, $selectedCategories) ? 'checked' : '' }}>
                                             <label class="form-check-label d-block lh-sm fs-0 text-900 fw-normal mb-0"
-                                                for="flexCheck{{ $kategoris->id }}">
+                                                for="kategori{{ $kategoris->id }}">
                                                 {{ $kategoris->nama_kategori }}
                                             </label>
                                         </div>
-                                    @endforeach --}}
+                                    @endforeach
                                 </div>
                             </div>
+
                             <a class="btn px-0 d-block collapse-indicator" data-bs-toggle="collapse"
                                 href="#collapsePriceRange" role="button" aria-expanded="true"
                                 aria-controls="collapsePriceRange">
@@ -64,12 +66,12 @@
                             </a>
                             <div class="collapse show" id="collapsePriceRange">
                                 <div class="d-flex justify-content-between mb-3">
-                                    {{-- <div class="input-group me-2">
+                                    <div class="input-group me-2">
                                         <input class="form-control" type="number" aria-label="First name" placeholder="Min"
                                             name="min" value="{{ old('min', $minPrice) }}">
                                         <input class="form-control" type="number" aria-label="Last name" placeholder="Max"
                                             name="max" value="{{ old('max', $maxPrice) }}">
-                                    </div> --}}
+                                    </div>
                                     <button class="btn btn-phoenix-primary border-300 px-3" type="submit">Go</button>
                                 </div>
                             </div>
@@ -150,10 +152,10 @@
                                                         <h6 class="card-title mb-2 lh-sm line-clamp-3 product-name">
                                                             {{ Str::limit($kamars->nama_kamar, 33, $end = '...') }}</h6>
                                                         </a>
-                                                        <p class="fs--1 text-1000 fw-bold mb-2">Stock {{ $kamars->stok }}
-                                                        </p>
-                                                        <p class="fs--1">
-                                                            @if (!is_null($kamars->rating))
+                                                        <p  class="badge badge-phoenix fs-10 badge-phoenix-success">{{ $kamars->status }}</p>
+
+                                                        {{-- <p class="fs--1"> --}}
+                                                            {{-- @if (!is_null($kamars->rating))
                                                                 @if ($kamars->rating - floor($kamars->rating) < 0.5)
                                                                     @for ($i = 0; $i < floor($kamars->rating); $i++)
                                                                         <span class="fa fa-star text-warning"></span>
@@ -168,7 +170,7 @@
                                                                     people rated)</span>
                                                             @else
                                                                 <p>There are no reviews</p>
-                                                            @endif
+                                                            @endif --}}
                                                         </p>
                                                     </div>
                                                 </div>

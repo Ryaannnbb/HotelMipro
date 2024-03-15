@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kamar;
+use App\Models\Detailkamar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,12 +12,26 @@ class HomeUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
-        $kamar = Kamar::all();
-        return view('user.homeuser', compact('kamar', 'user'));
+        $kamars = Kamar::all();
+
+        // Inisialisasi array untuk menyimpan rating dan total ulasan untuk setiap kamar
+        $ratings = [];
+        $totalUlasans = [];
+
+        // Hitung rating rata-rata dan total ulasan untuk setiap kamar
+        foreach ($kamars as $kamar) {
+            $detailkamars = Detailkamar::where('kamar_id', $kamar->id)->get();
+            $ratings[$kamar->id] = $detailkamars->avg('rating');
+            $totalUlasans[$kamar->id] = $detailkamars->count();
+        }
+
+        return view('user.homeuser', compact('kamars', 'user', 'ratings', 'totalUlasans'));
     }
+
+
 
     public function Detailkamar(Request $request, $id)
     {
@@ -31,6 +46,33 @@ class HomeUserController extends Controller
         ->groupBy('.id', 'nama_kamar','path_kamar','harga','deskripsi','status',) // sertakan semua kolom non-agregasi di sini
         ->get();
         return view('user.kamardetail', compact('Kamars', 'user'));
+    }
+    public function homeuser()
+    {
+        $kamars = DB::table('kamars')
+            ->leftJoin('detailkamars', 'kamars.id', '=', 'detailkamars.kamar_id')
+            ->select(
+                'kamars.id',
+                'kamars.nama_kamar',
+                'kamars.path_kamar',
+                'kamars.harga',
+                'kamars.deskripsi',
+                'kamars.status',
+                DB::raw('avg(detailkamars.rating) AS rating'),
+                DB::raw('count(detailkamars.id) AS totalulasan'))
+            ->groupBy(
+                'kamars.id',
+                'kamars.nama_kamar',
+                'kamars.path_kamar',
+                'kamars.harga',
+                'kamars.deskripsi',
+                'kamars.status')
+            ->groupBy('detailkamars.kamar_id') // Tambahkan pengelompokan berdasarkan kamar_id
+            ->get();
+
+        $user = auth()->user();
+
+        return view('user.homeuser', compact('kamars', 'user'));
     }
 
 
