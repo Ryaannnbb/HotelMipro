@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         // event(new Registered($user));
         // Auth::login($user);
-        return redirect()->route('/login')->with('success', 'Your registration was successful');
+        return redirect()->route('login')->with('success', 'Your registration was successful');
     }
 
     public function proseslogin(Request $request)

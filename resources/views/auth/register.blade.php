@@ -132,7 +132,8 @@
                                             <h3 class="text-1000">Sign Up</h3>
                                             <p class="text-700">Create your account today</p>
                                         </div>
-                                        <form method="GET" action="{{ route('register') }}">
+
+                                        <form method="POST" action="{{ route('Createregister') }}">
                                             @csrf
 
                                             <div class="mb-3 text-start"><label class="form-label"
@@ -189,8 +190,7 @@
                                                     </button>
                                                 </label>
                                             </div>
-                                            <a href="{{ route('login') }}" class="btn btn-primary w-100 mb-3">Sign
-                                                up</a>
+                                            <button class="btn btn-primary w-100 mb-3">Sign up</button>
                                             <div class="text-center"><a class="fs--1 fw-bold"
                                                     href="{{ route('login') }}">Sign in to an existing account</a>
                                             </div>

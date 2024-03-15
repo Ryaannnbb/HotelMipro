@@ -66,7 +66,7 @@
                                                     @else
                                                         Rp.{{ number_format($harga_awal, 0, ',', '.') }}
                                                     @endif
-                                                    @if ($diskon && property_exists($diskon, 'potongan_harga') && $diskon->kategori_id == $kamars->first()->kategori_id)
+                                                    @if ($diskons && property_exists($diskons, 'potongan_harga') && $diskons->kategori_id == $kamars->first()->kategori_id)
                                                         @if ($diskon->potongan_harga > 100)
                                                             {{-- Rp.{{ number_format($diskon->potongan_harga, 0, ',', '.') }} --}}
                                                         @else
@@ -83,7 +83,7 @@
                                                 @else
                                                     Discount has expired
                                                 @endif
-                                            </p>                                            
+                                            </p>
                                             @endforeach
                                             {{-- <p class="text-success font-size: 24px;">{{ $detail->status }}</p>
                                             <p class="mb-2 text-body-secondary"><strong class="text-body-highlight"
