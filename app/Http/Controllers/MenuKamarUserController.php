@@ -25,7 +25,7 @@ class MenuKamarUserController extends Controller
             $kamar->whereIn('kategori_id', $selectedCategories);
         }
     
-        // Filter berdasarkan harga
+        // Filter berdasarkan harga     
         $minPrice = $request->input('min');
         $maxPrice = $request->input('max');
     

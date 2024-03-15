@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\User;
 use App\Models\Kamar;
+use App\Models\Diskon;
 use App\Models\Pesanan;
 use App\Models\Fasilitas;
 use App\Models\Pembayaran;
@@ -13,6 +14,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Helpers\DaysCountHelper;
+use App\Models\Kategori;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -27,10 +30,18 @@ class PesananController extends Controller
     {
         $user = auth()->user();
         $kamars = Kamar::findOrFail($request->id);
+        $kategori_id = $kamars->kategori_id;
+        $kategori = Kategori::find($request->id);
         $fasilitas = Fasilitas::all();
         $bank = Pembayaran::where('metode_pembayaran', 'bank')->get();
         $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
-        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars'));
+        $diskons = DB::table('diskons')
+                ->select('potongan_harga', 'kategori_id', 'akhir_berlaku')
+                ->where('kategori_id', $kategori_id)
+                ->first();
+        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars', 'diskons','kategori'));
+
+        // dd($kamars);
 
         // $userID = Auth::id();
         // $user = User::find($userID);
@@ -64,8 +75,8 @@ class PesananController extends Controller
                 'before_or_equal:tanggal_akhir',
                 Rule::unique('pesanans')->where(function ($query) use ($request) {
                     return $query->where('rooms_id', $request->id_kamar)
-                                ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
-                                ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
+                        ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
+                        ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
                 }),
             ],
             'tanggal_akhir' => [
@@ -82,6 +93,7 @@ class PesananController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
             'nama_fasilitas' => 'required|array',
             'nama_fasilitas.*' => 'exists:fasilitas,id',
+            'kategori_id' => 'nullable|exists:diskons,id',
         ];
         $message = [
             'tanggal_awal.required' => 'Tanggal awal harus diisi.',
@@ -121,42 +133,68 @@ class PesananController extends Controller
 
         $user = $request->user_id;
         $kamar = $request->id_kamar;
-        $tarif = Kamar::find($kamar)->harga;
+        $tarif = Kamar::find($kamar)->harga; 
         $file = $request->file('foto');
+        $kategori = $request->kategori_id;
+        // $tglawal = $request->tanggal_awal;
+        // $tglakhir = $request->tanggal_akhir;
         $tglawal = Carbon::parse($request->tanggal_awal)->format('Y-m-d H:i');
         $tglakhir = Carbon::parse($request->tanggal_akhir)->format('Y-m-d H:i');
         $jedacheckout = DaysCountHelper::jedacheckout();
         $jedacheckin = DaysCountHelper::jedaCheckIn();
         $jampergatiancheckin = DaysCountHelper::jamPergantianCheckIn();
+        $kategori_id = $request->kategori_id;
 
         $buktipembayaran = Str::random(10) . '.' .  $file->getClientOriginalExtension();
         $file->storeAs('public/kamar', $buktipembayaran);
 
         $totalinap = 0;
+
         if ($usedeadline) {
             $totalinap += DaysCountHelper::formateDateWithDeadline($jedacheckin, $jedacheckout, $jampergatiancheckin, $tglawal, $tglakhir);
         } else {
             $totalinap += DaysCountHelper::formatDate($tglawal, $tglakhir, $jedacheckout);
         }
 
-        $totalharga = $totalinap * $tarif;
+        $kategori_id = $kategori_id ?? null; 
+        // Set nilai default sebagai null jika 'kategori_id' tidak ada
+        $diskon_amount = 0;
+        if ($kategori_id) {
+            $diskon = Diskon::find($kategori_id);
+        
+            if ($diskon) {
+                $diskon_amount = $diskon->potongan_harga;
+                $totalharga = $totalinap * $tarif - $diskon_amount;
+            }
+        
+        }
+        
         $pesanan = new Pesanan;
         $pesanan->email = $request->email;
         $pesanan->username = $request->username;
         $pesanan->telp = $request->no_tlp;
         $pesanan->user_id = $user;
+        $pesanan->kategori_id = $kategori;
         $pesanan->tanggal_awal = $tglawal;
         $pesanan->tanggal_akhir = $tglakhir;
         $pesanan->rooms_id = $kamar;
         $pesanan->metode_pembayaran = $request->metode_pembayaran;
-        $pesanan->harga_pesanan = $totalharga;
         $pesanan->invoice = $buktipembayaran;
+        $pesanan->harga_pesanan = $totalharga ?? ($totalinap * $tarif - $diskon_amount); 
+        
+        if ($kategori_id) {
+            $pesanan->kategori_id = $kategori_id;
+        } else {
+            $pesanan->kategori_id = null; // Atau berikan nilai default yang sesuai
+        }
+        
         $pesanan->save();
         Kamar::findOrFail($kamar)->update(['status' => 'booked']);
 
         // dd($kamar);
         return redirect()->route('homeuser')->with("success", "Product data added successfully!");
     }
+
 
     /**
      * Display the specified resource.

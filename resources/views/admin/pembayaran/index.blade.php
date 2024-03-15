@@ -313,6 +313,16 @@
                                     <th style="width: 25%;">INFORMATION</th>
                                     <th class="text-end" style="width: 15%;">ACTION</th>
                                 </tr>
+                                @if ($pembayaran->isEmpty())
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">
+                                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
+                                            <img src="{{ asset('assets/img/No data-amico.svg') }}" alt="" style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
+                                            <h3 class="mb-3">There are no payment method added by admin yet. Please check back later.</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endif
                             </thead>
                             <tbody>
                                 @php

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('diskons', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kategori_id')->constrained('kategoris')->restrictOnDelete();
             $table->string('nama_diskon');
             $table->string('gambar');
             $table->string('deskripsi');

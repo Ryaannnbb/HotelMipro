@@ -118,7 +118,8 @@
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item">
-                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span class="text-700 fw-semi-bold" >
+                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span
+                            class="text-700 fw-semi-bold">
                             @if ($kamar->count() > 0)
                                 <span>({{ $kamar->count() }})</span>
                             @endif
@@ -149,60 +150,84 @@
 
                         {{-- {{ TABLE }} --}}
                         <div class="row">
-                            @foreach ($kamar as $kamars)
-                                <div class="col-12 col-sm-6 col-md-4 col-xxl-3 mb-4">
-                                    <div class="card">
-                                        <img src="{{ asset('storage/kamar/' . $kamars->path_kamar) }}" class="card-img-top" alt="Room Image">
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title">{{ Str::limit($kamars->nama_kamar, 20, '...') }}</h5>
-                                            <p class="card-text fs-6">Price: <span class="fw-bold">{{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</span></p>
-                                            <p class="card-text">Category: {{ $kamars->kategori ? $kamars->kategori->nama_kategori : 'Tidak Ada Kategori' }}</p>
-                                            <p class="card-text"><span class="badge badge-success">{{ $kamars->status }}</span></p>
-                                            <p class="card-text">{{ strip_tags(Str::limit($kamars->deskripsi, 50)) }}</p>
-                                            <div class="btn-group">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-h"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="{{ route('kamar.edit', $kamars->id) }}">Edit</a></li>
-                                                    <li>
-                                                        <form action="{{ route('kamar.destroy', $kamars->id) }}" method="POST" class="hapus-form">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit" class="dropdown-item text-danger">Remove</button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
+                            @if (count($kamar) > 0)
+                                @foreach ($kamar as $kamars)
+                                    <div class="col-12 col-sm-6 col-md-4 col-xxl-3 mb-4">
+                                        <div class="card">
+                                            <img src="{{ asset('storage/kamar/' . $kamars->path_kamar) }}"
+                                                class="card-img-top" alt="Room Image">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title">{{ Str::limit($kamars->nama_kamar, 20, '...') }}</h5>
+                                                <p class="card-text fs-6">Price: <span
+                                                        class="fw-bold">{{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</span>
+                                                </p>
+                                                <p class="card-text">Category:
+                                                    {{ $kamars->kategori ? $kamars->kategori->nama_kategori : 'Tidak Ada Kategori' }}
+                                                </p>
+                                                <p class="card-text"><span
+                                                        class="badge badge-success">{{ $kamars->status }}</span></p>
+                                                <p class="card-text">{{ strip_tags(Str::limit($kamars->deskripsi, 50)) }}
+                                                </p>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item"
+                                                                href="{{ route('kamar.edit', $kamars->id) }}">Edit</a></li>
+                                                        <li>
+                                                            <form action="{{ route('kamar.destroy', $kamars->id) }}"
+                                                                method="POST" class="hapus-form">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit"
+                                                                    class="dropdown-item text-danger">Remove</button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
-                                </tbody>
-                            </table>
-                        </div>
+                                    @endforeach
+                                @else
+                                <div class="col-12 text-center py-4" style="margin-left: 100px; margin-top: 50px;">
+                                    <div
+                                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
+                                        <img src="{{ asset('assets/img/No data-amico.svg') }}" alt=""
+                                            style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
+                                        <h3 class="mb-3">There are no Rooms added by admin yet. Please check back
+                                            later.</h3>
 
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        </tbody>
+                        </table>
+                    </div>
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
-                            <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a
-                            class="fw-semi-bold" href="#!" data-list-view="*">View all<span
-                            class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
-                            class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span
-                            class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+                            <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info">
+                            </p><a class="fw-semi-bold" href="#!" data-list-view="*">View all<span
+                                    class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
+                                class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span
+                                    class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                         </div>
                         <div class="col-auto d-flex"><button class="page-link" data-list-pagination="prev"><span
                                     class="fas fa-chevron-left"></span></button>
-                                    <ul class="mb-0 pagination"></ul><button class="page-link pe-0" data-list-pagination="next"><span
-                                        class="fas fa-chevron-right"></span></button>
-                                    </div>
-                                </div>
-                                <hr class="hr">
+                            <ul class="mb-0 pagination"></ul><button class="page-link pe-0"
+                                data-list-pagination="next"><span class="fas fa-chevron-right"></span></button>
+                        </div>
+                    </div>
+                    <hr class="hr">
 
                     <style>
                         .hr {
                             margin-top: -2px;
                         }
+
                         .ellipsis-text {
                             max-width: 200px;
                             /* Sesuaikan dengan lebar maksimum yang diinginkan */
@@ -233,20 +258,20 @@
                             });
                         });
                     </script>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-                    <footer class="footer position-absolute">
-        <div class="row g-0 justify-content-between align-items-center h-100">
-          <div class="col-12 col-sm-auto text-center">
-            <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
-          </div>
-          <div class="col-12 col-sm-auto text-center">
-          </div>
         </div>
-      </footer>
     </div>
 
+    <footer class="footer position-absolute" style="margin-left: 290px;">
+        <div class="row g-0 justify-content-between align-items-center h-100">
+            <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span
+                        class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
+            </div>
+            <div class="col-12 col-sm-auto text-center">
+            </div>
+        </div>
+    </footer>
+    </div>
 @endsection

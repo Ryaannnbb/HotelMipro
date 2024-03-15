@@ -438,17 +438,16 @@
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">Add room discount</h5>
-                                                <select class="form-select @error('nama_kamar') is-invalid @enderror" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}' name="nama_kamar[]">
-                                                <option value="">Select rooms...</option>
-                                                @foreach ($room as $rooms)
-                                                    <option value="{{ $rooms->id }}"
-                                                        @selected(!is_null(@old('nama_kamar')) ? in_array($rooms->id, @old('nama_kamar')) : '')>
-                                                        {{ $rooms->nama_kamar }}
-                                                    </option>
+                                                <h5 class="mb-2 text-1000">Add Categori discount</h5>
+                                                <select class="form-select @error('nama_kategori') is-invalid @enderror" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}' name="nama_kategori[]">
+                                                <option value="">Select kategori...</option>
+                                                @foreach ($kategori as $kategoris)
+                                                <option value="{{ $kategoris->id }}" {{ !is_null(old('nama_kategori')) && in_array($kategoris->id, old('nama_kategori')) ? 'selected' : '' }}>
+                                                    {{ $kategoris->nama_kategori }}
+                                                </option>                                                
                                                 @endforeach
                                                 </select>
-                                                @error('nama_kamar')
+                                                @error('nama_kategori')
                                                     <strong class="invalid-feedback">
                                                         {{ $message }}
                                                     </strong>
@@ -521,19 +520,19 @@
                                         </td>
                                         <td class="ellipsis-text text-center col-1">
                                             {{ strip_tags(Str::limit($diskons->deskripsi, 10, $end = '...')) }}</td>
-                                            <td class="produks text-center ps-4">
-                                                <span
-                                                    class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskons->awal_berlaku) ? '-' : date('d F Y', strtotime($diskons->awal_berlaku)) }}</span>
-                                            </td>
-                                            <td class="produks text-center ps-4">
-                                                <span
-                                                    class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskons->akhir_berlaku) ? '-' : date('d F Y', strtotime($diskons->akhir_berlaku)) }}</span>
-                                            </td>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                                                                        <td class="produks text-center ps-4">
+                                                                            <span
+                                                                                class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskons->awal_berlaku) ? '-' : date('d F Y', strtotime($diskons->awal_berlaku)) }}</span>
+                                                                        </td>
+                                                                        <td class="produks text-center ps-4">
+                                                                            <span
+                                                                                class="fw-semi-bold fs--1 line-clamp-3 mb-0">{{ is_null($diskons->akhir_berlaku) ? '-' : date('d F Y', strtotime($diskons->akhir_berlaku)) }}</span>
+                                                                        </td>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
                         </table>
                     </div>
 

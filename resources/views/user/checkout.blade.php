@@ -35,6 +35,7 @@
                                     <td class="py-2 px-3">
                                         <h5 class="lh-sm fw-normal text-800">{{ Auth::user()->name }}</h5>
                                     </td>
+                                    <input type="hidden" name="kategori_id" value="{{ $kategori->id  }}">
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     <input type="hidden" name="username" value="{{ auth()->user()->name }}">
                                     <input type="hidden" name="email" value="{{ auth()->user()->email }}">
@@ -261,19 +262,19 @@
                                     </div>
                                     <div class="d-flex justify-content-between mb-2">
                                         <h5 class="text-900 fw-semi-bold">Discount: </h5>
-                                        <h5 class="text-danger fw-semi-bold">-$59</h5>
+                                        <h5 class="text-danger fw-semi-bold">-{{ $diskons->potongan_harga}}</h5>
                                     </div>
                                     <div class="d-flex justify-content-between mb-2">
                                         <h5 class="text-900 fw-semi-bold">Facility: </h5>
                                         <h5 class="text-900 fw-semi-bold">$126.20</h5>
                                     </div>
                                 </div>
-                                @php
-                                    $roomPrice = $kamars->harga;
-                                    $discount = 50000;
-                                    $facility = 100000;
-                                    $total = $roomPrice - $discount + $facility;
-                                @endphp
+                                        @php
+                                            $roomPrice = $kamars->harga;
+                                            $discount = $diskons->potongan_harga;
+                                            $facility = 100000;
+                                            $total = $roomPrice - $discount ;
+                                        @endphp
                                 <div class="d-flex justify-content-between border-dashed-y pt-3">
                                     <h4 class="mb-0">Total :</h4>
                                     <h4 class="mb-0">{{ 'Rp ' . number_format($total) }}</h4>
