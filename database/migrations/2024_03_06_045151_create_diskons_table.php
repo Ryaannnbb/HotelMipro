@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('gambar');
             $table->string('deskripsi');
             $table->enum('jenis', ['nominal', 'percentage'])->default('nominal');
-            $table->bigInteger('potongan_harga');
+            $table->bigInteger('potongan_harga')->nullable();
             $table->date('awal_berlaku');
             $table->date('akhir_berlaku');
             $table->timestamps();

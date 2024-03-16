@@ -31,16 +31,17 @@ class PesananController extends Controller
         $user = auth()->user();
         $kamars = Kamar::findOrFail($request->id);
         $kategori_id = $kamars->kategori_id;
-        $kategori = Kategori::find($request->id);
+        // $kategori = Kategori::find($request->id);
+        // dd($kategori_id);
         $fasilitas = Fasilitas::all();
         $bank = Pembayaran::where('metode_pembayaran', 'bank')->get();
         $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
         return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars','request'));
         $diskons = DB::table('diskons')
-                ->select('potongan_harga', 'kategori_id', 'akhir_berlaku')
+                ->select('potongan_harga', 'kategori_id', 'akhir_berlaku','jenis')
                 ->where('kategori_id', $kategori_id)
                 ->first();
-        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars', 'diskons','kategori'));
+        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars', 'diskons','kategori_id'));
 
         // dd($kamars);
 
@@ -152,16 +153,24 @@ class PesananController extends Controller
         $kategori_id = $kategori_id ?? null;
         // Set nilai default sebagai null jika 'kategori_id' tidak ada
         $diskon_amount = 0;
+
         if ($kategori_id) {
             $diskon = Diskon::find($kategori_id);
 
             if ($diskon) {
-                $diskon_amount = $diskon->potongan_harga;
-                $totalharga = $totalinap * $tarif - $diskon_amount;
+                if ($diskon->jenis == 'percentage') {
+                    // Jika jenis diskon adalah persentase, hitung diskon berdasarkan persentase
+                    $diskon_amount = ($totalinap * $tarif - $diskon->potongan_harga) / 100;
+                } else {
+                    
+                    $totalharga = $totalinap * $tarif - $diskon->potongan_harga;
+
+                }
+        
             }
-
         }
-
+        
+        
         $pesanan = new Pesanan;
         $pesanan->email = $request->email;
         $pesanan->username = $request->username;
