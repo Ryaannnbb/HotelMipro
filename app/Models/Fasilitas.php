@@ -9,9 +9,15 @@ class Fasilitas extends Model
 {
     use HasFactory;
     protected $table = 'fasilitas';
-    protected $fillable = [
+    protected $fillable =[
+        'id',
         'nama_fasilitas',
         'harga_satuan',
     ];
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class);
+    }
 
 }

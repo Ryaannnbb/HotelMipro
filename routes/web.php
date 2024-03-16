@@ -16,6 +16,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DetailKamarController;
+use App\Http\Controllers\UlasanKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\DashboardAdminController;
@@ -116,7 +117,13 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/detailkamar{id}', [DetailKamarController::class, 'index'])->name('detailkamar');
     Route::get('/pesanan/{id}', [PesananController::class, 'index'])->name('pesanan');
     Route::post('/pesanan/store', [PesananController::class, 'store'])->name('pesanan.store');
-    Route::delete('/pesanan/destroy/{id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
+    Route::post('/pesanan/update', [PesananController::class, 'update'])->name('pesanan.update');
+    Route::post('/pesanan/destroy/{id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
+    Route::post('/detailkamar', [DetailKamarController::class, 'store'])->name('detailkamar.store');
+    Route::post('/detailkamar{id}', [DetailKamarController::class, 'show'])->name('detailkamar.show');
+        Route::delete('/detailkamar/{id}', [DetailKamarController::class, 'destroy'])->name('detailkamar.delete');
+        Route::post('/updateFacilitiesPrice', [PesananController::class, 'update'])->name('updateFacilitiesPrice');
+    // });
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {
         Route::get('', 'index')->name('profil');

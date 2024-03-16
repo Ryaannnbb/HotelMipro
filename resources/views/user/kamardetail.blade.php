@@ -4,7 +4,7 @@
     <!-- ============================================-->
     <!-- <section> begin ============================-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @foreach ($Kamars as $detail)
+    @foreach ($Kamar as $detail)
         <section class="py-0 mt-5">
             <div class="container-small">
                 <div class="row g-5 mb-5 mb-lg-8" data-product-details="data-product-details">

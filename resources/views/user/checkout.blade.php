@@ -200,38 +200,24 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Select
-                                    facility</label>
-                                <select class="form-select @error('nama_fasilitas') is-invalid @enderror"
-                                    id="organizerMultiple" data-choices="data-choices" multiple="multiple"
-                                    data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
-                                    <option value="">Select Facility...</option>
-                                    @foreach ($fasilitas as $fasilitasd)
-                                        <option value="{{ $fasilitasd->id }}" @selected(!is_null(@old('nama_fasilitas')) ? in_array($fasilitasd->id, @old('nama_fasilitas')) : '')>
-                                            {{ $fasilitasd->nama_fasilitas }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('nama_fasilitas')
-                                    <strong class="mt-n3 invalid-feedback">
-                                        {{ $message }}
-                                    </strong>
-                                @enderror
-                            </div>
+
+
+                            {{-- <div class="d-flex justify-content-between border-y border-dashed py-3 mb-4">
+                                <h4 class="mb-0">Total Price:</h4>
+                                <h4 id="totalPrice" class="mb-">Rp. {{ number_format($total, 0, ',', '.') }}</h4>
+                            </div> --}}
                         </div>
                         <div class="row g-2 mb-5 mb-lg-0">
                             <div class="col-md-8 col-lg-9 d-grid">
                                 <button class="btn btn-primary" type="submit">Pay</button>
                             </div>
-                            <div class="col-md-4 col-lg-3 d-grid">
-                                <a href="{{ route('kamar') }}" class="btn btn-phoenix-secondary text-nowrap">Save Order
-                                    and Exit</a>
-                            </div>
+
+                        </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-xl-4">
                         <div class="card mt-3 mt-lg-0">
-                            <div class="card-body">
+                            <div class="card-body" id="facilitySummary">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h3 class="mb-0">Summary</h3>
                                     {{-- <button class="btn btn-link pe-0" type="button">Edit
@@ -268,9 +254,17 @@
                                         <h5 class="text-900 fw-semi-bold">Discount: </h5>
                                         <h5 class="text-danger fw-semi-bold">- Rp{{ $diskons->potongan_harga }}</h5>
                                     </div>
+
+                                </div>
+
+                                <div class="border-dashed border-bottom mt-4">
                                     <div class="d-flex justify-content-between mb-2">
-                                        <h5 class="text-900 fw-semi-bold">Facility: </h5>
-                                        <h5 class="text-900 fw-semi-bold">$126.20</h5>
+                                        <h5 class="text-900 fw-semi-bold">Facility Total:</h5>
+                                        @if(session('totalFacilityPrice'))
+                                            <h5 id="facilityTotalCard" class="text-900 fw-semi-bold">{{ 'Rp ' . number_format(session('totalFacilityPrice')) }}</h5>
+                                        @else
+                                            <h5 id="facilityTotalCard" class="text-900 fw-semi-bold">Rp 0</h5>
+                                        @endif
                                     </div>
                                 </div>
                                 @php
@@ -289,7 +283,7 @@
                                         $total -= $diskons->potongan_harga;
                                     }
 
-                                   
+
                                 @endphp
 
                                 <div class="d-flex justify-content-between border-dashed-y pt-3">
@@ -301,7 +295,36 @@
                     </div>
                 </div>
             </div>
-        </form><!-- end of .container-->
+        </form>
+        <div class="row ">
+            <div class="col-md-3 offset-md-8" style="margin-top: -300px;">
+                <form id="updateCartForm" action="{{ route('updateFacilitiesPrice') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="selected_fasilitas" value="{{ json_encode(old('nama_fasilitas', [])) }}">
+                    <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Select facility</label>
+                    <select class="form-select @error('nama_fasilitas') is-invalid @enderror" id="organizerMultiple"
+                        data-choices="data-choices" multiple="multiple"
+                        data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
+                        <option value="">Select Facility...</option>
+                        @foreach ($fasilitas as $fasilitasd)
+                            <option value="{{ $fasilitasd->id }}" @if(in_array($fasilitasd->id, old('nama_fasilitas', []))) selected @endif>
+                                {{ $fasilitasd->nama_fasilitas }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('nama_fasilitas')
+                        <strong class="mt-n3 invalid-feedback">
+                            {{ $message }}
+                        </strong>
+                    @enderror
+
+                    <button type="submit" class="btn btn-success mt-2 ml-auto">
+                        Update Cart
+                        <span class="fas fa-undo ms-1 order-2"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </section><!-- <section> close ============================-->
     <!-- ============================================-->
 
@@ -373,6 +396,27 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <script>
+        function updateCart() {
+            $.post("{{ route('updateFacilitiesPrice') }}", $('#updateCartForm').serialize())
+            .done(function(data) {
+                // Update the HTML element with the totalFacilityPrice
+                $("#facilityTotal").text("Rp " + data.totalFacilityPrice.toLocaleString());
+                $("#facilityTotalCard").text("Rp " + data.totalFacilityPrice.toLocaleString()); // Update total facility on card
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error("AJAX Error: " + textStatus, errorThrown);
+            });
+        }
+
+        $(document).ready(function() {
+            // Call updateCart function on page load and when there's a change in the input fields
+            updateCart();
+            $('input[name^="nama_fasilitas"]').on('change', updateCart);
+        });
+    </script>
     <script>
         const selectElement = document.querySelector('#selectMetode');
         const ewalletInput = document.querySelector('#ewalletInput');

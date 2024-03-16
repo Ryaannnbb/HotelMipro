@@ -14,10 +14,10 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Helpers\DaysCountHelper;
+use App\Models\PemakaianFasilitas;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 
 class PesananController extends Controller
 {
@@ -36,6 +36,7 @@ class PesananController extends Controller
         $fasilitas = Fasilitas::all();
         $bank = Pembayaran::where('metode_pembayaran', 'bank')->get();
         $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
+        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars','request'));
         $diskons = DB::table('diskons')
                 ->select('potongan_harga', 'kategori_id', 'akhir_berlaku','jenis')
                 ->where('kategori_id', $kategori_id)
@@ -68,73 +69,65 @@ class PesananController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        // $rules = [
-        //     'tanggal_awal' => [
-        //         'required',
-        //         'date',
-        //         'before_or_equal:tanggal_akhir',
-        //         Rule::unique('pesanans')->where(function ($query) use ($request) {
-        //             return $query->where('rooms_id', $request->id_kamar)
-        //                 ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
-        //                 ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
-        //         }),
-        //     ],
-        //     'tanggal_akhir' => [
-        //         'required',
-        //         'date',
-        //         'after_or_equal:tanggal_awal',
-        //         Rule::unique('pesanans')->where(function ($query) use ($request) {
-        //             return $query->where('rooms_id', $request->id_kamar)
-        //                         ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
-        //                         ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
-        //         }),
-        //     ],
-        //     'metode_pembayaran' => 'required|string',
-        //     'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
-        //     'nama_fasilitas' => 'required|array',
-        //     'nama_fasilitas.*' => 'exists:fasilitas,id',
-        //     'kategori_id' => 'nullable|exists:diskons,id',
-        // ];
-        // $message = [
-        //     'tanggal_awal.required' => 'Tanggal awal harus diisi.',
-        //     'tanggal_awal.date' => 'Tanggal awal harus dalam format tanggal yang valid.',
-        //     'tanggal_awal.before_or_equal' => 'Tanggal awal tidak boleh lebih dari tanggal akhir.',
-        //     'tanggal_awal.after_or_equal' => 'Tanggal awal tidak boleh kurang dari tanggal sekarang.',
-        //     'tanggal_awal.unique' => 'The selected date range is already booked. Please choose another date range.',
-        //     'tanggal_akhir.required' => 'Tanggal akhir harus diisi.',
-        //     'tanggal_akhir.date' => 'Tanggal akhir harus dalam format tanggal yang valid.',
-        //     'tanggal_akhir.after_or_equal' => 'Tanggal akhir harus setelah atau sama dengan tanggal awal.',
-        //     'tanggal_akhir.unique' => 'The selected date range is already booked. Please choose another date range.',
-        //     'metode_pembayaran.required' => 'Metode pembayaran harus diisi.',
-        //     'metode_pembayaran.string' => 'Metode pembayaran harus berupa teks.',
-        //     'foto.required' => 'The photo field is required.',
-        //     'foto.image' => 'The photo must be an image.',
-        //     'foto.mimes' => 'The photo must be a file of type: jpeg, png, jpg, gif.',
-        //     'foto.max' => 'The photo may not be greater than 10 mb.',
-        //     'nama_fasilitas.required' => 'The facility field is required.',
-        //     'nama_fasilitas.array' => 'The facility field must be an array.',
-        //     'nama_fasilitas.*.exists' => 'Selected facility is invalid.',
-        // ];
+        $rules = [
+            'tanggal_awal' => [
+                'required',
+                'date',
+                'before_or_equal:tanggal_akhir',
+                Rule::unique('pesanans')->where(function ($query) use ($request) {
+                    return $query->where('rooms_id', $request->id_kamar)
+                        ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
+                        ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
+                }),
+            ],
+            'tanggal_akhir' => [
+                'required',
+                'date',
+                'after_or_equal:tanggal_awal',
+                Rule::unique('pesanans')->where(function ($query) use ($request) {
+                    return $query->where('rooms_id', $request->id_kamar)
+                        ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
+                        ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
+                }),
+            ],
+            'metode_pembayaran' => 'required|string',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
+            'nama_fasilitas' => 'required|array',
+            'nama_fasilitas.*' => 'exists:fasilitas,id',
+            'kategori_id' => 'nullable|exists:diskons,id',
+        ];
 
-        // if($request->metode_pembayaran == 'bank') {
-        //     $rules['tujuan_bank'] = 'required';
-        // } else if($request->metode_pembayaran == 'e-wallet') {
-        //     $rules['tujuan_ewallet'] = 'required';
-        // }
+        $message = [
+            'tanggal_awal.required' => 'Tanggal awal harus diisi.',
+            'tanggal_awal.date' => 'Tanggal awal harus dalam format tanggal yang valid.',
+            'tanggal_awal.before_or_equal' => 'Tanggal awal tidak boleh lebih dari tanggal akhir.',
+            'tanggal_awal.after_or_equal' => 'Tanggal awal tidak boleh kurang dari tanggal sekarang.',
+            'tanggal_awal.unique' => 'The selected date range is already booked. Please choose another date range.',
+            'tanggal_akhir.required' => 'Tanggal akhir harus diisi.',
+            'tanggal_akhir.date' => 'Tanggal akhir harus dalam format tanggal yang valid.',
+            'tanggal_akhir.after_or_equal' => 'Tanggal akhir harus setelah atau sama dengan tanggal awal.',
+            'tanggal_akhir.unique' => 'The selected date range is already booked. Please choose another date range.',
+            'metode_pembayaran.required' => 'Metode pembayaran harus diisi.',
+            'metode_pembayaran.string' => 'Metode pembayaran harus berupa teks.',
+            'foto.required' => 'The photo field is required.',
+            'foto.image' => 'The photo must be an image.',
+            'foto.mimes' => 'The photo must be a file of type: jpeg, png, jpg, gif.',
+            'foto.max' => 'The photo may not be greater than 10 mb.',
+        ];
 
-        // // $kamar = Kamar::findOrFail($request->id_kamar);
-        // // if ($kamar->status == 'booked') {
-        // //     return redirect()->route('usermenu')->with("error", "The selected room is already booked.");
-        // // }
+        if ($request->metode_pembayaran == 'bank') {
+            $rules['tujuan_bank'] = 'required';
+        } else if ($request->metode_pembayaran == 'e-wallet') {
+            $rules['tujuan_ewallet'] = 'required';
+        }
 
-        // $request->validate($rules, $message);
+        $request->validate($rules, $message);
 
         $usedeadline = true;
 
         $user = $request->user_id;
         $kamar = $request->id_kamar;
-        $tarif = Kamar::find($kamar)->harga; 
+        $tarif = Kamar::find($kamar)->harga;
         $file = $request->file('foto');
         $kategori = $request->kategori_id;
         // $tglawal = $request->tanggal_awal;
@@ -146,7 +139,7 @@ class PesananController extends Controller
         $jampergatiancheckin = DaysCountHelper::jamPergantianCheckIn();
         $kategori_id = $request->kategori_id;
 
-        $buktipembayaran = Str::random(10) . '.' .  $file->getClientOriginalExtension();
+        $buktipembayaran = Str::random(10) . '.' . $file->getClientOriginalExtension();
         $file->storeAs('public/kamar', $buktipembayaran);
 
         $totalinap = 0;
@@ -157,27 +150,27 @@ class PesananController extends Controller
             $totalinap += DaysCountHelper::formatDate($tglawal, $tglakhir, $jedacheckout);
         }
 
-        $kategori_id = $kategori_id ?? null; 
+        $kategori_id = $kategori_id ?? null;
         // Set nilai default sebagai null jika 'kategori_id' tidak ada
         $diskon_amount = 0;
 
         if ($kategori_id) {
             $diskon = Diskon::find($kategori_id);
-        
+
             if ($diskon) {
                 if ($diskon->jenis == 'percentage') {
                     // Jika jenis diskon adalah persentase, hitung diskon berdasarkan persentase
                     $diskon_amount = ($totalinap * $tarif * $diskon->potongan_harga) / 100;
                 } else {
-                    
+
                     $totalharga = $totalinap * $tarif - $diskon->potongan_harga;
 
                 }
-        
+
             }
         }
-        
-        
+
+
         $pesanan = new Pesanan;
         $pesanan->email = $request->email;
         $pesanan->username = $request->username;
@@ -189,18 +182,19 @@ class PesananController extends Controller
         $pesanan->rooms_id = $kamar;
         $pesanan->metode_pembayaran = $request->metode_pembayaran;
         $pesanan->invoice = $buktipembayaran;
-        $pesanan->harga_pesanan = $totalharga ?? ($totalinap * $tarif - $diskon_amount); 
-        
+        $pesanan->harga_pesanan = $totalharga ?? ($totalinap * $tarif - $diskon_amount);
+
         if ($kategori_id) {
             $pesanan->kategori_id = $kategori_id;
         } else {
             $pesanan->kategori_id = null; // Atau berikan nilai default yang sesuai
         }
-        
+
         $pesanan->save();
+
+        // Update status kamar menjadi booked
         Kamar::findOrFail($kamar)->update(['status' => 'booked']);
 
-        // dd($kamar);
         return redirect()->route('homeuser')->with("success", "Product data added successfully!");
     }
 
@@ -232,8 +226,6 @@ class PesananController extends Controller
         return view('user.pesanan', ['data' => $data]);
     }
 
-
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -245,34 +237,35 @@ class PesananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request)
+{
+    if ($request->has('nama_fasilitas')) {
+        // Inisialisasi total harga fasilitas
+        $totalFacilityPrice = 0;
 
+        foreach ($request->nama_fasilitas as $fasilitas_id => $quantity) {
+            $pemakaianFasilitas = PemakaianFasilitas::find($fasilitas_id);
+
+            if ($pemakaianFasilitas) {
+                // Hitung total harga fasilitas berdasarkan harga dan jumlah
+                $totalFacilityPrice += $pemakaianFasilitas->harga_pemakaian * $quantity;
+            }
+        }
+
+        // Simpan total harga fasilitas dalam session
+        session()->put('totalFacilityPrice', $totalFacilityPrice);
+
+        // Redirect kembali ke halaman sebelumnya dengan menyertakan nilai yang dipilih
+        return redirect()->back()->withInput(['nama_fasilitas' => $request->nama_fasilitas]);
+    } else {
+        return redirect()->back()->withErrors(['error' => 'No facilities selected']);
+    }
+}
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $pesanan = Pesanan::findOrfail($id);
-        // return dd($pesanan);
-
-        if ($pesanan) {
-            $invoice = $pesanan->invoice;
-            $path = public_path($invoice);
-
-            // return dd($path);
-
-            if (File::exists($path)) {
-                File::delete($path);
-            }
-
-            $pesanan->delete();
-
-            return redirect()->route("profil")->with("success", "Room data deleted successfully!");
-        }
-
-        return redirect()->route("profil")->with("warning", "Room not found or already deleted.");
+        //
     }
 }

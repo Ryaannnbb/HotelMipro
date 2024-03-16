@@ -32,60 +32,54 @@
                     @php
                         $inwsihlist = [];
                     @endphp
-                    @if(count($kamar) > 0)
+                    @if($kamars && count($kamars) > 0)
                     {{-- @php
                         foreach ($wishlist as $value) {
                             array_push($inwsihlist, $value->product_id);
                         }
                     @endphp --}}
-                        @foreach ($kamar as $product)
+                    <div class="row" style="margin-left: 10px;">
+                        @foreach ($kamars as $product)
                         <div class="col-12 col-sm-6 col-md-4 col-xxl-2">
-                            <div class="product-card-container h-100">
-                                <div class="position-relative text-decoration-none product-card h-100">
-                                    <div class="card mb-3" style="width: 270px; height: 470px;">
-                                        <div class="position-relative text-decoration-none product-card">
-                                            <div class="border border-1 rounded-3 position-relative">
-                                                <img class="card-img-top img-fluid"
-                                                    src="{{ asset('storage/kamar/' . $product->path_kamar) }}"
-                                                    alt="{{ $product->nama_kamar }}"
-                                                    style="width: 266px; height: 200px; border-radius: 6px; object-fit: cover" />
-                                            </div>
-                                                            <div class="card-body">
-                                                    <a href=" {{ route('detailkamar', ['id' => $product->id]) }}" class="stretched-link"></a>
-                                                        <h6 class="card-title mb-2 lh-sm line-clamp-3 product-name">
-                                                            {{ $product->nama_kamar }}</h6>
-                                                    </a>
-                                                    <p class="fs--1 text-1000 fw-bold ">Stock {{ $product->stok }}</p>
-                                                    <p class="fs--1">
-                                                        @if (!is_null($product->rating))
-                                                            @if ($product->rating - floor($product->rating) < 0.5)
-                                                                @for ($i = 0; $i < floor($product->rating); $i++)
-                                                                    <span class="fa fa-star text-warning"></span>
-                                                                @endfor
-                                                            @else
-                                                                @for ($i = 0; $i < ceil($product->rating); $i++)
-                                                                    <span class="fa fa-star text-warning"></span>
-                                                                @endfor
-                                                            @endif
-                                                            <span class="text-500 fw-semi-bold ms-1">({{ $product->totalulasan }} people rated)</span>
-                                                        @else
-                                                            <p>There are no reviews</p>
-                                                        @endif
-                                                    </p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <div class="d-flex align-items-center mb-1">
-                                                        <h3 class="text-1100 mb-0">
-                                                            Rp.{{ number_format($product->harga, 0, ',', '.') }}</h3>
-                                                        <div class="flex-grow-1"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="card mb-3">
+                                <a href="{{ route('detailkamar', $product->id) }}" class="text-decoration-none">
+                                    <div class="position-relative">
+                                        <img class="card-img-top" src="{{ asset('storage/kamar/' . $product->path_kamar) }}" alt="{{ $product->nama_kamar }}" style="object-fit: cover; height: 200px;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-title mb-2 lh-sm line-clamp-3 product-name">{{ $product->nama_kamar }}</h6>
+                                        <p class="fs--1 text-1000 fw-bold">Stock {{ $product->stok }}</p>
+                                        <p class="fs--1">
+                                            @if ($totalUlasans[$product->id] > 0)
+                                            @php
+                                                $rating = $ratings[$product->id];
+                                            @endphp
+                                            @if ($rating - floor($rating) < 0.5)
+                                                @for ($i = 0; $i < floor($rating); $i++)
+                                                    <span class="fa fa-star text-warning"></span>
+                                                @endfor
+                                            @else
+                                                @for ($i = 0; $i < ceil($rating); $i++)
+                                                    <span class="fa fa-star text-warning"></span>
+                                                @endfor
+                                            @endif
+                                            <span class="text-primary fw-semi-bold mb-2"> ({{ $totalUlasans[$product->id] }} people rated)</span>
+                                        @else
+                                        <p>There are no reviews</p>
+                                        @endif
+                                    </p>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="d-flex align-items-center mb-1">
+                                            <h3 class="text-1100 mb-0">Rp.{{ number_format($product->harga, 0, ',', '.') }}</h3>
+                                            <div class="flex-grow-1"></div>
                                         </div>
-                                    </div>             
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
+                    </div>
                     @else
                         <tr>
                             <td colspan="8" class="text-center py-4">
@@ -97,7 +91,7 @@
                         </tr>
                     @endif
                 </div>
-                @if(count($kamar) > 0)
+                @if($kamars && count($kamars) > 0)
                     <div class="text-center mt-4">
                         <a href="{{route('usermenu')}}" class="btn btn-lg btn-primary rounded-pill">View All Rooms</a>
                     </div>

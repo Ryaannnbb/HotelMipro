@@ -444,7 +444,7 @@
                                                 @foreach ($kategori as $kategoris)
                                                 <option value="{{ $kategoris->id }}" {{ !is_null(old('nama_kategori')) && in_array($kategoris->id, old('nama_kategori')) ? 'selected' : '' }}>
                                                     {{ $kategoris->nama_kategori }}
-                                                </option>                                                
+                                                </option>
                                                 @endforeach
                                                 </select>
                                                 @error('nama_kategori')

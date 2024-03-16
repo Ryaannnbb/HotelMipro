@@ -283,6 +283,15 @@
                         </div>
                     @enderror
                 </div>
+                {{-- <div class="col-12 col-xl-12">
+                    <label class="fw-bold">Best Price</label>
+                    <input class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{ old('harga') }}" type="number" placeholder="Write title here..." />
+                    @error('harga')
+                        <strong class="invalid-feedback">
+                            {{ $message }}
+                        </strong>
+                    @enderror
+                </div> --}}
             </div>
         </form>
       <footer class="footer position-absolute">

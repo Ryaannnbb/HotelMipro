@@ -14,6 +14,7 @@ class Kategori extends Model
     protected $fillable = [
         'id',
         'nama_kategori',
+        // 'harga',
     ];
 
     public function room() : HasMany

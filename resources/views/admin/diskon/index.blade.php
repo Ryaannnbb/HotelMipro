@@ -70,7 +70,7 @@
                 </div>
                 <div class="row">
                     @foreach ($diskon as $diskons)
-                        <div class="col-12 col-sm-6 col-md-4 col-xxl-2 diskon"> 
+                        <div class="col-12 col-sm-6 col-md-4 col-xxl-2 diskon">
                             <div class="card mb-3">
                                 <div class="position-relative">
                                     <div class="position-absolute top-0 end-0 m-2">
@@ -149,7 +149,7 @@
                         searchInput.addEventListener('input', function() {
                             var searchTerm = this.value.trim().toLowerCase();
                             var discounts = document.querySelectorAll('.diskon');
-                
+
                             discounts.forEach(function(discount) {
                                 var discountName = discount.querySelector('.diskon-name').textContent.trim().toLowerCase();
                                 if (discountName.includes(searchTerm)) {
@@ -160,7 +160,7 @@
                             });
                         });
                     });
-                </script> 
+                </script>
 
                 </tbody>
                 </table>

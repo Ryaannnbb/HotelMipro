@@ -11,7 +11,7 @@ class Kamar extends Model
     use HasFactory;
     protected $table = 'kamars';
     protected $fillable = [
-        'id',
+        'kamar_id',
         'nama_kamar',
         'path_kamar',
         'harga',
@@ -22,6 +22,11 @@ class Kamar extends Model
     public function kategori(): BelongsTo
     {
         return $this->belongsTo(Kategori::class);
+    }
+
+    public function Detailkamar()
+    {
+        return $this->hasMany(Detailkamar::class);
     }
 
 }
