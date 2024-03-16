@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use auth;
 use App\Models\User;
-use App\Models\Pesanan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
@@ -17,27 +15,7 @@ class ProfilController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $lastorder = Pesanan::where('user_id', $user->id)->orderBy('created_at', 'desc')->take(1)->get();
-        $totalorder = Pesanan::where('user_id', $user->id)->get()->count();
-        $totalpembayaran = DB::table('pesanans')
-        ->select(
-            DB::raw('sum(harga_pesanan) AS total'),
-        )
-        ->where('user_id', $user->id)
-        ->get();
-        $pesanan = DB::table('pesanans')
-        ->leftJoin('users', 'pesanans.user_id', '=', 'users.id')
-        ->leftJoin('kamars', 'pesanans.rooms_id', '=', 'kamars.id')
-        // ->leftJoin('diskons', 'pesanans.diskon_id', '=', 'diskons.id')
-        ->select(
-            'pesanans.*',
-            'users.name as user_name',
-            'kamars.nama_kamar'
-            // 'diskons.discount as diskon_discount'
-            )
-        ->where('pesanans.user_id', $user->id)
-        ->get();
-        return view('user.profile', compact('user', 'pesanan', 'totalpembayaran', 'totalorder', 'lastorder'));
+        return view('user.profile', compact('user'));
     }
 
     /**

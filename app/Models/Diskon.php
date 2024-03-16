@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Diskon extends Model
 {
     use HasFactory;
     protected $table = 'diskons';
     protected $fillable =[
+        'kategori_id',
         'nama_diskon',
         'gambar',
         'deskripsi',
@@ -19,8 +21,12 @@ class Diskon extends Model
         'awal_berlaku',
         'akhir_berlaku',
     ];
-    public function detail_diskon(): HasMany
+    public function kategori(): BelongsTo
     {
-        return $this->hasMany(DetailDiskon::class);
+        return $this->belongsTo(Kategori::class);
+    }
+    public function Pesanan(): HasMany
+    {
+        return $this->hasMany(Pesanan::class);
     }
 }

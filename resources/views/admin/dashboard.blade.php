@@ -1,4 +1,14 @@
 @extends('layout_admin.app')
+@section('js')
+    <script src="{{ $chart1->cdn() }}"></script>
+    {{ $chart1->script() }}
+
+    <script src="{{ $chart2->cdn() }}"></script>
+    {{ $chart2->script() }}
+
+    <script src="{{ $chart3->cdn() }}"></script>
+    {{ $chart3->script() }}
+@endsection
 
 @section('content')
     @include('sweetalert.sweetalert')
@@ -200,22 +210,22 @@
                     <div class="row align-items-center g-4">
                         <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center"><span class="fa-stack"
-                                    style="min-height: 46px; min-width: 46px;"><span
+                                    style="min-height: 40px; min-width: 40px;"><span
                                         class="fa-solid fa-square fa-stack-2x text-primary-300"
                                         data-fa-transform="down-4 rotate--10 left-4"></span><span
                                         class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
                                         data-fa-transform="up-4 right-3 grow-2"></span><span
                                         class="fa-stack-1x fas fa-bed text-primary"
                                         data-fa-transform="shrink-2 up-8 right-6"></span></span>
-                                <div class="ms-3">
-                                    <h4 class="mb-0"> Rooms</h4>
-                                    <p class="text-800 fs--1 mb-0">Total amount</p>
-                                </div>
+                                        <div class="ms-3">
+                                            <h4 class="mb-0">Rooms</h4>
+                                            <p class="text-800 fs--1 mb-0">Total amount: {{ $rooms ? count($rooms) : 0 }}</p>
+                                        </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center">
-                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(119, 226, 253);" data-fa-transform="down-4 rotate--10 left-4"></span>
                                     <span
                                     class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
@@ -224,13 +234,13 @@
                                 </span>
                                 <div class="ms-3">
                                     <h4 class="mb-0">Users</h4>
-                                    <p class="text-800 fs--1 mb-0">Registered users total</p>
+                                    <p class="text-800 fs--1 mb-0">Registered users total: {{ $totalUsers }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center">
-                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(144, 255, 199);" data-fa-transform="down-4 rotate--10 left-4"></span>
                                     <span
                                         class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
@@ -239,13 +249,13 @@
                                 </span>
                                 <div class="ms-3">
                                     <h4 class="mb-0">Rooms Active</h4>
-                                    <p class="text-800 fs--1 mb-0">Rooms available</p>
+                                    <p class="text-800 fs--1 mb-0">Rooms available: {{ $roomsAvailable }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center">
-                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(250, 115, 115);" data-fa-transform="down-4 rotate--10 left-4"></span>
                                     <span
                                     class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
@@ -254,13 +264,13 @@
                                 </span>
                                 <div class="ms-3">
                                     <h4 class="mb-0">Rooms Empty</h4>
-                                    <p class="text-800 fs--1 mb-0">Rooms booked</p>
+                                    <p class="text-800 fs--1 mb-0">Rooms booked: {{ $roomsBooked }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center">
-                                <span class="fa-stack" style="min-height: 46px; min-width: 46px;">
+                                <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
                                     <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(252, 190, 109);" data-fa-transform="down-4 rotate--10 left-4"></span>
                                     <span
                                     class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
@@ -272,141 +282,39 @@
                                 </div>
                             </div>
                         </div>
-                    <hr class="bg-200 mb-6 mt-4" />
-                    <div class="row bg-tax">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="card card-tax">
-                                <div class="tax-title d-flex justify-content-between px-4 pt-3">
-                                    <div class="echart-area-line-chart-example" style="min-height:300px"></div>
-                                    <script>
-                                        const basicAreaLineChartInit = () => {
-                                        const { getColor, getData, rgbaColor } = window.phoenix.utils;
-                                        const t = document.querySelector(".echart-area-line-chart-example");
-                                        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                                        const dataValues = [1020, 1160, 1300, 958, 1240, 1020, 1409, 1200, 1051, 1120, 1240, 1054];
+                        <hr class="bg-200 mb-6 mt-4" />
+                        <div class="col-xl-6 col-xxl-7"> </div>
+                        <div class="card flex-fill w-100">
+                            <div class="card-body">
+                                {!! $chart1->container() !!}
+                            </div>
+                        </div>
+                        <div class="col-12 col-xxl-6">
+                            <div class="row g-3">
+                                <div class="col-12 col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            {!! $chart2->container() !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            {!! $chart3->container() !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
 
-                                        if (t) {
-                                            const chartData = getData(t, "echarts");
-                                            const chartInstance = window.echarts.init(t);
-                                            echartSetOption(chartInstance, chartData, () => ({
-                                                tooltip: {
-                                                    trigger: "axis",
-                                                    padding: [7, 10],
-                                                    backgroundColor: getColor("gray-100"),
-                                                    borderColor: getColor("gray-300"),
-                                                    textStyle: {
-                                                        color: getColor("dark")
-                                                    },
-                                                    borderWidth: 1,
-                                                    formatter: (params) => {
-                                                        return `
-                                                            <div>
-                                                                <h6 class="fs--1 text-700 mb-0">
-                                                                    <span class="fas fa-circle me-1" style='color:${params[0].borderColor}'></span>
-                                                                    ${params[0].name} : ${params[0].value}
-                                                                </h6>
-                                                            </div>
-                                                        `;
-                                                    },
-                                                    transitionDuration: 0,
-                                                    axisPointer: {
-                                                        type: "none"
-                                                    }
-                                                },
-                                                xAxis: {
-                                                    type: "category",
-                                                    data: months,
-                                                    boundaryGap: false,
-                                                    axisLine: {
-                                                        lineStyle: {
-                                                            color: getColor("gray-300"),
-                                                            type: "solid"
-                                                        }
-                                                    },
-                                                    axisTick: {
-                                                        show: false
-                                                    },
-                                                    axisLabel: {
-                                                        color: getColor("gray-400"),
-                                                        formatter: (value) => value.substring(0, 3),
-                                                        margin: 15
-                                                    },
-                                                    splitLine: {
-                                                        show: false
-                                                    }
-                                                },
-                                                yAxis: {
-                                                    type: "value",
-                                                    splitLine: {
-                                                        lineStyle: {
-                                                            color: getColor("gray-200")
-                                                        }
-                                                    },
-                                                    boundaryGap: false,
-                                                    axisLabel: {
-                                                        show: true,
-                                                        color: getColor("gray-400"),
-                                                        margin: 15
-                                                    },
-                                                    axisTick: {
-                                                        show: false
-                                                    },
-                                                    axisLine: {
-                                                        show: false
-                                                    },
-                                                    min: 600
-                                                },
-                                                series: [{
-                                                    type: "line",
-                                                    data: dataValues,
-                                                    itemStyle: {
-                                                        color: getColor("white"),
-                                                        borderColor: getColor("primary"),
-                                                        borderWidth: 2
-                                                    },
-                                                    lineStyle: {
-                                                        color: getColor("primary")
-                                                    },
-                                                    showSymbol: false,
-                                                    symbolSize: 10,
-                                                    symbol: "circle",
-                                                    smooth: false,
-                                                    hoverAnimation: true,
-                                                    areaStyle: {
-                                                        color: {
-                                                            type: "linear",
-                                                            x: 0,
-                                                            y: 0,
-                                                            x2: 0,
-                                                            y2: 1,
-                                                            colorStops: [{
-                                                                offset: 0,
-                                                                color: rgbaColor(getColor("primary"), 0.5)
-                                                            }, {
-                                                                offset: 1,
-                                                                color: rgbaColor(getColor("primary"), 0)
-                                                            }]
-                                                        }
-                                                    }
-                                                }],
-                                                grid: {
-                                                    right: "3%",
-                                                    left: "10%",
-                                                    bottom: "10%",
-                                                    top: "5%"
-                                                }
-                                            }));
-                                        }
-                                    };
-                                    basicAreaLineChartInit();
-                                    </script>
-                                    <i class="fi fi-sr-chart-line-up"></i>
+                                </div>
+                                <div class="col-12 col-md-6">
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <footer class="footer position-absolute">
                 <div class="row g-0 justify-content-between align-items-center h-100">

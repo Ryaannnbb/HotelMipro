@@ -24,6 +24,9 @@ return new class extends Migration
             $table->foreignId('rooms_id')->constrained('kamars')->restrictOnDelete();
             $table->bigInteger('harga_pesanan');
             $table->enum('adaulasan', ['true', 'false'])->default('false');
+            $table->foreignId('kategori_id')->constrained('Kategoris')->restrictOnDelete();
+            
+            // $table->enum('adaulasan', ['true', 'false'])->default('false');
             $table->timestamps();
         });
     }

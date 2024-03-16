@@ -47,7 +47,13 @@ class DiskonController extends Controller
             "kategoris.nama_kategori",
             // "kamars.path_kamar",
             )
-        ->where('diskons.awal_berlaku', '>=', Carbon::now('Asia/Jakarta'));
+            // ->groupBy(
+            //     'detail_diskons.kategori_id', // Jika ingin groupBy harus menyertakan semua kolom termasuk kolom yang tidak mmiliki DB:raw
+            //     "kategoris.id",
+            //     "kategoris.nama_kategori",
+            //     // "kamars.path_kamar",
+            // )
+            ->where('diskons.awal_berlaku', '>=', Carbon::now('Asia/Jakarta'));
         $detaildiskon = $query->get();
         return view('admin.diskon.create', compact('kategori', 'detaildiskon', 'diskon'));
     }
@@ -123,6 +129,8 @@ class DiskonController extends Controller
         $diskon->potongan_harga = $request->potongan_harga;
         $diskon->awal_berlaku = Carbon::parse($request->awal_berlaku)->format('Y-m-d');
         $diskon->akhir_berlaku = Carbon::parse($request->akhir_berlaku)->format('Y-m-d');
+        $kategori_id = $request->nama_kategori[0] ?? null;
+        $diskon->kategori_id = $kategori_id;
         $diskon->save();
 
         $kategori = $request->nama_kategori;
@@ -135,7 +143,7 @@ class DiskonController extends Controller
             $harga_kamar = $kategori->harga;
             if ($request->jenis == 'percentage') {
                 $detail->nominal_potongan = $harga_kamar - ($harga_kamar * $request->potongan_harga / 100);
-            }else {
+            } else {
                 $detail->nominal_potongan = $harga_kamar - $request->potongan_harga;
             }
             $detail->save();
@@ -175,14 +183,20 @@ class DiskonController extends Controller
             "kategoris.nama_kategori",
             // "kamars.path_kamar",
             )
-        ->where('diskons.awal_berlaku', '>=', Carbon::now('Asia/Jakarta'));
+            ->groupBy(
+                'diskons.kategori_id',
+                'kategoris.id',
+                'kategoris.nama_kategori',
+            )
+            ->where('diskons.awal_berlaku', '>=', Carbon::now('Asia/Jakarta'));
         $detaildiskon = $query->get();
-
+        $kategoris = Kategori::all();
         $diskon = Diskon::findOrFail($id);
         $diskons = Diskon::all();
         $kategoriterdiskon = DetailDiskon::where('diskon_id', $id)->get();
         return view('admin.diskon.edit', compact('kategori', 'detaildiskon', 'diskon', 'kategoriterdiskon', 'diskons'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -264,41 +278,40 @@ class DiskonController extends Controller
             }
         }
 
-        $kategori = $request->nama_kategori;
         $kategoriDB = Kategori::all();
-        foreach ($kategoriDB as $value) {
-            $kategori = Kategori::find($value->id);
+        foreach ($kategoriDB as $kategori) {
             $harga_kamar = $kategori->harga;
+
             if ($request->jenis == 'percentage') {
                 $nominal_potongan = $harga_kamar - ($harga_kamar * $request->potongan_harga / 100);
-            }else {
+            } else {
                 $nominal_potongan = $harga_kamar - $request->potongan_harga;
             }
 
-            $checkdetail = DetailDiskon::where('diskon_id', $id)->where('kategori_id', $value->id)->get();
+            $checkdetail = DetailDiskon::where('diskon_id', $id)->where('kategori_id', $kategori->id)->get();
             if ($checkdetail->count() > 0) {
-                if (in_array($value->id, $kategori)) {
+                // Menggunakan $kategori->id untuk memeriksa apakah kategori ada
+                if (in_array($kategori->id, $request->nama_kategori)) {
                     DetailDiskon::where('diskon_id', $id)
-                    ->where('kategori_id', $value->id)
-                    ->update(['nominal_potongan' => $nominal_potongan]);
+                        ->where('kategori_id', $kategori->id)
+                        ->update(['nominal_potongan' => $nominal_potongan]);
                 } else {
                     DetailDiskon::where('diskon_id', $id)
-                    ->where('kategori_id', $value->id)
-                    ->delete();
+                        ->where('kategori_id', $kategori->id)
+                        ->delete();
                 }
             } else {
-                if (in_array($value->id, $kategori)) {
+                if (in_array($kategori->id, $request->nama_kategori)) {
                     $detail = new DetailDiskon;
-                    $detail->kategori_id = $value->id;
+                    $detail->kategori_id = $kategori->id;
                     $detail->diskon_id = $id;
                     $detail->nominal_potongan = $nominal_potongan;
                     $detail->save();
                 }
             }
-            // echo $checkdetail->count();
         }
 
-    return redirect()->route('diskon')->with("success", "Diskon data added successfully!");
+        return redirect()->route('diskon')->with("success", "Diskon data added successfully!");
     }
 
     /**

@@ -133,5 +133,5 @@ Route::middleware([UserMiddleware::class])->group(function () {
         Route::put('edit/{id}', 'update')->name('profil.update');
         Route::get('destroy/{id}', 'destroy')->name('profil.destroy');
     });
-
+    
 });

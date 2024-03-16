@@ -327,60 +327,69 @@
                 <div
                     class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white border-top border-bottom border-200 position-relative top-1">
                     <div class="table-responsive scrollbar mx-n1 px-1">
-                        <table class="table fs--1 mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="white-space-nowrap text-start fs--1  ps-0" style="width: 10%">
-                                        <span>NO</span>
-                                    </th>
-                                    <th class="sort text-center white-space-nowrap ps-4" scope="col"
-                                        >FACILITY NAME</th>
-                                    <th class="sort text-center white-space-nowrap ps-4" scope="col"
-                                        >BEST PRICE</th>
-                                    <th class="sort text-end pe-0 ps-4" scope="col" style="width: 20%">
-                                        ACTION</th>
-                                </tr>
-                            </thead>
-                            <tbody class="list" id="products-table-body">
-                                @if ($fasilitas->count() > 0)
-                                    @foreach ($fasilitas as $value)
-                                        <tr class="position-static">
-                                            <td class="fs--1 align-middle"><span>{{ $loop->iteration }}</span></td>
-                                            <td class="text-center category align-middle ps-4">
-                                                <span></span>{{ $value->nama_fasilitas }}
-                                            </td>
-                                            <td class="price text-center align-middle white-space-nowrap text-end fw-bold fs--1  text-700 ps-4">
-                                                {{ 'Rp ' . number_format($value->harga_satuan, 0, ',', '.') }}
-                                            </td>
-                                            <td
-                                                class="align-middle white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger">
-                                                <div class="font-sans-serif btn-reveal-trigger position-static"><button
-                                                        class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
-                                                        type="button" data-bs-toggle="dropdown" data-boundary="window"
-                                                        aria-haspopup="true" aria-expanded="false"
-                                                        data-bs-reference="parent"><span
-                                                            class="fas fa-ellipsis-h fs--2"></span></button>
-                                                    <div class="dropdown-menu dropdown-menu-end py-2"><a
-                                                            class="dropdown-item"
-                                                            href="{{ route('fasilitas.edit', $value->id) }}">Edit</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        {{-- <button type="submit" class="dropdown-item text-danger hapus"
-                                                            href="{{ route('fasilitas.destroy', $value->id) }}">Remove</button> --}}
-                                                        <form action="{{ route('fasilitas.destroy', $value->id) }}" method="POST" class="hapus-form">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="button" class="dropdown-item text-danger hapus">
-                                                                Remove
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                        <t<div class="row">
+                            <div class="col">
+                                <table class="table fs--1 mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="white-space-nowrap text-start fs--1 ps-0" style="width: 10%">
+                                                <span>NO</span>
+                                            </th>
+                                            <th class="sort text-center white-space-nowrap ps-4" scope="col">FACILITY NAME</th>
+                                            <th class="sort text-center white-space-nowrap ps-4" scope="col">BEST PRICE</th>
+                                            <th class="sort text-end pe-0 ps-4" scope="col" style="width: 20%">ACTION</th>
+                                        </tr>
+                                        @if ($fasilitas->isEmpty())
+                                        <tr>
+                                            <td colspan="4" class="text-center py-4">
+                                                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
+                                                    <img src="{{ asset('assets/img/No data-amico.svg') }}" alt="" style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
+                                                    <h3 class="mb-3">There are no Facility added by admin yet. Please check back later.</h3>
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
+                                        @endif
+                                    </thead>
+                                    <tbody class="list" id="products-table-body">
+                                        @if ($fasilitas->isNotEmpty())
+                                            @foreach ($fasilitas as $value)
+                                                <tr class="position-static">
+                                                    <td class="fs--1 align-middle"><span>{{ $loop->iteration }}</span></td>
+                                                    <td class="text-center category align-middle ps-4">
+                                                        <span>{{ $value->nama_fasilitas }}</span>
+                                                    </td>
+                                                    <td class="price text-center align-middle white-space-nowrap text-end fw-bold fs--1  text-700 ps-4">
+                                                        {{ 'Rp ' . number_format($value->harga_satuan, 0, ',', '.') }}
+                                                    </td>
+                                                    <td class="align-middle white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger">
+                                                        <div class="font-sans-serif btn-reveal-trigger position-static">
+                                                            <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                                                type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true"
+                                                                aria-expanded="false" data-bs-reference="parent">
+                                                                <span class="fas fa-ellipsis-h fs--2"></span>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-end py-2">
+                                                                <a class="dropdown-item" href="{{ route('fasilitas.edit', $value->id) }}">Edit</a>
+                                                                <div class="dropdown-divider"></div>
+                                                                <form action="{{ route('fasilitas.destroy', $value->id) }}" method="POST"
+                                                                    class="hapus-form">
+                                                                    @csrf
+                                                                    @method('delete')
+                                                                    <button type="button" class="dropdown-item text-danger hapus">
+                                                                        Remove
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">

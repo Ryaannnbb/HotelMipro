@@ -24,7 +24,7 @@ use Carbon\Carbon;
         color: #ffcc00;
     }
 </style>
-<div class="pt-5 pb-9">
+{{-- <div class="pt-5 pb-9">
     <!-- ============================================-->
     <!-- <section> begin ============================-->
     <section class="py-0">
@@ -48,7 +48,24 @@ use Carbon\Carbon;
                                                 <div class="swiper swiper-container theme-slider"
                                                     data-thumb-target="swiper-products-thumb"
                                                     data-products-swiper='{"slidesPerView":1,"spaceBetween":16,"thumbsEl":".swiper-products-thumb"}'>
-                                                </div>
+                                                </div> --}}
+    <div class="pt-5 pb-9">
+        <section class="py-0">
+            <div class="container-small">
+                @foreach ($kamars as $detail)
+                    <section class="py-0 mt-5">
+                        <div class="container-small">
+                            <div class="row g-5 mb-5 mb-lg-8" data-product-details="data-product-details">
+                                <div class="col-12 col-lg-6">
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-12 col-md-2 col-lg-12 col-xl-2">
+                                            <div class="swiper-products-thumb swiper swiper-container theme-slider overflow-visible"
+                                                id="swiper-products-thumb"></div>
+                                        </div>
+                                        <div class="col-12 col-md-10 col-lg-12 col-xl-10">
+                                            <div
+                                                class="d-flex align-items-center border border-translucent rounded-3 text-center p-5 h-100">
+                                                <img src="{{ asset('storage/kamar/' . $detail->path_kamar) }}">
                                             </div>
                                         </div>
                                     </div>
@@ -70,19 +87,94 @@ use Carbon\Carbon;
                                             </p>
                                         </div>
                                         <div>
+                                            <div class="d-flex flex-wrap align-items-center">
+                                                <div class="me-2">
+                                                    <span class="fa fa-star text-warning"></span>
+                                                    <span class="fa fa-star text-warning"></span>
+                                                    <span class="fa fa-star text-warning"></span>
+                                                    <span class="fa fa-star text-warning"></span>
+                                                    <span class="fa fa-star text-warning"></span>
+                                                </div>
+                                                <p class="text-primary fw-semibold mb-2">6548 People rated and reviewed</p>
+                                            </div>
+                                            <h3 class="mb-3 lh-sm" style="font-size: 18px;">{{ $detail->nama_kamar }}</h3>
+
+                                            @php
+                                                $potongan_harga = 0; // Inisialisasi potongan harga di luar loop untuk menghitungnya sekali saja
+                                            @endphp
+                                            @foreach ($kamars as $detail)
+                                                @php
+                                                    $harga_awal = $detail->harga;
+                                                    $diskon_tersedia = false;
+                                                    // dd($diskon, $detail->id);
+
+                                                    foreach ($diskons as $diskon) {
+                                                        if ($diskon->kategori_id === $detail->kategori_id) {
+                                                            $potongan_harga = $diskon->potongan_harga;
+                                                            // dd($potongan_harga);
+                                                            $harga_setelah_diskon = $harga_awal - $potongan_harga;
+                                                            $diskon_tersedia = true;
+                                                        }
+                                                    }
+
+                                                @endphp
+                                               <div class="d-flex flex-wrap align-items-center">
+                                                <h1 style="font-size: 30px;">
+                                                    @if ($diskon_tersedia && \Carbon\Carbon::now() <= \Carbon\Carbon::parse($diskon->akhir_berlaku))
+                                                        Rp.{{ number_format($harga_setelah_diskon, 0, ',', '.') }}
+                                                        <span class="text-body-quaternary text-decoration-line-through fs-1 mb-0 me-3">
+                                                            Rp.{{ number_format($harga_awal, 0, ',', '.') }}
+                                                        </span>
+                                                    @else
+                                                        Rp.{{ number_format($harga_awal, 0, ',', '.') }}
+                                                    @endif
+                                                    @if ($diskons && property_exists($diskons, 'potongan_harga') && $diskons->kategori_id == $kamars->first()->kategori_id)
+                                                        @if ($diskon->potongan_harga > 100)
+                                                            {{-- Rp.{{ number_format($diskon->potongan_harga, 0, ',', '.') }} --}}
+                                                        @else
+                                                            {{ $diskon->potongan_harga }}%
+                                                        @endif
+                                                    @endif
+                                                </h1>
+                                            </div>
+                                            <p class="text-success font-size: 24px;">{{ $detail->status }}</p>
+                                            <p class="mb-2 text-body-secondary"><strong class="text-body-highlight" style="font-size: 14px;">{{ $detail->deskripsi }}</strong></p>
+                                            <p class="text-danger-dark fw-bold mb-5 mb-lg-0">
+                                                @if ($diskon_tersedia && \Carbon\Carbon::now() <= \Carbon\Carbon::parse($diskon->akhir_berlaku))
+                                                    Discount expires {{ \Carbon\Carbon::parse($diskon->akhir_berlaku)->diffForHumans(\Carbon\Carbon::now(), true) }}
+                                                @else
+                                                    Discount has expired
+                                                @endif
+                                            </p>
+                                            @endforeach
+                                            {{-- <p class="text-success font-size: 24px;">{{ $detail->status }}</p>
+                                            <p class="mb-2 text-body-secondary"><strong class="text-body-highlight"
+                                                    style="font-size: 14px;">{{ $detail->deskripsi }}</strong></p>
+                                                    <p class="text-danger-dark fw-bold mb-5 mb-lg-0">
+                                                        Discount expires
+                                                        {{ \Carbon\Carbon::parse($diskon->akhir_berlaku)->diffForHumans(\Carbon\Carbon::now(), true) }}
+                                                    </p>                                                     --}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="card card-hotel-list h-100 border-0 shadow">
+                            <div class="d-flex" style="margin-top: -50px; margin-left: 70px; ">
+                                <a href="{{ route('pesanan', ['id' => $detail->id]) }}"
+                                    class="btn btn-lg btn-warning rounded-pill w-50 fs--1 fs-sm-0">
+                                    <span class="fas fa-shopping-cart me-2"></span>Checkout
+                                </a>
+                            </div>
+                        </div>
                     </section>
 
-                <div class="d-flex">
+                {{-- <div class="d-flex">
                     <a href="{{ route('pesanan', ['id' => $id]) }}"
                         class="btn btn-lg btn-warning rounded-pill w-50 fs--1 fs-sm-0">
                         <span class="fas fa-shopping-cart me-2"></span>Checkout
                     </a>
-                </div>
+                </div> --}}
 
 
     <!-- ============================================-->

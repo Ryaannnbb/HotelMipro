@@ -341,6 +341,16 @@
                                     <th class="sort text-end align-middle pe-0 ps-4" scope="col" style="width: 20%">
                                         ACTION</th>
                                 </tr>
+                                @if ($kategori->isEmpty())
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">
+                                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
+                                            <img src="{{ asset('assets/img/No data-amico.svg') }}" alt="" style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
+                                            <h3 class="mb-3">There are no category added by admin yet. Please check back later.</h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endif
                             </thead>
                             <tbody class="list" id="products-table-body">
                                 @if ($kategori->count() > 0)

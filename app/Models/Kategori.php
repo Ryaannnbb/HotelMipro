@@ -22,4 +22,8 @@ class Kategori extends Model
         return $this->hasMany(Kamar::class);
     }
 
+    public function kategori() : HasMany
+    {
+        return $this->hasMany(Kategori::class);
+    }
 }

@@ -151,8 +151,8 @@
                 </div>
                 <div class="col-lg-9 col-xxl-10">
                     <div class="row">
-                        @if (count($kamar) > 0)
-                            @foreach ($kamar as $kamars)
+                        @if($kamar->isNotEmpty())
+                            @foreach($kamar as $kamars)
                                 <div class="col-12 col-xl-4 mt-2">
                                     <div class="card mr-3" style="height: 450px">
                                         <div class="position-relative text-decoration-none product-card h-100">
@@ -205,17 +205,14 @@
                                 </div>
                             @endforeach
                         @else
-                            <tr>
-                                <td colspan="8" class="text-center py-4">
-                                    <div
-                                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
-                                        <img src="{{ asset('assets/img/No data-amico.svg') }}" alt=""
-                                            style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
-                                        <h3 class="mb-3">There are no products added by admin yet. Please check back
-                                            later.</h3>
-                                    </div>
-                                </td>
-                            </tr>
+                            <div class="col-12">
+                                <div
+                                    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
+                                    <img src="{{ asset('assets/img/No data-amico.svg') }}" alt=""
+                                        style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
+                                    <h3 class="mb-3">There are no products available.</h3>
+                                </div>
+                            </div>
                         @endif
                     </div>
                 </div>

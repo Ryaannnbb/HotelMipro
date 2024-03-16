@@ -16,15 +16,27 @@ class DetailKamarController extends Controller
     public function index(Request $request, $id)
     {
         $user = auth()->user();
-        $kamar = Kamar::where('id', $id)->get();
+        $kamars = Kamar::where('id', $id)->get();
+        $pesanan = Pesanan::find($id);
+        $diskons = DB::table('diskons')
         $detailkamars = Detailkamar::where('kamar_id', $id)->get();
-
-        // Hitung total rating dan total ulasan
+            ->leftJoin('diskons as diskon', 'diskon.id', '=',  'diskons.id')
+            ->select('diskon.potongan_harga', 'diskon.kategori_id', 'diskon.akhir_berlaku')
+            ->get();
+        // $diskonsArray = $diskons->toArray();
+        // $kategoriIds = [];
+        // foreach ($diskonsArray as $diskon) {
+        //     $kategoriIds[] = $diskon->kategori_id;
+        // }
+        // $kategoriIds = array_unique($kategoriIds);
         $totalRating = $detailkamars->avg('rating');
         $totalUlasan = $detailkamars->count();
 
-        return view('user.detailkamar', compact('user', 'kamar', 'detailkamars', 'totalRating', 'totalUlasan', 'id'));
+        return view('user.detailkamar', compact('user', 'kamar', 'detailkamars', 'totalRating', 'totalUlasan', 'pesanan','diskon','id'));
     }
+        // Hitung total rating dan total ulasan
+
+
 
     /**
      * Show the form for creating a new resource.

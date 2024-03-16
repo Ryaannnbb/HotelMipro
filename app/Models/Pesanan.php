@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pesanan extends Model
 {
     use HasFactory;
+
     protected $table = 'pesanans';
-    protected $Fillabel =[
+
+    protected $fillable = [
         'email',
         'username',
         'telp',
@@ -20,23 +22,29 @@ class Pesanan extends Model
         'adaulasan',
         'foto',
         'rooms_id',
-        'user_id'
+        'user_id',
+        'kategori_id'
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-    public function room()
-    {
-        return $this->belongsTo(Kamar::class);
-    }
-    // public function ulasan()
+
+    // Relasi dengan user
+    // public function user()
     // {
-    //     return $this->hasMany(Ulasan::class);
+    //     return $this->belongsTo(User::class);
     // }
+
+    // Relasi dengan kamar
+    // public function room()
+    // {
+    //     return $this->belongsTo(Kamar::class, 'room_id'); // Menambahkan 'room_id' sebagai foreign key
+    // }
+
+    // Relasi dengan pemakaian fasilitas
     public function pemakaian_fasilitas()
     {
         return $this->hasMany(PemakaianFasilitas::class);
     }
-
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }
