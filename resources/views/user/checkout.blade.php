@@ -35,6 +35,7 @@
                                     <td class="py-2 px-3">
                                         <h5 class="lh-sm fw-normal text-800">{{ Auth::user()->name }}</h5>
                                     </td>
+                                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     <input type="hidden" name="username" value="{{ auth()->user()->name }}">
                                     <input type="hidden" name="email" value="{{ auth()->user()->email }}">
                                 </tr>
@@ -195,31 +196,18 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Select
-                                    facility</label>
-                                <select class="form-select @error('nama_fasilitas') is-invalid @enderror"
-                                    id="organizerMultiple" data-choices="data-choices" multiple="multiple"
-                                    data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
-                                    <option value="">Select Facility...</option>
-                                    @foreach ($fasilitas as $fasilitasd)
-                                        <option value="{{ $fasilitasd->id }}" @selected(!is_null(@old('nama_fasilitas')) ? in_array($fasilitasd->id, @old('nama_fasilitas')) : '')>
-                                            {{ $fasilitasd->nama_fasilitas }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('nama_fasilitas')
-                                    <strong class="mt-n3 invalid-feedback">
-                                        {{ $message }}
-                                    </strong>
-                                @enderror
-                            </div>
+
+
+                            {{-- <div class="d-flex justify-content-between border-y border-dashed py-3 mb-4">
+                                <h4 class="mb-0">Total Price:</h4>
+                                <h4 id="totalPrice" class="mb-">Rp. {{ number_format($total, 0, ',', '.') }}</h4>
+                            </div> --}}
                         </div>
                         <div class="row g-2 mb-5 mb-lg-0">
                             <div class="col-md-8 col-lg-9 d-grid">
                                 <button class="btn btn-primary" type="submit">Pay</button>
                             </div>
-                            <div class="col-md-4 col-lg-3 d-grid">
-                                <button id="updateFacilitiesBtn" class="btn btn-primary">Update</button>
+
                         </div>
                         </div>
                     </div>
@@ -262,16 +250,24 @@
                                         <h5 class="text-900 fw-semi-bold">Discount: </h5>
                                         <h5 class="text-danger fw-semi-bold">-$59</h5>
                                     </div>
-                                    <div class="d-flex justify-content-between mb-2" id="facilitySection">
-                                        <h5 class="text-900 fw-semi-bold">Facility: </h5>
+
+                                </div>
+
+                                <div class="border-dashed border-bottom mt-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="text-900 fw-semi-bold">Facility Total:</h5>
+                                        @if(session('totalFacilityPrice'))
+                                            <h5 id="facilityTotalCard" class="text-900 fw-semi-bold">{{ 'Rp ' . number_format(session('totalFacilityPrice')) }}</h5>
+                                        @else
+                                            <h5 id="facilityTotalCard" class="text-900 fw-semi-bold">Rp 0</h5>
+                                        @endif
                                     </div>
                                 </div>
                                 @php
-                                    $roomPrice = $kamars->harga;
-                                    $discount = 50000;
-                                    $facility = 100000;
-                                    $total = $roomPrice - $discount + $facility;
-                                @endphp
+                                $roomPrice = $kamars->harga;
+                                $totalFacilityPrice = session('totalFacilityPrice', 0); // Inisialisasi dengan nilai default 0 jika tidak ada dalam sesi
+                                $total = $roomPrice + $totalFacilityPrice;
+                            @endphp
                                 <div class="d-flex justify-content-between border-dashed-y pt-3">
                                     <h4 class="mb-0">Total :</h4>
                                     <h4 class="mb-0">{{ 'Rp ' . number_format($total) }}</h4>
@@ -281,7 +277,36 @@
                     </div>
                 </div>
             </div>
-        </form><!-- end of .container-->
+        </form>
+        <div class="row ">
+            <div class="col-md-3 offset-md-8" style="margin-top: -300px;">
+                <form id="updateCartForm" action="{{ route('updateFacilitiesPrice') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="selected_fasilitas" value="{{ json_encode(old('nama_fasilitas', [])) }}">
+                    <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Select facility</label>
+                    <select class="form-select @error('nama_fasilitas') is-invalid @enderror" id="organizerMultiple"
+                        data-choices="data-choices" multiple="multiple"
+                        data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
+                        <option value="">Select Facility...</option>
+                        @foreach ($fasilitas as $fasilitasd)
+                            <option value="{{ $fasilitasd->id }}" @if(in_array($fasilitasd->id, old('nama_fasilitas', []))) selected @endif>
+                                {{ $fasilitasd->nama_fasilitas }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('nama_fasilitas')
+                        <strong class="mt-n3 invalid-feedback">
+                            {{ $message }}
+                        </strong>
+                    @enderror
+
+                    <button type="submit" class="btn btn-success mt-2 ml-auto">
+                        Update Cart
+                        <span class="fas fa-undo ms-1 order-2"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </section><!-- <section> close ============================-->
     <!-- ============================================-->
 
@@ -354,39 +379,26 @@
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('updateFacilitiesBtn').addEventListener('click', function(event) {
-                event.preventDefault();
-
-                var selectedFacilities = Array.from(document.querySelectorAll('#selectedFacilities option:checked'))
-                    .map(option => ({ name: option.textContent }));
-
-                var facilitySection = document.getElementById('facilitySection');
-                facilitySection.innerHTML = '';
-
-                if (selectedFacilities.length > 0) { // Check if there are selected facilities
-                    var facilityHeader = document.createElement('h5');
-                    facilityHeader.className = 'text-900 fw-semi-bold';
-                    facilityHeader.textContent = 'Facility: ';
-                    facilitySection.appendChild(facilityHeader);
-
-                    selectedFacilities.forEach(function(facility) {
-                        var facilityName = document.createElement('h5');
-                        facilityName.className = 'text-900 fw-semi-bold';
-                        facilityName.textContent = facility.name;
-                        facilitySection.appendChild(facilityName);
-                    });
-                } else {
-                    // Show a message if no facilities are selected
-                    var noFacilitiesMessage = document.createElement('p');
-                    noFacilitiesMessage.textContent = 'No facilities selected';
-                    facilitySection.appendChild(noFacilitiesMessage);
-                }
+        function updateCart() {
+            $.post("{{ route('updateFacilitiesPrice') }}", $('#updateCartForm').serialize())
+            .done(function(data) {
+                // Update the HTML element with the totalFacilityPrice
+                $("#facilityTotal").text("Rp " + data.totalFacilityPrice.toLocaleString());
+                $("#facilityTotalCard").text("Rp " + data.totalFacilityPrice.toLocaleString()); // Update total facility on card
+            })
+            .fail(function(jqXHR, textStatus, errorThrown) {
+                console.error("AJAX Error: " + textStatus, errorThrown);
             });
-        });
-        </script>
+        }
 
+        $(document).ready(function() {
+            // Call updateCart function on page load and when there's a change in the input fields
+            updateCart();
+            $('input[name^="nama_fasilitas"]').on('change', updateCart);
+        });
+    </script>
     <script>
         const selectElement = document.querySelector('#selectMetode');
         const ewalletInput = document.querySelector('#ewalletInput');

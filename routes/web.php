@@ -118,10 +118,11 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/pesanan/{id}', [PesananController::class, 'index'])->name('pesanan');
     Route::post('/pesanan/store', [PesananController::class, 'store'])->name('pesanan.store');
     Route::post('/pesanan/update', [PesananController::class, 'update'])->name('pesanan.update');
+    Route::post('/pesanan/destroy/{id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
     Route::post('/detailkamar', [DetailKamarController::class, 'store'])->name('detailkamar.store');
     Route::post('/detailkamar{id}', [DetailKamarController::class, 'show'])->name('detailkamar.show');
         Route::delete('/detailkamar/{id}', [DetailKamarController::class, 'destroy'])->name('detailkamar.delete');
-        Route::post('/update-facilities-price', [PesananController::class, 'updateFacilitiesPrice'])->name('updateFacilitiesPrice');
+        Route::post('/updateFacilitiesPrice', [PesananController::class, 'update'])->name('updateFacilitiesPrice');
     // });
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {
