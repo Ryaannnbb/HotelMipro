@@ -211,8 +211,10 @@
                             <div class="col-md-8 col-lg-9 d-grid">
                                 <button class="btn btn-primary" type="submit">Pay</button>
                             </div>
-
-                        </div>
+                            <div class="col-md-4 col-lg-3 d-grid">
+                                <a href="{{ route('kamar') }}" class="btn btn-phoenix-secondary text-nowrap">Save Order
+                                    and Exit</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-xl-4">
@@ -248,11 +250,18 @@
                                     <div class="d-flex justify-content-between mb-2">
                                         <h5 class="text-900 fw-semi-bold">Room Price: </h5>
                                         <h5 class="text-900 fw-semi-bold">
-                                            {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</h5>
+                                            {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}
+                                        </h5>
                                     </div>
                                     <div class="d-flex justify-content-between mb-2">
                                         <h5 class="text-900 fw-semi-bold">Discount: </h5>
-                                        <h5 class="text-danger fw-semi-bold">- Rp{{ $diskons->potongan_harga }}</h5>
+                                        <h5 class="text-danger fw-semi-bold">
+                                            @if ($diskons)
+                                                -{{ $diskons->potongan_harga }}
+                                            @else
+                                                -0
+                                            @endif
+                                        </h5>
                                     </div>
 
                                 </div>
@@ -268,28 +277,22 @@
                                     </div>
                                 </div>
                                 @php
-                                    $roomPrice = $kamars->harga; // Harga kamar
-                                    $discount = $diskons->potongan_harga; // Potongan harga dari diskon
-                                    $total = $roomPrice; // Total awalnya diatur dengan harga kamar
+                                $roomPrice = $kamars->harga; // Harga kamar
+                                $discount = optional($diskons)->potongan_harga ?? 0; // Potongan harga dari diskon
+                                $total = $roomPrice; // Total awalnya diatur dengan harga kamar
 
-                                    // Jika jenis diskon adalah persentase, hitung diskon berdasarkan persentase
-                                    // @dd($diskons);
-                                    if ($diskons->jenis == 'percentage') {
+                                if ($diskons && $diskons->jenis == 'percentage') {
+                                    $discountAmount = ($roomPrice * $discount) / 100;
+                                    $total -= $discountAmount;
+                                } else {
+                                    $total -= $discount;
+                                }
+                            @endphp
 
-                                        $discountAmount = ($roomPrice * $discount / 100);
-                                        $total -= $discountAmount;
-                                    } else {
-                                        // Jika jenis diskon bukan persentase, potongan harga langsung dikurangkan
-                                        $total -= $diskons->potongan_harga;
-                                    }
-
-
-                                @endphp
-
-                                <div class="d-flex justify-content-between border-dashed-y pt-3">
-                                    <h4 class="mb-0">Total :</h4>
-                                    <h4 class="mb-0">{{ 'Rp ' . number_format($total) }}</h4>
-                                </div>
+                            <div class="d-flex justify-content-between border-dashed-y pt-3">
+                                <h4 class="mb-0">Total :</h4>
+                                <h4 class="mb-0">{{ 'Rp ' . number_format($total) }}</h4>
+                            </div>
                             </div>
                         </div>
                     </div>

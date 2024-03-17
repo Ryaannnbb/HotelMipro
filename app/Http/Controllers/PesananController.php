@@ -36,7 +36,6 @@ class PesananController extends Controller
         $fasilitas = Fasilitas::all();
         $bank = Pembayaran::where('metode_pembayaran', 'bank')->get();
         $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
-        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars','request'));
         $diskons = DB::table('diskons')
                 ->select('potongan_harga', 'kategori_id', 'akhir_berlaku','jenis')
                 ->where('kategori_id', $kategori_id)

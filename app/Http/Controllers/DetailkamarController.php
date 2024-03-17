@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kamar;
+use App\Models\Pesanan;
 use App\Models\Detailkamar;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class DetailKamarController extends Controller
 {
@@ -18,8 +19,8 @@ class DetailKamarController extends Controller
         $user = auth()->user();
         $kamars = Kamar::where('id', $id)->get();
         $pesanan = Pesanan::find($id);
-        $diskons = DB::table('diskons')
         $detailkamars = Detailkamar::where('kamar_id', $id)->get();
+        $diskons = DB::table('diskons')
             ->leftJoin('diskons as diskon', 'diskon.id', '=',  'diskons.id')
             ->select('diskon.jenis', 'diskon.potongan_harga', 'diskon.kategori_id', 'diskon.akhir_berlaku')
             ->groupBy('diskon.jenis', 'diskon.potongan_harga', 'diskon.kategori_id', 'diskon.akhir_berlaku')
