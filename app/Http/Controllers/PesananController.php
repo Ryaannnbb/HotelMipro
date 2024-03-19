@@ -300,33 +300,26 @@ class PesananController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-{
-    // dd($request->all());
-    if ($request->has('nama_fasilitas')) {
-        // Inisialisasi total harga fasilitas
-        $totalFacilityPrice = 0;
+    {
+        if ($request->has('nama_fasilitas')) {
+            $totalFacilityPrice = 0;
 
-        foreach ($request->nama_fasilitas as $fasilitas_id) {
-            // dd($fasilitas_id);
-            $pemakaianFasilitas = PemakaianFasilitas::find($fasilitas_id);
-            // dd($pemakaianFasilitas);
+            foreach ($request->nama_fasilitas as $fasilitas_id) {
+                $pemakaianFasilitas = PemakaianFasilitas::find($fasilitas_id);
 
-            if ($pemakaianFasilitas) {
-                // Hitung total harga fasilitas berdasarkan harga dan jumlah
-                $totalFacilityPrice += $pemakaianFasilitas->harga_pemakaian;
+                if ($pemakaianFasilitas) {
+                    $totalFacilityPrice += $pemakaianFasilitas->harga_pemakaian;
+                }
             }
+
+            session()->put('totalFacilityPrice', $totalFacilityPrice);
+            return redirect()->back()->withInput(['nama_fasilitas' => $request->nama_fasilitas]);
+        } else {
+            // Jika tidak ada fasilitas yang dipilih, set total harga fasilitas ke 0 dalam session
+            session()->put('totalFacilityPrice', 0);
+            return redirect()->back()->withErrors(['error' => 'No facilities selected']);
         }
-        // dd($totalFacilityPrice);
-
-        // Simpan total harga fasilitas dalam session
-        session()->put('totalFacilityPrice', $totalFacilityPrice);
-
-        // Redirect kembali ke halaman sebelumnya dengan menyertakan nilai yang dipilih
-        return redirect()->back()->withInput(['nama_fasilitas' => $request->nama_fasilitas]);
-    } else {
-        return redirect()->back()->withErrors(['error' => 'No facilities selected']);
     }
-}
     /**
      * Remove the specified resource from storage.
      */
