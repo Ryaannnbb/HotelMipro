@@ -221,18 +221,18 @@
 
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h2 class="mb-2">Add a facility</h2>
-                    <h5 class="text-700 fw-semi-bold">Facilities booked across your hotel</h5>
+                    <h2 class="mb-2">Tambah Fasilitas</h2>
+                    <h5 class="text-700 fw-semi-bold">Fasilitas Bisa Dipesan Di Seluruh kamar hotel</h5>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('fasilitas') }}">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish facility</button>
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('fasilitas') }}">Batalkan</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Simpan Fasilitas</button>
                 </div>
             </div>
             <div class="row g-5">
                 <div class="col-12 col-xl-12">
-                    <label class="fw-bold">Facility Title</label>
-                    <input class="form-control @error('nama_fasilitas') is-invalid @enderror" name="nama_fasilitas" value="{{ old('nama_fasilitas') }}" type="text" placeholder="Write title here..." />
+                    <label class="fw-bold">Nama Fasilitas</label>
+                    <input class="form-control @error('nama_fasilitas') is-invalid @enderror" name="nama_fasilitas" value="{{ old('nama_fasilitas') }}" type="text" placeholder="Tulis nama fasilitas disini..." />
                     @error('nama_fasilitas')
                         <strong class="invalid-feedback">
                             {{ $message }}
@@ -240,8 +240,8 @@
                     @enderror
                 </div>
                 <div class="col-12 col-xl-12">
-                    <label class="fw-bold">Best Price</label>
-                    <input class="form-control @error('harga_satuan') is-invalid @enderror" name="harga_satuan" value="{{ old('harga_satuan') }}" type="number" placeholder="Write title here..." />
+                    <label class="fw-bold">Harga </label>
+                    <input class="form-control @error('harga_satuan') is-invalid @enderror" name="harga_satuan" value="{{ old('harga_satuan') }}" type="number" placeholder="Tulis harga disini..." />
                     @error('harga_satuan')
                         <strong class="invalid-feedback">
                             {{ $message }}

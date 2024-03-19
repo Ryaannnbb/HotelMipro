@@ -266,26 +266,26 @@
             @csrf
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h2 class="mb-2">Edit a rooms</h2>
-                    <h5 class="text-700 fw-semi-bold">Orders placed across your store</h5>
+                    <h2 class="mb-2">Edit Kamar</h2>
+                    <h5 class="text-700 fw-semi-bold">Pesanan ditempatkan di seluruh toko anda</h5>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kamar') }}">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish Rooms</button>
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kamar') }}">Batalkan</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Simpan Kamar</button>
                 </div>
             </div>
             @method('PUT')
             <div class="row g-5">
                 <div class="col-12 col-xl-8">
-                    <h4 class="mb-3">Product Title</h4><input class="form-control mb-5" type="text"
+                    <h4 class="mb-3">Nama Kamar</h4><input class="form-control mb-5" type="text"
                         name="nama_kamar" value="{{ old('name', $kamar->nama_kamar) }}"
                         placeholder="Write title here..." />
                     <div class="mb-6">
-                        <h4 class="mb-3"> Product Description</h4>
+                        <h4 class="mb-3"> Deskripsi Kamar</h4>
                         <textarea class="tinymce" name="deskripsi"
                             data-tinymce='{"height":"15rem","placeholder":"Write a description here...","plugins": "nonbreaking"}'>{{ old('description', $kamar->deskripsi) }}</textarea>
                     </div>
-                    <h4 class="mb-3">Display images</h4>
+                    <h4 class="mb-3">Tambah Gambar</h4>
                     <div class="mb-3">
                         <div class="d-flex align-items-center flex-column">
                             <input class="form-control @error('path_kamar') is-invalid @enderror"
@@ -322,12 +322,12 @@
                         <div class="col-12 col-xl-12">
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-4">Organize</h4>
+                                    <h4 class="card-title mb-4">Pengaturan</h4>
                                     <div class="row gx-3">
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
                                                 <div class="d-flex flex-wrap mb-2">
-                                                    <h5 class="mb-0 text-1000 me-2">category</h5><a class="fw-bold fs--1"
+                                                    <h5 class="mb-0 text-1000 me-2">Kategori</h5><a class="fw-bold fs--1"
                                                         href="#!"></a>
                                                 </div>
                                                 <select class="form-select mb-3 @error('kategori_id') is-invalid @enderror"
@@ -343,7 +343,7 @@
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">price</h5><input class="form-control mb-xl-3"
+                                                <h5 class="mb-2 text-1000">Harga</h5><input class="form-control mb-xl-3"
                                                     type="number" name="harga"
                                                     value="{{ old('name', $kamar->harga) }}" placeholder="price" />
                                             </div>

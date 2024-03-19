@@ -113,12 +113,12 @@
         <div class="mb-9">
             <div class="row g-3 mb-4">
                 <div class="col-auto">
-                    <h2 class="mb-0">Rooms</h2>
+                    <h2 class="mb-0">Kamar</h2>
                 </div>
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item">
-                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span
+                    <p class="nav-link active my-n2" aria-current="page"><span>Semua </span><span
                             class="text-700 fw-semi-bold">
                             @if ($kamar->count() > 0)
                                 <span>({{ $kamar->count() }})</span>
@@ -142,7 +142,7 @@
                                 <div class="ms-xxl-auto">
                                     <button class="btn btn-link text-900 me-4 px-0"></button>
                                     <a href="{{ route('kamar.create') }}" class="btn btn-primary" id="addBtn">
-                                        <span class="fas fa-plus me-2"></span>Add room
+                                        <span class="fas fa-plus me-2"></span>Tambah Kamar
                                     </a>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@
                                                             @csrf
                                                             @method('delete')
                                                             <button type="button"
-                                                                class="dropdown-item text-danger hapus">Remove</button>
+                                                                class="dropdown-item text-danger hapus">Hapus</button>
                                                         </form>
                                                     </div>
                                                 </div>

@@ -282,7 +282,7 @@
         <div class="mb-9">
             <div class="row g-3 mb-4">
                 <div class="col-auto">
-                    <h2 class="mb-0">Orders</h2>
+                    <h2 class="mb-0">Pesanan</h2>
                 </div>
             </div>
             <div id="products"
@@ -315,19 +315,19 @@
                                         <th class="sort white-space-nowrap align-middle text-center  "
                                             scope="col" style="width:15%; min-width:120px">NO</th>
                                         <th class="sort white-space-nowrap align-middle text-center  "
-                                            scope="col" style="width:15%; min-width:140px">INVOICE</th>
+                                            scope="col" style="width:15%; min-width:140px">BUKTI</th>
                                         <th class="sort white-space-nowrap align-middle text-center  "
-                                            scope="col" style="width:15%; min-width:140px">USERNAME</th>
+                                            scope="col" style="width:15%; min-width:140px">NAMA PENGGUNA</th>
                                         <th class="sort white-space-nowrap align-middle text-center  "
-                                            scope="col" style="width:15%; min-width:140px">ROOM NAME</th>
+                                            scope="col" style="width:15%; min-width:140px">NAMA KAMAR</th>
                                         <th class="sort align-middle  text-center" scope="col"
-                                            style="width:15%; min-width:180px">PAYMENT METHOD</th>
+                                            style="width:15%; min-width:180px">METODE PEMBAYARAN</th>
                                         {{-- <th class="sort align-middle text-center" scope="col"
                                             style="width:20%; min-width:160px">DELIVERY METHOD</th> --}}
                                         <th class="sort align-middle  text-center" scope="col"
-                                            style="width:15%; min-width:160px">START DATE</th>
+                                            style="width:15%; min-width:160px">TANGGAL AWAL PESAN</th>
                                         <th class="sort align-middle  text-center" scope="col"
-                                            style="width:15%; min-width:160px">END DATE</th>
+                                            style="width:15%; min-width:160px">TANGGAL AKHIR PESAN</th>
                                         <th class="sort align-middle text-center" scope="col"
                                             style="width:15%; min-width:160px">TOTAL</th>
                                         {{-- <th class="align-middle text-center" scope="col"

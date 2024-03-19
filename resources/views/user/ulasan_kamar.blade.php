@@ -53,8 +53,7 @@
                     <div class="d-flex">
                         <button class="btn btn-lg btn-outline-primary rounded-pill w-100 me-3 px-2 px-sm-4 fs--1 fs-sm-0"
                             data-bs-toggle="modal" data-bs-target="#commentModal">
-                            <span class="me-2 far fa-comment"></span>Add comment
-                        </button>
+                            <span class="me-2 far fa-comment"></span>Tambah komentar
                     </div>
 
                     <!-- Modal "Add Comment" -->

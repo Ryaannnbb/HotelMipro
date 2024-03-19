@@ -205,7 +205,7 @@
             <div class="row g-4">
                 <div class="col-12 col-xxl-6">
                     <div class="mb-8">
-                        <h2 class="mb-2">Dashboard</h2>
+                        <h2 class="mb-2">Berada</h2>
                     </div>
                     <div class="row align-items-center g-4">
                         <div class="col-12 col-md-auto">
@@ -218,70 +218,76 @@
                                         class="fa-stack-1x fas fa-bed text-primary"
                                         data-fa-transform="shrink-2 up-8 right-6"></span></span>
                                         <div class="ms-3">
-                                            <h4 class="mb-0">Rooms</h4>
-                                            <p class="text-800 fs--1 mb-0">Total amount: {{ $rooms ? count($rooms) : 0 }}</p>
+                                            <h4 class="mb-0">Kamar</h4>
+                                            <p class="text-800 fs--1 mb-0">Total Kamar : {{ $rooms ? count($rooms) : 0 }}</p>
                                         </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center">
                                 <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
-                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(119, 226, 253);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span
-                                    class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
-                                    data-fa-transform="up-4 right-3 grow-2"></span>
-                                    <span class="fa-stack-1x fas fa-user" style="color: rgb(37, 197, 236);" data-fa-transform="shrink-2 up-8 right-6"></span>
-                                </span>
-                                <div class="ms-3">
-                                    <h4 class="mb-0">Users</h4>
-                                    <p class="text-800 fs--1 mb-0">Registered users total: {{ $totalUsers }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-auto">
-                            <div class="d-flex align-items-center">
-                                <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
-                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(144, 255, 199);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span
-                                        class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(119, 226, 253);"
+                                        data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
                                         data-fa-transform="up-4 right-3 grow-2"></span>
-                                    <span class="fa-stack-1x far fa-check-circle" style="color: rgb(111, 175, 142);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                    <span class="fa-stack-1x fas fa-user" style="color: rgb(37, 197, 236);"
+                                        data-fa-transform="shrink-2 up-8 right-6"></span>
                                 </span>
                                 <div class="ms-3">
-                                    <h4 class="mb-0">Rooms Active</h4>
-                                    <p class="text-800 fs--1 mb-0">Rooms available: {{ $roomsAvailable }}</p>
+                                    <h4 class="mb-0">Pengguna</h4>
+                                    <p class="text-800 fs--1 mb-0">Total Pengguna Terdaftar: {{ $totalUsers }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-auto">
+                            <div class="d-flex align-items-center">
+                                <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(144, 255, 199);"
+                                        data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                        data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span class="fa-stack-1x far fa-check-circle" style="color: rgb(111, 175, 142);"
+                                        data-fa-transform="shrink-2 up-8 right-6"></span>
+                                </span>
+                                <div class="ms-3">
+                                    <h4 class="mb-0">Kamar Aktif</h4>
+                                    <p class="text-800 fs--1 mb-0">Kamar Belum Dipesan: {{ $roomsAvailable }}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center">
                                 <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
-                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(250, 115, 115);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span
-                                    class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
-                                    data-fa-transform="up-4 right-3 grow-2"></span>
-                                    <span class="fa-stack-1x fa-regular fa-circle-xmark" style="color: rgb(250, 107, 71);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(250, 115, 115);"
+                                        data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                        data-fa-transform="up-4 right-3 grow-2"></span>
+                                    <span class="fa-stack-1x fa-regular fa-circle-xmark" style="color: rgb(250, 107, 71);"
+                                        data-fa-transform="shrink-2 up-8 right-6"></span>
                                 </span>
                                 <div class="ms-3">
-                                    <h4 class="mb-0">Rooms Empty</h4>
-                                    <p class="text-800 fs--1 mb-0">Rooms booked: {{ $roomsBooked }}</p>
+                                    <h4 class="mb-0">Kamar Dibooking</h4>
+                                    <p class="text-800 fs--1 mb-0">Kamar sudah dipesan: {{ $roomsBooked }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-auto">
+                        {{-- <div class="col-12 col-md-auto">
                             <div class="d-flex align-items-center">
                                 <span class="fa-stack" style="min-height: 40px; min-width: 40px;">
-                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(252, 190, 109);" data-fa-transform="down-4 rotate--10 left-4"></span>
-                                    <span
-                                    class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
-                                    data-fa-transform="up-4 right-3 grow-2"></span>                                    <span class="fa-stack-1x fas fa-clock" style="color: rgb(255, 140, 0);" data-fa-transform="shrink-2 up-8 right-6"></span>
+                                    <span class="fa-solid fa-square fa-stack-2x" style="color: rgb(252, 190, 109);"
+                                        data-fa-transform="down-4 rotate--10 left-4"></span>
+                                    <span class="fa-solid fa-circle fa-stack-2x stack-circle text-primary-100"
+                                        data-fa-transform="up-4 right-3 grow-2"></span> <span
+                                        class="fa-stack-1x fas fa-clock" style="color: rgb(255, 140, 0);"
+                                        data-fa-transform="shrink-2 up-8 right-6"></span>
                                 </span>
                                 <div class="ms-3">
                                     <h4 class="mb-0">Rooms Pending</h4>
                                     <p class="text-800 fs--1 mb-0">Users order pending</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <hr class="bg-200 mb-6 mt-4" />
                         <div class="col-xl-6 col-xxl-7"> </div>
                         <div class="card flex-fill w-100">

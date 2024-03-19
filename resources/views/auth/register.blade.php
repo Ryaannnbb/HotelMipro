@@ -129,15 +129,15 @@
                                                     <img src="{{ asset('assets/img/brands/small.png') }}" alt="logo" width="58" />
                                                 </div>
                                             </a>
-                                            <h3 class="text-1000">Sign Up</h3>
-                                            <p class="text-700">Create your account today</p>
+                                            <h3 class="text-1000">Register</h3>
+                                            <p class="text-700">Buat akun baru</p>
                                         </div>
 
                                         <form method="POST" action="{{ route('Createregister') }}">
                                             @csrf
 
                                             <div class="mb-3 text-start"><label class="form-label"
-                                                    for="name">Name</label><input
+                                                    for="name">Nama</label><input
                                                     class="form-control @error('name') is-invalid @enderror"
                                                     name="name" value="{{ old('name') }}" autocomplete="name"
                                                     autofocus id="name" type="text" placeholder="Name" />
@@ -148,7 +148,7 @@
                                                 @enderror
                                             </div>
                                             <div class="mb-3 text-start"><label class="form-label"
-                                                    for="email">Email address</label><input
+                                                    for="email">Alamat Email</label><input
                                                     class="form-control @error('email') is-invalid @enderror"
                                                     name="email" value="{{ old('email') }}" autocomplete="email"
                                                     id="email" type="email" placeholder="name@example.com" />
@@ -171,7 +171,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="col-xl-6"><label class="form-label"
-                                                        for="confirmPassword">Confirm Password</label><input
+                                                        for="confirmPassword">Konfirmasi Password</label><input
                                                         class="form-control form-icon-input"
                                                         name="password_confirmation" autocomplete="new-password"
                                                         id="confirmPassword" type="password"
@@ -180,19 +180,19 @@
                                             <div class="form-check mb-3">
                                                 <input class="form-check-input mt-2" id="termsService" type="checkbox" value="" required />
                                                 <label class="form-label fs--1 text-none" for="termsService">
-                                                    I accept the
+                                                    saya menerima
                                                     <button id="termsButton" type="button" class="btn btn-link mx-n3" data-bs-toggle="modal" data-bs-target="#termsModal">
-                                                        terms
+                                                        ketentuan
                                                     </button>
-                                                    and
+                                                    Dan
                                                     <button type="button" class="btn btn-link mx-n4" data-bs-toggle="modal" data-bs-target="#privacyModal">
-                                                        privacy policy
+                                                        Kebijakan pribadi
                                                     </button>
                                                 </label>
                                             </div>
-                                            <button class="btn btn-primary w-100 mb-3">Sign up</button>
+                                            <button class="btn btn-primary w-100 mb-3">Register</button>
                                             <div class="text-center"><a class="fs--1 fw-bold"
-                                                    href="{{ route('login') }}">Sign in to an existing account</a>
+                                                    href="{{ route('login') }}">Masuk ke akun yang ada</a>
                                             </div>
                                         </form>
                                         <!-- Terms Modal -->

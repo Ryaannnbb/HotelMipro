@@ -40,12 +40,12 @@
         <div class="mb-9">
             <div class="row g-3 mb-4">
                 <div class="col-auto">
-                    <h2 class="mb-0">Discount</h2>
+                    <h2 class="mb-0">Diskon</h2>
                 </div>
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item">
-                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span
+                    <p class="nav-link active my-n2" aria-current="page"><span>Semua </span><span
                             class="text-700 fw-semi-bold">
                             @if ($diskon->count() > 0)
                                 <span>({{ $diskon->count() }})</span>
@@ -65,7 +65,7 @@
                             </form>
                         </div>
                         <div class="ms-xxl-auto"><a href="{{ route('diskon.create') }}"><button class="btn btn-primary"
-                                    id="addBtn"><span class="fas fa-plus me-2"></span>Add Discount</button></a></div>
+                                    id="addBtn"><span class="fas fa-plus me-2"></span>Tambah Diskon</button></a></div>
                     </div>
                 </div>
                 <div class="row">
@@ -90,7 +90,7 @@
                                                     @csrf
                                                     @method('delete')
                                                     <button type="button"
-                                                        class="dropdown-item text-danger hapus">Remove</button>
+                                                        class="dropdown-item text-danger hapus">Hapus</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -136,7 +136,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
+                                            data-bs-dismiss="modal">Tutup</button>
                                     </div>
                                 </div>
                             </div>
