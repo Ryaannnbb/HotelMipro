@@ -48,12 +48,12 @@
                         <div class="product-filter-offcanvas bg-soft scrollbar phoenix-offcanvas phoenix-offcanvas-fixed"
                             id="productFilterColumn">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3 class="mb-0">Filters</h3><button class="btn d-lg-none p-0"
+                                <h3 class="mb-0">Filter</h3><button class="btn d-lg-none p-0"
                                     data-phoenix-dismiss="offcanvas"><span class="uil uil-times fs-0"></span></button>
                             </div><a class="btn px-0 d-block collapse-indicator" data-bs-toggle="collapse"
                                 href="#collapseDevice" role="button" aria-expanded="true" aria-controls="collapseDevice">
                                 <div class="d-flex align-items-center justify-content-between w-100">
-                                    <div class="fs-0 text-1000">Category</div><span
+                                    <div class="fs-0 text-1000">Kategori</div><span
                                         class="fa-solid fa-angle-down toggle-icon text-500"></span>
                                 </div>
                             </a>
@@ -78,7 +78,7 @@
                                 href="#collapsePriceRange" role="button" aria-expanded="true"
                                 aria-controls="collapsePriceRange">
                                 <div class="d-flex align-items-center justify-content-between w-100">
-                                    <div class="fs-0 text-1000">Price range</div>
+                                    <div class="fs-0 text-1000">Kisaran Harga</div>
                                     <span class="fa-solid fa-angle-down toggle-icon text-500"></span>
                                 </div>
                             </a>
@@ -210,7 +210,7 @@
                                     style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
                                     <img src="{{ asset('assets/img/No data-amico.svg') }}" alt=""
                                         style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
-                                    <h3 class="mb-3">There are no products available.</h3>
+                                    <h3 class="mb-3">Tidak Ada Kamar Yang Tersedia.</h3>
                                 </div>
                             </div>
                         @endif

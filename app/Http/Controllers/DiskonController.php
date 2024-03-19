@@ -72,6 +72,7 @@ class DiskonController extends Controller
         'potongan_harga' => [
             'required',
             'numeric',
+            'min:10',
             function ($attribute, $value, $fail) use ($request) {
                 $jenis = $request->input('jenis');
 
@@ -105,6 +106,7 @@ class DiskonController extends Controller
             'jenis.in' => 'Jenis diskon yang dipilih tidak valid.',
             'potongan_harga.required' => 'Potongan harga diskon harus diisi.',
             'potongan_harga.numeric' => 'Potongan harga diskon harus berupa angka.',
+            'potongan_harga.min' => 'Harga harus lebih dari :min.',
             'awal_berlaku.required' => 'Tanggal awal berlaku harus diisi.',
             'awal_berlaku.after_or_equal' => 'Tanggal awal berlaku harus setelah atau sama dengan tanggal hari ini.',
             'akhir_berlaku.required' => 'Tanggal akhir berlaku harus diisi.',
@@ -115,7 +117,6 @@ class DiskonController extends Controller
             'nama_kategori.*.exists' => 'Salah satu kamar yang dipilih tidak valid.',
             'nama_kategori.*.required' => 'Kamar diskon harus dipilih.',
         ]);
-
         $file = $request->file('gambar');
         $fileName = Str::random(10) . '.' .  $file->getClientOriginalExtension();
         $file->storeAs('public/kamar', $fileName);
@@ -167,21 +168,14 @@ class DiskonController extends Controller
     {
         $room = Kamar::all();
         $query = DB::table('diskons')
-        ->leftJoin('detail_diskons', 'diskons.id', '=', 'detail_diskons.diskon_id')
-        ->join('kategoris', 'kategoris.id', '=', 'detail_diskons.kategoris_id')
-        ->select(
-            'kategoris.id',
-            'kategoris.nama_kategori',
-            // 'kategoris.path_kamar',
-            DB::raw('sum(detail_diskons.nominal_potongan) AS total'),
-            DB::raw('min(diskons.awal_berlaku) AS awal_berlaku'),
-            DB::raw('max(diskons.akhir_berlaku) AS akhir_berlaku'),
-        )
-        ->groupBy(
-            'detail_diskons.kategori_id',
-            "kategoris.id",
-            "kategoris.nama_kategori",
-            // "kamars.path_kamar",
+            ->leftJoin('diskons as diskon1', 'diskon1.id', '=', 'diskons.id')
+            ->join('kategoris', 'kategoris.id', '=', 'diskons.kategori_id')
+            ->select(
+                'kategoris.id',
+                'kategoris.nama_kategori',
+                DB::raw('sum(diskon1.potongan_harga) AS total'),
+                DB::raw('min(diskon1.awal_berlaku) AS awal_berlaku'),
+                DB::raw('max(diskon1.akhir_berlaku) AS akhir_berlaku'),
             )
             ->groupBy(
                 'diskons.kategori_id',
@@ -194,7 +188,7 @@ class DiskonController extends Controller
         $diskon = Diskon::findOrFail($id);
         $diskons = Diskon::all();
         $kategoriterdiskon = DetailDiskon::where('diskon_id', $id)->get();
-        return view('admin.diskon.edit', compact('kategori', 'detaildiskon', 'diskon', 'kategoriterdiskon', 'diskons'));
+        return view('admin.diskon.edit', compact('kategoris', 'detaildiskon', 'diskon', 'kategoriterdiskon', 'diskons', 'room'));
     }
 
 

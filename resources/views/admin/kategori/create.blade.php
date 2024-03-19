@@ -264,19 +264,19 @@
 
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h2 class="mb-2">Add a category</h2>
-                    <h5 class="text-700 fw-semi-bold">Categories added across your store</h5>
+                    <h2 class="mb-2">Tambah Kategori</h2>
+                    <h5 class="text-700 fw-semi-bold">Kategori ditambahkan diseluruh kamar hotel</h5>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kategori') }}">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish category</button>
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kategori') }}">Batalkan</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">tambah kamar</button>
                 </div>
             </div>
             <div class="row g-5">
                 <div class="col-12 col-xl-12">
-                    <h4 class="mb-3">Category Title</h4>
+                    <h4 class="mb-3">Nama Kategori</h4>
                     <input class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori"
-                        value="{{ old('nama_kategori') }}" type="text" placeholder="Write title here..." />
+                        value="{{ old('nama_kategori') }}" type="text" placeholder="Tulis nama kategori disini..." />
                     @error('nama_kategori')
                         <div class="invalid-feedback">
                             {{ $message }}

@@ -150,6 +150,7 @@
       </div>
     </div>
   </div>
+
   <script>
     var navbarTopShape = window.config.config.phoenixNavbarTopShape;
     var navbarPosition = window.config.config.phoenixNavbarPosition;
@@ -247,23 +248,34 @@
   <!-- Include jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <div class="content">
+
     <form method="POST" action="{{ route('pembayaran.store') }}" class="mb-9" enctype="multipart/form-data">
         @csrf
         <div>
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h4 class="mb-2">Add a payment</h4>
-                    <h5 class="text-700 fw-semi-bold">Payments processed across your hotel</h5>
+                    <h4 class="mb-2">Tambah Pembayaran</h4>
+                    <h5 class="text-700 fw-semi-bold">Pembayaran diproses di seluruh hotel Anda</h5>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('pembayaran') }}">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">add Payment</button>
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('pembayaran') }}">Batal</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Tambah Pembayaran</button>
                 </div>
             </div>
+
+            @if ($errors->all())
+                <div class="alert alert-danger">
+                    <h3>Ada Kesalahan</h3>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="mb-2">
-                <h4 class="mb-2 fw-bold">Payment Method</h4>
+                <h4 class="mb-2 fw-bold">Nama pembayaran</h4>
                 <select name="metode_pembayaran" id="selectMetode" class="form-control">
-                    <option value="" class="dropdown-menu" disabled selected>Select Payment Method</option>
+                    <option value="" class="dropdown-menu" disabled selected>pilih Metode Pembayaran</option>
                     <option value="e-wallet" data-target="ewalletInput">E-Wallet</option>
                     <option value="bank" data-target="bankInput">Bank</option>
                 </select>
@@ -272,7 +284,7 @@
             <div class="form-section" value="e-wallet" id="ewalletInput" style="display: none;">
                 <!-- E-Wallet Form -->
                 <div class="mb-3">
-                    <label for="" class="form-label fw-bold">Objective</label>
+                    <label for="" class="form-label fw-bold">Nama bank</label>
                     <input type="text" name="tujuan_ewallet" class="form-control" value="{{ old('tujuan_ewallet') }}">
                     @if ($errors->has('tujuan_ewallet'))
                         <span class="text-danger">{{ $errors->first('tujuan_ewallet') }}</span>
@@ -284,6 +296,13 @@
                         value="{{ old('keterangan_ewallet') }}">
                     @if ($errors->has('keterangan_ewallet'))
                         <span class="text-danger">{{ $errors->first('keterangan_ewallet') }}</span>
+                    @endif
+                </div>
+                <div class="mb-3">
+                    <label for="nama_ewallet" class="form-label fw-bold">Nama E-Walet</label>
+                    <input type="text" name="nama_ewallet" id="nama" class="form-control" value="{{ old('nama_ewallet') }}">
+                    @if ($errors->has('nama_ewallet'))
+                        <span class="text-danger">{{ $errors->first('nama_ewallet') }}</span>
                     @endif
                 </div>
             </div>
@@ -299,13 +318,21 @@
                     @endif
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label fw-bold">Account Number</label>
+                    <label for="" class="form-label fw-bold">Nomor Rekening</label>
                     <input type="number" name="keterangan_bank" id="keterangan_bank" class="form-control"
                         value="{{ old('keterangan_bank') }}">
                     @if ($errors->has('keterangan_bank'))
                         <span class="text-danger">{{ $errors->first('keterangan_bank') }}</span>
                     @endif
                 </div>
+                <div class="mb-3">
+                    <label for="nama" class="form-label fw-bold">Nama</label>
+                    <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}">
+                    @if ($errors->has('nama'))
+                        <span class="text-danger">{{ $errors->first('nama') }}</span>
+                    @endif
+                </div>
+
             </div>
         </div>
 

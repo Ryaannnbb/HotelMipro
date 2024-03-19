@@ -10,15 +10,17 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id();
-            $table->enum('metode_pembayaran',['e-wallet', 'bank']);
-            $table->string('tujuan');
-            $table->string('keterangan');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('pembayarans', function (Blueprint $table) {
+        $table->id();
+        $table->enum('metode_pembayaran', ['e-wallet', 'bank']);
+        $table->string('tujuan');
+        $table->string('keterangan');
+        $table->string('nama')->nullable();
+        $table->string('nama_ewallet')->nullable();
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.

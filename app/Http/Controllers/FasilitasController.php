@@ -29,6 +29,16 @@ class FasilitasController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_fasilitas' => 'required|string|max:255',
+            'harga_satuan' => 'required|numeric|min:10000',
+        ], [
+            'nama_fasilitas.required' => 'Facility title is required.',
+            'nama_fasilitas.max' => 'Facility title may not be greater than :max characters.',
+            'harga_satuan.required' => 'Best price is required.',
+            'harga_satuan.numeric' => 'Best price must be a number.',
+            'harga_satuan.min' => 'Best price must be at least :min.',
+        ]);
         Fasilitas::create($request->all());
         return redirect()->route('fasilitas')->with("success", "Facility data added successfully!");
     }

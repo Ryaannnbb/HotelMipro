@@ -297,12 +297,12 @@
         <div class="mb-9">
             <div class="row g-3 mb-4">
                 <div class="col-auto">
-                    <h2 class="mb-0">Category</h2>
+                    <h2 class="mb-0">Kategori</h2>
                 </div>
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
                 <li class="nav-item">
-                    <p class="nav-link active my-n2" aria-current="page"><span>All </span><span class="text-700 fw-semi-bold">
+                    <p class="nav-link active my-n2" aria-current="page"><span>Semua </span><span class="text-700 fw-semi-bold">
                             @if ($kategori->count() > 0)
                                 <span>({{ $kategori->count() }})</span>
                             @endif
@@ -321,7 +321,7 @@
                             </form>
                         </div>
                         <div class="ms-xxl-auto"><a href="{{ route('kategori.create') }}"><button class="btn btn-primary"
-                                    id="addBtn"><span class="fas fa-plus me-2"></span>Add category</button></a></div>
+                                    id="addBtn"><span class="fas fa-plus me-2"></span>Tambah kategori</button></a></div>
                     </div>
                 </div>
                 <div
@@ -334,19 +334,19 @@
                                         <span>NO</span>
                                     </th>
                                     <th class="sort text-center white-space-nowrap align-middle ps-4" scope="col"
-                                        style="width:70%;">CATEGORY NAME</th>
+                                        style="width:70%;">NAMA KATEGORI</th>
                                         {{-- <th class="sort text-center white-space-nowrap ps-4" scope="col"
                                         >BEST PRICE</th> --}}
 
                                     <th class="sort text-end align-middle pe-0 ps-4" scope="col" style="width: 20%">
-                                        ACTION</th>
+                                        AKSI</th>
                                 </tr>
                                 @if ($kategori->isEmpty())
                                 <tr>
                                     <td colspan="4" class="text-center py-4">
                                         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
                                             <img src="{{ asset('assets/img/No data-amico.svg') }}" alt="" style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
-                                            <h3 class="mb-3">There are no category added by admin yet. Please check back later.</h3>
+                                            <h3 class="mb-3">Belum ada kategori yang ditambahkan oleh admin.silahkan periksa lagi nanti</h3>
                                         </div>
                                     </td>
                                 </tr>
@@ -382,7 +382,7 @@
                                                             @csrf
                                                             @method('delete')
                                                             <button type="button" class="dropdown-item text-danger hapus">
-                                                                Remove
+                                                                Hapus
                                                             </button>
                                                         </form>
                                                     </div>
@@ -397,9 +397,9 @@
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
                             <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info">
-                            </p><a class="fw-semi-bold" href="#!" data-list-view="*">View all<span
+                            </p><a class="fw-semi-bold" href="#!" data-list-view="*">Tampilkan semua<span
                                     class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
-                                class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span
+                                class="fw-semi-bold d-none" href="#!" data-list-view="less">Lihat lebih sedikit<span
                                     class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                         </div>
                         <div class="col-auto d-flex"><button class="page-link" data-list-pagination="prev"><span

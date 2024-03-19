@@ -283,18 +283,18 @@
             @csrf
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h2 class="mb-2">Add a rooms</h2>
-                    <h5 class="text-700 fw-semi-bold">Orders placed across your store</h5>
+                    <h2 class="mb-2">Tambah Diskon</h2>
+                    <h5 class="text-700 fw-semi-bold">Diskon Ditempatkan Diseluruh Kategori Kamar Hotel</h5>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('diskon') }}">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish Rooms</button>
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('diskon') }}">Batalkan</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Simpan Diskon</button>
                 </div>
             </div>
             <div class="row g-5">
                 <div class="col-12 col-xl-8">
                     <!-- Konten form di sini -->
-                    <h4 class="mb-3">Discount Title</h4>
+                    <h4 class="mb-3">Nama Diskon</h4>
                     <input class="form-control mb-2 @error('nama_diskon') is-invalid @enderror" type="text"
                         name="nama_diskon" value="{{ old('nama_diskon') }}" placeholder="Write title here..." />
 
@@ -305,7 +305,7 @@
                     @enderror
 
                     <div class="mb-6">
-                        <h4 class="mb-3">Discount Description</h4>
+                        <h4 class="mb-3">Deskripsi Diskon</h4>
                         <textarea class="tinymce @error('deskripsi') is-invalid @enderror" name="deskripsi"
                             data-tinymce='{"height":"15rem","placeholder":"Write a description here...","plugins": "nonbreaking"}'>
                             {{ old('deskripsi') }}
@@ -318,7 +318,7 @@
                         @enderror
                     </div>
 
-                    <h4 class="mb-3">Display images</h4>
+                    <h4 class="mb-3">Tambah Gambar</h4>
                     <div class="mb-3">
                         <div id="imagePreview" class="mt-2"></div>
                         <div class="d-flex align-items-center flex-column">
@@ -351,7 +351,7 @@
                         <div class="col-12 col-xl-12 order-xl-first">
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <h4 class="card-title mb-4">Organize</h4>
+                                    <h4 class="card-title mb-4">Peraturan</h4>
                                     <div class="row gx-3">
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
@@ -361,12 +361,12 @@
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-3">
-                                                <h5 class="mb-2 text-1000">Type</h5>
+                                                <h5 class="mb-2 text-1000">Tipe</h5>
                                                 <select class="form-select @error('jenis') is-invalid @enderror" id="organizerSingle" data-choices="data-choices" data-options='{"removeItemButton":true,"placeholder":true}' name="jenis">
-                                                    <option value="">Select organizer...</option>
+                                                    <option value="">Plih Tipe...</option>
                                                     <option value="nominal" @selected(old('jenis') == 'nominal')>Nominal
                                                     </option>
-                                                    <option value="percentage" @selected(old('jenis') == 'percentage')>Percentage
+                                                    <option value="percentage" @selected(old('jenis') == 'percentage')>Persen
                                                     </option>
                                                 </select>
                                                 @error('jenis')
@@ -378,7 +378,7 @@
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">Discount</h5>
+                                                <h5 class="mb-2 text-1000">Diskon</h5>
                                                 <input
                                                     class="form-control mb-xl-3 @error('potongan_harga') is-invalid @enderror"
                                                     type="number" name="potongan_harga"
@@ -392,7 +392,7 @@
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">Start Effects</h5>
+                                                <h5 class="mb-2 text-1000">Tanggal Awal Diskon</h5>
                                                 <input class="form-control datetimepicker start-date @error('awal_berlaku') is-invalid @enderror" type="text" placeholder="dd/mm/yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="awal_berlaku" />
                                                 @error('awal_berlaku')
                                                     <strong class="invalid-feedback">
@@ -415,7 +415,7 @@
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">End Effects</h5>
+                                                <h5 class="mb-2 text-1000">Tanggal Akhir Diskon</h5>
                                                 <input class="form-control datetimepicker end-date @error('akhir_berlaku') is-invalid @enderror" type="text" placeholder="dd/mm/yyyy" data-options='{"disableMobile":true,"dateFormat":"d-m-Y"}' name="akhir_berlaku"  />
                                                 @error('akhir_berlaku')
                                                     <strong class="invalid-feedback">
@@ -438,9 +438,9 @@
                                         </div>
                                         <div class="col-12 col-sm-6 col-xl-12">
                                             <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">Add Categori discount</h5>
+                                                <h5 class="mb-2 text-1000">Add Kategori Diskon</h5>
                                                 <select class="form-select @error('nama_kategori') is-invalid @enderror" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}' name="nama_kategori[]">
-                                                <option value="">Select kategori...</option>
+                                                <option value="">Pilih Kategori...</option>
                                                 @foreach ($kategori as $kategoris)
                                                 <option value="{{ $kategoris->id }}" {{ !is_null(old('nama_kategori')) && in_array($kategoris->id, old('nama_kategori')) ? 'selected' : '' }}>
                                                     {{ $kategoris->nama_kategori }}
@@ -482,19 +482,19 @@
                                     <th class="white-space-nowrap text-start align-middle ps-4 fs--1 text-dark"
                                         data-sort="text start">NO</th>
                                     <th class="white-space-nowrap text-center align-middle ps-4 fs--1 text-dark"
-                                        data-sort="path_produk">IMAGE</th>
+                                        data-sort="path_produk">GAMBAR</th>
                                     <th class="white-space-nowrap text-center align-middle ps-4 fs--1 text-dark"
-                                        data-sort="path_nama">DISCOUNT NAME</th>
+                                        data-sort="path_nama">NAMA DISKON</th>
                                     <th class="white-space-nowrap align-middle text-center fs--1 ps-4 text-dark"
-                                        data-sort="harga">DISCOUNT</th>
+                                        data-sort="harga">DISKON</th>
                                     <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
-                                        data-sort="categori">TYPE</th>
+                                        data-sort="categori">TIPE</th>
                                     <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
-                                        data-sort="categori">DESCRIPTION</th>
+                                        data-sort="categori">DESKRIPSI</th>
                                     <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
-                                        data-sort="stok">START EFFECTS</th>
+                                        data-sort="stok">AWAL BERLAKU</th>
                                     <th class="white-space-nowrap text-center align-middle fs--1 ps-4 text-dark"
-                                        data-sort="deskripsi">END EFFECTS</th>
+                                        data-sort="deskripsi">AKHIR BERLAKU</th>
                                 </tr>
                             </thead>
                             <tbody class="list" id="products-table-body text-center">
@@ -539,9 +539,9 @@
                 <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                     <div class="col-auto d-flex">
                         <p class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900" data-list-info="data-list-info"></p><a
-                        class="fw-semi-bold" href="#!" data-list-view="*">View all<span
+                        class="fw-semi-bold" href="#!" data-list-view="*">Lihat Semua<span
                         class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a
-                        class="fw-semi-bold d-none" href="#!" data-list-view="less">View Less<span
+                        class="fw-semi-bold d-none" href="#!" data-list-view="less">Lebih Sedikit<span
                         class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
                     </div>
                     <div class="col-auto d-flex"><button class="page-link" data-list-pagination="prev"><span

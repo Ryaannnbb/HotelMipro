@@ -82,10 +82,10 @@
             </div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3 active" aria-current="page" href="#">Home</a></li>
-              <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#rooms">Rooms</a></li>
+              <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#rooms">Kamar</a></li>
 
-              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#about">About Us</a></li>
-              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#facility">Facility</a></li>
+              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#about">Tentang Kami</a></li>
+              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#facility">Fasilitas</a></li>
             </ul>
             <div class="d-grid d-lg-flex align-items-center">
                 <!-- Toggle tema -->
@@ -107,11 +107,11 @@
                 </a> --}}
 
                 <!-- Tombol Sign in -->
-                <a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="{{ route('login') }}">Sign in</a>
+                <a class="btn btn-link text-900 order-1 order-lg-0 ps-4 me-lg-2" href="{{ route('login') }}">Login</a>
 
                 <!-- Tombol Sign Up -->
                 <a class="btn btn-phoenix-primary order-0" href="{{ route('register') }}">
-                  <span class="fw-bold">Sign Up</span>
+                  <span class="fw-bold">Register</span>
                 </a>
               </div>
           </div>
@@ -241,7 +241,7 @@
           <div class="container-small px-lg-7 px-xxl-3">
             <div class="row align-items-center">
               <div class="col-12 col-lg-6 pt-8 pb-6 position-relative z-index-5 text-center text-lg-start">
-                <h1 class="fs-5 fs-md-6 fs-xl-7 fw-black mb-4"><span class="text-gradient-info me-3">Welcome To</span><br />Tulip Hotel</h1>
+                <h1 class="fs-5 fs-md-6 fs-xl-7 fw-black mb-4"><span class="text-gradient-info me-3"></span><br />Small Hotel</h1>
                 {{-- <p class="mb-5 pe-xl-10"></p><a class="btn btn-lg btn-primary rounded-pill me-3" href="#!" role="button">Sign up</a><a class="btn btn-link me-2 fs-0 p-0" href="#!" ></span></a> --}}
               </div>
               <div class="col-12 col-lg-auto d-none d-lg-block">
@@ -393,7 +393,7 @@
         <!--/.bg-holder-->
         <div class="container-small position-relative px-lg-7 px-xxl-3">
           <div class="text-center mb-7">
-            <h5 class="text-info mb-3" style="font-size: 1.5em;">Gallery</h5>
+            <h5 class="text-info mb-3" style="font-size: 1.5em;">Galleri</h5>
 
           </div>
 
@@ -557,7 +557,7 @@
         <div class="container-small px-lg-7 px-xxl-3">
           <div class="text-center mb-5 mb-8">
             {{-- <div class="row g-3" id="image_gallery" data-sl-isotope='{"layoutMode":"packery"}'> --}}
-            <h5 class="text-info mb-3"><span style="font-size: 30px;">Facility</span></h5>
+            <h5 class="text-info mb-3"><span style="font-size: 30px;">Fasilitas</span></h5>
 
           </div>
           <div class="row gx-3 gy-7">
@@ -589,7 +589,7 @@
       <section class="pt-13 pb-10" id="about">
         <div class="container-small px-lg-7 px-xxl-3">
           <div class="text-center mb-10 mb-md-5">
-            <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">About Us</h5>
+            <h5 class="text-info mb-3" style="text-align: left; font-size: 25px;">Tentang Kami</h5>
 
             <p class="mb-0" style="text-align: left;  font-size: 20px; max-width: 600px;">
                 Small Hotel is a place of accommodation that provides various facilities

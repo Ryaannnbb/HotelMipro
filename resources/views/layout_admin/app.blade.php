@@ -6,6 +6,7 @@
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -374,5 +375,5 @@
 
 
 <!-- Mirrored from prium.github.io/phoenix/v1.13.0/apps/e-commerce/admin/add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 Nov 2023 12:10:52 GMT -->
-
+{{-- @yield('js') --}}
 </html>

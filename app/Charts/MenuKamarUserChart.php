@@ -2,10 +2,7 @@
 
 namespace App\Charts;
 
-use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Kamar;
-use Illuminate\Support\Facades\Auth;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class MenuKamarUserChart
@@ -19,18 +16,20 @@ class MenuKamarUserChart
 
     public function build(): \ArielMejiaDev\LarapexCharts\PieChart
     {
-        $tahun = date('Y');
-        $bulan = 12;
-        for ($i = 1; $i <= $bulan; $i++) {
-            $user = User::whereYear('created_at', $tahun)->whereMonth('created_at', $i)->count();
-            $datatotaluser[] = $user;
-            $databulan[] = Carbon::create()->month($i)->format('F');
-        }
+
+        $jumlahPengguna = User::selectRaw('count(*) as jumlah, role')
+            ->groupBy('role')
+            ->pluck('jumlah', 'role')
+            ->toArray();
+
+
+        $jumlahUser = $jumlahPengguna['user'] ?? 0;
+        $jumlahAdmin = $jumlahPengguna['admin'] ?? 0;
 
         return $this->chart2->pieChart()
-            ->setTitle('Menu User')
-            // ->setSubtitle('Season 2021.')
-            ->addData($datatotaluser)
-            ->setLabels($databulan);
+            ->setTitle('Jumlah Pengguna yang terdaftar')
+            // ->setSubtitle('Tahun 2021')
+            ->addData([$jumlahUser, $jumlahAdmin])
+            ->setLabels(['User', 'Admin']);
     }
 }

@@ -14,11 +14,11 @@
                             <li class="breadcrumb-item active" aria-current="page">Default</li>
                         </ol>
                     </nav> --}}
-                <h2 class="mb-5">Check out</h2>
+                <h2 class="mb-5">Buat Pesanan</h2>
                 <div class="row justify-content-between">
                     <div class="col-lg-7 col-xl-7">
                         <div class="d-flex align-items-end">
-                            <h3 class="mb-0 me-3">User Details</h3>
+                            <h3 class="mb-0 me-3">Detail Pengguna</h3>
                             {{-- <button class="btn btn-link p-0"
                             type="button">Edit</button> --}}
                         </div>
@@ -28,24 +28,24 @@
                                     <td class="py-2 ps-0">
                                         <div class="d-flex"><span class="fs-5 me-2" data-feather="user"
                                                 style="height:16px; width:16px;"> </span>
-                                            <h5 class="lh-sm me-4">Name</h5>
+                                            <h5 class="lh-sm me-4">Nama</h5>
                                         </div>
                                     </td>
                                     <td class="py-2 fw-bold lh-sm">:</td>
                                     <td class="py-2 px-3">
                                         <h5 class="lh-sm fw-normal text-800">{{ Auth::user()->name }}</h5>
                                     </td>
-                                    {{-- @dd($kategori); --}}
-                                    <input type="hidden" name="kategori_id" value="{{ $kamars->kategori_id}}">
+                                    <input type="hidden" name="kategori_id" value="{{ $kategori->id }}">
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     <input type="hidden" name="username" value="{{ auth()->user()->name }}">
                                     <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+                                    <input type="hidden" name="diskon_id" value="{{ $diskonid->id }}">
                                 </tr>
                                 <tr>
                                     <td class="py-2 ps-0">
                                         <div class="d-flex"><span class="fs-5 me-2" data-feather="home"
                                                 style="height:16px; width:16px;"> </span>
-                                            <h5 class="lh-sm me-4">Address</h5>
+                                            <h5 class="lh-sm me-4">Alamat</h5>
                                         </div>
                                     </td>
                                     <td class="py-2 fw-bold lh-sm">:</td>
@@ -53,7 +53,7 @@
                                         @if (Auth::user()->address)
                                             <h5 class="lh-lg fw-normal text-800">{{ Auth::user()->address }}</h5>
                                         @else
-                                            <p>Please fill in your address.</p>
+                                            <p>Silahkan isi alamat anda.</p>
                                         @endif
                                     </td>
                                 </tr>
@@ -61,7 +61,7 @@
                                     <td class="py-2 ps-0">
                                         <div class="d-flex"><span class="fs-5 me-2" data-feather="phone"
                                                 style="height:16px; width:16px;"> </span>
-                                            <h5 class="lh-sm me-4">Phone</h5>
+                                            <h5 class="lh-sm me-4">Telephon</h5>
                                         </div>
                                     </td>
                                     <td class="py-2 fw-bold lh-sm">: </td>
@@ -69,7 +69,7 @@
                                         @if (Auth::user()->telp)
                                             <h5 class="lh-lg fw-normal text-800">{{ Auth::user()->telp }}</h5>
                                         @else
-                                            <p>Please fill in your number phone.</p>
+                                            <p>Silahkan Isi Nomer Telephon Anda.</p>
                                         @endif
                                     </td>
                                     <input type="hidden" name="no_tlp" value="{{ auth()->user()->telp }}">
@@ -77,7 +77,7 @@
                             </tbody>
                         </table>
                         <hr class="my-6">
-                        <h3 class="mb-5">Payment Proccess</h3>
+                        <h3 class="mb-5">Proses Pembayaran</h3>
                         <div class="row g-4 mb-7">
                             <div class="col-12">
                                 <div class="row gx-lg-11">
@@ -85,12 +85,11 @@
                             </div>
                             <div class="col-md-12">
                                 <input type="hidden" name="id_kamar" value="{{ $kamars->id }}">
-                                <label class="form-label fs-0 text-1000 ps-0 text-none" for="tanggal_awal">Choose payment
-                                    method</label>
+                                <label class="form-label fs-0 text-1000 ps-0 text-none" for="tanggal_awal">Pilih Methode Pembayaran</label>
                                 <select class="form-select mb-3 @error('metode_pembayaran') is-invalid @enderror"
                                     name="metode_pembayaran" aria-label=".form-select-lg example" id="selectMetode">
-                                    <option value="" disabled {{ old('metode_pembayaran') ? '' : 'selected' }}>Select
-                                        Payment</option>
+                                    <option value="" disabled {{ old('metode_pembayaran') ? '' : 'selected' }}>Pilih
+                                        Pembayaran</option>
                                     <option value="e-wallet" data-target="ewalletInput"
                                         {{ old('metode_pembayaran') == 'e-wallet' ? 'selected' : '' }}>E-Wallet</option>
                                     <option value="bank" data-target="bankInput"
@@ -104,7 +103,7 @@
                                 <div class="mb-3" id="ewalletInput"
                                     style="display: @error('tujuan_ewallet') block @else none @enderror;">
                                     <div>
-                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Type QR</label>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Tipe QR</label>
                                     </div>
                                     <select name="tujuan_ewallet" id="tujuan_ewallet"
                                         class="form-control @error('tujuan_ewallet') is-invalid @enderror">
@@ -113,7 +112,7 @@
                                             <option value="{{ $data->tujuan }}" data-foto="{{ $data->keterangan }}">
                                                 {{ $data->tujuan }}</option>
                                         @empty
-                                            <option value="" disabled selected>No Data E-wallet</option>
+                                            <option value="" disabled selected>Tidak Ada Methode Pembayaran</option>
                                         @endforelse
                                     </select>
                                     @error('tujuan_ewallet')
@@ -136,7 +135,7 @@
                                 <div class="mb-3" id="bankInput"
                                     style="display: @error('tujuan_bank') block @else none @enderror;">
                                     <div>
-                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Choose Bank</label>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Pilih Bank</label>
                                     </div>
                                     <select name="tujuan_bank" id="tujuan_bank"
                                         class="form-control @error('tujuan_bank') is-invalid @enderror">
@@ -145,7 +144,7 @@
                                             <option value="{{ $data->tujuan }}" data="{{ $data->keterangan }}">
                                                 {{ $data->tujuan }}</option>
                                         @empty
-                                            <option value="" disabled selected>No account number available</option>
+                                            <option value="" disabled selected>Tidak Ada Nomor Rekening Yang Tersedia</option>
                                         @endforelse
                                     </select>
                                     @error('tujuan_bank')
@@ -154,15 +153,15 @@
                                         </strong>
                                     @enderror
                                     <div class="mt-3">
-                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Account Number</label>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none">Nomor Akun</label>
                                     </div>
                                     @foreach ($bank as $data)
                                         <input type="text" name="keterangan_bank" value="{{ $data->keterangan }}"
                                             id="{{ $data->keterangan }}" class="form-control" readonly disabled>
                                     @endforeach
                                 </div>
-                                <label class="form-label fs-0 text-1000 ps-0 text-none" for="foto">Enter your Proof of
-                                    Payment</label>
+                                <label class="form-label fs-0 text-1000 ps-0 text-none" for="foto">Masukkan Bukti
+                                    Pembayaran</label>
                                 <input type="file" name="foto"
                                     class="form-control @error('foto') is-invalid @enderror mb-3" id="foto">
                                 @error('foto')
@@ -172,48 +171,46 @@
                                 @enderror
                                 <div class="d-flex justify-content-between">
                                     <div style="width: 48%;">
-                                        <label class="form-label fs-0 text-1000 ps-0 text-none" for="tanggal_awal">Start
-                                            date</label>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none" for="tanggal_awal">
+                                            Tanggal Awal Pesan</label>
                                         <input
-                                            class="form-control datetimepicker mb-3 start-date  @error('tanggal_awal') is-invalid @enderror"
-                                            id="datetimepicker" type="text" placeholder="yyyy-mm-dd hour : minute"
+                                            class="form-control datetimepicker mb-3 start-date @error('tanggal_awal') is-invalid @enderror"
+                                            id="startDatePicker" type="text" placeholder="yyyy-mm-dd hour : minute"
                                             data-options='{"enableTime":true,"dateFormat":"y-m-d H:i","disableMobile":true}'
                                             name="tanggal_awal" />
                                         @error('tanggal_awal')
-                                            <strong class="mt-n3 invalid-feedback">
-                                                {{ $message }}
-                                            </strong>
+                                            <strong class="mt-n3 invalid-feedback">{{ $message }}</strong>
                                         @enderror
                                     </div>
                                     <div style="width: 48%;">
-                                        <label class="form-label fs-0 text-1000 ps-0 text-none" for="tanggal_akhir">End
-                                            date</label>
+                                        <label class="form-label fs-0 text-1000 ps-0 text-none" for="tanggal_akhir">
+                                            Tanggal Akhir Pesan</label>
                                         <input
-                                            class="form-control datetimepicker mb-3 start-date  @error('tanggal_akhir') is-invalid @enderror"
-                                            id="datetimepicker" type="text" placeholder="yyyy-mm-dd hour : minute"
+                                            class="form-control datetimepicker mb-3 start-date @error('tanggal_akhir') is-invalid @enderror"
+                                            id="endDatePicker" type="text" placeholder="yyyy-mm-dd hour : minute"
                                             data-options='{"enableTime":true,"dateFormat":"y-m-d H:i","disableMobile":true}'
                                             name="tanggal_akhir" />
                                         @error('tanggal_akhir')
-                                            <strong class="mt-n3 invalid-feedback">
-                                                {{ $message }}
-                                            </strong>
+                                            <strong class="mt-n3 invalid-feedback">{{ $message }}</strong>
                                         @enderror
                                     </div>
+
+
                                 </div>
 
 
-                            {{-- <div class="d-flex justify-content-between border-y border-dashed py-3 mb-4">
+
+
+                                {{-- <div class="d-flex justify-content-between border-y border-dashed py-3 mb-4">
                                 <h4 class="mb-0">Total Price:</h4>
                                 <h4 id="totalPrice" class="mb-">Rp. {{ number_format($total, 0, ',', '.') }}</h4>
                             </div> --}}
-                        </div>
-                        <div class="row g-2 mb-5 mb-lg-0">
-                            <div class="col-md-8 col-lg-9 d-grid">
-                                <button class="btn btn-primary" type="submit">Pay</button>
                             </div>
-                            <div class="col-md-4 col-lg-3 d-grid">
-                                <a href="{{ route('kamar') }}" class="btn btn-phoenix-secondary text-nowrap">Save Order
-                                    and Exit</a>
+                            <div class="row g-2 mb-5 mb-lg-0">
+                                <div class="col-md-8 col-lg-9 d-grid">
+                                    <button class="btn btn-primary" type="submit">Bayar Sekarang</button>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -221,7 +218,7 @@
                         <div class="card mt-3 mt-lg-0">
                             <div class="card-body" id="facilitySummary">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <h3 class="mb-0">Summary</h3>
+                                    <h3 class="mb-0">Rincian Pemesanan</h3>
                                     {{-- <button class="btn btn-link pe-0" type="button">Edit
                                 cart</button> --}}
                                 </div>
@@ -238,61 +235,81 @@
                                                 </div>
                                             </div>
                                             {{-- <div class="col-2 col-md-3 col-lg-2">
-                                        <h6 class="fs--2 mb-0">x1</h6>
-                                    </div>
-                                    <div class="col-2 ps-0">
-                                        <h5 class="mb-0 fw-semi-bold text-end">$398</h5>
-                                    </div> --}}
+                                                <h6 class="fs--2 mb-0">x1</h6>
+                                            </div>
+                                            <div class="col-2 ps-0">
+                                                <h5 class="mb-0 fw-semi-bold text-end">$398</h5>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="border-dashed border-bottom mt-4">
                                     <div class="d-flex justify-content-between mb-2">
-                                        <h5 class="text-900 fw-semi-bold">Room Price: </h5>
+                                        <h5 class="text-900 fw-semi-bold">Harga Kamar: </h5>
                                         <h5 class="text-900 fw-semi-bold">
-                                            {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}
-                                        </h5>
+                                            {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</h5>
                                     </div>
+                                    @if ($diskons)
                                     <div class="d-flex justify-content-between mb-2">
                                         <h5 class="text-900 fw-semi-bold">Discount: </h5>
                                         <h5 class="text-danger fw-semi-bold">
-                                            @if ($diskons)
-                                                -{{ $diskons->potongan_harga }}
+                                            @if ($diskons->jenis == 'percentage')
+                                                -{{ $diskons->potongan_harga }}%
                                             @else
-                                                -0
+                                                -Rp {{ number_format($diskons->potongan_harga, 0, ',', '.') }}
                                             @endif
                                         </h5>
                                     </div>
-
+                                    @endif
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <h5 class="text-900 fw-semi-bold">Total inap: </h5>
+                                        <h5 class="text-900 fw-semi-bold" id="totalInap">Rp 0</h5>
+                                    </div>
                                 </div>
-
                                 <div class="border-dashed border-bottom mt-4">
                                     <div class="d-flex justify-content-between mb-2">
-                                        <h5 class="text-900 fw-semi-bold">Facility Total:</h5>
-                                        @if(session('totalFacilityPrice'))
-                                            <h5 id="facilityTotalCard" class="text-900 fw-semi-bold">{{ 'Rp ' . number_format(session('totalFacilityPrice')) }}</h5>
+                                        <h5 class="text-900 fw-semi-bold">Total Fasilitas:</h5>
+                                        @if (session('totalFacilityPrice'))
+                                            <h5 id="facilityTotalCard" class="text-900 fw-semi-bold">
+                                                {{ 'Rp ' . number_format(session('totalFacilityPrice')) }}</h5>
                                         @else
                                             <h5 id="facilityTotalCard" class="text-900 fw-semi-bold">Rp 0</h5>
                                         @endif
                                     </div>
                                 </div>
                                 @php
-                                $roomPrice = $kamars->harga; // Harga kamar
-                                $discount = optional($diskons)->potongan_harga ?? 0; // Potongan harga dari diskon
-                                $total = $roomPrice; // Total awalnya diatur dengan harga kamar
+                                    $roomPrice = $kamars->harga; // Harga kamar
+                                    $discount = optional($diskons)->potongan_harga ?? 0; // Potongan harga dari diskon
+                                    $totalFacilityPrice = session('totalFacilityPrice', 0);
 
-                                if ($diskons && $diskons->jenis == 'percentage') {
-                                    $discountAmount = ($roomPrice * $discount) / 100;
-                                    $total -= $discountAmount;
-                                } else {
-                                    $total -= $discount;
-                                }
-                            @endphp
+                                    // Perhitungan total inap
+                                    if ($diskons && $diskons->jenis == 'percentage') {
+                                        $discountAmount = ($roomPrice * $discount) / 100;
+                                        $totalInap = $roomPrice - $discountAmount;
+                                    } else {
+                                        $totalInap = $roomPrice - $discount;
+                                    }
 
-                            <div class="d-flex justify-content-between border-dashed-y pt-3">
-                                <h4 class="mb-0">Total :</h4>
-                                <h4 class="mb-0">{{ 'Rp ' . number_format($total) }}</h4>
-                            </div>
+                                    // Total keseluruhan termasuk fasilitas
+                                    $totalKeseluruhan = $totalInap + $totalFacilityPrice;
+                                @endphp
+
+                                <input type="hidden" value="{{ $roomPrice }}" id="hargakamar">
+                                {{-- @php
+                                            $roomPrice = $kamars->harga;
+
+                                            $discount = $diskons->potongan_harga;
+                                            // $facility = 100000;
+                                            $total = $roomPrice - $discount + $totalFacilityPrice ;
+                                        @endphp --}}
+                                {{-- <div class="d-flex justify-content-between border-dashed-y pt-3">
+                                    <h4 class="mb-0">Total :</h4>
+                                    <h4 class="mb-0">{{ 'Rp ' . number_format($totalKeseluruhan) }}</h4>
+                                </div> --}}
+                                <div class="d-flex justify-content-between border-dashed-y pt-3">
+                                    <h5 class="text-900 fw-semi-bold">Total Pembayaran: </h5>
+                                    <h5 class="text-900 fw-bold" id="totalHarga">Rp 0</h5>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -303,14 +320,17 @@
             <div class="col-md-3 offset-md-8" style="margin-top: -300px;">
                 <form id="updateCartForm" action="{{ route('updateFacilitiesPrice') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="selected_fasilitas" value="{{ json_encode(old('nama_fasilitas', [])) }}">
-                    <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Select facility</label>
+
+                    <input type="hidden" name="selected_fasilitas"
+                        value="{{ json_encode(old('nama_fasilitas', [])) }}">
+                    <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">
+                        Pilih Fasilitas</label>
                     <select class="form-select @error('nama_fasilitas') is-invalid @enderror" id="organizerMultiple"
                         data-choices="data-choices" multiple="multiple"
                         data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
-                        <option value="">Select Facility...</option>
+                        <option value="">Pilih Fasilitas...</option>
                         @foreach ($fasilitas as $fasilitasd)
-                            <option value="{{ $fasilitasd->id }}" @if(in_array($fasilitasd->id, old('nama_fasilitas', []))) selected @endif>
+                            <option value="{{ $fasilitasd->id }}" @if (in_array($fasilitasd->id, old('nama_fasilitas', []))) selected @endif>
                                 {{ $fasilitasd->nama_fasilitas }}
                             </option>
                         @endforeach
@@ -320,9 +340,8 @@
                             {{ $message }}
                         </strong>
                     @enderror
-
                     <button type="submit" class="btn btn-success mt-2 ml-auto">
-                        Update Cart
+                        Perbarui Fasilitas
                         <span class="fas fa-undo ms-1 order-2"></span>
                     </button>
                 </form>
@@ -399,25 +418,76 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
+    <script>
+        const startDateInput = document.getElementById('startDatePicker');
+        const endDateInput = document.getElementById('endDatePicker');
+        const hargakamar = document.getElementById('hargakamar').value;
+
+        const totalInapElement = document.getElementById('totalInap');
+        const totalHargaElement = document.getElementById('totalHarga');
+
+        startDateInput.addEventListener('input', hitungTotalInap);
+        endDateInput.addEventListener('input', hitungTotalInap);
+
+        function hitungTotalInap() {
+            const startDate = moment(startDateInput.value, 'YYYY-MM-DD');
+            const endDate = moment(endDateInput.value, 'YYYY-MM-DD');
+
+            if (!startDate.isValid() || !endDate.isValid()) {
+                totalInapElement.textContent = 'Silakan lengkapi tanggal';
+                totalHargaElement.textContent = 'Rp 0';
+            } else if (endDate.isBefore(startDate)) {
+                totalInapElement.textContent = 'Tanggal tidak valid';
+                totalHargaElement.textContent = 'Rp 0';
+            } else {
+                const selisihWaktu = endDate.diff(startDate);
+                const jumlahHari = Math.ceil(selisihWaktu / (1000 * 60 * 60 * 24));
+
+                const hargaKamar = parseInt(hargakamar);
+                const totalInap = jumlahHari * hargaKamar;
+
+                const totalFacilityPrice = parseInt("{{ $totalFacilityPrice }}");
+                const diskon = parseInt("{{ $discount }}");
+                const totalKeseluruhan = totalInap + totalFacilityPrice - diskon;
+
+                totalInapElement.textContent = 'Rp ' + totalInap.toLocaleString();
+                totalHargaElement.textContent = 'Rp ' + totalKeseluruhan.toLocaleString();
+            }
+        }
+    </script>
 
     <script>
         function updateCart() {
             $.post("{{ route('updateFacilitiesPrice') }}", $('#updateCartForm').serialize())
-            .done(function(data) {
-                // Update the HTML element with the totalFacilityPrice
-                $("#facilityTotal").text("Rp " + data.totalFacilityPrice.toLocaleString());
-                $("#facilityTotalCard").text("Rp " + data.totalFacilityPrice.toLocaleString()); // Update total facility on card
-            })
-            .fail(function(jqXHR, textStatus, errorThrown) {
-                console.error("AJAX Error: " + textStatus, errorThrown);
-            });
+                .done(function(data) {
+                    // Update the HTML element with the totalFacilityPrice
+                    $("#facilityTotal").text("Rp " + data.totalFacilityPrice.toLocaleString());
+                    $("#facilityTotalCard").text("Rp " + data.totalFacilityPrice
+                .toLocaleString()); // Update total facility on card
+                })
+                .fail(function(jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX Error: " + textStatus, errorThrown);
+                });
         }
 
         $(document).ready(function() {
             // Call updateCart function on page load and when there's a change in the input fields
             updateCart();
             $('input[name^="nama_fasilitas"]').on('change', updateCart);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cek apakah halaman dimuat ulang atau tidak
+            if (performance.navigation.type === 1) {
+                // Reset nilai facilityTotalCard ke 'Rp 0' saat halaman dimuat ulang
+                const facilityTotalCard = document.getElementById('facilityTotalCard');
+                facilityTotalCard.textContent = 'Rp 0';
+            }
+
+            // Panggil fungsi updateCart untuk memperbarui total facility price saat halaman dimuat kembali
+            updateCart();
         });
     </script>
     <script>

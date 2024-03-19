@@ -229,14 +229,14 @@
 
         <div class="row g-3 flex-between-end mb-5">
           <div class="col-auto">
-            <h2 class="mb-2">Add a category</h2>
-            <h5 class="text-700 fw-semi-bold">Orders placed across your store</h5>
+            <h2 class="mb-2">Edit Kategori</h2>
+            <h5 class="text-700 fw-semi-bold">Kategori ditempatkan diseluruh kamar hotel</h5>
           </div>
-          <div class="col-auto"><button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button">Discard</button><button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish category</button></div>
+          <div class="col-auto"><button class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button">Batalkan</button><button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish category</button></div>
         </div>
         <div class="row g-5">
           <div class="col-12 col-xl-12">
-            <h4 class="mb-3">Category Title</h4><input class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori" value="{{ $kategori->nama_kategori }}" type="text" placeholder="Write title here..." />
+            <h4 class="mb-3">Nama Kategori</h4><input class="form-control @error('nama_kategori') is-invalid @enderror" name="nama_kategori" value="{{ $kategori->nama_kategori }}" type="text" placeholder="Tulis nama kategori disini..." />
             @error('nama_kategori')
                 <div class="invalid-feedback">
                     {{ $message }}
