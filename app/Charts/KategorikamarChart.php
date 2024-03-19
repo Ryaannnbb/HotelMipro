@@ -3,8 +3,9 @@
 namespace App\Charts;
 
 use Carbon\Carbon;
-use App\Models\Kategori;
 use App\Models\Kamar;
+use App\Models\Pesanan;
+use App\Models\Kategori;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 class KategorikamarChart
@@ -17,37 +18,48 @@ class KategorikamarChart
     }
 
     public function build(): \ArielMejiaDev\LarapexCharts\BarChart
-    {
-        $tahun = date('Y');
-        $bulan = 12;
-        $kategoriList = Kategori::pluck('nama_kategori')->toArray();
-        $dataKategori = [];
+{
+    $tahun = date('Y');
+    $bulan = 12;
+    $kategoriList = Kategori::pluck('nama_kategori')->toArray();
+    $dataKategori = [];
 
-        for ($i = 1; $i <= $bulan; $i++){
-            $kategoriCount = [];
-            foreach ($kategoriList as $kategori) {
-                $count = Kamar::whereHas('kategori', function ($query) use ($tahun, $i, $kategori) {
-                                $query->where('nama_kategori', $kategori);
-                            })->whereYear('created_at', $tahun)
-                              ->whereMonth('created_at', $i)
-                              ->count();
-                $kategoriCount[] = $count;
-            }
-            $dataKategori[] = $kategoriCount;
-        }
+    // Menginisialisasi array untuk menyimpan jumlah kategori per bulan
+    $jumlahKategori = array_fill(0, $bulan, []);
 
-        // Array warna untuk setiap kategori
-        $colors = ['#FF5733', '#FFC300', '#DAF7A6', '#C70039', '#900C3F', '#3D0C02', '#8D021F', '#FF5733', '#FFC300', '#DAF7A6', '#C70039', '#900C3F'];
+    for ($i = 1; $i <= $bulan; $i++){
+        $databulan[] = Carbon::create()->month($i)->format('F');
 
-        $chart = $this->chart1->barChart()
-            ->setTitle('Kategori Kamar')
-            ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
-
-        // Tambahkan data untuk setiap kategori dengan warna yang sesuai
         foreach ($kategoriList as $index => $kategori) {
-            $chart->addData($kategori, $dataKategori[$index], $colors[$index]);
-        }
+            $count = Pesanan::whereHas('kategori', function ($query) use ($tahun, $i, $kategori) {
+                            $query->where('nama_kategori', $kategori);
+                        })->whereYear('created_at', $tahun)
+                          ->whereMonth('created_at', $i)
+                          ->count();
+            $dataKategori[$index][] = $count;
 
-        return $chart;
+            // Menambahkan jumlah kategori untuk bulan saat ini
+            $jumlahKategori[$i - 1][$kategori] = $count;
+        }
     }
+
+    // Array warna untuk setiap kategori
+    $colors = ['#FF5733', '#FFC300', '#DAF7A6', '#C70039', '#900C3F', '#3D0C02', '#8D021F', '#FF5733', '#FFC300', '#DAF7A6', '#C70039', '#900C3F'];
+
+    $chart = $this->chart1->barChart()
+    ->setTitle('Jumlah Pesanan Berdasarkan kategori')
+    ->setXAxis(array_map(function ($bulan) {
+        return Carbon::create()->month($bulan)->format('F');
+    }, range(1, $bulan)))
+    ->setLabels(array_map(function ($bulan) {
+        return Carbon::create()->month($bulan)->format('F');
+    }, range(1, $bulan)));
+
+    // Tambahkan data untuk setiap kategori dengan warna yang sesuai
+    foreach ($kategoriList as $index => $kategori) {
+        $chart->addData($kategori, $dataKategori[$index], $colors[$index]);
+    }
+
+    return $chart;
+}
 }

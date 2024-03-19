@@ -43,7 +43,7 @@ class KamarController extends Controller
             'deskripsi' => 'required',
             'path_kamar' => 'required|image|mimes:jpeg,png,jpg|max:10048',
             'kategori_id' => 'required',
-            'harga' => 'required|numeric',
+            'harga' => 'required|numeric|min:10000',
         ], [
             'nama_kamar.required' => 'Room name is required.',
             'deskripsi.required' => 'Room description is required.',
@@ -54,6 +54,7 @@ class KamarController extends Controller
             'kategori_id.required' => 'Room category is required.',
             'harga.required' => 'Room price is required.',
             'harga.numeric' => 'Room price must be a number.',
+            'harga.min' => 'Nilai :attribute harus minimal :min.',
         ]);
 
         $file = $request->file('path_kamar');
@@ -101,7 +102,7 @@ class KamarController extends Controller
             'deskripsi' => 'required',
             'path_kamar' => 'required|image|mimes:jpeg,png,jpg|max:10048',
             'kategori_id' => 'required',
-            'harga' => 'required|numeric',
+            'harga' => 'required|numeric|min:10000',
         ], [
             'nama_kamar.required' => 'Room name is required.',
             'deskripsi.required' => 'Room description is required.',
@@ -112,6 +113,7 @@ class KamarController extends Controller
             'kategori_id.required' => 'Room category is required.',
             'harga.required' => 'Room price is required.',
             'harga.numeric' => 'Room price must be a number.',
+            'harga.min' => 'Nilai :attribute harus minimal :min.',
         ]);
 
         $kamar = Kamar::find($id);

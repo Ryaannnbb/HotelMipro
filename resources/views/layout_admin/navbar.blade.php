@@ -21,7 +21,7 @@
                             <span class="nav-link-icon">
                                 <span data-feather="pie-chart"></span>
                             </span>
-                            <span class="nav-link-text">Dashboard</span>
+                            <span class="nav-link-text">Beranda</span>
                         </div>
                     </a>
                 </li>
@@ -32,7 +32,7 @@
                             <span class="nav-link-icon">
                                 <span class="fas fa-door-open"></span>
                             </span>
-                            <span class="nav-link-text">Rooms</span>
+                            <span class="nav-link-text">Kamar</span>
                         </div>
                     </a>
                 </li>
@@ -43,7 +43,7 @@
                             <span class="nav-link-icon">
                                 <span data-feather="list"></span>
                             </span>
-                            <span class="nav-link-text">Category</span>
+                            <span class="nav-link-text">Kategori</span>
                         </div>
                     </a>
                 </li>
@@ -54,7 +54,7 @@
                             <span class="nav-link-icon mt-1">
                                 <span class="fas fa-credit-card"></span>
                             </span>
-                            <span class="nav-link-text">Payment</span>
+                            <span class="nav-link-text">pembayaran</span>
                         </div>
                     </a>
                 </li>
@@ -65,7 +65,7 @@
                             <span class="nav-link-icon mt-1">
                                 <span class="fas fa-receipt"></span>
                             </span>
-                            <span class="nav-link-text">Facility</span>
+                            <span class="nav-link-text">Fasilitas</span>
                         </div>
                     </a>
                 </li>
@@ -76,7 +76,7 @@
                             <span class="nav-link-icon">
                                 <span class="fas fa-tag mt-1"></span>
                             </span>
-                            <span class="nav-link-text">Discount</span>
+                            <span class="nav-link-text">Diskon</span>
                         </div>
                     </a>
                 </li>
@@ -87,7 +87,7 @@
                             <span class="nav-link-icon">
                                 <span data-feather="shopping-bag"></span>
                             </span>
-                            <span class="nav-link-text">Orders</span>
+                            <span class="nav-link-text">pesanan</span>
                         </div>
                     </a>
                 </li>

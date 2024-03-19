@@ -80,7 +80,7 @@
                                 <div class="d-flex flex-wrap align-items-center justify-content-end">
                                     <h1>Rp.{{ number_format($detail->harga, 0, ',', '.') }}</h1>
                                 </div>
-                                <p class="mb-2 text-800 text-right"><strong class="text-1000">Description:</strong>
+                                <p class="mb-2 text-800 text-right"><strong class="text-1000">Deskripsi:</strong>
                                 <p class="mb-2 text-800 text-right">
                                     <strong class="text-1000"
                                         style="display: block; overflow-wrap: break-word; word-wrap: break-word;">

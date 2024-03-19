@@ -106,13 +106,13 @@
                       <div class="text-center mb-7"><a class="d-flex flex-center text-decoration-none mb-4" href="../../../index.html">
                           <div class="d-flex align-items-center fw-bolder fs-5 d-inline-block"><img src="{{ asset('assets/img/brands/small.png') }}" alt="logo" width="58" /></div>
                         </a>
-                        <h3 class="text-1000">Sign In</h3>
-                        <p class="text-700">Get access to your account</p>
+                        <h3 class="text-1000">Login</h3>
+                        <p class="text-700">Dapatkan akses ke akun Anda</p>
                       <div class="position-relative">
                       </div>
                       <form method="POST" action="{{ route('proseslogin') }}">
                         @csrf
-                          <div class="mb-3 text-start"><label class="form-label" for="email">Email address</label>
+                          <div class="mb-3 text-start"><label class="form-label" for="email">Alamat Email</label>
                             <div class="form-icon-container"><input class="form-control form-icon-input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email" autofocus id="email" type="email" placeholder="Email" /><span class="fas fa-user text-900 fs--1 form-icon"></span>
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -135,8 +135,8 @@
                                 <div class="form-check mb-0"><input class="form-check-input" id="basic-checkbox" type="checkbox" checked="checked" /><label class="form-check-label mb-0" for="basic-checkbox">Remember me</label></div>
                         </div>
                         <div class="col-auto"><a class="fs--1 fw-semi-bold" href="{{ route('password.request') }}">Forgot Password?</a></div>
-                      </div><button class="btn btn-primary w-100 mb-3">Sign In</button>
-                      <div class="text-center"><a class="fs--1 fw-bold" href="{{ route('register') }}">Create an account</a></div>
+                      </div><button class="btn btn-primary w-100 mb-3">Login</button>
+                      <div class="text-center"><a class="fs--1 fw-bold" href="{{ route('register') }}">Buat akun Baru</a></div>
                     </form>
                     </div>
                   </div>

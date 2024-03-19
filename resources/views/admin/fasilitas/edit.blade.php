@@ -272,19 +272,19 @@
 
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h2 class="mb-2">Edit a facility</h2>
-                    <h5 class="text-700 fw-semi-bold">Orders placed across your store</h5>
+                    <h2 class="mb-2">Edit fasilitas</h2>
+                    <h5 class="text-700 fw-semi-bold">Fasilitas ditempatkan di seluruh kamar hotel </h5>
                 </div>
                 <div class="col-auto">
-                    <a href="{{ route('fasilitas') }}" class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Publish facility</button>
+                    <a href="{{ route('fasilitas') }}" class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" type="button">Batalkan</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">simpan Fasilitas</button>
                 </div>
             </div>
             <div class="row g-5">
                 <div class="col-12 col-xl-12">
-                    <label class="fw-bold">Facility Title</label><input
+                    <label class="fw-bold">Nama Fasilitas</label><input
                         class="form-control @error('nama_fasilitas') is-invalid @enderror" name="nama_fasilitas"
-                        value="{{ $fasilitas->nama_fasilitas }}" type="text" placeholder="Write title here..." />
+                        value="{{ $fasilitas->nama_fasilitas }}" type="text" placeholder="Tulis nama fasilitas disini..." />
                     @error('nama_fasilitas')
                         <strong class="invalid-feedback">
                             {{ $message }}
@@ -292,9 +292,9 @@
                     @enderror
                 </div>
                 <div class="col-12 col-xl-12">
-                    <label class="fw-bold">Best Price</label><input
+                    <label class="fw-bold">Harga</label><input
                         class="form-control @error('harga_satuan') is-invalid @enderror" name="harga_satuan"
-                        value="{{ $fasilitas->harga_satuan }}" type="text" placeholder="Write title here..." />
+                        value="{{ $fasilitas->harga_satuan }}" type="text" placeholder="Tulis harga disini..." />
                     @error('harga_satuan')
                         <strong class="invalid-feedback">
                             {{ $message }}

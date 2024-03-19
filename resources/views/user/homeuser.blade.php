@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h6 class="card-title mb-2 lh-sm line-clamp-3 product-name">{{ $product->nama_kamar }}</h6>
-                                        <p class="fs--1 text-1000 fw-bold">Stock {{ $product->stok }}</p>
+                                        {{-- <p class="fs--1 text-1000 fw-bold">Stock {{ $product->stok }}</p> --}}
                                         <p class="fs--1">
                                             @if ($totalUlasans[$product->id] > 0)
                                             @php
@@ -65,7 +65,7 @@
                                             @endif
                                             <span class="text-primary fw-semi-bold mb-2"> ({{ $totalUlasans[$product->id] }} people rated)</span>
                                         @else
-                                        <p>There are no reviews</p>
+                                        <p>Tidak Ada Ulasan</p>
                                         @endif
                                     </p>
 
@@ -76,8 +76,9 @@
                                             <div class="flex-grow-1"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
+                        </div>
                         @endforeach
                     </div>
                     @else
@@ -85,7 +86,7 @@
                             <td colspan="8" class="text-center py-4">
                                 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
                                     <img src="{{ asset('assets/img/No data-amico.svg') }}" alt="" style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
-                                    <h3 class="mb-3">There are no Rooms added by admin yet. Please check back later.</h3>
+                                    <h3 class="mb-3">Belum Ada Kamar Yang Ditambahkan Oleh Admin.Silahkan Periksa Kembali Nanti.</h3>
                                 </div>
                             </td>
                         </tr>
@@ -93,7 +94,7 @@
                 </div>
                 @if($kamars && count($kamars) > 0)
                     <div class="text-center mt-4">
-                        <a href="{{route('usermenu')}}" class="btn btn-lg btn-primary rounded-pill">View All Rooms</a>
+                        <a href="{{route('usermenu')}}" class="btn btn-lg btn-primary rounded-pill">Tampilkan Semua Kamar</a>
                     </div>
                 @endif
     </section>

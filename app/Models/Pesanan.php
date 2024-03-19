@@ -23,7 +23,8 @@ class Pesanan extends Model
         'foto',
         'rooms_id',
         'user_id',
-        'kategori_id'
+        'kategori_id',
+        'diskon_id'
     ];
 
     // Relasi dengan user
@@ -46,5 +47,10 @@ class Pesanan extends Model
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
+    }
+
+    public function diskon()
+    {
+        return $this->belongsTo(Diskon::class);
     }
 }
