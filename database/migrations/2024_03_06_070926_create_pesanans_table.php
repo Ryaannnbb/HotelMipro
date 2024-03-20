@@ -25,7 +25,7 @@ return new class extends Migration
             $table->bigInteger('harga_pesanan');
             $table->enum('adaulasan', ['true', 'false'])->default('false');
             $table->foreignId('kategori_id')->constrained('Kategoris')->restrictOnDelete();
-            $table->foreignId('diskon_id')->constrained('diskons')->restrictOnDelete();
+            $table->foreignId('diskon_id')->nullable()->constrained('diskons')->restrictOnDelete();
 
             // $table->enum('adaulasan', ['true', 'false'])->default('false');
             $table->timestamps();

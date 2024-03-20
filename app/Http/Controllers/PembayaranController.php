@@ -33,23 +33,23 @@ class PembayaranController extends Controller
     public function store(Request $request)
 {
     // $request->dd();
-    if ($request->metode_pembayaran === 'bank') {
-        $request->validate([
-            'keterangan_bank' => 'required|numeric|digits:10',
-            'nama' => 'required|string|max:255',
-            'tujuan_bank' => 'required|string',
-        ], [
-            'keterangan_bank.required' => 'Kolom nomor rekening wajib diisi.',
-            'keterangan_bank.numeric' => 'Nomor rekening harus berupa angka.',
-            'keterangan_bank.digits' => 'Nomor rekening tidak boleh kurang :digits karakter.',
-            // 'keterangan_bank.max' => 'Nomor rekening tidak boleh lebih :max karakter.',
-            'nama.required' => 'Kolom Nama wajib diisi.',
-            'nama.string' => 'Nama harus berupa teks.',
-            'nama.max' => 'Nama tidak boleh lebih dari :max karakter.',
-            'tujuan_bank.required' => 'Kolom bank wajib diisi.',
-            'tujuan_bank.string' => ' kolom bank harus berupa teks.',
-        ]);
-    }
+    // if ($request->metode_pembayaran === 'bank') {
+    //     $request->validate([
+    //         'keterangan_bank' => 'required|numeric|digits:10',
+    //         'nama' => 'required|string|max:255',
+    //         'tujuan_bank' => 'required|string',
+    //     ], [
+    //         'keterangan_bank.required' => 'Kolom nomor rekening wajib diisi.',
+    //         'keterangan_bank.numeric' => 'Nomor rekening harus berupa angka.',
+    //         'keterangan_bank.digits' => 'Nomor rekening tidak boleh kurang :digits karakter.',
+    //         // 'keterangan_bank.max' => 'Nomor rekening tidak boleh lebih :max karakter.',
+    //         'nama.required' => 'Kolom Nama wajib diisi.',
+    //         'nama.string' => 'Nama harus berupa teks.',
+    //         'nama.max' => 'Nama tidak boleh lebih dari :max karakter.',
+    //         'tujuan_bank.required' => 'Kolom bank wajib diisi.',
+    //         'tujuan_bank.string' => ' kolom bank harus berupa teks.',
+    //     ]);
+    // }
     if ($request->metode_pembayaran === 'e-wallet') {
     $request->validate([
         'keterangan_ewallet' => 'required|file|max:255|mimes:jpeg,png,pdf',
