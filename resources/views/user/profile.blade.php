@@ -17,7 +17,9 @@
             display: none;
         }
     </style>
-
+    <form action="{{ route('profil.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
         <section class="pt-5 pb-9">
             <div class="container-small">
                 @if (is_null($user->address) and is_null($user->telp))
@@ -266,53 +268,31 @@
                                                             {{ number_format($orders->harga_pesanan, 0, ',', '.') }}
                                                         </span>
                                                     </td>
-                                                    <td class="produks align-middle ">
-                                                        <td class="produks align-middle ">
-                                                            <td class="produks align-middle">
-                                                                @if ($orders->status == 'pending')
-                                                                <button type="button" class="btn btn-link primary" data-bs-toggle="modal" data-bs-target="#batalkanPesananModal{{ $orders->id }}">Batalkan</button>
-                                                                @elseif ($orders->status == 'reject')
-                                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
-                                                                    Lihat Alasan
-                                                                </button>
-                                                                <!-- Modal alasan penolakan -->
-                                                                <div class="modal fade" id="alasanPenolakanModal{{ $orders->id }}" tabindex="-1" aria-labelledby="alasanPenolakanModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="alasanPenolakanModalLabel">Alasan Penolakan</h5>
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <p>{{ $orders->reject_reason }}</p>
-                                                                            </div>
-                                                                        </div>
+                                                    <td class="produks align-middle border-bottom">
+
+                                                        @if ($orders->status == 'reject')
+                                                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
+                                                            Lihat Alasan
+                                                        </button>
+                                                        <!-- Modal alasan penolakan -->
+                                                        <div class="modal fade" id="alasanPenolakanModal{{ $orders->id }}" tabindex="-1" aria-labelledby="alasanPenolakanModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="alasanPenolakanModalLabel">Alasan Penolakan</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                     </div>
-                                                                </div>
-                                                            @endif
-                                                    </tr>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="batalkanPesananModal{{ $orders->id }}" tabindex="-1" aria-labelledby="batalkanPesananModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="batalkanPesananModalLabel">Batalkan Pesanan</h5>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form action="{{ route('orders.cancel', $orders->id) }}" method="POST">
-                                                                        @csrf
-                                                                        <div class="mb-3">
-                                                                            <label for="alasan_pembatalan{{ $orders->id }}" class="form-label">Alasan Pembatalan</label>
-                                                                            <textarea class="form-control" id="alasan_pembatalan{{ $orders->id }}" name="alasan_pembatalan" rows="3" required></textarea>
-                                                                        </div>
-                                                                        <button type="submit" class="btn btn-primary">Kirim</button>
-                                                                    </form>
+                                                                    <div class="modal-body">
+                                                                        <p>{{ $orders->reject_reason }}</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                        </form>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                                    <!-- Modal -->
+
                                                         {{-- @if ($orders->status == 'shipped')
                                                         <form action="{{ route('diterima', $orders->id) }}">
                                                                             @csrf
@@ -504,9 +484,7 @@
                                 @endphp
                             @endif
                         @endforeach --}}
-                        <form action="{{ route('profil.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')                            <div class="tab-pane fade" id="tab-personal-info" role="tabpanel"
+                            <div class="tab-pane fade" id="tab-personal-info" role="tabpanel"
                                 aria-labelledby="personal-info-tab">
                                 <div class="row g-3 mb-5">
                                     <div class="col-12 col-lg-6">
@@ -533,9 +511,30 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- end of .container-->
+            </div>
         </section>
-    </form><!-- <section> close ============================-->
+    </form>
+    <div class="modal fade" id="batalkanPesananModal{{ $orders->id }}" tabindex="-1" aria-labelledby="batalkanPesananModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="batalkanPesananModalLabel">Batalkan Pesanan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('orders.cancel', $orders->id) }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="alasan_pembatalan{{ $orders->id }}" class="form-label">Alasan Pembatalan</label>
+                            <textarea class="form-control" id="alasan_pembatalan{{ $orders->id }}" name="alasan_pembatalan" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        </form><!-- <section> close ============================-->
     </main><!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
