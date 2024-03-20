@@ -24,7 +24,10 @@ class Pesanan extends Model
         'rooms_id',
         'user_id',
         'kategori_id',
-        'diskon_id'
+        'diskon_id',
+        'status', // tambahkan properti status
+        'reject_reason', // tambahkan kolom reject_reason di sini
+        'alasan_pembatalan'
     ];
 
     // Relasi dengan user

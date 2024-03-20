@@ -292,6 +292,45 @@ class PesananController extends Controller
             return redirect()->back()->withErrors(['error' => 'No facilities selected']);
         }
     }
+
+    public function rejectOrder(Request $request, $id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+        $pesanan->status = 'reject';
+        $pesanan->reject_reason = $request->input('reject_reason');
+        $pesanan->save();
+
+        // Kode lainnya...
+
+        return redirect()->back()->with('success', 'Pesanan berhasil ditolak.');
+    }
+    public function approveOrder($id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+
+        // Set status menjadi "approve"
+        $pesanan->status = 'approve';
+        $pesanan->save();
+
+        return redirect()->back()->with('success', 'Pesanan berhasil disetujui.');
+    }
+
+    public function cancelOrder(Request $request, $id)
+    {
+        $pesanan = Pesanan::findOrFail($id);
+
+        // Hanya izinkan pembatalan jika status pesanan adalah 'pending'
+        if ($pesanan->status === 'pending') {
+            // Set status pesanan menjadi 'reject' dan simpan alasan pembatalan
+            $pesanan->status = 'reject';
+            $pesanan->alasan_pembatalan = $request->alasan_pembatalan;
+            $pesanan->save();
+
+            return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
+        } else {
+            return redirect()->back()->with('error', 'Hanya pesanan dengan status "pending" yang dapat dibatalkan.');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */

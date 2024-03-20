@@ -27,6 +27,7 @@ class PesananDetailAdminController extends Controller
         ->get();
         return view('admin.pesanan.index', compact('user', 'pesanan'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

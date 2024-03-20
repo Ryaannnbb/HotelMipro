@@ -322,16 +322,16 @@
                                             scope="col" style="width:15%; min-width:140px">NAMA KAMAR</th>
                                         <th class="sort align-middle  text-center" scope="col"
                                             style="width:15%; min-width:180px">METODE PEMBAYARAN</th>
-                                        {{-- <th class="sort align-middle text-center" scope="col"
-                                            style="width:20%; min-width:160px">DELIVERY METHOD</th> --}}
-                                        <th class="sort align-middle  text-center" scope="col"
+                                            <th class="sort align-middle  text-center" scope="col"
                                             style="width:15%; min-width:160px">TANGGAL AWAL PESAN</th>
-                                        <th class="sort align-middle  text-center" scope="col"
+                                            <th class="sort align-middle  text-center" scope="col"
                                             style="width:15%; min-width:160px">TANGGAL AKHIR PESAN</th>
-                                        <th class="sort align-middle text-center" scope="col"
+                                            <th class="sort align-middle text-center" scope="col"
                                             style="width:15%; min-width:160px">TOTAL</th>
-                                        {{-- <th class="align-middle text-center" scope="col"
-                                            style="width:15%;">ACTION</th> --}}
+                                            <th class="sort align-middle text-center" scope="col"
+                                                style="width:20%; min-width:160px">STATUS</th>
+                                        <th class="align-middle text-center" scope="col"
+                                            style="width:15%;">ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list" id="profile-order-table-body text-center">
@@ -376,21 +376,53 @@
                                         </td>
                                         <td class="align-middle white-space-nowrap py-0">
                                             <span class="badge-phoenix-success">{{ $orders->metode_pembayaran }}</span>
-                                            {{-- <span
-                                                            class="badge badge-phoenix fs--2
+                                            <td>
+                                                <span class="badge badge-phoenix fs--2
                                                     @if ($orders->status == 'pending') badge-phoenix-warning
-                                                    @elseif($orders->status == 'shipped')
-                                                        badge-phoenix-info
-                                                    @elseif($orders->status == 'delivered')
-                                                        badge-phoenix-success
-                                                    @elseif($orders->status == 'completed')
-                                                    badge-phoenix-success
-                                                    @elseif($orders->status == 'reject')
-                                                    badge-phoenix-danger @endif
-                                                    ">
-                                                            {{ $orders->status }}
-                                                        </span> --}}
-                                        </td>
+                                                    @elseif($orders->status == 'approve') badge-phoenix-info
+                                                    {{-- @elseif($orders->status == 'delivered') badge-phoenix-success --}}
+                                                     {{-- @elseif($orders->status == 'completed') badge-phoenix-success --}}
+                                                    @elseif($orders->status == 'reject') badge-phoenix-danger
+                                                    @endif">
+                                                    @if ($orders->status == 'pending') Pending
+                                                    @elseif($orders->status == 'approve') Approve
+                                                     {{-- @elseif($orders->status == 'delivered') Delivered
+                                                    @elseif($orders->status == 'completed') Completed --}}
+                                                    @elseif($orders->status == 'reject') Rejected
+                                                    @endif
+                                                </span>
+                                                @if ($orders->status == 'pending')
+                                                    <form action="{{ route('rejectOrder', $orders->id) }}" method="POST" style="display:inline">
+                                                        @csrf
+                                                        <form action="{{ route('rejectOrder', $orders->id) }}" method="POST" style="display:inline">
+                                                            @csrf
+                                                                Rejected
+                                                            </button>
+                                                            <!-- Modal -->
+                                                                <!-- Isi Modal -->
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <!-- Isi Modal -->
+                                                                        <div class="modal-body">
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {{-- </form> --}}
+
+                                                    </form>
+                                                    <form action="{{ route('approveOrder', $orders->id) }}" method="POST" style="display:inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-success">Approve</button>
+                                                    </form>
+                                                @endif
+                                            </td>
                                         {{-- <td class="align-middle white-space-nowrap py-0">
                                             <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
                                                 {{ $orders->metode_pengiriman }}
@@ -411,6 +443,28 @@
                                             <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">Rp.
                                                 {{ number_format($orders->harga_pesanan, 0, ',', '.') }}
                                             </span>
+                                        </td>
+
+                                        <td class="align-middle text-center">
+                                            @if ($orders->status == 'reject')
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alasanPembatalanModal{{ $orders->id }}">
+                                                    Lihat Alasan
+                                                </button>
+                                            @endif
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="alasanPembatalanModal{{ $orders->id }}" tabindex="-1" aria-labelledby="alasanPembatalanModalLabel{{ $orders->id }}" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="alasanPembatalanModalLabel{{ $orders->id }}">Alasan Pembatalan</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {{ $orders->alasan_pembatalan }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         {{-- <td class="produks align-middle ">
                                             @if ($orders->status == 'shipped')
