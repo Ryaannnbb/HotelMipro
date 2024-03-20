@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
+            $table->string('status')->default('pending'); // nilai default adalah "pending"
+            // $table->string('reject_reason'); // nilai default adalah "pending"
             $table->string('email');
             $table->string('username');
             $table->string('telp');
@@ -26,6 +28,11 @@ return new class extends Migration
             $table->enum('adaulasan', ['true', 'false'])->default('false');
             $table->foreignId('kategori_id')->constrained('Kategoris')->restrictOnDelete();
             $table->foreignId('diskon_id')->constrained('diskons')->restrictOnDelete();
+            // {
+            //     Schema::table('pesanans', function (Blueprint $table) {
+            //         $table->text('reject_reason')->nullable();
+            //     });
+            // }
 
             // $table->enum('adaulasan', ['true', 'false'])->default('false');
             $table->timestamps();

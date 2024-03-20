@@ -40,6 +40,9 @@ class ProfilController extends Controller
         return view('user.profile', compact('user', 'pesanan', 'totalpembayaran', 'totalorder', 'lastorder'));
     }
 
+   
+
+
     /**
      * Show the form for creating a new resource.
      */

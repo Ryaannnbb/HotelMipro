@@ -316,18 +316,13 @@
                 </div>
             </div>
         </form>
-        <div class="row ">
-            <div class="col-md-3 offset-md-8" style="margin-top: -300px;">
+        <div class="row">
+            <div class="col-md-4 offset-md-8" style="margin-top: -300px;">
                 <form id="updateCartForm" action="{{ route('updateFacilitiesPrice') }}" method="POST">
                     @csrf
-
-                    <input type="hidden" name="selected_fasilitas"
-                        value="{{ json_encode(old('nama_fasilitas', [])) }}">
-                    <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">
-                        Pilih Fasilitas</label>
-                    <select class="form-select @error('nama_fasilitas') is-invalid @enderror" id="organizerMultiple"
-                        data-choices="data-choices" multiple="multiple"
-                        data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
+                    <input type="hidden" name="selected_fasilitas" value="{{ json_encode(old('nama_fasilitas', [])) }}">
+                    <label class="form-label fs-0 text-1000 ps-0 text-none" for="organizerMultiple">Pilih Fasilitas</label>
+                    <select class="form-select @error('nama_fasilitas') is-invalid @enderror" id="organizerMultiple" data-choices="data-choices" multiple="multiple" data-options='{"removeItemButton":true,"placeholder":true}' name="nama_fasilitas[]">
                         <option value="">Pilih Fasilitas...</option>
                         @foreach ($fasilitas as $fasilitasd)
                             <option value="{{ $fasilitasd->id }}" @if (in_array($fasilitasd->id, old('nama_fasilitas', []))) selected @endif>

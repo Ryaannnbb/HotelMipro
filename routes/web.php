@@ -111,6 +111,9 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 });
 
 // USER
+Route::post('/pesanan/{id}/cancel', [PesananController::class, 'cancelOrder'])->name('orders.cancel');
+Route::post('pesanan/{id}/reject', [PesananController::class,'rejectOrder'])->name('rejectOrder');
+Route::post('pesanan/{id}/approve', [PesananController::class,'approveOrder'])->name('approveOrder');
 Route::middleware([UserMiddleware::class])->group(function () {
     Route::get('/homeuser', [HomeUserController::class, 'index'])->name('homeuser');
     Route::get('/usermenu', [MenuKamarUserController::class, 'index'])->name('usermenu');
@@ -133,5 +136,5 @@ Route::middleware([UserMiddleware::class])->group(function () {
         Route::put('edit/{id}', 'update')->name('profil.update');
         Route::get('destroy/{id}', 'destroy')->name('profil.destroy');
     });
-    
+
 });

@@ -17,9 +17,7 @@
             display: none;
         }
     </style>
-    <form action="{{ route('profil.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+
         <section class="pt-5 pb-9">
             <div class="container-small">
                 @if (is_null($user->address) and is_null($user->telp))
@@ -164,6 +162,8 @@
                                                         scope="col" style="width:15%; min-width:140px">NAMA KAMAR</th>
                                                     <th class="sort align-middle  text-center" scope="col"
                                                         style="width:15%; min-width:180px">METODE PEMBAYARAN</th>
+                                                        <th class="sort align-middle  text-center" scope="col"
+                                                        style="width:15%; min-width:180px">Status</th>
                                                     {{-- <th class="sort align-middle text-center" scope="col"
                                                         style="width:20%; min-width:160px">DELIVERY METHOD</th> --}}
                                                     <th class="sort align-middle  text-center" scope="col"
@@ -208,20 +208,42 @@
                                                     </td>
                                                     <td class="align-middle white-space-nowrap py-0">
                                                         <span class="badge-phoenix-success">{{ $orders->metode_pembayaran }}</span>
-                                                        {{-- <span
-                                                                        class="badge badge-phoenix fs--2
-                                                                @if ($orders->status == 'pending') badge-phoenix-warning
-                                                                @elseif($orders->status == 'shipped')
-                                                                    badge-phoenix-info
-                                                                @elseif($orders->status == 'delivered')
-                                                                    badge-phoenix-success
-                                                                @elseif($orders->status == 'completed')
-                                                                badge-phoenix-success
-                                                                @elseif($orders->status == 'reject')
-                                                                badge-phoenix-danger @endif
-                                                                ">
-                                                                        {{ $orders->status }}
-                                                                    </span> --}}
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-phoenix fs--2
+                                                            @if ($orders->status == 'pending') badge-phoenix-warning
+                                                            @elseif($orders->status == 'approve') badge-phoenix-info
+                                                            {{-- @elseif($orders->status == 'delivered') badge-phoenix-success --}}
+                                                             {{-- @elseif($orders->status == 'completed') badge-phoenix-success --}}
+                                                            @elseif($orders->status == 'reject') badge-phoenix-danger
+                                                            @endif">
+                                                            @if ($orders->status == 'pending') Pending
+                                                            @elseif($orders->status == 'approve') Approve
+                                                             {{-- @elseif($orders->status == 'delivered') Delivered
+                                                            @elseif($orders->status == 'completed') Completed --}}
+                                                             @elseif($orders->status == 'reject') Rejected
+                                                            @endif
+                                                        </span>
+                                                        {{-- @if ($orders->status == 'reject')
+                                                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
+                                                            <i class="bi bi-eye"></i>
+                                                        </button>
+                                                        <!-- Modal alasan penolakan -->
+                                                        <div class="modal fade" id="alasanPenolakanModal{{ $orders->id }}" tabindex="-1" aria-labelledby="alasanPenolakanModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="alasanPenolakanModalLabel">Alasan Penolakan</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>{{ $orders->reject_reason }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endif
+                                                    </td> --}}
                                                     </td>
                                                     {{-- <td class="align-middle white-space-nowrap py-0">
                                                         <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
@@ -245,12 +267,51 @@
                                                         </span>
                                                     </td>
                                                     <td class="produks align-middle ">
-                                                        <form action="{{ route('pesanan.destroy', $orders->id) }}" method="POST" class="hapus-form">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit" class="btn btn-link primary">
-                                                                Batalkan
-                                                            </button>
+                                                        <td class="produks align-middle ">
+                                                            <td class="produks align-middle">
+                                                                @if ($orders->status == 'pending')
+                                                                <button type="button" class="btn btn-link primary" data-bs-toggle="modal" data-bs-target="#batalkanPesananModal{{ $orders->id }}">Batalkan</button>
+                                                                @elseif ($orders->status == 'reject')
+                                                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
+                                                                    Lihat Alasan
+                                                                </button>
+                                                                <!-- Modal alasan penolakan -->
+                                                                <div class="modal fade" id="alasanPenolakanModal{{ $orders->id }}" tabindex="-1" aria-labelledby="alasanPenolakanModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="alasanPenolakanModalLabel">Alasan Penolakan</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <p>{{ $orders->reject_reason }}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                    </tr>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="batalkanPesananModal{{ $orders->id }}" tabindex="-1" aria-labelledby="batalkanPesananModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="batalkanPesananModalLabel">Batalkan Pesanan</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="{{ route('orders.cancel', $orders->id) }}" method="POST">
+                                                                        @csrf
+                                                                        <div class="mb-3">
+                                                                            <label for="alasan_pembatalan{{ $orders->id }}" class="form-label">Alasan Pembatalan</label>
+                                                                            <textarea class="form-control" id="alasan_pembatalan{{ $orders->id }}" name="alasan_pembatalan" rows="3" required></textarea>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                         </form>
                                                         {{-- @if ($orders->status == 'shipped')
                                                         <form action="{{ route('diterima', $orders->id) }}">
@@ -443,7 +504,9 @@
                                 @endphp
                             @endif
                         @endforeach --}}
-                            <div class="tab-pane fade" id="tab-personal-info" role="tabpanel"
+                        <form action="{{ route('profil.update', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')                            <div class="tab-pane fade" id="tab-personal-info" role="tabpanel"
                                 aria-labelledby="personal-info-tab">
                                 <div class="row g-3 mb-5">
                                     <div class="col-12 col-lg-6">
