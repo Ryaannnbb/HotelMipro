@@ -39,7 +39,7 @@
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     <input type="hidden" name="username" value="{{ auth()->user()->name }}">
                                     <input type="hidden" name="email" value="{{ auth()->user()->email }}">
-                                    <input type="hidden" name="diskon_id" value="{{ $diskonid->id }}">
+                                    <input type="hidden" name="diskon_id" value="{{ $diskonid ? $diskonid->id : null }}">
                                 </tr>
                                 <tr>
                                     <td class="py-2 ps-0">
@@ -247,7 +247,8 @@
                                     <div class="d-flex justify-content-between mb-2">
                                         <h5 class="text-900 fw-semi-bold">Harga Kamar: </h5>
                                         <h5 class="text-900 fw-semi-bold">
-                                            {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}</h5>
+                                            {{ 'Rp ' . number_format($kamars->harga, 0, ',', '.') }}
+                                        </h5>
                                     </div>
                                     @if ($diskons)
                                     <div class="d-flex justify-content-between mb-2">

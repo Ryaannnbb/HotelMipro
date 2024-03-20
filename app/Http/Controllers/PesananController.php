@@ -38,10 +38,10 @@ class PesananController extends Controller
         $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
 
         $diskons = DB::table('diskons')
-                ->select('potongan_harga', 'kategori_id', 'akhir_berlaku','jenis')
-                ->where('kategori_id', $kategori_id)
-                ->first();
-        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars', 'diskons','kategori', 'request', 'diskonid'));
+            ->select('potongan_harga', 'kategori_id', 'akhir_berlaku', 'jenis')
+            ->where('kategori_id', $kategori_id)
+            ->first();
+        return view('user.checkout', compact('user', 'fasilitas', 'bank', 'wallet', 'kamars', 'diskons', 'kategori', 'request', 'diskonid'));
 
         // dd($kamars);
 
@@ -163,101 +163,103 @@ class PesananController extends Controller
         if ($kategori_id) {
             $diskon = Diskon::find($request->diskon_id);
             // dd($diskon);
-            // dd($diskon);
-            // dd($kategori_id);
-            // Hitung total harga pesanan
-        $totalFacilityPrice = session()->get('totalFacilityPrice', 0);
-        // dd($totalFacilityPrice);
-        $totalharga = $totalinap * $tarif;
-        // dd($totalharga);
-        // Periksa apakah totalFacilityPrice tidak nol sebelum digunakan dalam perhitungan
-        // dd($totalFacilityPrice);
-        if ($totalFacilityPrice != 0) {
-            // Hitung total harga pesanan
-
-
-            // Tambahkan harga fasilitas jika ada
             $totalFacilityPrice = session()->get('totalFacilityPrice', 0);
-            // $totalharga += $totalFacilityPrice;
+            // dd($totalFacilityPrice);
+            $totalharga = $totalinap * $tarif;
+            // dd($totalharga);
+
+            // Periksa jika ada diskon
             if ($diskon) {
                 // dd($diskon);
                 $diskon_amount = $diskon->potongan_harga;
-
                 // dd("Ada diskon");
+
                 // Kurangi diskon dari total harga pesanan
                 // dd($diskon->jenis, $diskon_amount);
+                // dd($diskon_amount);
+
                 if ($diskon->jenis == 'percentage') {
-                    // dd('percentage');
                     $diskon_amount = ($totalharga * $diskon->potongan_harga) / 100;
-                    $totalharga -= $diskon_amount;
                 } else {
-                    // dd('nominal');
-                    $totalharga -= $diskon->potongan_harga;
+                    $diskon_amount = $diskon->potongan_harga;
                 }
             } else {
                 // dd("Tidak Ada diskon");
                 $totalharga = $totalinap * $tarif;
-                $totalFacilityPrice = session()->get('totalFacilityPrice', 0);
-                $totalharga += $totalFacilityPrice;
+                // $totalFacilityPrice = session()->get('totalFacilityPrice', 0);
+                // $totalharga += $totalFacilityPrice;
 
                 session()->forget('totalFacilityPrice');
             }
+
+            if ($totalFacilityPrice != 0) {
+                $totalharga += $totalFacilityPrice;
+            }
+            // dd($diskon);
+
+
 
             // $diskon->nominal_potongan = $totalharga - $request->potongan_harga;
 
 
             // session()->forget('totalFacilityPrice');
             // $totalharga += $totalFacilityPrice;
+            // }
+
+            // dd($diskon);
+            $pesanan = new Pesanan;
+            $pesanan->email = $request->email;
+            $pesanan->username = $request->username;
+            $pesanan->telp = $request->no_tlp;
+            $pesanan->user_id = $user;
+            $pesanan->kategori_id = $kategori;
+            $pesanan->tanggal_awal = $tglawal;
+            $pesanan->tanggal_akhir = $tglakhir;
+            $pesanan->rooms_id = $kamar;
+            // $pesanan->diskon_id = $diskon->id;
+            // $diskon->diskon = $request->jenis;
+            $pesanan->metode_pembayaran = $request->metode_pembayaran;
+            $pesanan->invoice = $buktipembayaran;
+            if ($diskon) {
+                $pesanan->diskon_id = $diskon->id;
+                $diskon->diskon = $request->jenis;
+                $pesanan->harga_pesanan = (int) (($totalharga ?? (int) $totalinap * $tarif) - $diskon_amount);
+            } else {
+                $pesanan->harga_pesanan = (int) ($totalharga ?? (int) $totalinap * $tarif);
+            }
+            // $pesanan->harga_pesanan = (int) ((($totalharga ?? (int) $totalinap * $tarif) - $diskon_amount) + $totalFacilityPrice);
+            // dd( $pesanan->harga_pesanan = (int) ($totalharga ?? (int) $totalinap * $tarif));
+            if ($kategori_id) {
+                $pesanan->kategori_id = $kategori_id;
+            } else {
+                $pesanan->kategori_id = null; // Atau berikan nilai default yang sesuai
+            }
+
+            $pesanan->save();
+
+            // Update status kamar menjadi booked
+            Kamar::findOrFail($kamar)->update(['status' => 'booked']);
+            // Jika hanya satu fasilitas yang dipilih
+            // Simpan detail pemakaian fasilitas
+            //
+            //  if (!empty($request->nama_fasilitas)) {
+            //     foreach ($request->nama_fasilitas as $fasilitas_id) {
+            //         if (Fasilitas::where('id', $fasilitas_id)->exists()) {
+            //             $fasilitas = Fasilitas::find($fasilitas_id);
+
+            //             $detailPemakaian = new PemakaianFasilitas;
+            //             $detailPemakaian->pesanan_id = $pesanan->id;
+            //             $detailPemakaian->fasilitas_id = $fasilitas_id;
+            //             $detailPemakaian->jumlah_pemakaian = 1; // Set jumlah pemakaian sesuai kebutuhan
+
+            //             // Harga pemakaian diatur sesuai dengan harga satuan fasilitas
+            //             $detailPemakaian->harga_pemakaian = intval($fasilitas->harga_satuan ?? 0);
+            //             $detailPemakaian->save();
+            //         }
+            //     }
+            // }
+            return redirect()->route('homeuser')->with("success", "Product data added successfully!");
         }
-
-        // dd($diskon);
-        $pesanan = new Pesanan;
-        $pesanan->email = $request->email;
-        $pesanan->username = $request->username;
-        $pesanan->telp = $request->no_tlp;
-        $pesanan->user_id = $user;
-        $pesanan->kategori_id = $kategori;
-        $pesanan->tanggal_awal = $tglawal;
-        $pesanan->tanggal_akhir = $tglakhir;
-        $pesanan->rooms_id = $kamar;
-        $pesanan->diskon_id = $diskon->id;
-        $diskon->diskon = $request->jenis;
-        $pesanan->metode_pembayaran = $request->metode_pembayaran;
-        $pesanan->invoice = $buktipembayaran;
-        $pesanan->harga_pesanan =  (int) $totalharga ?? (int) $totalinap * $tarif - $diskon_amount;
-
-
-        if ($kategori_id) {
-            $pesanan->kategori_id = $kategori_id;
-        } else {
-            $pesanan->kategori_id = null; // Atau berikan nilai default yang sesuai
-        }
-
-        $pesanan->save();
-
-        // Update status kamar menjadi booked
-        Kamar::findOrFail($kamar)->update(['status' => 'booked']);
-       // Jika hanya satu fasilitas yang dipilih
- // Simpan detail pemakaian fasilitas
-//
-//  if (!empty($request->nama_fasilitas)) {
-//     foreach ($request->nama_fasilitas as $fasilitas_id) {
-//         if (Fasilitas::where('id', $fasilitas_id)->exists()) {
-//             $fasilitas = Fasilitas::find($fasilitas_id);
-
-//             $detailPemakaian = new PemakaianFasilitas;
-//             $detailPemakaian->pesanan_id = $pesanan->id;
-//             $detailPemakaian->fasilitas_id = $fasilitas_id;
-//             $detailPemakaian->jumlah_pemakaian = 1; // Set jumlah pemakaian sesuai kebutuhan
-
-//             // Harga pemakaian diatur sesuai dengan harga satuan fasilitas
-//             $detailPemakaian->harga_pemakaian = intval($fasilitas->harga_satuan ?? 0);
-//             $detailPemakaian->save();
-//         }
-//     }
-// }
-        return redirect()->route('homeuser')->with("success", "Product data added successfully!");
-    }
     }
 
 
@@ -301,6 +303,7 @@ class PesananController extends Controller
      */
     public function update(Request $request)
     {
+<<<<<<< HEAD
         if ($request->has('nama_fasilitas')) {
             $totalFacilityPrice = 0;
 
@@ -357,6 +360,32 @@ class PesananController extends Controller
             return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
         } else {
             return redirect()->back()->with('error', 'Hanya pesanan dengan status "pending" yang dapat dibatalkan.');
+=======
+        // dd($request->all());
+        if ($request->has('nama_fasilitas')) {
+            // Inisialisasi total harga fasilitas
+            $totalFacilityPrice = 0;
+
+            foreach ($request->nama_fasilitas as $fasilitas_id) {
+                // dd($fasilitas_id);
+                $pemakaianFasilitas = PemakaianFasilitas::find($fasilitas_id);
+                // dd($pemakaianFasilitas);
+
+                if ($pemakaianFasilitas) {
+                    // Hitung total harga fasilitas berdasarkan harga dan jumlah
+                    $totalFacilityPrice += $pemakaianFasilitas->harga_pemakaian;
+                }
+            }
+            // dd($totalFacilityPrice);
+
+            // Simpan total harga fasilitas dalam session
+            session()->put('totalFacilityPrice', $totalFacilityPrice);
+
+            // Redirect kembali ke halaman sebelumnya dengan menyertakan nilai yang dipilih
+            return redirect()->back()->withInput(['nama_fasilitas' => $request->nama_fasilitas]);
+        } else {
+            return redirect()->back()->withErrors(['error' => 'No facilities selected']);
+>>>>>>> 616779ab5b4fe9a68137729ccea761a821d42230
         }
     }
     /**
