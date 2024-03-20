@@ -376,53 +376,7 @@
                                         </td>
                                         <td class="align-middle white-space-nowrap py-0">
                                             <span class="badge-phoenix-success">{{ $orders->metode_pembayaran }}</span>
-                                            <td>
-                                                <span class="badge badge-phoenix fs--2
-                                                    @if ($orders->status == 'pending') badge-phoenix-warning
-                                                    @elseif($orders->status == 'approve') badge-phoenix-info
-                                                    {{-- @elseif($orders->status == 'delivered') badge-phoenix-success --}}
-                                                     {{-- @elseif($orders->status == 'completed') badge-phoenix-success --}}
-                                                    @elseif($orders->status == 'reject') badge-phoenix-danger
-                                                    @endif">
-                                                    @if ($orders->status == 'pending') Pending
-                                                    @elseif($orders->status == 'approve') Approve
-                                                     {{-- @elseif($orders->status == 'delivered') Delivered
-                                                    @elseif($orders->status == 'completed') Completed --}}
-                                                    @elseif($orders->status == 'reject') Rejected
-                                                    @endif
-                                                </span>
-                                                @if ($orders->status == 'pending')
-                                                    <form action="{{ route('rejectOrder', $orders->id) }}" method="POST" style="display:inline">
-                                                        @csrf
-                                                        <form action="{{ route('rejectOrder', $orders->id) }}" method="POST" style="display:inline">
-                                                            @csrf
-                                                                Rejected
-                                                            </button>
-                                                            <!-- Modal -->
-                                                                <!-- Isi Modal -->
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <!-- Isi Modal -->
-                                                                        <div class="modal-body">
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                            <button type="submit" class="btn btn-danger">Submit</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        {{-- </form> --}}
 
-                                                    </form>
-                                                    <form action="{{ route('approveOrder', $orders->id) }}" method="POST" style="display:inline">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-success">Approve</button>
-                                                    </form>
-                                                @endif
-                                            </td>
                                         {{-- <td class="align-middle white-space-nowrap py-0">
                                             <span class="fw-semi-bold fs--1 line-clamp-3 mb-0">
                                                 {{ $orders->metode_pengiriman }}
@@ -444,28 +398,79 @@
                                                 {{ number_format($orders->harga_pesanan, 0, ',', '.') }}
                                             </span>
                                         </td>
+                                        <td>
+                                            <span class="badge badge-phoenix fs--2
+                                                @if ($orders->status == 'pending') badge-phoenix-warning
+                                                @elseif($orders->status == 'approve') badge-phoenix-info
+                                                {{-- @elseif($orders->status == 'delivered') badge-phoenix-success --}}
+                                                 {{-- @elseif($orders->status == 'completed') badge-phoenix-success --}}
+                                                @elseif($orders->status == 'reject') badge-phoenix-danger
+                                                @endif">
+                                                @if ($orders->status == 'pending') Pending
+                                                @elseif($orders->status == 'approve') Approve
+                                                 {{-- @elseif($orders->status == 'delivered') Delivered
+                                                @elseif($orders->status == 'completed') Completed --}}
+                                                @elseif($orders->status == 'reject') Rejected
+                                                @endif
+                                            </span>
 
-                                        <td class="align-middle text-center">
-                                            @if ($orders->status == 'reject')
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#alasanPembatalanModal{{ $orders->id }}">
-                                                    Lihat Alasan
-                                                </button>
-                                            @endif
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="alasanPembatalanModal{{ $orders->id }}" tabindex="-1" aria-labelledby="alasanPembatalanModalLabel{{ $orders->id }}" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="alasanPembatalanModalLabel{{ $orders->id }}">Alasan Pembatalan</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                            <td class="align-middle text-center">
+                                                @if ($orders->status == 'pending')
+                                                    <form action="{{ route('rejectOrder', $orders->id) }}" method="POST" style="display:inline">
+                                                        @csrf
+                                                        <button type="button" class="btn btn-link text-danger" data-bs-toggle="modal" data-bs-target="#rejectReasonModal{{ $orders->id }}">
+                                                            Rejected
+                                                        </button>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="rejectReasonModal{{ $orders->id }}" tabindex="-1" aria-labelledby="rejectReasonModalLabel{{ $orders->id }}" aria-hidden="true">
+                                                            <!-- Isi Modal -->
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="rejectReasonModalLabel{{ $orders->id }}">Alasan Penolakan</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <!-- Isi Modal -->
+                                                                    <div class="modal-body">
+                                                                        <label for="rejectReason{{ $orders->id }}">Alasan Penolakan:</label>
+                                                                        <textarea class="form-control" id="rejectReason{{ $orders->id }}" name="reject_reason" rows="3"></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            {{ $orders->alasan_pembatalan }}
+                                                    </form>
+                                                    <form action="{{ route('approveOrder', $orders->id) }}" method="POST" style="display:inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-success btn-link">
+                                                            Approve
+                                                        </button>
+                                                    </form>
+                                                @elseif ($orders->status == 'reject')
+                                                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
+                                                        Lihat Alasan
+                                                    </button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="alasanPenolakanModal{{ $orders->id }}" tabindex="-1" aria-labelledby="alasanPenolakanModalLabel{{ $orders->id }}" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="alasanPenolakanModalLabel{{ $orders->id }}">Alasan Penolakan</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{ $orders->alasan_pembatalan }}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </td>
+                                                @endif
+                                            </td>
+
                                         {{-- <td class="produks align-middle ">
                                             @if ($orders->status == 'shipped')
                                             <form action="{{ route('diterima', $orders->id) }}">

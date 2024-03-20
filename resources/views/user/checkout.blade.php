@@ -39,7 +39,7 @@
                                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                                     <input type="hidden" name="username" value="{{ auth()->user()->name }}">
                                     <input type="hidden" name="email" value="{{ auth()->user()->email }}">
-                                    <input type="hidden" name="diskon_id" value="{{ $diskonid->id }}">
+                                    <input type="hidden" name="diskon_id" value="{{ $diskonid ? $diskonid->id : null }}">
                                 </tr>
                                 <tr>
                                     <td class="py-2 ps-0">
