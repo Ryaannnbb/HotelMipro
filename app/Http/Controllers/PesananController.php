@@ -303,7 +303,6 @@ class PesananController extends Controller
      */
     public function update(Request $request)
     {
-<<<<<<< HEAD
         if ($request->has('nama_fasilitas')) {
             $totalFacilityPrice = 0;
 
@@ -360,32 +359,6 @@ class PesananController extends Controller
             return redirect()->back()->with('success', 'Pesanan berhasil dibatalkan.');
         } else {
             return redirect()->back()->with('error', 'Hanya pesanan dengan status "pending" yang dapat dibatalkan.');
-=======
-        // dd($request->all());
-        if ($request->has('nama_fasilitas')) {
-            // Inisialisasi total harga fasilitas
-            $totalFacilityPrice = 0;
-
-            foreach ($request->nama_fasilitas as $fasilitas_id) {
-                // dd($fasilitas_id);
-                $pemakaianFasilitas = PemakaianFasilitas::find($fasilitas_id);
-                // dd($pemakaianFasilitas);
-
-                if ($pemakaianFasilitas) {
-                    // Hitung total harga fasilitas berdasarkan harga dan jumlah
-                    $totalFacilityPrice += $pemakaianFasilitas->harga_pemakaian;
-                }
-            }
-            // dd($totalFacilityPrice);
-
-            // Simpan total harga fasilitas dalam session
-            session()->put('totalFacilityPrice', $totalFacilityPrice);
-
-            // Redirect kembali ke halaman sebelumnya dengan menyertakan nilai yang dipilih
-            return redirect()->back()->withInput(['nama_fasilitas' => $request->nama_fasilitas]);
-        } else {
-            return redirect()->back()->withErrors(['error' => 'No facilities selected']);
->>>>>>> 616779ab5b4fe9a68137729ccea761a821d42230
         }
     }
     /**
@@ -396,3 +369,4 @@ class PesananController extends Controller
         //
     }
 }
+
