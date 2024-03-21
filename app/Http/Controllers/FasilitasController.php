@@ -40,7 +40,7 @@ class FasilitasController extends Controller
             'harga_satuan.min' => 'Best price must be at least :min.',
         ]);
         Fasilitas::create($request->all());
-        return redirect()->route('fasilitas')->with("success", "Facility data added successfully!");
+        return redirect()->route('fasilitas')->with("success", "Data fasilitas berhasil ditambahkan!");
     }
 
     /**
@@ -67,7 +67,7 @@ class FasilitasController extends Controller
     {
         $fasilitas = Fasilitas::find($id);
         $fasilitas->update($request->all());
-        return redirect()->route('fasilitas')->with("success", "Facility data updated successfully.");
+        return redirect()->route('fasilitas')->with("success", "Data fasilitas berhasil diperbarui.");
     }
 
     /**
@@ -79,10 +79,10 @@ class FasilitasController extends Controller
         try {
             //code...
             $fasilitas->delete();
-            return redirect()->route("fasilitas")->with("success", "Fasilitas data has been successfully deleted!");
+            return redirect()->route("fasilitas")->with("success", "Data fasilitas berhasil dihapus!");
         } catch (\Throwable $th) {
             //throw $th;
-            return redirect()->route('fasilitas')->with("error", "Failed to delete because fasilitas data is in use!");
+            return redirect()->route('fasilitas')->with("error", "Gagal menghapus karena data fasilitas sedang digunakan!");
         }
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama_kamar');
             $table->string('harga');
             $table->text('deskripsi');
-            $table->enum('status', ['booked', 'available'])->default('available');
+            $table->enum('status', ['booked', 'available','pending'])->default('available');
             $table->foreignId('kategori_id')->constrained('kategoris')->restrictOnDelete();
             $table->timestamps();
         });

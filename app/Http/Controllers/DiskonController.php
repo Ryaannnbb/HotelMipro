@@ -150,7 +150,7 @@ class DiskonController extends Controller
             $detail->save();
         }
 
-        return redirect()->route('diskon')->with("success", "Diskon data added successfully!");
+        return redirect()->route('diskon')->with("success", "Data diskon berhasil ditambahkan!");
     }
 
     /**
@@ -305,7 +305,7 @@ class DiskonController extends Controller
             }
         }
 
-        return redirect()->route('diskon')->with("success", "Diskon data added successfully!");
+        return redirect()->route('diskon')->with("success", "Data diskon berhasil ditambahkan!");
     }
 
     /**

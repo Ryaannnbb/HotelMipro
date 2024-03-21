@@ -275,22 +275,30 @@
                                 var searchInput = document.querySelector('.search-input');
                                 searchInput.addEventListener('input', function() {
                                     var searchTerm = this.value.trim().toLowerCase();
-                                    var rooms = document.querySelectorAll('.room'); // Mengambil semua kamar dengan kelas "room"
+                                    var rooms = document.querySelectorAll('.room');
 
                                     rooms.forEach(function(room) {
                                         var roomName = room.querySelector('.room-name').textContent.trim()
-                                    .toLowerCase(); // Mengambil nama kamar di dalam kamar
+                                            .toLowerCase();
+
                                         if (roomName.includes(searchTerm)) {
-                                            room.style.visibility =
-                                            'visible'; // Menampilkan kamar jika nama kamar cocok dengan pencarian
+                                            room.style.display =
+                                                'block';
                                         } else {
-                                            room.style.visibility =
-                                            'hidden'; // Menyembunyikan kamar jika nama kamar tidak cocok dengan pencarian
+                                            room.style.display =
+                                                'none';
                                         }
                                     });
+
+                                    if (searchTerm === '') {
+                                        rooms.forEach(function(room) {
+                                            room.style.display = 'block';
+                                        });
+                                    }
                                 });
                             });
                         </script>
+
                         </tbody>
                         </table>
                     </div>

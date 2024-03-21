@@ -95,7 +95,7 @@ class PembayaranController extends Controller
             'nama_ewallet'=>$request->nama_ewallet,
         ]);
     }
-    return redirect()->route('pembayaran')->with('success', 'Successfully added payment');
+    return redirect()->route('pembayaran')->with('success', 'Pembayaran berhasil ditambahkan');
 }
 
 
@@ -125,14 +125,14 @@ class PembayaranController extends Controller
         $request->validate([
             'metode_pembayaran' => 'required|string|max:255',
         ], [
-            'metode_pembayaran.required' => 'The Payment Method column is mandatory.',
-            'metode_pembayaran.string' => 'Payment Method must be text.',
-            'metode_pembayaran.max' => 'Payment Method must have no more than :max characters.',
+            'metode_pembayaran.required' => 'Kolom Metode Pembayaran wajib diisi.',
+            'metode_pembayaran.string' => 'Metode Pembayaran harus berupa teks.',
+            'metode_pembayaran.max' => 'Metode Pembayaran tidak boleh lebih dari :max karakter.',
         ]);
 
         $pembayaran = Pembayaran::find($id);
         $pembayaran->update($request->all());
-        return redirect()->route('pembayaran')->with("success", "Payment data updated successfully.");
+        return redirect()->route('pembayaran')->with("success", "Data pembayaran berhasil diperbarui.");
     }
 
     /**
@@ -144,10 +144,10 @@ class PembayaranController extends Controller
         try {
             //code...
             $pembayaran->delete();
-            return redirect()->route("pembayaran")->with("success", "Payment data has been successfully deleted!");
+            return redirect()->route("pembayaran")->with("success", "Data pembayaran berhasil dihapus!");
         } catch (\Throwable $th) {
             //throw $th;
-            return redirect()->route('pembayaran')->with("error", "Failed to delete because payment data is in use!");
+            return redirect()->route('pembayaran')->with("error", "Gagal menghapus karena data pembayaran sedang digunakan!");
         }
     }
 }
