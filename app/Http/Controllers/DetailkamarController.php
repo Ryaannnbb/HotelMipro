@@ -78,7 +78,7 @@ class DetailKamarController extends Controller
         // Simpan ulasan hanya untuk kamar yang sesuai
         Detailkamar::create($data);
 
-        return redirect()->route('detailkamar', $request->input('id'))->with("success", "Review data added successfully!");
+        return redirect()->route('detailkamar', $request->input('id'))->with("success", "Data berhasil ditambahkan!");
     }
         /**
      * Display the specified resource.

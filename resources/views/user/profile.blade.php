@@ -269,8 +269,13 @@
                                                         </span>
                                                     </td>
                                                     <td class="produks align-middle border-bottom">
+                                                        {{-- @if ($orders->status == 'pending')
+                                                        <button type="button" class="btn btn-link primary" data-bs-toggle="modal" data-bs-target="#batalkanPesananModal{{ $orders->id }}">Batalkan</button> --}}
 
                                                         @if ($orders->status == 'reject')
+                                                        {{-- <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
+                                                            Lihat Alasan
+                                                        </button> --}}
                                                         <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
                                                             Lihat Alasan
                                                         </button>
@@ -291,6 +296,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
+
                                                     <!-- Modal -->
 
                                                         {{-- @if ($orders->status == 'shipped')
@@ -514,6 +520,7 @@
             </div>
         </section>
     </form>
+    {{-- @foreach ($pesanan as $orders)
     <div class="modal fade" id="batalkanPesananModal{{ $orders->id }}" tabindex="-1" aria-labelledby="batalkanPesananModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -534,6 +541,7 @@
             </div>
         </div>
     </div>
+    @endforeach --}}
         </form><!-- <section> close ============================-->
     </main><!-- ===============================================-->
     <!--    End of Main Content-->
@@ -567,18 +575,18 @@
         var form = $(this).closest('form');
 
         Swal.fire({
-            title: "Are you sure?",
-            text: "You will delete this product. This action cannot be undone!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, accept!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                form.submit();
-            }
+                title: "Apakah Anda yakin?",
+                text: "Anda akan menghapus produk ini. Tindakan ini tidak dapat dibatalkan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
         });
-    });
 </script>
 @endsection

@@ -31,8 +31,10 @@ class PesananController extends Controller
         $user = auth()->user();
         $kamars = Kamar::findOrFail($request->id);
         $kategori_id = $kamars->kategori_id;
+
         $kategori = Kategori::find($request->id);
-        $diskonid = Diskon::find($request->id);
+        $diskonid = Diskon::where('kategori_id', $kategori_id)->first();
+        //  dd($diskonid);
         $fasilitas = Fasilitas::all();
         $bank = Pembayaran::where('metode_pembayaran', 'bank')->get();
         $wallet = Pembayaran::where('metode_pembayaran', 'e-wallet')->get();
@@ -75,21 +77,31 @@ class PesananController extends Controller
                 'required',
                 'date',
                 'before_or_equal:tanggal_akhir',
-                Rule::unique('pesanans')->where(function ($query) use ($request) {
-                    return $query->where('rooms_id', $request->id_kamar)
-                        ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
-                        ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
-                }),
+                function ($attribute, $value, $fail) use ($request) {
+                    $overlapBooking = Pesanan::where(function ($query) use ($request) {
+                        $query->where('tanggal_awal', '<=', $request->input('tanggal_akhir'))
+                              ->where('tanggal_akhir', '>=', $request->input('tanggal_awal'));
+                    })->exists();
+
+                    if ($overlapBooking) {
+                        $fail('Tanggal yang Anda pilih telah dipesan.');
+                    }
+                },
             ],
             'tanggal_akhir' => [
                 'required',
                 'date',
                 'after_or_equal:tanggal_awal',
-                Rule::unique('pesanans')->where(function ($query) use ($request) {
-                    return $query->where('rooms_id', $request->id_kamar)
-                        ->whereDate('tanggal_akhir', '>=', $request->tanggal_awal)
-                        ->whereDate('tanggal_awal', '<=', $request->tanggal_akhir);
-                }),
+                function ($attribute, $value, $fail) use ($request) {
+                    $overlapBooking = Pesanan::where(function ($query) use ($request) {
+                        $query->where('tanggal_awal', '<=', $request->input('tanggal_akhir'))
+                              ->where('tanggal_akhir', '>=', $request->input('tanggal_awal'));
+                    })->exists();
+
+                    if ($overlapBooking) {
+                        $fail('Tanggal yang Anda pilih telah dipesan.');
+                    }
+                },
             ],
             'metode_pembayaran' => 'required|string',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
@@ -132,6 +144,7 @@ class PesananController extends Controller
 
         $user = $request->user_id;
         $diskon = $request->diskon_id;
+        // dd($diskon);
         $kamar = $request->id_kamar;
         $tarif = Kamar::find($kamar)->harga;
         $file = $request->file('foto');
@@ -169,19 +182,20 @@ class PesananController extends Controller
             // dd($totalharga);
 
             // Periksa jika ada diskon
+            // dd($diskon->jenis, $diskon_amount);
             if ($diskon) {
                 // dd($diskon);
-                $diskon_amount = $diskon->potongan_harga;
                 // dd("Ada diskon");
+                $diskon_amount = $diskon->potongan_harga;
 
                 // Kurangi diskon dari total harga pesanan
-                // dd($diskon->jenis, $diskon_amount);
                 // dd($diskon_amount);
 
                 if ($diskon->jenis == 'percentage') {
                     $diskon_amount = ($totalharga * $diskon->potongan_harga) / 100;
                 } else {
-                    $diskon_amount = $diskon->potongan_harga;
+                    // dd($totalharga);
+                    $totalharga -= $diskon->potongan_harga;
                 }
             } else {
                 // dd("Tidak Ada diskon");
@@ -221,6 +235,7 @@ class PesananController extends Controller
             $pesanan->metode_pembayaran = $request->metode_pembayaran;
             $pesanan->invoice = $buktipembayaran;
             if ($diskon) {
+                // dd($diskon);
                 $pesanan->diskon_id = $diskon->id;
                 $diskon->diskon = $request->jenis;
                 $pesanan->harga_pesanan = (int) (($totalharga ?? (int) $totalinap * $tarif) - $diskon_amount);
@@ -228,7 +243,7 @@ class PesananController extends Controller
                 $pesanan->harga_pesanan = (int) ($totalharga ?? (int) $totalinap * $tarif);
             }
             // $pesanan->harga_pesanan = (int) ((($totalharga ?? (int) $totalinap * $tarif) - $diskon_amount) + $totalFacilityPrice);
-            // dd( $pesanan->harga_pesanan = (int) ($totalharga ?? (int) $totalinap * $tarif));
+            // dd((int) (($totalharga ?? (int) $totalinap * $tarif) - $diskon_amount));
             if ($kategori_id) {
                 $pesanan->kategori_id = $kategori_id;
             } else {
@@ -258,7 +273,7 @@ class PesananController extends Controller
             //         }
             //     }
             // }
-            return redirect()->route('homeuser')->with("success", "Product data added successfully!");
+            return redirect()->route('homeuser')->with("success", "Berhasil booking kamar menunggu persetujuan dari admin!");
         }
     }
 
@@ -341,6 +356,8 @@ class PesananController extends Controller
         // Set status menjadi "approve"
         $pesanan->status = 'approve';
         $pesanan->save();
+
+
 
         return redirect()->back()->with('success', 'Pesanan berhasil disetujui.');
     }

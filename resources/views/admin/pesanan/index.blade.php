@@ -450,7 +450,7 @@
                                                             Approve
                                                         </button>
                                                     </form>
-                                                @elseif ($orders->status == 'reject')
+                                                {{-- @elseif ($orders->status == 'reject')
                                                     <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#alasanPenolakanModal{{ $orders->id }}">
                                                         Lihat Alasan
                                                     </button>
@@ -467,7 +467,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 @endif
                                             </td>
 

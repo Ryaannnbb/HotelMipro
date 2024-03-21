@@ -34,17 +34,17 @@ class AuthController extends Controller
             'password' => 'required|min:8|confirmed',
             'password_confirmation' => 'required',
         ], [
-            'name.required' => 'Name is required.',
-            'email.required' => 'Email address is required.',
-            'email.email' => 'Invalid email address format.',
-            'email.unique' => 'Email address is already registered. Please use another email address.',
-            'password.required' => 'Password is required.',
-            'password.min' => 'Password must be at least 8 characters long.',
-            'password.confirmed' => 'Password confirmation does not match.',
-            'password_confirmation.required' => 'Password confirmation is required.',
+            'name.required' => 'Nama wajib diisi.',
+            'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format alamat email tidak valid.',
+            'email.unique' => 'Alamat email sudah terdaftar. Harap gunakan alamat email lain.',
+            'password.required' => 'Kata sandi wajib diisi.',
+            'password.min' => 'Kata sandi minimal harus terdiri dari 8 karakter.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak sesuai.',
+            'password_confirmation.required' => 'Konfirmasi kata sandi wajib diisi.',
         ]);
         if (User::where('email', $request->email)->exists()) {
-            return redirect()->route('login')->with('error', 'The email address is registered. Use another email address.');
+            return redirect()->route('login')->with('error', 'Alamat email sudah terdaftar. Gunakan alamat email lain.');
         }
         $data = [
             'name' => $request->name,
@@ -58,7 +58,7 @@ class AuthController extends Controller
 
         // event(new Registered($user));
         // Auth::login($user);
-        return redirect()->route('login')->with('success', 'Your registration was successful');
+        return redirect()->route('login')->with('success', 'Registrasi Anda berhasil');
     }
 
     public function proseslogin(Request $request)
@@ -84,29 +84,27 @@ class AuthController extends Controller
         }
 
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            if (auth()->user()->role == 'user'){
-                return redirect()->route('homeuser')->with('success', 'you have successfully logged in');
-                return redirect()->route('login')->with('error', 'Email atau password salah');
-
-            }else if(auth()->user()->role == 'admin'){
-                return redirect()->route('dashboard')->with('success', 'you have successfully logged in');
-                return redirect()->route('login')->with('error', 'Email atau password salah');
+            if (auth()->user()->role == 'user') {
+                return redirect()->route('homeuser')->with('success', 'Anda berhasil masuk.');
+                return redirect()->route('login')->with('error', 'Email atau password salah.');
+            } else if (auth()->user()->role == 'admin') {
+                return redirect()->route('dashboard')->with('success', 'Anda berhasil masuk.');
+                return redirect()->route('login')->with('error', 'Email atau kata sandi salah.');
             }
         }
 
-        return redirect()->back()->withInput($request->except('password'))->withErrors(['password' => 'Invalid credentials']);
-
+        return redirect()->back()->withInput($request->except('password'))->withErrors(['password' => 'Kredensial tidak valid']);
     }
 
     public function logout(){
 
         Auth::logout();
 
-        return redirect('/')->with('success', 'Successfully logout');
+        return redirect('/')->with('success', 'Berhasil keluar');
     }
     public function changeAccount(){
 
         Auth::logout();
-        return redirect()->route('login')->with('success', 'Succesfully logout, please change account');
+        return redirect()->route('login')->with('success', 'Berhasil logout, harap ganti akun');
     }
 }

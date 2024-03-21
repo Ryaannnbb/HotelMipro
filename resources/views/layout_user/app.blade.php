@@ -382,21 +382,21 @@
                             <p class="logo-text ms-2">Small</p>
                         </div>
                         <p class="text-700 mb-1 fw-semi-bold lh-sm fs--1">
-                            Small Hotel is a leading hospitality provider in Indonesia, offering a variety of modern
-                            facilities and high-quality services. Guests can explore a range of innovative
-                            accommodations and luxurious amenities. Small Hotel is dedicated to ensuring guest
-                            satisfaction by providing personalized experiences and the best customer support from
-                            experienced professionals.</p>
+                            Small Hotel adalah penyedia perhotelan terkemuka di Indonesia, menawarkan beragam modern
+                            fasilitas dan layanan berkualitas tinggi. Para tamu dapat menjelajahi berbagai hal inovatif
+                            akomodasi dan fasilitas mewah. Hotel Kecil didedikasikan untuk memastikan tamu
+                            kepuasan dengan memberikan pengalaman yang dipersonalisasi dan dukungan pelanggan terbaik dari
+                            profesional yang berpengalaman.</p>
                     </div>
                     <div class="col-6 col-md-auto">
-                        <h5 class="fw-bolder mb-3">About Small Hotel</h5>
+                        <h5 class="fw-bolder mb-3">Tentang Small Hotel</h5>
                         <div class="d-flex flex-column"><a class="text-700 fw-semi-bold fs--1 mb-1"
-                                href="#!">Career </a><a class="text-700 fw-semi-bold fs--1 mb-1"
-                                href="#!">Personal policy</a><a class="text-700 fw-semi-bold fs--1 mb-1"
-                                href="#!">Terms & conditions</a><a class="text-700 fw-semi-bold fs--1 mb-1"></a></div>
+                                href="#!">karir </a><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Kebijakan pribadi</a><a class="text-700 fw-semi-bold fs--1 mb-1"
+                                href="#!">Syarat & Ketentuan</a><a class="text-700 fw-semi-bold fs--1 mb-1"></a></div>
                     </div>
                     <div class="col-6 col-md-auto">
-                        <h5 class="fw-bolder mb-3">Stay Connected</h5>
+                        <h5 class="fw-bolder mb-3">Tetap terhubung</h5>
                         <div class="d-flex flex-column"><a class="text-700 fw-semi-bold fs--1 mb-1"
                                 href="#!">Jalan Ijen
                                 No.

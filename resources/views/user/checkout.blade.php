@@ -317,7 +317,7 @@
             </div>
         </form>
         <div class="row">
-            <div class="col-md-4 offset-md-8" style="margin-top: -300px;">
+            <div class="col-md-3 offset-md-8" style="margin-top: -300px;">
                 <form id="updateCartForm" action="{{ route('updateFacilitiesPrice') }}" method="POST">
                     @csrf
                     <input type="hidden" name="selected_fasilitas" value="{{ json_encode(old('nama_fasilitas', [])) }}">

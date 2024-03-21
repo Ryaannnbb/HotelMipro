@@ -160,15 +160,13 @@
                                                         @endif
                                                     </h1>
                                                 </div>
-                                                <p class="text-success font-size: 24px;">{{ $detail->status }}</p>
+                                                <p class="text-success font-size: 24px;">{{ ucfirst($detail->status) }}</p>
                                                 <p class="mb-2 text-body-secondary"><strong class="text-body-highlight"
                                                         style="font-size: 14px;">{{ $detail->deskripsi }}</strong></p>
                                                 <p class="text-danger fw-bold mb-5 mb-lg-0">
                                                     @if ($diskon_tersedia && \Carbon\Carbon::now() <= \Carbon\Carbon::parse($diskon->akhir_berlaku))
                                                         Diskon Berakhir
                                                         {{ \Carbon\Carbon::parse($diskon->akhir_berlaku)->diffForHumans(\Carbon\Carbon::now(), true) }}
-                                                    @else
-                                                        Diskon Telah Kadaluarsa
                                                     @endif
                                                 </p>
                                             @endforeach

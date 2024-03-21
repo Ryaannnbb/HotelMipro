@@ -32,5 +32,9 @@ class KategoriSeeder extends Seeder
         Kategori::create([
             "nama_kategori" => "Executive Room",
         ]);
+
+        Kategori::create([
+            "nama_kategori" => "Superior Room",
+        ]);
     }
 }

@@ -45,16 +45,16 @@ class KamarController extends Controller
             'kategori_id' => 'required',
             'harga' => 'required|numeric|min:10000',
         ], [
-            'nama_kamar.required' => 'Room name is required.',
-            'deskripsi.required' => 'Room description is required.',
-            'path_kamar.required' => 'Room image is required.',
-            'path_kamar.image' => 'The uploaded file must be an image.',
-            'path_kamar.mimes' => 'The image must be in jpeg, png, or jpg format.',
-            'path_kamar.max' => 'The image size must not exceed 10MB.',
-            'kategori_id.required' => 'Room category is required.',
-            'harga.required' => 'Room price is required.',
-            'harga.numeric' => 'Room price must be a number.',
-            'harga.min' => 'Nilai :attribute harus minimal :min.',
+            'nama_kamar.required' => 'Nama kamar harus diisi.',
+            'deskripsi.required' => 'Deskripsi kamar harus diisi.',
+            'path_kamar.required' => 'Gambar kamar harus diisi.',
+            'path_kamar.image' => 'File yang diunggah harus berupa gambar.',
+            'path_kamar.mimes' => 'Gambar harus dalam format jpeg, png, atau jpg.',
+            'path_kamar.max' => 'Ukuran gambar tidak boleh melebihi 10 MB.',
+            'kategori_id.required' => 'Kategori kamar harus diisi.',
+            'harga.required' => 'Harga kamar diperlukan.',
+            'harga.numeric' => 'Harga kamar harus berupa angka.',
+            'harga.min' => 'Nilai atribut harus minimal :min.',
         ]);
 
         $file = $request->file('path_kamar');
@@ -69,7 +69,7 @@ class KamarController extends Controller
             "kategori_id" => $request->kategori_id,
         ]);
 
-        return redirect()->route('kamar')->with("success", "Room data added successfully!");
+        return redirect()->route('kamar')->with("success", "Data kamar berhasil diperbarui.");
     }
 
     /**
@@ -104,16 +104,16 @@ class KamarController extends Controller
             'kategori_id' => 'required',
             'harga' => 'required|numeric|min:10000',
         ], [
-            'nama_kamar.required' => 'Room name is required.',
-            'deskripsi.required' => 'Room description is required.',
-            'path_kamar.required' => 'Room image is required.',
-            'path_kamar.image' => 'The uploaded file must be an image.',
-            'path_kamar.mimes' => 'The image must be in jpeg, png, or jpg format.',
-            'path_kamar.max' => 'The image size must not exceed 10MB.',
-            'kategori_id.required' => 'Room category is required.',
-            'harga.required' => 'Room price is required.',
-            'harga.numeric' => 'Room price must be a number.',
-            'harga.min' => 'Nilai :attribute harus minimal :min.',
+           'nama_kamar.required' => 'Nama kamar harus diisi.',
+            'deskripsi.required' => 'Deskripsi kamar harus diisi.',
+            'path_kamar.required' => 'Gambar kamar harus diisi.',
+            'path_kamar.image' => 'File yang diunggah harus berupa gambar.',
+            'path_kamar.mimes' => 'Gambar harus dalam format jpeg, png, atau jpg.',
+            'path_kamar.max' => 'Ukuran gambar tidak boleh melebihi 10 MB.',
+            'kategori_id.required' => 'Kategori kamar harus diisi.',
+            'harga.required' => 'Harga kamar diperlukan.',
+            'harga.numeric' => 'Harga kamar harus berupa angka.',
+            'harga.min' => 'Nilai atribut harus minimal :min.',
         ]);
 
         $kamar = Kamar::find($id);
@@ -138,7 +138,7 @@ class KamarController extends Controller
             }
         }
 // dd($request);
-        return redirect()->route('kamar')->with("success", "Room data updated successfully.");
+return redirect()->route('kamar')->with("success", "Data kamar berhasil diperbarui.");
     }
 
     /**
@@ -161,9 +161,9 @@ class KamarController extends Controller
 
             $kamar->delete();
 
-            return redirect()->route("kamar")->with("success", "Room data deleted successfully!");
+            return redirect()->route("kamar")->with("success", "Data kamar berhasil dihapus!");
         }
 
-        return redirect()->route("kamar")->with("warning", "Room not found or already deleted.");
+        return redirect()->route("kamar")->with("warning", "Kamar tidak ditemukan atau sudah dihapus.");
     }
 }

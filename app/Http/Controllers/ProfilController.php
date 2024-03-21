@@ -40,7 +40,7 @@ class ProfilController extends Controller
         return view('user.profile', compact('user', 'pesanan', 'totalpembayaran', 'totalorder', 'lastorder'));
     }
 
-   
+
 
 
     /**
@@ -88,13 +88,13 @@ class ProfilController extends Controller
                 'telp' => 'nullable',
                 'profile' => 'nullable|image',
             ], [
-                'profile.image' => 'The profile must be an image.',
+                'profile.image' => 'Profil harus berupa gambar.',
             ]);
 
             $user = User::find($id);
 
             if (!$user) {
-                return redirect()->route('user.index')->with('error', 'Error, please try again');
+                return redirect()->route('user.index')->with('error', 'Error, silakan coba lagi');
             }
 
             $userData = [];
@@ -121,7 +121,7 @@ class ProfilController extends Controller
 
             $user->update($userData);
 
-            return redirect()->route('profil')->with('success', 'Successfully updated profile');
+            return redirect()->route('profil')->with('success', 'Profil berhasil diperbarui');
         } catch (\Exception $e) {
             return redirect()->route('profil')->with('error', 'Error');
         }

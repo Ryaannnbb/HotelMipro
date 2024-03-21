@@ -389,7 +389,7 @@
                                 </table>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="row align-items-center justify-content-between py-2 pe-0 fs--1">
                         <div class="col-auto d-flex">
@@ -492,18 +492,18 @@
             var form = $(this).closest('form');
 
             Swal.fire({
-                title: "Are you sure?",
-                text: "You will delete this product. This action cannot be undone!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, accept!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
+            title: "Apakah Anda yakin?",
+            text: "Anda akan menghapus produk ini. Tindakan ini tidak dapat dibatalkan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya, hapus!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
         });
     </script>
 @endsection

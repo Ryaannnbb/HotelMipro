@@ -272,11 +272,11 @@
         <div class="mb-9">
             <div class="row g-3 mb-4">
                 <div class="col-auto">
-                    <h2 class="mb-0">Pembayaran</h2>
+                    <h2 class="mb-0">Payment</h2>
                 </div>
             </div>
             <ul class="nav nav-links mb-3 mb-lg-2 mx-n3">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><span>Semua
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"><span>All
                         </span><span class="text-700 fw-semi-bold">
                             @if ($pembayaran->count() > 0)
                                 <span>({{ $pembayaran->count() }})</span>
@@ -297,7 +297,8 @@
                             </form>
                         </div> --}}
                         <div class="ms-xxl-auto"><a href="{{ route('pembayaran.create') }}"><button
-                                    class="btn btn-primary" id="addBtn"><span class="fas fa-plus me-2"></span>Tambah Pembayaran</button></a></div>
+                                    class="btn btn-primary" id="addBtn"><span class="fas fa-plus me-2"></span>Add
+                                    Payment</button></a></div>
                     </div>
                 </div>
                 <div
@@ -307,22 +308,12 @@
                             <thead>
                                 <tr>
                                     <th style="width: 5%;">NO</th>
-                                    <th style="width: 30%;">NAMA PEMBAYARAN</th>
-                                    <th style="width: 25%;">NAMA BANK</th>
-                                    <th style="width: 25%;">NO REKENING</th>
-                                    <th style="width: 25%;">NAMA</th>
-                                    <th class="text-end" style="width: 15%;">AKSI</th>
+                                    <th style="width: 30%;">METODE PEMBAYARAN</th>
+                                    <th style="width: 25%;">JENIS PEMBAYARAN</th>
+                                    <th style="width: 25%;">INFORMASI TRANSAKSI</th>
+                                    <th style="width: 25%;">NAMA GOPAY</th>
+                                    <th class="text-end" style="width: 15%;">ACTION</th>
                                 </tr>
-                                @if ($pembayaran->isEmpty())
-                                <tr>
-                                    <td colspan="4" class="text-center py-4">
-                                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 70%;">
-                                            <img src="{{ asset('assets/img/No data-amico.svg') }}" alt="" style="width: 300px; height: auto; max-width: 100%; display: block; margin: 0 auto;">
-                                            <h3 class="mb-3">There are no payment method added by admin yet. Please check back later.</h3>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endif
                             </thead>
                             <tbody>
                                 @php
@@ -345,8 +336,7 @@
                                                     {{ $a->keterangan }}
                                                 @endif
                                             </td>
-                                            <td>{{ $a->nama }} {{ $a->nama_ewallet }}</td>
-                                            {{-- <td class="text-center"></td> --}}
+                                            <td>{{ $a->nama_ewallet }}</td>
                                             <td
                                                 class="align-middle white-space-nowrap text-end pe-0 ps-4 btn-reveal-trigger">
                                                 <div class="font-sans-serif btn-reveal-trigger position-static"><button
@@ -363,7 +353,8 @@
                                                         <form action="{{ route('pembayaran.destroy', $a->id) }}" method="POST" class="hapus-form">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit" class="dropdown-item text-danger hapus">Hapus
+                                                            <button type="submit" class="dropdown-item text-danger hapus">
+                                                                Remove
                                                             </button>
                                                         </form>
                                                     </div>
@@ -395,9 +386,9 @@
         <footer class="footer position-absolute">
             <div class="row g-0 justify-content-between align-items-center h-100">
                 <div class="col-12 col-sm-auto text-center">
-                    <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span
+                    <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © iVibe<span
                             class="d-none d-sm-inline-block"></span><span
-                            class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
+                            class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2023</p>
 
                 </div>
                 <div class="col-12 col-sm-auto text-center">
