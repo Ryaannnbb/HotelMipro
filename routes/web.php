@@ -16,6 +16,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DetailKamarController;
+use App\Http\Controllers\TentangKamiController;
 use App\Http\Controllers\UlasanKamarController;
 use App\Http\Controllers\MenuKamarUserController;
 use App\Http\Controllers\ResetPasswordController;
@@ -124,8 +125,9 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::post('/pesanan/destroy/{id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
     Route::post('/detailkamar', [DetailKamarController::class, 'store'])->name('detailkamar.store');
     Route::post('/detailkamar{id}', [DetailKamarController::class, 'show'])->name('detailkamar.show');
-        Route::delete('/detailkamar/{id}', [DetailKamarController::class, 'destroy'])->name('detailkamar.delete');
-        Route::post('/updateFacilitiesPrice', [PesananController::class, 'update'])->name('updateFacilitiesPrice');
+    Route::delete('/detailkamar/{id}', [DetailKamarController::class, 'destroy'])->name('detailkamar.delete');
+    Route::post('/updateFacilitiesPrice', [PesananController::class, 'update'])->name('updateFacilitiesPrice');
+    Route::get('/tentangkami', [TentangKamiController::class, 'index'])->name('tentangkami');
     // });
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {

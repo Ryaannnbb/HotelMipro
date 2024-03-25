@@ -85,7 +85,7 @@
                                                 <a class="dropdown-item"
                                                     href="{{ route('diskon.edit', $diskons->id) }}">Edit</a>
                                                 <div class="dropdown-divider"></div>
-                                                <form action="{{ route('kamar.destroy', $diskons->id) }}" method="POST"
+                                                <form action="{{ route('diskon.destroy', $diskons->id) }}" method="POST"
                                                     class="hapus-form">
                                                     @csrf
                                                     @method('delete')

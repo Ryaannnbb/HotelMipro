@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\DetailDiskon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class DiskonController extends Controller
@@ -313,6 +314,26 @@ class DiskonController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $diskon = Diskon::findOrfail($id);
+
+        try {
+            if ($diskon) {
+                $gambar = $diskon->gambar;
+                $path = public_path($gambar);
+
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+
+                $diskon->delete();
+
+                return redirect()->route("diskon")->with("success", "Data diskon berhasil dihapus!");
+            } else {
+                return redirect()->route("diskon")->with("warning", "Diskon tidak ditemukan atau sudah dihapus.");
+            }
+        } catch (\Exception $e) {
+            // Log the error or return a more specific message
+            return redirect()->route("diskon")->with("error", "Diskon sedang dipakai, tidak bisa di hapus");
+        }
     }
 }

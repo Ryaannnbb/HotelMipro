@@ -26,4 +26,9 @@ class Kategori extends Model
     {
         return $this->hasMany(Kategori::class);
     }
+
+    public function diskons()
+    {
+        return $this->hasMany(Diskon::class);
+    }
 }

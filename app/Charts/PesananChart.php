@@ -20,15 +20,14 @@ class PesananChart
         $tahun = date('Y');
         $bulan = 12;
         for ($i = 1; $i <= $bulan; $i++) {
-            $pesanan = Pesanan::whereYear('created_at', $tahun)->whereMonth('created_at', $i)->count();
-            $datatotalpesanan[] = $pesanan;
+            $pesanan = Pesanan::whereYear('created_at', $tahun)->whereMonth('created_at', $i)->sum('harga_pesanan');
+            $datatotalharga[] = ($pesanan);
             $databulan[] = Carbon::create()->month($i)->format('F');
         }
 
         return $this->chart3->lineChart()
             ->setTitle('Data Pesanan')
-            // ->setSubtitle('Physical sales vs Digital sales.')
-            ->addData('Total Pesanan', $datatotalpesanan)
+            ->addData('Total Harga Pesanan', $datatotalharga)
             ->setXAxis($databulan);
     }
 }

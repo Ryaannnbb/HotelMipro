@@ -14,6 +14,8 @@ class Kamar extends Model
         'kamar_id',
         'nama_kamar',
         'path_kamar',
+        'path_kamar1',
+        'path_kamar2',
         'harga',
         'deskripsi',
         'status',

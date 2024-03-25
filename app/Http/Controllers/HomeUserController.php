@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kamar;
+use App\Models\Kategori;
 use App\Models\Detailkamar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,11 @@ class HomeUserController extends Controller
     {
         $user = auth()->user();
         $kamars = Kamar::all();
+        $kategoris_with_diskons = Kategori::whereHas('diskons')->get();
+        $diskons = DB::table('diskons')
+        ->leftJoin('diskons as diskon', 'diskon.id', '=',  'diskons.id')
+        ->select('diskon.potongan_harga', 'diskon.kategori_id', 'diskon.akhir_berlaku', 'diskon.jenis')
+        ->get();
 
         // Inisialisasi array untuk menyimpan rating dan total ulasan untuk setiap kamar
         $ratings = [];
@@ -28,7 +34,7 @@ class HomeUserController extends Controller
             $totalUlasans[$kamar->id] = $detailkamars->count();
         }
 
-        return view('user.homeuser', compact('kamars', 'user', 'ratings', 'totalUlasans'));
+        return view('user.homeuser', compact('kamars', 'user', 'ratings', 'totalUlasans','diskons','kategoris_with_diskons'));
     }
 
 

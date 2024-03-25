@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('kamars', function (Blueprint $table) {
             $table->id();
-            $table->string('path_kamar');
             $table->string('nama_kamar');
+            $table->string('path_kamar');
+            $table->string('path_kamar1');
+            $table->string('path_kamar2');
             $table->string('harga');
             $table->text('deskripsi');
             $table->enum('status', ['booked', 'available','pending'])->default('available');
