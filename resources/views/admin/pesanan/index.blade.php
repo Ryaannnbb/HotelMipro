@@ -446,7 +446,7 @@
                                                     </form>
                                                     <form action="{{ route('approveOrder', $orders->id) }}" method="POST" style="display:inline">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-success btn-link">
+                                                        <button type="submit" class="btn  btn-link">
                                                             Approve
                                                         </button>
                                                     </form>

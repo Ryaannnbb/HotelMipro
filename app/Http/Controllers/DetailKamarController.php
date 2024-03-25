@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kamar;
 use App\Models\Pesanan;
+use App\Models\Fasilitas;
 use App\Models\Detailkamar;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class DetailKamarController extends Controller
     {
         $user = auth()->user();
         $kamars = Kamar::where('id', $id)->get();
+        $fasilitas = Fasilitas::all();
         $pesanan = Pesanan::find($id);
         $detailkamars = Detailkamar::where('kamar_id', $id)->get();
         $diskons = DB::table('diskons')
@@ -30,10 +32,21 @@ class DetailKamarController extends Controller
         //     $kategoriIds[] = $diskon->kategori_id;
         // }
         // $kategoriIds = array_unique($kategoriIds);
+         // Ambil data pesanan dari database
+        //  $pesanan = Pesanan::withCount('produk')->get();
+
+        //  // Hitung jumlah penjualan untuk setiap kombinasi nama produk dan pesanan
+        //  $jumlahPenjualan = $pesanan->groupBy(['nama_produk', 'jenis_pesanan'])->map->count();
+
+        //  // Temukan item dengan jumlah penjualan tertinggi
+        //  $bestSeller = $jumlahPenjualan->sortDesc()->keys()->first();
+
         $totalRating = $detailkamars->avg('rating');
         $totalUlasan = $detailkamars->count();
 
-        return view('user.detailkamar', compact('user', 'kamars', 'detailkamars', 'totalRating', 'totalUlasan', 'pesanan','diskons','id'));
+
+
+        return view('user.detailkamar', compact('user', 'kamars', 'detailkamars', 'totalRating', 'totalUlasan', 'pesanan','diskons','id','fasilitas'));
     }
         // Hitung total rating dan total ulasan
 
@@ -62,24 +75,39 @@ class DetailKamarController extends Controller
         $data['foto'] = $fileName; // simpan nama file foto ke dalam data
     }
 
-        // Pastikan ulasan tidak kosong sebelum menyimpan
-        if (empty($data['ulasan'])) {
-            return redirect()->back()->withInput()->withErrors(['ulasan' => 'Ulasan tidak boleh kosong']);
-        }
+        // Periksa apakah pengguna sudah memberikan ulasan sebelumnya untuk kamar tertentu
+    $existingReview = Detailkamar::where('kamar_id', $request->input('id'))
+    ->where('user_id', auth()->id())
+    ->exists();
 
-        // Pastikan ada nilai yang diberikan untuk 'foto'
-        if (!isset($data['foto'])) {
-            $data['foto'] = null;
-        }
+// Jika ulasan sudah ada, kembalikan pengguna dengan pesan kesalahan
+if ($existingReview) {
+return redirect()->back()->withInput()->withErrors(['detailkamar' => 'Maaf, Anda telah memberikan ulasan untuk kamar ini sebelumnya.']);
+}
 
-        // Tambahkan ID kamar ke data
-        $data['kamar_id'] = $request->input('id');
+// Proses penyimpanan foto jika ada
+if ($request->hasFile('foto')) {
+// Proses penyimpanan foto
+}
 
-        // Simpan ulasan hanya untuk kamar yang sesuai
-        Detailkamar::create($data);
+// Proses validasi jika ulasan kosong
+if (empty($data['ulasan'])) {
+return redirect()->back()->withInput()->withErrors(['ulasan' => 'Ulasan tidak boleh kosong']);
+}
 
-        return redirect()->route('detailkamar', $request->input('id'))->with("success", "Data berhasil ditambahkan!");
-    }
+// Pastikan ada nilai yang diberikan untuk 'foto'
+if (!isset($data['foto'])) {
+$data['foto'] = null;
+}
+
+// Tambahkan ID kamar ke data
+$data['kamar_id'] = $request->input('id');
+
+// Simpan ulasan hanya untuk kamar yang sesuai
+Detailkamar::create($data);
+
+return redirect()->route('detailkamar', $request->input('id'))->with("success", "Data berhasil ditambahkan!");
+}
         /**
      * Display the specified resource.
      */

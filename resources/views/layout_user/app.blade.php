@@ -354,16 +354,17 @@
             <ul class="navbar-nav mx-auto justify-content-end align-items-center">
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('homeuser') ? 'active' : '' }}"
-                        href="{{ route('homeuser') }}">Home</a></li>
+                        href="{{ route('homeuser') }}">Beranda</a></li>
                 <li class="nav-item" data-nav-item="data-nav-item"><a
                         class="nav-link {{ request()->routeIs('#') ? 'active' : '' }}"
-                        href="{{ route('usermenu') }}">Rooms</a></li>
-                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
-                        class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}"
-                        href="{{ route('pesanan') }}">Checkout</a></li> --}}
-                {{-- <li class="nav-item" data-nav-item="data-nav-item"><a
-                        class="nav-link {{ request()->routeIs('checkout') ? 'active' : '' }}""
-                        href="{{ route('checkout') }}">Checkout</a></li> --}}
+                        href="{{ route('usermenu') }}">Kamar</a></li>
+                <li class="nav-item" data-nav-item="data-nav-item"><a
+                        class="nav-link {{ request()->routeIs('tentangkami') ? 'active' : '' }}"
+                        href="{{ route('tentangkami') }}">Tentang kami</a></li>
+                        <li class="nav-item" data-nav-item="data-nav-item">
+                            <a class="nav-link {{ request()->routeIs('tentangkami') ? 'active' : '' }}"
+                               href="javascript:void(0)">Fasilitas</a>
+                        </li>
             </ul>
         </div>
     </nav>

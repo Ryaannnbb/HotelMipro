@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Charts\KamarFavoritChart;
 use App\Charts\KategorikamarChart;
 use App\Charts\MenuKamarUserChart;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 
 class DashboardAdminController extends Controller
@@ -24,11 +25,12 @@ class DashboardAdminController extends Controller
         $totalUsers = User::where('role', '!=', 'admin')->count();
         $roomsAvailable = Kamar::where('status', 'available')->count();
         $roomsBooked = Kamar::where('status', 'booked')->count();
+        $totalincome = DB::table('pesanans')->sum('harga_pesanan');
 
         // Menggabungkan $data dan $rooms ke dalam satu array
         $viewData = array_merge($data, ['rooms' => $rooms, 'totalUsers'=> $totalUsers, 'roomsAvailable'=> $roomsAvailable, 'roomsBooked'=> $roomsBooked]);
 
-        return view('admin.dashboard', $viewData);
+        return view('admin.dashboard', $viewData, compact('totalincome'));
 
         // return view('admin.dashboard', ['chart' => $chart->build()]);
     }

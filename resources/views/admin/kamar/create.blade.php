@@ -325,13 +325,36 @@
                                 <input type="file" name="path_kamar" id="formFile" class="form-control   @error('path_kamar') is-invalid @enderror"
                                 value="{{ old('path_kamar') }}">
                                 <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
+                                @error('path_kamar')
+                                <strong class="invalid-feedback">
+                                    {{ $message }}
+                                </strong>
+                            @enderror
+
                             </div>
-                        </div>
-                        @error('path_kamar')
-                            <strong class="invalid-feedback">
-                                {{ $message }}
-                            </strong>
-                        @enderror
+                            <div class="mb-3">
+                                <div id="imagePreview" class="mt-2"></div>
+                                <div class="d-flex align-items-center flex-column">
+                                    <input type="file" name="path_kamar1" id="formFile" class="form-control   @error('path_kamar1') is-invalid @enderror"
+                                    value="{{ old('path_kamar1') }}">
+                                    <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
+                                </div>
+                                <div class="mb-3">
+                                    <div id="imagePreview" class="mt-2"></div>
+                                    <div class="d-flex align-items-center flex-column">
+                                        <input type="file" name="path_kamar2" id="formFile" class="form-control   @error('path_kamar2') is-invalid @enderror"
+                                        value="{{ old('path_kamar2') }}">
+                                        <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
+                                    </div>
+                                    {{-- <div class="mb-3">
+                                        <div id="imagePreview" class="mt-2"></div>
+                                        <div class="d-flex align-items-center flex-column">
+                                            <input type="file" name="path_kamar3" id="formFile" class="form-control   @error('path_kamar3') is-invalid @enderror"
+                                            value="{{ old('path_kamar3') }}">
+                                            <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
+                                        </div> --}}
+
+
                         <script>
                             document.getElementById('formFile').addEventListener('change', function(e) {
                                 const file = e.target.files[0];

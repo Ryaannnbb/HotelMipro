@@ -237,7 +237,6 @@
                                     <h4 class="mb-0">Pengguna</h4>
                                     <p class="text-800 fs--1 mb-0">Total Pengguna Terdaftar: {{ $totalUsers }}</p>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-12 col-md-auto">
@@ -289,7 +288,9 @@
                             </div>
                         </div> --}}
                         <hr class="bg-200 mb-6 mt-4" />
-                        <div class="col-xl-6 col-xxl-7"> </div>
+                        <div class="col-xl-6 col-xxl-7">
+                            <h3>{{ 'Total Pendapatan : ' . 'Rp. ' .  number_format($totalincome, 0, ',', '.') }}</h3>
+                        </div>
                         <div class="card flex-fill w-100">
                             <div class="card-body">
                                 {!! $chart1->container() !!}
@@ -312,10 +313,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6">
-
                                 </div>
                                 <div class="col-12 col-md-6">
-
                                 </div>
                             </div>
                         </div>
@@ -325,10 +324,9 @@
             <footer class="footer position-absolute">
                 <div class="row g-0 justify-content-between align-items-center h-100">
                     <div class="col-12 col-sm-auto text-center">
-                        <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span
+                        <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © kontol<span
                                 class="d-none d-sm-inline-block"></span><span
                                 class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
-
                     </div>
                     <div class="col-12 col-sm-auto text-center">
                     </div>
