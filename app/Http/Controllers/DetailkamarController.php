@@ -9,6 +9,7 @@ use App\Models\Detailkamar;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DetailKamarController extends Controller
 {
@@ -65,49 +66,60 @@ class DetailKamarController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->all();
 
-    // Proses penyimpanan foto jika ada
-    if ($request->hasFile('foto')) {
-        $file = $request->file('foto');
-        $fileName = Str::random(10) . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/kamar', $fileName);
-        $data['foto'] = $fileName; // simpan nama file foto ke dalam data
-    }
+        // Proses penyimpanan foto jika ada
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $fileName = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('public/kamar'), $fileName);
+            $data['foto'] = $fileName; // simpan nama file foto ke dalam data
+        }
 
         // Periksa apakah pengguna sudah memberikan ulasan sebelumnya untuk kamar tertentu
-    $existingReview = Detailkamar::where('kamar_id', $request->input('id'))
-    ->where('user_id', auth()->id())
-    ->exists();
+        $existingReview = Detailkamar::where('kamar_id', $request->input('id'))
+        ->where('user_id', auth()->id())
+        ->exists();
 
-// Jika ulasan sudah ada, kembalikan pengguna dengan pesan kesalahan
-if ($existingReview) {
-return redirect()->back()->withInput()->withErrors(['detailkamar' => 'Maaf, Anda telah memberikan ulasan untuk kamar ini sebelumnya.']);
-}
+        // Jika ulasan sudah ada, kembalikan pengguna dengan pesan kesalahan
+        if ($existingReview) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Maaf, Anda telah memberikan ulasan untuk kamar ini sebelumnya.']);
+        }
 
-// Proses penyimpanan foto jika ada
-if ($request->hasFile('foto')) {
-// Proses penyimpanan foto
-}
+        // Periksa apakah pengguna sudah memesan kamar ini sebelumnya
+        $existingBooking = Pesanan::where('rooms_id', $request->input('id'))
+        ->where('user_id', auth()->id())
+        ->exists();
 
-// Proses validasi jika ulasan kosong
-if (empty($data['ulasan'])) {
-return redirect()->back()->withInput()->withErrors(['ulasan' => 'Ulasan tidak boleh kosong']);
-}
+        // Jika belum memesan, kembalikan pengguna dengan pesan kesalahan
+        if (!$existingBooking) {
+        return redirect()->back()->withErrors(['error' => 'Anda harus memesan kamar ini sebelum menambahkan ulasan.']);
+        }
 
-// Pastikan ada nilai yang diberikan untuk 'foto'
-if (!isset($data['foto'])) {
-$data['foto'] = null;
-}
+        // Proses penyimpanan foto jika ada
+        if ($request->hasFile('foto')) {
+        // Proses penyimpanan foto
+        }
 
-// Tambahkan ID kamar ke data
-$data['kamar_id'] = $request->input('id');
+        // Proses validasi jika ulasan kosong
+        if (empty($data['ulasan'])) {
+        return redirect()->back()->withInput()->withErrors(['ulasan' => 'Ulasan tidak boleh kosong']);
+        }
 
-// Simpan ulasan hanya untuk kamar yang sesuai
-Detailkamar::create($data);
+        // Pastikan ada nilai yang diberikan untuk 'foto'
+        if (!isset($data['foto'])) {
+        $data['foto'] = null;
+        }
 
-return redirect()->route('detailkamar', $request->input('id'))->with("success", "Data berhasil ditambahkan!");
-}
+        // Tambahkan ID kamar ke data
+        $data['kamar_id'] = $request->input('id');
+
+        // Simpan ulasan hanya untuk kamar yang sesuai
+        Detailkamar::create($data);
+
+        return redirect()->route('detailkamar', $request->input('id'))->with("success", "Data berhasil ditambahkan!");
+    }
         /**
      * Display the specified resource.
      */
@@ -166,11 +178,35 @@ return redirect()->route('detailkamar', $request->input('id'))->with("success", 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update($id,Request $request)
     {
-        //
-    }
+        // dd($request->all());
+        // Dapatkan data ulasan berdasarkan ID yang diterima dari request
+        $ulasan = Detailkamar::findOrFail($id);
 
+        // Perbarui nilai atribut berdasarkan data dari request
+        $ulasan->rating = $request->rating;
+        $ulasan->ulasan = $request->ulasan;
+        $ulasan->user_id = $request->user_id;
+        $existingimage = $ulasan->foto;
+
+        // Periksa apakah ada file foto yang diunggah
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $fileName = Str::random('10') .'.'. $file->getClientOriginalExtension();
+            $file->move(public_path('public/kamar'), $fileName);
+
+            $ulasan->update(['foto' => $fileName]);
+
+            if ($existingimage) {
+                Storage::delete('kamar/' . $existingimage);
+            }
+        }
+
+        $ulasan->save();
+
+        return redirect()->route('detailkamar', ['id' => $ulasan->kamar_id])->with("success", "Product data updated successfully.");
+    }
     /**
      * Remove the specified resource from storage.
      */

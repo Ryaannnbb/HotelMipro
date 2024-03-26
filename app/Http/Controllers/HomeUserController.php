@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kamar;
+use App\Models\Slider;
 use App\Models\Kategori;
 use App\Models\Detailkamar;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class HomeUserController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $kamars = Kamar::all();
+        $kamars = Kamar::all();     
+        $sliders = Slider::all();        
         $kategoris_with_diskons = Kategori::whereHas('diskons')->get();
         $diskons = DB::table('diskons')
         ->leftJoin('diskons as diskon', 'diskon.id', '=',  'diskons.id')
@@ -34,7 +36,7 @@ class HomeUserController extends Controller
             $totalUlasans[$kamar->id] = $detailkamars->count();
         }
 
-        return view('user.homeuser', compact('kamars', 'user', 'ratings', 'totalUlasans','diskons','kategoris_with_diskons'));
+        return view('user.homeuser', compact('kamars', 'user', 'ratings', 'totalUlasans','diskons','kategoris_with_diskons','sliders'));
     }
 
 

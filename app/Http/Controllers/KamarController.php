@@ -77,22 +77,21 @@ class KamarController extends Controller
         $file->storeAs('public/kamar', $fileName);
 
         $file1 = $request->file('path_kamar1');
-$fileName1 = Str::random(10) . '.' .  $file1->getClientOriginalExtension();
-$file1->storeAs('public/kamar', $fileName1);
+        $fileName1 = Str::random(10) . '.' .  $file1->getClientOriginalExtension();
+        $file1->storeAs('public/kamar', $fileName1);
 
-$file2 = $request->file('path_kamar2');
-$fileName2 = Str::random(10) . '.' .  $file2->getClientOriginalExtension();
-$file2->storeAs('public/kamar', $fileName2);
+        $file2 = $request->file('path_kamar2');
+        $fileName2 = Str::random(10) . '.' .  $file2->getClientOriginalExtension();
+        $file2->storeAs('public/kamar', $fileName2);
 
-// $file3 = $request->file('path_kamar3');
-// $fileName3 = Str::random(10) . '.' .  $file3->getClientOriginalExtension();
-// $file3->storeAs('public/kamar', $fileName3);
+        // $file3 = $request->file('path_kamar3');
+        // $fileName3 = Str::random(10) . '.' .  $file3->getClientOriginalExtension();
+        // $file3->storeAs('public/kamar', $fileName3);
 
         Kamar::create([
             "path_kamar" => $fileName,
             "path_kamar1" => $fileName1,
             "path_kamar2" => $fileName2,
-            // "path_kamar3" => $fileName3,
             "nama_kamar" => $request->nama_kamar,
             "deskripsi" => $deskripsi,
             "harga" => $request->harga,

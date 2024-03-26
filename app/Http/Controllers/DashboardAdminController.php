@@ -10,6 +10,7 @@ use App\Charts\KategorikamarChart;
 use App\Charts\MenuKamarUserChart;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
+use App\Models\Pesanan;
 
 class DashboardAdminController extends Controller
 {
@@ -30,9 +31,10 @@ class DashboardAdminController extends Controller
         // Menggabungkan $data dan $rooms ke dalam satu array
         $viewData = array_merge($data, ['rooms' => $rooms, 'totalUsers'=> $totalUsers, 'roomsAvailable'=> $roomsAvailable, 'roomsBooked'=> $roomsBooked]);
 
-        return view('admin.dashboard', $viewData, compact('totalincome'));
+        // Query untuk mendapatkan data pesanan dengan informasi pengguna, kategori kamar, dan harga
+        $pesanan = Pesanan::with('user', 'kategori')->latest()->take(5)->get();
 
-        // return view('admin.dashboard', ['chart' => $chart->build()]);
+        return view('admin.dashboard', $viewData, compact('totalincome', 'pesanan'));
     }
 
     /**

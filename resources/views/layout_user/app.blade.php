@@ -79,6 +79,16 @@
                                         src="{{ asset('assets/img/brands/small.png') }}" alt="phoenix" width="40" />
                                     <p class="logo-text ms-2">Small Hotel</p>
                                 </div>
+                                <nav style="height: 35px; position: relative; z-index: 100; margin-left:450px; margin-top:-50px; font-size: 12px; font-weight: bold;">
+                                    <div class="container-small pt-2 text-center" data-navbar="data-navbar">
+                                        <ul class="navbar-nav mx-auto justify-content-start align-items-center">
+                                            <li class="nav-item" data-nav-item="data-nav-item"><a class="nav-link {{ request()->routeIs('homeuser') ? 'active' : '' }}" href="{{ route('homeuser') }}">Beranda</a></li>
+                                            <li class="nav-item" data-nav-item="data-nav-item"><a class="nav-link {{ request()->routeIs('usermenu') ? 'active' : '' }}" href="{{ route('usermenu') }}">Kamar</a></li>
+                                            <li class="nav-item" data-nav-item="data-nav-item"><a class="nav-link {{ request()->routeIs('tentangkami') ? 'active' : '' }}" href="{{ route('tentangkami') }}">Tentang kami</a></li>
+                                            <li class="nav-item" data-nav-item="data-nav-item"><a class="nav-link {{ request()->routeIs('tentangkami') ? 'active' : '' }}" href="{{ route('usermenu') }}">Fasilitas</a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </a></div>
                         <div class="col-auto order-md-1">
                             <ul class="navbar-nav navbar-nav-icons flex-row me-n2">
@@ -348,7 +358,7 @@
         </div>
         </div><!-- end of .container-->
     </section>
-    <nav class="ecommerce-navbar navbar-expand navbar-light bg-white justify-content-center h-3"
+    {{-- <nav class="ecommerce-navbar navbar-expand navbar-light bg-white justify-content-center h-3"
         style="height: 35px; position: relative; z-index: 100;">
         <div class="container-small d-flex flex-between-center pt-2 text-center" data-navbar="data-navbar">
             <ul class="navbar-nav mx-auto justify-content-end align-items-center">
@@ -366,7 +376,7 @@
                                href="javascript:void(0)">Fasilitas</a>
                         </li>
             </ul>
-        </div>
+        </div> --}}
     </nav>
 
 

@@ -7,6 +7,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\KamarController;
 use App\Http\Controllers\DiskonController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UlasanController;
 use App\Http\Controllers\PesananController;
 use App\Http\Middleware\RedirectMiddleware;
@@ -108,6 +109,15 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::controller(PesananDetailAdminController::class)->prefix('pesanandetail')->group(function () {
         Route::get('/', 'index')->name('pesanandetail');
     });
+    Route::controller(SliderController::class)->prefix('Slider')->group(function () {
+        Route::get('/', 'index')->name('Slider');
+        Route::get('/create', 'create')->name('Slider.create');
+        Route::post('/store', 'store')->name('Slider.store');
+        Route::get('/edit/{id}', 'edit')->name('Slider.edit');    
+        Route::put('/edit/{id}', 'update')->name('Slider.update');
+        Route::delete('destroy/{id}', 'destroy')->name('Slider.destroy');
+    });
+
 
 });
 
@@ -128,6 +138,7 @@ Route::middleware([UserMiddleware::class])->group(function () {
     Route::delete('/detailkamar/{id}', [DetailKamarController::class, 'destroy'])->name('detailkamar.delete');
     Route::post('/updateFacilitiesPrice', [PesananController::class, 'update'])->name('updateFacilitiesPrice');
     Route::get('/tentangkami', [TentangKamiController::class, 'index'])->name('tentangkami');
+    Route::post('/detailkamar/{id}', [DetailKamarController::class, 'update'])->name('detailkamar.update');
     // });
 
     Route::controller(ProfilController::class)->prefix('profil')->group(function () {

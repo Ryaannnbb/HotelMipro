@@ -19,7 +19,6 @@ class MenuKamarUserController extends Controller
         $user = auth()->user();
         $kategori = Kategori::all();
         $kamars = Kamar::query();
-        $detailkamars = Detailkamar::query(); // Mengubah query menjadi objek Detailkamar
         $fasilitas = Fasilitas::all();
         $diskons = DB::table('diskons')
             ->leftJoin('diskons as diskon', 'diskon.id', '=',  'diskons.id')
@@ -41,38 +40,49 @@ class MenuKamarUserController extends Controller
             $kamars->whereBetween('harga', [intval($minPrice), intval($maxPrice)]);
         }
 
-         // Filter berdasarkan rating
-$selectedRating = $request->input('flexRadio');
+        // // Filter berdasarkan rating
+        // $selectedRating = $request->input('flexRadio');
 
-// Simpan nilai radio button ke dalam session saat tombol "Go" diklik
-session()->put('selectedRating', $selectedRating);
+        // if (!empty($selectedRating)) {
+        //     $kamars->whereIn('id', function ($query) use ($selectedRating) {
+        //         $query->select('kamar_id')
+        //             ->from('detailkamars')
+        //             ->where('rating', $selectedRating);
+        //     });
+        // }
 
-if (!empty($selectedRating)) {
-    $kamars->whereIn('id', function ($query) use ($selectedRating, $detailkamars) {
-        $query->select('kamar_id')
-            ->from('detailkamars')
-            ->where('rating', $selectedRating);
-    });
-}
+        // Lakukan penyaringan berdasarkan rating tertinggi atau terendah
+        if ($request->has('highestRatingBtn')) {
+            // Jika tombol "Rating Tertinggi" diklik, lakukan penyaringan untuk rating tertinggi (4-5)
+            $kamars->whereIn('id', function ($query) {
+                $query->select('kamar_id')
+                    ->from('detailkamars')
+                    ->where('rating', '>', 3);
+            });
+        } elseif ($request->has('lowestRatingBtn')) {
+            // Jika tombol "Rating Terendah" diklik, lakukan penyaringan untuk rating terendah (1-3)
+            $kamars->whereIn('id', function ($query) {
+                $query->select('kamar_id')
+                    ->from('detailkamars')
+                    ->where('rating', '<', 3);
+            });
+        }
 
-// Menetapkan kembali variabel $kamars setelah menerapkan filter
-$kamars = $kamars->get();
-
-        // Menetapkan kembali variabel $detailkamars setelah menerapkan filter rating
-        $detailkamars = $detailkamars->get();
+        $kamars = $kamars->get();
 
         $ratings = [];
         $totalUlasans = [];
 
         // Hitung rating rata-rata dan total ulasan untuk setiap kamar
         foreach ($kamars as $kamar) {
-            $filteredDetailkamars = $detailkamars->where('kamar_id', $kamar->id); // Filter detail kamar berdasarkan kamar
+            $filteredDetailkamars = Detailkamar::where('kamar_id', $kamar->id)->get(); // Filter detail kamar berdasarkan kamar
             $ratings[$kamar->id] = $filteredDetailkamars->avg('rating'); // Hitung rating rata-rata
             $totalUlasans[$kamar->id] = $filteredDetailkamars->count(); // Hitung total ulasan
         }
 
-        return view('user.menukamaruser', compact('kamars', 'user', 'kategori', 'minPrice', 'maxPrice', 'selectedCategories', 'detailkamars', 'ratings', 'totalUlasans','selectedRating','fasilitas','diskons'));
-        }
+        return view('user.menukamaruser', compact('kamars', 'user', 'kategori', 'minPrice', 'maxPrice', 'selectedCategories', 'ratings', 'totalUlasans', 'fasilitas','diskons'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

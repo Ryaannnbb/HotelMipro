@@ -73,72 +73,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <a class="btn px-0 y-4 d-block collapse-indicator" data-bs-toggle="collapse"
-                                href="#collapseRating" role="button" aria-expanded="true" aria-controls="collapseRating">
-                                <div class="d-flex align-items-center justify-content-between w-100">
-                                    <div class="fs-0 text-1000">Rating</div><span
-                                        class="fa-solid fa-angle-down toggle-icon text-500"></span>
-                                </div>
-                            </a>
-                            <div class="collapse show" id="collapseRating">
-                               <!-- Radio button 1 -->
-<div class="d-flex align-items-center mb-1">
-    <input class="form-check-input me-3 rating-radio" id="flexRadio5" type="radio" name="flexRadio"
-           value="5" data-rating="5" {{ session('selectedRating') == '5' ? 'checked' : '' }}>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-</div>
 
-<!-- Radio button 2 -->
-<div class="d-flex align-items-center mb-1">
-    <input class="form-check-input me-3 rating-radio" id="flexRadio4" type="radio" name="flexRadio"
-           value="4" data-rating="4" {{ session('selectedRating') == '4' ? 'checked' : '' }}>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    {{-- <p class="ms-1 mb-0">&amp; above</p> --}}
-</div>
-
-<!-- Radio button 3 -->
-<div class="d-flex align-items-center mb-1">
-    <input class="form-check-input me-3 rating-radio" id="flexRadio3" type="radio" name="flexRadio"
-           value="3" data-rating="3" {{ session('selectedRating') == '3' ? 'checked' : '' }}>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    {{-- <p class="ms-1 mb-0">&amp; above</p> --}}
-</div>
-
-<!-- Radio button 4 -->
-<div class="d-flex align-items-center mb-1">
-    <input class="form-check-input me-3 rating-radio" id="flexRadio2" type="radio" name="flexRadio"
-           value="2" data-rating="2" {{ session('selectedRating') == '2' ? 'checked' : '' }}>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    {{-- <p class="ms-1 mb-0">&amp; above</p> --}}
-</div>
-
-<!-- Radio button 5 -->
-<div class="d-flex align-items-center mb-3">
-    <input class="form-check-input me-3 rating-radio" id="flexRadio1" type="radio" name="flexRadio"
-           value="1" data-rating="1" {{ session('selectedRating') == '1' ? 'checked' : '' }}>
-    <span class="fa fa-star text-warning fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    <span class="fa-regular fa-star text-warning-300 fs--1 me-1"></span>
-    {{-- <p class="ms-1 mb-0">&amp; above</p> --}}
-</div>
 
                             <a class="btn px-0 d-block collapse-indicator" data-bs-toggle="collapse"
                                 href="#collapsePriceRange" role="button" aria-expanded="true"
@@ -159,9 +94,32 @@
                                     <button class="btn btn-phoenix-primary border-300 px-3" type="submit">Go</button>
                                 </div>
                             </div>
-
-                            {{-- </div> --}}
+                            <a class="btn px-0 y-4 d-block collapse-indicator" data-bs-toggle="collapse"
+                            href="#collapseRating" role="button" aria-expanded="true" aria-controls="collapseRating">
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <div class="fs-0 text-1000">Rating</div><span
+                                    class="fa-solid fa-angle-down toggle-icon text-500"></span>
                             </div>
+                        </a>
+                        <div class="collapse show" id="collapseRating">
+                            <div class="d-flex justify-content-between">
+                                <!-- Tombol Rating Tertinggi -->
+                                <form>
+
+                                    <input type="hidden" name="highestRatingBtn" value="1">
+                                    <button type="submit" class="btn btn-phoenix-primary border-300 px-3 me-2">Rating Tertinggi</button>
+                                </form>
+
+                                <!-- Tombol Rating Terendah -->
+                                <form>
+                                    @csrf
+                                    <input type="hidden" name="lowestRatingBtn" value="1">
+                                    <button type="submit" class="btn btn-phoenix-primary border-300 px-3">Rating Terendah</button>
+                                </form>
+                            </div>
+                            <!-- Radio button 1 -->
+                            <!-- Isi lainnya di sini -->
+                        </div>
                         </div>
                         <div class="phoenix-offcanvas-backdrop d-lg-none" data-phoenix-backdrop></div>
                     </form>
@@ -172,6 +130,7 @@
                         @foreach ($kamars as $kamar)
                         <div class="col-12 col-sm-6 col-md-4 col-xxl-3 mb-5"> <!-- Ubah ukuran kolom -->
                             <div class="product-card-container h-100">
+                                {{-- <div class="position-relative text-decoration-none product-card h-100" data-rating="{{ $kamar->rating }}"> --}}
                                 <div class="position-relative text-decoration-none product-card h-100">
                                     <div class="d-flex flex-column justify-content-between h-100">
                                         <div>
@@ -200,26 +159,33 @@
                                             </a>
 
                                             <p class="fs--1">
-                                                @if ($totalUlasans[$kamar->id] > 0)
-                                                    @php
-                                                        $rating = $ratings[$kamar->id];
-                                                    @endphp
-                                                    @if ($rating - floor($rating) < 0.5)
-                                                        @for ($i = 0; $i < floor($rating); $i++)
-                                                            <span class="fa fa-star text-warning"></span>
-                                                        @endfor
-                                                    @else
-                                                        @for ($i = 0; $i < ceil($rating); $i++)
-                                                            <span class="fa fa-star text-warning"></span>
-                                                        @endfor
-                                                    @endif
-                                                    <span class="text-primary fw-semi-bold mb-2"> ({{ $totalUlasans[$kamar->id] }} orang memberi rating)</span>
-                                                @else
-                                                    @for ($i = 0; $i < 5; $i++)
-                                                        <span class="fa fa-star text-secondary"></span>
-                                                    @endfor
-                                                    <span class="text-secondary fw-semi-bold mb-2"> (Tidak Ada Ulasan)</span>
+                                            @if ($totalUlasans[$kamar->id] > 0)
+                                                @php
+                                                    $rating = $ratings[$kamar->id];
+                                                    $whole = floor($rating); // Bagian integer dari rating
+                                                    $fraction = $rating - $whole; // Bagian desimal dari rating
+                                                @endphp
+
+                                                @for ($i = 0; $i < $whole; $i++)
+                                                    <span class="fa fa-star text-warning"></span>
+                                                @endfor
+
+                                                @if ($fraction >= 0.25 && $fraction < 0.75)
+                                                    <span class="fa fa-star-half text-warning"></span>
                                                 @endif
+
+                                                <span class="text-primary fw-semi-bold mb-2">
+                                                    ({{ $totalUlasans[$kamar->id] }} orang memberi rating)
+                                                </span>
+                                            @else
+                                                @for ($i = 0; $i < 5; $i++)
+                                                    <span class="fa fa-star text-secondary"></span>
+                                                @endfor
+
+                                                <span class="text-secondary fw-semi-bold mb-2">
+                                                    (Tidak Ada Ulasan)
+                                                </span>
+                                            @endif
                                             </p>
                                         </div>
                                         <div class="col">
@@ -311,6 +277,33 @@
             });
         });
     </script> --}}
+    <script>
+        document.getElementById('highestRatingBtn').addEventListener('click', function() {
+            filterByRating(4, 5); // Menyaring rating 4-5
+        });
+
+        document.getElementById('lowestRatingBtn').addEventListener('click', function() {
+            filterByRating(1, 3); // Menyaring rating 1-3
+        });
+
+        function filterByRating(minRating, maxRating) {
+            var productCards = document.querySelectorAll('.product-card'); // Mendapatkan semua kartu produk
+
+            // Menampilkan semua kartu produk terlebih dahulu
+            productCards.forEach(function(card) {
+                card.style.display = 'block';
+            });
+
+            // Menyembunyikan kartu produk yang tidak memenuhi kriteria rating
+            productCards.forEach(function(card) {
+                var rating = parseInt(card.getAttribute('data-rating')); // Mendapatkan rating dari atribut data-rating
+
+                if (!(rating >= minRating && rating <= maxRating)) {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
     <script>
         document.getElementById('showMoreBtn').addEventListener('click', function() {
             document.getElementById('hiddenFasilitas').style.display = 'block';
