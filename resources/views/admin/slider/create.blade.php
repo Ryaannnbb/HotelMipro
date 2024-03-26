@@ -279,153 +279,125 @@
         </style>
 
         {{-- {{ TAMBAH }} --}}
-        <form class="mb-9" action="{{ route('kamar.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="mb-9" action="{{ route('Slider.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row g-3 flex-between-end mb-5">
                 <div class="col-auto">
-                    <h2 class="mb-2">Tambah Kamar</h2>
-                    <h5 class="text-700 fw-semi-bold">Kamar dipesen di hotel Anda</h5>
+                    <h2 class="mb-2">Tambah Slider</h2>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('kamar') }}">Discard</a>
-                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Simpan Kamar</button>
+                    <a class="btn btn-phoenix-secondary me-2 mb-2 mb-sm-0" href="{{ route('Slider') }}">Discard</a>
+                    <button class="btn btn-primary mb-2 mb-sm-0" type="submit">Simpan Slider</button>
                 </div>
             </div>
             <div class="row g-5">
                 <div class="col-12 col-xl-8">
-                    <!-- Konten form di sini -->
-                    <h4 class="mb-3">Nama Kamar</h4>
-                    <input class="form-control mb-2 @error('nama_kamar') is-invalid @enderror" type="text"
-                        name="nama_kamar" value="{{ old('nama_kamar') }}" placeholder="Write title here..." />
-
-                    @error('nama_kamar')
+                    <h4 class="mb-3">Judul</h4>
+                    <input class="form-control mb-2 @error('judul') is-invalid @enderror" type="text" name="judul"
+                        value="{{ old('judul') }}" placeholder="Write title here..." />
+        
+                    @error('judul')
                         <strong class="invalid-feedback">
                             {{ $message }}
                         </strong>
                     @enderror
-
+        
                     <div class="mb-6">
-                        <h4 class="mb-3">Deskripsi Kamar</h4>
+                        <h4 class="mb-3">Deskripsi</h4>
                         <textarea class="tinymce @error('deskripsi') is-invalid @enderror" name="deskripsi"
-                            data-tinymce='{"height":"15rem","placeholder":"Write a description here...","plugins": "nonbreaking"}'>
-                            {{ old('deskripsi') }}
-                        </textarea>
-
+                            data-tinymce='{"height":"15rem","placeholder":"Write a description here...","plugins": "nonbreaking"}'>{{ old('deskripsi') }}</textarea>
+        
                         @error('deskripsi')
                             <strong class="invalid-feedback">
                                 {{ $message }}
                             </strong>
                         @enderror
                     </div>
-
+        
                     <h4 class="mb-3">Tambah Gambar</h4>
-                        <div class="mb-3">
-                            <div id="imagePreview" class="mt-2"></div>
-                            <div class="d-flex align-items-center flex-column">
-                                <input type="file" name="path_kamar" id="formFile" class="form-control   @error('path_kamar') is-invalid @enderror"
+                    <div class="mb-3">
+                        <div id="imagePreview" class="mt-2"></div>
+                        <div class="d-flex align-items-center flex-column">
+                            <input type="file" name="path_kamar" id="formFile"
+                                class="form-control @error('path_kamar') is-invalid @enderror"
                                 value="{{ old('path_kamar') }}">
-                                <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
-                                @error('path_kamar')
+                            <img class="mt-2" id="image-preview" src="#" alt="Preview"
+                                style="display: none; width: 50%; height: auto; border-radius: 5px">
+                            @error('path_kamar')
                                 <strong class="invalid-feedback">
                                     {{ $message }}
                                 </strong>
                             @enderror
-
-                            </div>
-                            <div class="mb-3">
-                                <div id="imagePreview" class="mt-2"></div>
-                                <div class="d-flex align-items-center flex-column">
-                                    <input type="file" name="path_kamar1" id="formFile" class="form-control   @error('path_kamar1') is-invalid @enderror"
-                                    value="{{ old('path_kamar1') }}">
-                                    <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
-                                </div>
-                                <div class="mb-3">
-                                    <div id="imagePreview" class="mt-2"></div>
-                                    <div class="d-flex align-items-center flex-column">
-                                        <input type="file" name="path_kamar2" id="formFile" class="form-control   @error('path_kamar2') is-invalid @enderror"
-                                        value="{{ old('path_kamar2') }}">
-                                        <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
-                                    </div>
-                                    {{-- <div class="mb-3">
-                                        <div id="imagePreview" class="mt-2"></div>
-                                        <div class="d-flex align-items-center flex-column">
-                                            <input type="file" name="path_kamar3" id="formFile" class="form-control   @error('path_kamar3') is-invalid @enderror"
-                                            value="{{ old('path_kamar3') }}">
-                                            <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
-                                        </div> --}}
-
-                        <script>
-                            document.getElementById('formFile').addEventListener('change', function(e) {
-                                const file = e.target.files[0];
-                                const reader = new FileReader();
-                                reader.onload = function(e) {
-                                    document.getElementById('image-preview').src = e.target.result;
-                                    document.getElementById('image-preview').style.display = 'block';
-                                }
-                                reader.readAsDataURL(file);
-                            });
-                        </script>
+                        </div>
+                    </div>
+        
+                    <div class="col-12 col-sm-6 col-xl-12">
+                        <div class="mb-4">
+                            <h5 class="mb-2 text-1000">Harga</h5>
+                            <input class="form-control mb-xl-3 @error('harga') is-invalid @enderror" type="number"
+                                name="harga" value="{{ old('harga') }}" placeholder="Price" />
+                            @error('harga')
+                                <strong class="invalid-feedback">
+                                    {{ $message }}
+                                </strong>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-12 col-xl-4" style="margin-top: 70px;">
-                    <div class="row g-2 order-xl-last" >
+        
+                <div class="col-12 col-xl-4">
+                    <div class="row g-2 order-xl-last">
                         <div class="col-12 col-xl-12 order-xl-first">
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h4 class="card-title mb-4">Pengaturan</h4>
-                                    <div class="row gx-3">
-                                        <div class="col-12 col-sm-6 col-xl-12">
-                                            <div class="mb-4">
-                                                <div class="d-flex flex-wrap mb-2">
-                                                    <h5 class="mb-0 text-1000 me-2">Kategori</h5><a class="fw-bold fs--1"
-                                                        href="#!"></a>
-                                                </div>
-                                                <select
-                                                    class="form-select mb-3 @error('kategori_id') is-invalid @enderror" name="kategori_id"
-                                                    value="{{ old('kategori_id') }}" aria-label="category">
-                                                    @foreach ($kategori as $kategoris)
-                                                        <option value="{{ $kategoris->id }}">
-                                                            {{ $kategoris->nama_kategori }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('kategori_id')
-                                                    <strong class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </strong>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6 col-xl-12">
-                                            <div class="mb-4">
-                                                <h5 class="mb-2 text-1000">Harga</h5>
-                                                <input class="form-control mb-xl-3 @error('harga') is-invalid @enderror"
-                                                    type="number" name="harga" value="{{ old('harga') }}" placeholder="Price" />
-                                                @error('harga')
-                                                    <strong class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </strong>
-                                                @enderror
-                                            </div>
-                                        </div>
+                                    <div class="mb-6">
+                                        <h4 class="mb-3">Fasilitas</h4>
+                                        <input class="form-control @error('fasilitas') is-invalid @enderror" name="fasilitas" rows="3"
+                                            placeholder="Masukkan fasilitas kamar">{{ old('fasilitas') }}</input>
+                                        @error('fasilitas')
+                                            <strong class="invalid-feedback">
+                                                {{ $message }}
+                                            </strong>
+                                        @enderror
                                     </div>
+        
+                                    <div class="mb-6">
+                                        <h4 class="mb-3">Diskon</h4>
+                                        <div class="input-group">
+                                            <input class="form-control @error('diskon') is-invalid @enderror" type="number" name="diskon" value="{{ old('diskon') }}" placeholder="Masukkan diskon kamar">
+                                            @if (old('diskon'))
+                                                <span class="input-group-text">%</span>
+                                            @endif
+                                        </div>
+                                        @error('diskon')
+                                            <strong class="invalid-feedback">
+                                                {{ $message }}
+                                            </strong>
+                                        @enderror
+                                    </div>
+                                    
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
         </form>
         <footer class="footer position-absolute">
             <div class="row g-0 justify-content-between align-items-center h-100">
-              <div class="col-12 col-sm-auto text-center">
-                <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
-              </div>
-              <div class="col-12 col-sm-auto text-center">
-              </div>
+                <div class="col-12 col-sm-auto text-center">
+                    <p class="mb-0 mt-2 mt-sm-0 text-900">Copyright © Small<span
+                            class="d-none d-sm-inline-block"></span><span
+                            class="d-none d-sm-inline-block mx-1">|</span><br class="d-sm-none" />2024</p>
+                </div>
+                <div class="col-12 col-sm-auto text-center">
+                </div>
             </div>
-          </footer>
-        </div>
-        {{-- {{ TAMBAH }} --}}
-    @endsection
+        </footer>
+    </div>
+    {{-- {{ TAMBAH }} --}}
+@endsection

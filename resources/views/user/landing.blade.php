@@ -80,12 +80,16 @@
                 </form>
               </div>
             </div>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3 active" aria-current="page" href="#">Home</a></li>
-              <li class="nav-item border-bottom border-bottom-lg-0"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#rooms">Kamar</a></li>
-
-              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#about">Tentang Kami</a></li>
-              <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#facility">Fasilitas</a></li>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="padding-left:250px ">
+                <li class="nav-item border-bottom border-bottom-lg-0"><a
+                        class="nav-link lh-1 py-0 fs--1 fw-bold py-3 active" aria-current="page"
+                        href="#">Beranda</a></li>
+                <li class="nav-item border-bottom border-bottom-lg-0"><a
+                        class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#rooms">Kamar</a></li>
+                <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3" href="#about">Tentang
+                        Kami</a></li>
+                <li class="nav-item"><a class="nav-link lh-1 py-0 fs--1 fw-bold py-3"
+                        href="#facility">Fasilitas</a></li>
             </ul>
             <div class="d-grid d-lg-flex align-items-center">
                 <!-- Toggle tema -->

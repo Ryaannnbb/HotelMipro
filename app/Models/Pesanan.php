@@ -56,4 +56,9 @@ class Pesanan extends Model
     {
         return $this->belongsTo(Diskon::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

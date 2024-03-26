@@ -312,6 +312,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr class="bg-primary text-white">
+                                                <th style="width: 40%">Nama Pengguna</th>
+                                                <th style="width: 40%">Nama Kamar</th>
+                                                <th style="width: 20%">Harga</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($pesanan as $item)
+                                                <tr>   
+                                                    <td>{{ $item->user->name }}</td>
+                                                    <td>{{ $item->kategori->nama_kategori }}</td>
+                                                    <td>Rp {{ number_format($item->harga_pesanan, 0, ',', '.') }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="col-12 col-md-6">
                                 </div>
                                 <div class="col-12 col-md-6">

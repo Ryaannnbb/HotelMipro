@@ -34,7 +34,7 @@
     <!-- ===============================================-->
     <!--    Favicons-->
     <!-- ===============================================-->
-    <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png">
+    {{-- <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicons/favicon.ico">
@@ -76,7 +76,7 @@
             userLinkRTL.setAttribute('disabled', true);
         }
     </script>
-    </head>
+    </head> --}}
 
     <body>
         <!-- ===============================================-->
@@ -395,32 +395,36 @@
                                             <div class="d-flex flex-wrap align-items-center">
                                                 <div class="me-2">
                                                     @if ($totalUlasan > 0)
-                                                        @php
-                                                            $rating = $totalRating;
-                                                        @endphp
-                                                        @if ($rating - floor($rating) < 0.5)
-                                                            @for ($i = 0; $i < floor($rating); $i++)
-                                                                <span class="fa fa-star text-warning"></span>
-                                                            @endfor
-                                                        @else
-                                                            @for ($i = 0; $i < ceil($rating); $i++)
-                                                                <span class="fa fa-star text-warning"></span>
-                                                            @endfor
-                                                        @endif
-                                                    @else
-                                                        <!-- Jika tidak ada ulasan, tampilkan bintang abu-abu -->
-                                                        <span class="fa fa-star text-secondary"></span>
-                                                        <span class="fa fa-star text-secondary"></span>
-                                                        <span class="fa fa-star text-secondary"></span>
-                                                        <span class="fa fa-star text-secondary"></span>
-                                                        <span class="fa fa-star text-secondary"></span>
+                                                    @php
+                                                        $rating = $totalRating;
+                                                        $whole = floor($rating); // Bagian integer dari rating
+                                                        $fraction = $rating - $whole; // Bagian desimal dari rating
+                                                    @endphp
+
+                                                    @for ($i = 0; $i < $whole; $i++)
+                                                        <span class="fa fa-star text-warning"></span>
+                                                    @endfor
+
+                                                    @if ($fraction >= 0.25 && $fraction < 0.75)
+                                                        <span class="fa fa-star-half text-warning"></span>
                                                     @endif
+
                                                     <span class="text-primary fw-semi-bold mb-2">
-                                                        @if ($totalUlasan > 0)
-                                                            ({{ $totalUlasan }} orang memberi ulasan)
-                                                        @else
-                                                            Tidak Ada Ulasan
-                                                        @endif
+                                                        ({{ $totalUlasan }} people rated)
+                                                    </span>
+                                                @else
+                                                    <!-- Jika tidak ada ulasan, tampilkan bintang abu-abu -->
+                                                    <span class="fa fa-star text-secondary"></span>
+                                                    <span class="fa fa-star text-secondary"></span>
+                                                    <span class="fa fa-star text-secondary"></span>
+                                                    <span class="fa fa-star text-secondary"></span>
+                                                    <span class="fa fa-star text-secondary"></span>
+
+                                                    <span class="text-primary fw-semi-bold mb-2">
+                                                        Tidak Ada Ulasan
+                                                    </span>
+                                                @endif
+
                                                     </span>
                                                 </div>
                                             </div>
@@ -508,37 +512,24 @@
 
                                             <div class="mb-3">
                                                 {{-- <p class="fw-semi-bold mb-2 text-900">Color : <span class="text-1100" data-product-color="data-product-color">Blue</span></p> --}}
-                                                <div class="d-flex product-color-variants"
-                                                    data-product-color-variants="data-product-color-variants">
-                                                    <div class="rounded-1 border me-2 active" data-variant="Blue"
-                                                        data-products-images='["{{ asset('storage/kamar/' . $detail->path_kamar) }}","{{ asset('storage/kamar/' . $detail->path_kamar1) }}","{{ asset('storage/kamar/' . $detail->path_kamar2) }}"]'>
+                                                <div class="d-flex product-color-variants" data-product-color-variants="data-product-color-variants">
+                                                    <div class="rounded-1 border me-2 active"
+                                                            data-variant="Blue"
+                                                            data-products-images='[
+                                                                "{{ asset('storage/kamar/' . $detail->path_kamar) }}",
+                                                                "{{ asset('storage/kamar/' . $detail->path_kamar1) }}",
+                                                                "{{ asset('storage/kamar/' . $detail->path_kamar2) }}"
+                                                            ]'>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="row g-3 g-sm-5 align-items-end">
-                      <div class="col-12 col-sm-auto">
-                        <p class="fw-semi-bold mb-2 text-900">Size : </p>
-                        <div class="d-flex align-items-center"><select class="form-select w-auto">
-                            <option value="44">44</option>
-                            <option value="22">22</option>
-                            <option value="18">18</option>
-                          </select><a class="ms-2 fs--1 fw-semi-bold" href="#!">Size chart</a></div>
-                      </div>
-                      <div class="col-12 col-sm">
-                        <p class="fw-semi-bold mb-2 text-900">Quantity : </p>
-                        <div class="d-flex justify-content-between align-items-end">
-                          <div class="d-flex flex-between-center" data-quantity="data-quantity"><button class="btn btn-phoenix-primary px-3" data-type="minus"><span class="fas fa-minus"></span></button><input class="form-control text-center input-spin-none bg-transparent border-0 outline-none" style="width:50px;" type="number" min="1" value="2" /><button class="btn btn-phoenix-primary px-3" data-type="plus"><span class="fas fa-plus"></span></button></div><button class="btn btn-phoenix-primary px-3 border-0"><span class="fas fa-share-alt fs-1"></span></button>
-                        </div>
-                      </div>
-                    </div> --}}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
             @endforeach
-            <!-- end of .container-->
+            <!-- end of container-->
             </section><!-- <section> close ============================-->
             <!-- ============================================-->
 
@@ -550,9 +541,9 @@
                 <section class="py-0">
                     <div class="container-small">
                         <ul class="nav nav-underline mb-4" id="productTab" role="tablist">
-                            <li class="nav-item"><a class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                            {{-- <li class="nav-item"><a class="nav-link active" id="description-tab" data-bs-toggle="tab"
                                     href="#tab-description" role="tab" aria-controls="tab-description"
-                                    aria-selected="true"></a></li>
+                                    aria-selected="true"></a></li> --}}
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="specification-tab" data-bs-toggle="tab"
@@ -573,31 +564,30 @@
                                         role="tabpanel" aria-labelledby="description-tab">
                                         <!-- Konten Deskripsi -->
                                     </div>
-                                    <div class="tab-content" id="productTabContent">
-                                        <div class="tab-pane fade show active" id="tab-specification" role="tabpanel"
-                                            aria-labelledby="specification-tab">
-                                            <h3 class="mb-0 ms-4 fw-bold">Fasilitas</h3>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 40%"> </th>
-                                                        <th style="width: 60%"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($fasilitas as $fasili)
-                                                        <tr>
-                                                            <td class="bg-100 align-middle">
-                                                                <h6
-                                                                    class="mb-0 text-900 text-uppercase fw-bolder px-4 fs--1 lh-sm">
-                                                                    {{ $fasili['nama_fasilitas'] }}</h6>
-                                                            </td>
-                                                            <td class="px-5 mb-0">{{ $fasili['harga_satuan'] }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <div class="tab-pane fade show active" id="tab-specification" role="tabpanel"
+                                    aria-labelledby="specification-tab">
+                                    <h3 class="mb-0 ms-4 fw-bold">Fasilitas</h3>
+                                    <table class="table mt-5">
+                                        <thead>
+                                            <tr class="bg-100 align-middle">
+                                                <th style="width: 40%">Nama Fasilitas</th>
+                                                <th style="width: 60%">Harga</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($fasilitas as $fasili)
+                                                <tr>
+                                                    <td class="bg-100 align-middle">
+                                                        <h6
+                                                            class="mb-0 text-900 text-uppercase fw-bolder px-4 fs--1 lh-sm">
+                                                            {{ $fasili['nama_fasilitas'] }}</h6>
+                                                    </td>
+                                                    <td class="px-5 mb-0">Rp. {{ number_format($fasili['harga_satuan'], 0, ',', '.') }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                                         <div class="tab-pane fade" id="tab-reviews" role="tabpanel"
                                             aria-labelledby="reviews-tab">
                                             {{-- <h3 class="mb-0 ms-4 fw-bold">Ratings & reviews</h3> --}}
@@ -606,24 +596,26 @@
                                                     <div class="col-auto">
                                                         <div class="col-auto">
                                                             @if ($totalUlasan > 0)
-                                                                @php
-                                                                    $rating = $totalRating;
-                                                                @endphp
-                                                                @if ($rating - floor($rating) < 0.5)
-                                                                    @for ($i = 0; $i < floor($rating); $i++)
-                                                                        <span class="fa fa-star text-warning"></span>
-                                                                    @endfor
-                                                                @else
-                                                                    @for ($i = 0; $i < ceil($rating); $i++)
-                                                                        <span class="fa fa-star text-warning"></span>
-                                                                    @endfor
-                                                                @endif
-                                                                <span class="text-primary fw-semi-bold mb-2">
-                                                                    ({{ $totalUlasan }} people
-                                                                    rated)</span>
-                                                            @else
-                                                                <h3 class="me-n2">Tidak Ada Ulasan</h3>
+                                                            @php
+                                                                $rating = $totalRating;
+                                                                $whole = floor($rating); // Bagian integer dari rating
+                                                                $fraction = $rating - $whole; // Bagian desimal dari rating
+                                                            @endphp
+
+                                                            @for ($i = 0; $i < $whole; $i++)
+                                                                <span class="fa fa-star text-warning"></span>
+                                                            @endfor
+
+                                                            @if ($fraction >= 0.25 && $fraction < 0.75)
+                                                                <span class="fa fa-star-half text-warning"></span>
                                                             @endif
+
+                                                            <span class="text-primary fw-semi-bold mb-2">
+                                                                ({{ $totalUlasan }} people rated)
+                                                            </span>
+                                                        @else
+                                                            <h3 class="me-n2">Tidak Ada Ulasan</h3>
+                                                        @endif
                                                         </div>
                                                     </div>
 
@@ -698,56 +690,122 @@
                                                     </div>
                                                 </div>
 
+                                                @foreach ($detailkamars as $u)
                                                 <div class="mb-4 hover-actions-trigger btn-reveal-trigger">
-                                                    @foreach ($detailkamars as $u)
-                                                        <div class="d-flex justify-content-between">
-                                                            <div style="color: #666;">
-                                                                <div style="display: flex; align-items: center;">
-                                                                    @for ($i = 1; $i <= 5; $i++)
-                                                                        @if ($i <= $u->rating)
-                                                                            <span class="fa fa-star text-warning"></span>
-                                                                        @else
-                                                                            <span class="fa fa-star"></span>
-                                                                        @endif
-                                                                    @endfor
-                                                                    <span class="text-800 ms-1"
-                                                                        style="margin-left: 10px; margin-top: 3px;  font-weight: bold;">By</span>
-                                                                    <!-- Tampilkan nama pengguna -->
-                                                                    <h5 class="lh-sm text-800 d-flex align-items-center"
-                                                                        style="margin-left: 10px; margin-top: 6px; font-weight: bold;">
-                                                                        {{ $u->user->name }}</h5>
-                                                                </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div style="color: #666;">
+                                                            <div style="display: flex; align-items: center;">
+                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                    @if ($i <= $u->rating)
+                                                                        <span class="fa fa-star text-warning"></span>
+                                                                    @else
+                                                                        <span class="fa fa-star"></span>
+                                                                    @endif
+                                                                @endfor
+                                                                <span class="text-800 ms-1" style="margin-left: 10px; margin-top: 3px; font-weight: bold;">By</span>
+                                                                <h5 class="lh-sm text-800 d-flex align-items-center" style="margin-left: 10px; margin-top: 6px; font-weight: bold;">
+                                                                    {{ $u->user->name }}
+                                                                </h5>
                                                             </div>
-                                                            <div class="col-auto">
-                                                                <div class="ml-auto">
-                                                                    <div
-                                                                        class="font-sans-serif btn-reveal-trigger position-static">
-                                                                        <button
-                                                                            class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal"
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <div class="ml-auto">
+                                                                <div class="font-sans-serif btn-reveal-trigger position-static">
+                                                                    <button class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal"
                                                                             type="button" data-bs-toggle="dropdown"
                                                                             data-boundary="window" aria-haspopup="true"
                                                                             aria-expanded="false"
                                                                             data-bs-reference="parent">
-                                                                            <span class="fas fa-ellipsis-h fs--2"></span>
-                                                                        </button>
-                                                                        <div class="dropdown-menu dropdown-menu-end py-2">
-                                                                            {{-- <div class="dropdown-divider"></div> --}}
-                                                                            <form
-                                                                                action="{{ route('detailkamar.delete', $u->id) }}"
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit"
-                                                                                    class="dropdown-item text-danger hapus">Hapus</button>
-                                                                            </form>
-                                                                        </div>
+                                                                        <span class="fas fa-ellipsis-h fs--2"></span>
+                                                                    </button>
+                                                                    <div class="dropdown-menu dropdown-menu-end py-2">
+                                                                        <form action="{{ route('detailkamar.delete', $u->id) }}" method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="dropdown-item text-danger hapus">Hapus</button>
+                                                                        </form>
+                                                                        <button type="button" class="dropdown-item text-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $u->id }}">Edit</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <!-- Modal Edit -->
+                                                    <div class="modal fade" id="editModal{{ $u->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="editModalLabel">Edit</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="{{ route('detailkamar.update', $u->id) }}" method="POST" enctype="multipart/form-data">
+                                                                        @csrf
+                                                                        @method('POST')
+                                                                        <div class="mb-3">
+                                                                            <div class="rating" style="transform: rotate(180deg)">
+                                                                                @for ($i = 5; $i >= 1; $i--)
+                                                                                    <input type="radio" name="rating" id="star{{ $u->id }}_{{ $i }}" value="{{ $i }}" {{ old('rating', $u->rating) == $i ? 'checked' : '' }}>
+                                                                                    <label for="star{{ $u->id }}_{{ $i }}" style="rotate: 35deg">&#9733;</label>
+                                                                                @endfor
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="commentInput" class="">Ulasan</label>
+                                                                                <textarea class="form-control" id="commentInput" rows="3" name="ulasan">{{ old('ulasan', $u->ulasan) }}</textarea>
+                                                                                <input type="hidden" name="id" value="{{ $kamars->first()->id }}">
+                                                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <div id="imagePreview" class="mt-2"></div>
+                                                                                <div class="d-flex align-items-center flex-column">
+                                                                                    <input class="form-control @error('foto') is-invalid @enderror"
+                                                                                    type="file" name="foto" id="formFile">
+                                                                                    @if ($u->foto)
+                                                                                    {{-- @dd($u->foto); --}}
+                                                                                    <img src="{{ asset('public/kamar/' . $u->foto) }}" alt="Foto Ulasan"
+                                                                                    alt="Preview"
+                                                                                    style="width: 50%; height: auto; border-radius: 5px">
+                                                                                    @endif
+                                                                                    <img class="mt-2" id="image-preview" src="#" alt="Preview" style="display: none; width: 50%; height: auto; border-radius: 5px">
+                                                                                    @error('foto')
+                                                                                        <strong class="invalid-feedback">
+                                                                                            {{ $message }}
+                                                                                        </strong>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                            @error('foto')
+                                                                                <strong class="invalid-feedback">
+                                                                                    {{ $message }}
+                                                                                </strong>
+                                                                            @enderror
+                                                                            <script>
+                                                                                document.getElementById('formFile').addEventListener('change', function(e) {
+                                                                                    const file = e.target.files[0];
+                                                                                    const reader = new FileReader();
+                                                                                    reader.onload = function(e) {
+                                                                                        document.getElementById('image-preview').src = e.target.result;
+                                                                                        document.getElementById('image-preview').style.display = 'block';
+                                                                                    }
+                                                                                    reader.readAsDataURL(file);
+                                                                                });
+                                                                            </script>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                                            <button class="btn btn-primary">Kirim</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                         <p class="text-700 fs--1 mb-1">
-                                                            {{ Carbon::parse($u->created_at)->diffForHumans(null, true) }}
-                                                            Yang Lalu
+                                                            @if($u->created_at == $u->updated_at)
+                                                                {{ Carbon::parse($u->created_at)->diffForHumans(null, true) }} Yang Lalu
+                                                            @else
+                                                                Diedit {{ Carbon::parse($u->updated_at)->diffForHumans(null, true) }} Yang Lalu
+                                                            @endif
                                                         </p>
                                                         <div class="text-1000 mb-3">
                                                             <span style="margin-right: 5px;">{{ $u->ulasan }}</span>
@@ -756,11 +814,11 @@
                                                             <div class="col-auto">
                                                                 @if ($u->foto !== null)
                                                                     <img class="card-img-top"
-                                                                        src="{{ asset('storage/kamar/' . $u->foto) }}"
+                                                                        src="{{ asset('public/kamar/' . $u->foto) }}"
                                                                         alt="{{ $u->nama_kamar }}"
                                                                         style="object-fit: cover; height: 200px;">
                                                                     {{-- @else
-                                                            <img class="card-img-top" src="{{ asset('path/ke/gambar/default.jpg') }}" alt="Default Image" style="object-fit: cover; height: 200px;"> --}}
+                                                            <img class="card-img-top" src="{{ asset('path/ke/foto/default.jpg') }}" alt="Default Image" style="object-fit: cover; height: 200px;"> --}}
                                                                 @endif
                                                             </div>
                                                         </div>
@@ -769,7 +827,7 @@
                                                     <!-- ===============================================-->
                                                     <!--    JavaScripts-->
                                                     <!-- ===============================================-->
-                                                    <script src="../../../vendors/popper/popper.min.js"></script>
+                                                    {{-- <script src="../../../vendors/popper/popper.min.js"></script>
                                                     <script src="../../../vendors/bootstrap/bootstrap.min.js"></script>
                                                     <script src="../../../vendors/anchorjs/anchor.min.js"></script>
                                                     <script src="../../../vendors/is/is.min.js"></script>
@@ -783,8 +841,26 @@
                                                     <script src="../../../vendors/dropzone/dropzone.min.js"></script>
                                                     <script src="../../../vendors/rater-js/index.js"></script>
                                                     <script src="../../../vendors/glightbox/glightbox.min.js"></script>
-                                                    <script src="../../../assets/js/phoenix.js"></script>
+                                                    <script src="../../../assets/js/phoenix.js"></script> --}}
     </body>
+    <!-- di dalam view user.detailkamar.blade.php atau view yang relevan -->
+    @if ($errors->any())
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: {!! json_encode($errors->first()) !!},
+                showCloseButton: true,
+                showConfirmButton: false,
+                customClass: {
+                    closeButton: 'swal2-close',
+                }
+            });
+        });
+    </script>
+@endif
 @endsection
 
 

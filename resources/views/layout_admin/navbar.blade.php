@@ -81,6 +81,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('Slider') ? 'active' : '' }}"
+                        href="{{ route('Slider') }}" data-bs-toggle="" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon">
+                                <span class="fas fa-sliders-h mt-1"></span>
+                            </span>
+                            <span class="nav-link-text">Slider</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('pesanandetail') ? 'active' : '' }}"
                         href="{{ route('pesanandetail') }}" data-bs-toggle="" aria-expanded="false">
                         <div class="d-flex align-items-center">
